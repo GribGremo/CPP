@@ -1,0 +1,815 @@
+sources:
+	-www.cplusplus.com
+	-https://www.geeksforgeeks.org/include-guards-in-c/
+	-https://www.francescmm.com/orthodox-canonical-class-form/
+
+1 NAMESPACES
+	-Permet de lier un "namespace" et des variables ou fonction, cela permet d'avoir des valeurs differentes pour une meme variable ou fonction, de par son namespace.
+********************************************************
+namespace	Foo {
+
+	int	gl_var = 3;
+	int	f(void){return 4;}
+	
+}
+********************************************************
+	-On peut aussi creer un alias namespace pour acceder a un autre namespace
+********************************************************
+namespace	Muf = Foo; // INTERDIT !!!
+********************************************************
+	-Scope resolution operator "::" : Permet d'acceder a une variable ou fonction appartenant a un namespace nomme.
+********************************************************
+printf("Foo::gl_var	%d\n", Foo::gl_var);
+printf("Foo::f()	%d\n", Foo::f());
+********************************************************
+
+STDIO STREAMS
+	-Permet de capter ou delivrer une chaine de caracteres par le biais de STDIN et STDOUT.
+********************************************************
+include <iostream> // Permet de charger la librairie std
+std::cout << "Hello world !" << std::endl; // Permet d'employer l'objet "cout" du namespace/class? "std" pour ecrire dans la sortie standard, endl = newline
+// "<<" et ">>" redirige un flux vers un autre en l'occurence STDIN et STDOUT(cout, cin)
+std::cout << "Input a word: ";
+std::cin >> buff;
+std::cout << "You entered [" << buff << "]" << std::endl;
+********************************************************
+	- << permet d'ecrire sur la sortie standard
+	- >> permet de lire sur l'entree standard
+	
+CLASS AND INSTANCES
+	-Creer une classe dans fichier Maclasse.class.hpp, il s'agit commme en c d'un fichier .h pour cpp.
+********************************************************
+#ifndef MACLASSE_CLASS_H // Nom du fichier meme norme que .h
+# define MACLASSE_CLASS_H
+
+class	Maclasse { //definit le modele pour la classe comme un int char ... Maclasse va definir le type de la variable
+public:
+
+	Maclasse(void); // Definit le constructeur de la classe
+	~Maclasse(void); // definit le destructeur de la classe
+
+};
+********************************************************
+	-Creer un constructeur et un destructeur dans un fichier Maclasse.class.cpp
+********************************************************
+#include "Sample.class.hpp"
+
+Maclasse::Maclasse(void) {
+
+	std::cout << "Constructor called" << std::endl;
+	return; // Pas sur que obligatoire
+
+}
+
+Maclasse::~Maclasse(void) {
+
+	std::cout << "Destructor called" << std::endl
+	return;
+
+}
+********************************************************
+	-creer une variable de type Maclasse, ceci appellera le constructeur et le destructeur lorsque la fonction s'arrete
+********************************************************
+#include "Maclasse.class.cpp"
+
+int main(void)
+{
+	Maclass toto;
+	
+	return (0);
+}
+********************************************************
+
+MEMBER ATTRIBUTES AND MEMBER FUNCTIONS
+	-Vous pouvez assigner des variables et fonctions a une classe
+********************************************************
+#ifndef MACLASSE_CLASS_H
+# define MACLASSE_CLASS_H
+
+class	Maclasse {
+
+public:
+	int foo;
+	
+	Maclasse(void); 
+	~Maclasse(void); 
+	
+	void bar(void);
+};
+	-Tout comme les construxteurs et destructeurs, vous pourrez ajouter une fonction de classe dans un fichier .cpp
+********************************************************
+#include "Maclasse.class.hpp"
+
+Maclasse::Maclasse(void) {
+
+	std::cout << "Constructor called" << std::endl;
+	return; // Pas sur que obligatoire
+
+}
+
+Maclasse::~Maclasse(void) {
+
+	std::cout << "Destructor called" << std::endl
+	return;
+
+}
+
+void	Maclasse::bar(void){
+
+	std::cout << "Mermber function bar called" << std::endl;
+}
+********************************************************
+	-Vous pourrez modifier une variable de classe (comme dans les structures en C), et utiliser une fonction de classe. Creez un fichier main.cpp
+********************************************************
+#include "iostream"
+#include "Maclasse.class.hpp"
+
+int main()
+{
+	Maclasse toto;
+	
+	toto.foo = 42;//On modifie la variable foo dans la variable "toto" de class/type "Maclasse"
+	std::cout<< "toto.foo: " << toto.foo << std::endl;
+	
+	toto.bar();//On utilise la fonction bar de la fonction "Maclasse"
+}
+********************************************************
+
+THIS
+	-"this" est employer pour faire reference a l'instance de classe actuelle
+********************************************************
+#include "Maclasse.class.hpp"
+
+Maclasse::Maclasse(void) {
+
+	std::cout << "Constructor called" << std::endl;
+	
+	this->foo = 42;// cela va attribuer 42 a la variable "foo" presente dans la classe "Maclasse"
+	std::cout << "this->foo: " <<this->foo << std::endl;
+	
+	this->foo();//Fais appel a la fonction bar de l'instance actuelle de la classe Maclasse
+	
+	return; // Pas sur que obligatoire
+
+}
+********************************************************
+
+INITIALISATION LIST
+	-Elles sont utilisees pour permettre d'assigner un argument a une variable(constructeur seulement?)
+********************************************************
+#ifndef MACLASSE1_CLASS_H
+# define MACLASSE1_CLASS_H
+
+class	Maclasse1 {
+
+public:
+	char	a1;
+	int	a2;
+	float	a3;
+	
+	Maclasse1(char p1, int p2, float p3);//Ici on envoie des arguments a mon constructeur
+	~Maclasse1(void); 
+	
+	void bar(void);
+};
+
+#include "Maclasse1.class.hpp"
+
+Maclasse1::Maclasse1(void) : a1(p1), a2(p2), a3(p3) { // Ici on initialise les variables de l'instance de ma classe "Maclasse1", elles prennent les valeurs envoyees en arguments au constructeur CE N"EST PAS UNE ASSIGNATION
+
+	std::cout << "Constructor called" << std::endl;
+	std::cout<< "a1: " << a1 << std::endl;
+	std::cout<< "a2: " << a2 << std::endl;
+	std::cout<< "a3: " << a3 << std::endl;
+	
+	return; // Pas sur que obligatoire
+}
+
+********************************************************
+
+CONST
+	-Utilisez le const pour empecher de modifier des variables dans vos instances
+********************************************************
+#ifndef MACLASSE1_CLASS_H
+# define MACLASSE1_CLASS_H
+
+class	Maclasse1 {
+
+public:
+
+	float	const	pi;
+	int		qd;
+	
+	Maclasse1(float const f);
+	~Maclasse1(void); 
+	
+	void bar(void);
+};
+
+#include "Maclasse1.class.hpp"
+
+Maclasse1::Maclasse1(float f) : pi(f), qd(42) { //Encore une fois on initialise les variables de classe grace aux aruments envoyes au constructeur, mais cette fois ci pi est "const" et ne peut etre modifier, ce n'est pas un problem ici on initialise pi 
+
+	std::cout << "Constructor called" << std::endl;
+	std::cout<< "a1: " << a1 << std::endl;
+	std::cout<< "a2: " << a2 << std::endl;
+	std::cout<< "a3: " << a3 << std::endl;
+	
+	return; // Pas sur que obligatoire
+}
+
+********************************************************
+	-Dans cet exemple on va mettre en const l'integralite la fonction
+********************************************************
+void	Maclasse1::bar(void) const { //Ici on ne pourra pas modifier l'instance en cours
+
+	std::cout << "this->pi" << this->pi << std::endl;
+	return;
+}
+********************************************************
+
+VISIBILITY
+	-Vous devez limiter ce a quoivous avez acces dans votre classe depuis l'exterieur(main program), pour cela vous allez definir certaines fonctions et variables en prive, si il n'y a pas de raisons que quelqu'un d'autre y accede, ce doit etre prive
+********************************************************
+#ifndef MACLASSE1_CLASS_H
+# define MACLASSE1_CLASS_H
+
+class	Maclasse1 {
+
+public:
+
+	int publicfoo;
+	
+	Maclasse1(void);
+	~Maclasse1(void); 
+	
+	void publicbar(void);
+	
+private:
+	int	_privatefoo;
+	
+	void privatebar(void) const;
+};
+
+
+#include "Maclasse1.class.hpp"
+
+Maclasse1::Maclasse1(void) { 
+
+	this->publicfoo = 0;
+	this->privatefoo = 0;// Ici aucun probleme pour acceder aux variable et fonctions privees, on est dans le constructeur de l'instance de la classe. En revanche dans un main on ne peut y acceder.
+	this->publicbar();
+	this->privatebar();
+	
+	return; // Pas sur que obligatoire
+}
+********************************************************
+
+CLASS VS STRUCT
+	-Pas de difference hormis qu'une structure est publique par defaut et une classe prive
+	
+ACCESSORS
+	-Les accesseurs vous permettent d'acceder aux variables prives d'une classe pour y lire ou ecrire.
+********************************************************
+	class	Maclasse1 {
+
+public:
+	
+	Maclasse1(void);
+	~Maclasse1(void); 
+	
+	int	getFoo(void) const;
+	void	setFoo(int n);
+	
+private:
+	int	_foo;
+	
+};
+
+int	Maclasse1::getFoo(void) const{ //Cette fonction permet de recuperer la valeur de la variable prive _foo.
+
+	return	this->_foo;
+}
+
+void	Maclasse1::setFoo(int n){ //Celle ci permet de setup la valeur de la variable prive _foo.
+	if (n >= 0)
+		this->_foo = n;
+}
+
+OPERATEUR D"ASSIGNATION
+
+
+
+Lorsque vous faites une déclaration comme Contact& ctc = this->ctc_array[this->array_index]; suivie de ctc = Contact(f_name, l_name, nname, p_number, d_secret);, voici ce qui se passe en détail :
+
+Étape 1 : Référence à un Élément du Tableau
+cpp
+Copy code
+Contact& ctc = this->ctc_array[this->array_index];
+this->ctc_array[this->array_index] : Accède à un élément du tableau ctc_array à l'indice array_index. Cette expression retourne une référence à l'objet Contact stocké à cet indice du tableau.
+
+Contact& ctc : Crée une référence ctc à l'objet Contact spécifié. Cela signifie que ctc est maintenant une référence directe à l'objet Contact dans ctc_array à l'index array_index. Toute modification apportée à ctc se reflétera directement dans ctc_array à ce même indice.
+
+Étape 2 : Assignation à la Référence
+cpp
+Copy code
+ctc = Contact(f_name, l_name, nname, p_number, d_secret);
+Contact(f_name, l_name, nname, p_number, d_secret) : Crée un nouvel objet Contact avec les paramètres fournis. C'est une instanciation temporaire de l'objet Contact avec les attributs spécifiés.
+
+ctc = : Utilise l'opérateur d'assignation pour assigner cet objet temporaire au Contact référencé par ctc. Cela appelle l'opérateur d'assignation de la classe Contact.
+
+Détails de l'Opération
+Création d'un Objet Temporaire : Un nouvel objet Contact est créé avec les valeurs passées au constructeur. Cet objet temporaire est utilisé pour l'assignation.
+
+Opérateur d'Assignation :
+
+L'opération ctc = Contact(f_name, l_name, nname, p_number, d_secret); appelle l'opérateur d'assignation (operator=) de la classe Contact.
+L'Opérateur d'Assignation : Typiquement, cet opérateur est défini comme suit dans la classe Contact :
+cpp
+Copy code
+Contact& operator=(const Contact& other) {
+    if (this != &other) { // Protection contre l'assignation à soi-même
+        this->f_name = other.f_name;
+        this->l_name = other.l_name;
+        this->nname = other.nname;
+        this->p_number = other.p_number;
+        this->d_secret = other.d_secret;
+    }
+    return *this;
+}
+Cette fonction copie les attributs de l'objet other (dans ce cas, l'objet temporaire créé) vers l'objet référencé par ctc.
+Mise à Jour du Tableau : Puisque ctc est une référence à l'objet dans ctc_array, toute modification effectuée via ctc se reflète directement dans l'élément du tableau correspondant.
+
+Exemple Illustratif
+Voici un exemple complet illustrant ce comportement :
+
+cpp
+Copy code
+#include <iostream>
+#include <string>
+
+class Contact {
+public:
+    std::string f_name;
+    std::string l_name;
+    std::string nname;
+    std::string p_number;
+    std::string d_secret;
+
+    // Constructeur
+    Contact(std::string f, std::string l, std::string n, std::string p, std::string d)
+        : f_name(f), l_name(l), nname(n), p_number(p), d_secret(d) {}
+
+    // Opérateur d'assignation
+    Contact& operator=(const Contact& other) {
+        if (this != &other) {
+            f_name = other.f_name;
+            l_name = other.l_name;
+            nname = other.nname;
+            p_number = other.p_number;
+            d_secret = other.d_secret;
+        }
+        return *this;
+    }
+
+    // Méthode d'affichage
+    void display() const {
+        std::cout << f_name << " " << l_name << " " << nname << " " << p_number << " " << d_secret << std::endl;
+    }
+};
+
+int main() {
+    Contact c1("John", "Doe", "JD", "1234567890", "secret1");
+    Contact c2("Jane", "Smith", "JS", "0987654321", "secret2");
+
+    Contact c_array[2] = {c1, c2};
+    Contact& ctc = c_array[0]; // Référence à c1
+
+    std::cout << "Before assignment:" << std::endl;
+    ctc.display(); // Affiche "John Doe JD 1234567890 secret1"
+
+    ctc = Contact("Alice", "Wonderland", "AW", "5555555555", "secret3"); // Assigner un nouvel objet à ctc
+
+    std::cout << "After assignment:" << std::endl;
+    ctc.display(); // Affiche "Alice Wonderland AW 5555555555 secret3"
+    std::cout << "Array content:" << std::endl;
+    c_array[0].display(); // Affiche aussi "Alice Wonderland AW 5555555555 secret3"
+
+    return 0;
+}
+Résumé
+Référence ctc : Pointant vers l'objet Contact dans ctc_array.
+Assignation : Crée un nouvel objet Contact avec les paramètres fournis et utilise l'opérateur d'assignation pour mettre à jour l'objet référencé par ctc.
+Effet : L'objet dans le tableau ctc_array à l'indice array_index est modifié pour correspondre aux nouvelles valeurs.
+Cela signifie que ctc_array[this->array_index] est effectivement mis à jour avec les nouvelles valeurs, et toute modification apportée via ctc se reflète directement dans le tableau.
+
+
+Il est possible que l'opérateur d'assignation ne soit pas défini explicitement dans votre classe Contact, mais cela ne signifie pas que le code ne fonctionne pas. Si vous n'avez pas défini votre propre opérateur d'assignation, le compilateur génère automatiquement un opérateur d'assignation par défaut. Ce comportement peut expliquer pourquoi votre code fonctionne même sans une définition explicite de cet opérateur.
+
+Opérateur d'Assignation par Défaut
+Lorsque vous ne définissez pas explicitement l'opérateur d'assignation pour une classe, le compilateur génère un opérateur d'assignation par défaut. Cet opérateur par défaut fait généralement ce qui suit :
+
+Copie Membre à Membre : Il copie chaque membre de l'objet source (l'objet à droite de l'opérateur d'assignation) dans l'objet cible (l'objet à gauche de l'opérateur d'assignation). Cela fonctionne bien pour les types de données simples comme les types primitifs (int, float, etc.) et les types de données composés comme les std::string.
+
+Gestion des Mémoires Dynamiques : Si votre classe utilise de la mémoire dynamique (via des pointeurs), l'opérateur d'assignation par défaut ne gère pas correctement les problèmes potentiels comme les fuites de mémoire ou les double libérations. Dans ces cas, vous auriez besoin de définir votre propre opérateur d'assignation pour gérer ces situations de manière appropriée.
+
+Exemple d'Opérateur d'Assignation par Défaut
+Voici un exemple simple pour illustrer comment l'opérateur d'assignation par défaut fonctionne :
+
+cpp
+Copy code
+#include <iostream>
+#include <string>
+
+class Contact {
+public:
+    std::string f_name;
+    std::string l_name;
+    std::string nname;
+    std::string p_number;
+    std::string d_secret;
+
+    // Constructeur
+    Contact(std::string f, std::string l, std::string n, std::string p, std::string d)
+        : f_name(f), l_name(l), nname(n), p_number(p), d_secret(d) {}
+
+    // Opérateur d'assignation par défaut
+    // Contact& operator=(const Contact& other) = default;
+
+    // Méthode d'affichage
+    void display() const {
+        std::cout << f_name << " " << l_name << " " << nname << " " << p_number << " " << d_secret << std::endl;
+    }
+};
+
+int main() {
+    Contact c1("John", "Doe", "JD", "1234567890", "secret1");
+    Contact c2("Jane", "Smith", "JS", "0987654321", "secret2");
+
+    Contact c_array[2] = {c1, c2};
+    Contact& ctc = c_array[0]; // Référence à c1
+
+    std::cout << "Before assignment:" << std::endl;
+    ctc.display(); // Affiche "John Doe JD 1234567890 secret1"
+
+    ctc = Contact("Alice", "Wonderland", "AW", "5555555555", "secret3"); // Assigner un nouvel objet à ctc
+
+    std::cout << "After assignment:" << std::endl;
+    ctc.display(); // Affiche "Alice Wonderland AW 5555555555 secret3"
+    std::cout << "Array content:" << std::endl;
+    c_array[0].display(); // Affiche aussi "Alice Wonderland AW 5555555555 secret3"
+
+    return 0;
+}
+Dans cet exemple, nous avons commenté la ligne où nous aurions pu déclarer l'opérateur d'assignation par défaut (operator=(const Contact& other) = default;). Même sans cette ligne, le compilateur génère un opérateur d'assignation par défaut qui copie les membres de l'objet.
+
+Quand Définir Votre Propre Opérateur d'Assignation
+Vous devriez définir votre propre opérateur d'assignation si :
+
+Gestion de la Mémoire Dynamique : Votre classe gère des ressources dynamiques, comme des pointeurs, où une simple copie membre à membre pourrait causer des problèmes de gestion de mémoire.
+
+Comportement Spécifique : Vous souhaitez personnaliser le comportement de l'assignation, par exemple en effectuant des vérifications supplémentaires ou en effectuant des actions spécifiques lors de l'assignation.
+
+Résumé
+Opérateur d'Assignation par Défaut : Le compilateur génère un opérateur d'assignation par défaut qui copie les membres de manière simple et directe.
+Définir Votre Propre Opérateur : Si vous avez besoin de gestion spécifique de la mémoire ou d'un comportement personnalisé, vous devez définir explicitement l'opérateur d'assignation.
+Même si votre code fonctionne sans définir explicitement un opérateur d'assignation, il est important de comprendre comment cela fonctionne et de définir un opérateur personnalisé si nécessaire pour gérer des cas plus complexes.
+
+
+IOSTATE
+
+Exactement ! Pour clarifier la relation entre std::stringstream, std::ios::iostate, et std::iostream, voici comment cela fonctionne :
+
+Hiérarchie et Gestion de l'État
+std::ios :
+
+C’est la classe de base pour toutes les classes de flux. Elle définit l'énumération iostate qui est utilisée pour représenter les états d'erreur et autres états internes d'un flux. L'état du flux est géré par des indicateurs comme failbit, eofbit, et badbit.
+Méthodes associées : fail(), eof(), bad(), good(), et clear() pour gérer et vérifier l'état du flux.
+std::iostream :
+
+C’est une classe dérivée de std::ios (et de std::basic_iostream), combinant les fonctionnalités de lecture et d'écriture. Elle gère à la fois les opérations d'entrée et de sortie et utilise les mécanismes d'état définis dans std::ios.
+std::stringstream :
+
+C’est une spécialisation de std::iostream, dérivée de std::basic_stringstream, permettant la manipulation de chaînes de caractères comme des flux. Elle hérite des fonctionnalités de gestion d'état et des méthodes de std::iostream et, en fin de compte, de std::ios.
+Relation avec iostate
+iostate est une énumération définie dans std::ios qui représente les différents états d'erreur possibles pour un flux. Les objets std::stringstream (comme tous les objets dérivés de std::ios) utilisent cette énumération pour gérer et signaler les erreurs.
+
+Héritage et Utilisation :
+
+std::stringstream hérite des membres et des méthodes pour gérer les états d'erreur de std::iostream, qui à son tour hérite de std::ios.
+Donc, bien que std::stringstream n'hérite pas directement de iostate, il utilise les mécanismes de iostate à travers l'héritage de std::ios.
+Exemple Illustratif
+Pour montrer comment cela se manifeste dans le code, voici un exemple :
+
+cpp
+Copy code
+#include <iostream>
+#include <sstream>
+#include <string>
+
+int main() {
+    std::string input = "123abc"; // Entrée contenant un entier et des caractères non numériques
+    int nbr;
+
+    std::stringstream ss(input);
+
+    // Essayer de lire un entier depuis le stringstream
+    if (!(ss >> nbr)) { // Vérifie si la lecture a échoué
+        if (ss.fail()) {
+            std::cout << "Stream state: failbit is set." << std::endl; // Vérifie l'état d'erreur de lecture
+        }
+        if (ss.eof()) {
+            std::cout << "Stream state: eofbit is set." << std::endl; // Vérifie si la fin du flux est atteinte
+        }
+        if (ss.bad()) {
+            std::cout << "Stream state: badbit is set." << std::endl; // Vérifie les erreurs sérieuses
+        }
+        ss.clear(); // Réinitialise les indicateurs d'état du flux
+        ss.str(""); // Vide le contenu du flux, optionnel
+    } else {
+        std::cout << "Read integer: " << nbr << std::endl;
+    }
+
+    return 0;
+}
+Résumé
+std::stringstream hérite des mécanismes de gestion des états d'erreur de std::iostream, qui hérite de std::ios.
+std::ios::iostate est utilisé en interne pour représenter les états d'erreur, mais les méthodes comme fail(), eof(), bad(), et clear() sont accessibles directement à travers les classes dérivées comme std::stringstream.
+En résumé, bien que std::stringstream n'hérite pas directement de iostate, il utilise les fonctionnalités de gestion des états d'erreur fournies par std::ios via l'héritage de std::iostream.
+
+
+REINITIALISER FLUX
+
+C’est une excellente question ! En fait, lorsque vous remplacez le contenu d’un std::stringstream avec une nouvelle chaîne en utilisant ss.str(buffer), vous n'avez pas toujours besoin de faire ss.str("") au préalable. Voici une explication plus détaillée :
+
+Remplacement du Contenu du Flux
+Lorsque vous appelez ss.str(buffer), cela remplace le contenu actuel du std::stringstream par le contenu de la chaîne buffer. Ce remplacement a les effets suivants :
+
+Contenu du Flux : Le contenu du flux est mis à jour avec la nouvelle chaîne. Le flux contient maintenant les nouvelles données de buffer.
+
+État du Flux : L’état du flux, comme les erreurs de lecture ou d’écriture précédentes, reste inchangé par cette opération. Si le flux était dans un état d’erreur, il pourrait encore être dans cet état après le remplacement du contenu.
+
+Besoin de ss.str("")
+ss.str("") (Vider le Contenu) : Cette opération vide le contenu actuel du flux avant de le remplir avec une nouvelle chaîne. C’est généralement utilisé pour garantir que le flux commence avec un état propre et sans données résiduelles.
+
+Non Nécessaire si Remplacement Direct : Si vous êtes sûr que vous remplacez toujours le contenu avec des données fraîches et que l’état du flux est déjà propre, vous n’avez pas besoin d’appeler ss.str(""). La méthode ss.str(buffer) remplira le flux avec le contenu de buffer, et dans la plupart des cas, cela suffira.
+
+Pourquoi Utiliser ss.clear()?
+Même si ss.str(buffer) remplace le contenu du flux, il ne réinitialise pas l’état d’erreur du flux. Si le flux était dans un état d’erreur à cause de précédentes opérations, il est essentiel de :
+
+Utiliser ss.clear() : Avant de lire de nouvelles données, surtout après une opération qui pourrait avoir échoué, vous devez appeler ss.clear() pour réinitialiser les états d’erreur. Cela assure que le flux peut être utilisé correctement pour les nouvelles opérations.
+Exemple Illustratif
+Voici un exemple pour illustrer la nécessité de réinitialiser les états d’erreur :
+
+cpp
+Copy code
+#include <iostream>
+#include <sstream>
+#include <string>
+
+int main() {
+    std::string input;
+    int nbr;
+    const int length = 10;
+
+    while (true) {
+        std::getline(std::cin, input);
+
+        if (std::cin.eof()) {
+            std::cout << "End of input detected. Exiting." << std::endl;
+            return 1;
+        }
+
+        std::stringstream ss(input);
+
+        if (!(ss >> nbr)) {
+            std::cout << "Failed to read an integer. Please enter a valid integer." << std::endl;
+            ss.clear(); // Réinitialiser les erreurs du flux
+        } else if (nbr < 0 || nbr >= length) {
+            std::cout << "Invalid contact index, please try again" << std::endl;
+        } else {
+            std::cout << "Valid contact index: " << nbr << std::endl;
+            break;
+        }
+
+        // Réinitialiser le flux pour la prochaine itération
+        // Pas nécessaire d'appeler ss.str("") ici, car ss.str(buffer) suffit pour remplir le flux avec de nouvelles données
+        ss.str(input); // Remplacer le contenu du flux par la nouvelle chaîne
+    }
+
+    return 0;
+}
+Résumé
+ss.str("") : N'est pas toujours nécessaire si vous allez immédiatement remplacer le contenu avec ss.str(buffer). Cependant, il peut être utilisé pour garantir que le flux est complètement vidé avant de le remplir avec une nouvelle chaîne.
+
+ss.clear() : Est crucial pour réinitialiser l'état d’erreur du flux afin de permettre des opérations de lecture ou d’écriture correctes après une erreur.
+
+En pratique, si vous vous assurez que l’état du flux est toujours propre (en utilisant ss.clear()) avant chaque utilisation, vous pouvez souvent omettre l’appel à ss.str("") et simplement remplacer le contenu avec ss.str(buffer).
+
+
+STATIC
+
+
+En C++, le mot-clé static a des implications spécifiques sur la portée et le cycle de vie des variables et des méthodes. Voici pourquoi il est utilisé uniquement lors de la déclaration d'une méthode ou d'une variable dans une classe :
+
+Lié à la classe, pas à l'instance : Lorsqu'une méthode est déclarée comme static, cela signifie qu'elle est associée à la classe elle-même plutôt qu'à une instance particulière de cette classe. Cela permet d'accéder à la méthode sans avoir besoin de créer un objet de la classe.
+
+Consistance et clarté : En déclarant une méthode statique dans la définition de la classe, vous indiquez clairement au compilateur que cette méthode n'accède ni ne modifie les membres non statiques de la classe. Cela renforce la lisibilité et la compréhension du code.
+
+Efficacité : La gestion de l'espace mémoire est plus efficace lorsque le compilateur sait dès la compilation qu'une méthode ou une variable est statique. Cela évite des allocations dynamiques inutiles pour des méthodes qui n'ont pas besoin d'accéder à des données d'instance.
+
+Conception orientée objet : En C++, la distinction entre méthodes statiques et non statiques fait partie de la conception orientée objet. Cela permet de structurer le code et d'encourager des pratiques de programmation claires et cohérentes.
+
+En résumé, déclarer une méthode comme static au sein de la définition de la classe fournit des informations importantes au compilateur et aux développeurs sur la manière dont cette méthode interagit avec la classe et ses instances.
+
+
+
+You said:
+vous indiquez clairement au compilateur que cette méthode n'accède ni ne modifie les membres non statiques de la classe. peux tu elaborer?
+ChatGPT said:
+ChatGPT
+Bien sûr ! En C++, les méthodes d'une classe peuvent être soit statiques, soit non statiques. Cette distinction est cruciale pour comprendre comment elles interagissent avec les membres de la classe.
+
+Méthodes statiques
+Accès aux membres : Les méthodes statiques n'ont pas accès aux membres non statiques (c'est-à-dire aux variables d'instance) de la classe. Cela signifie qu'à l'intérieur d'une méthode statique, vous ne pouvez pas utiliser this pour référencer un objet de la classe. En effet, les méthodes statiques ne sont pas liées à une instance spécifique.
+
+Utilisation : Les méthodes statiques sont souvent utilisées pour des opérations qui ne nécessitent pas de connaître l'état d'un objet particulier. Elles sont idéales pour des fonctions utilitaires ou des méthodes qui opèrent uniquement sur des données statiques ou des arguments passés.
+
+Méthodes non statiques
+Accès aux membres : Les méthodes non statiques, en revanche, ont accès à tous les membres de la classe, qu'ils soient statiques ou non. Elles peuvent utiliser this pour accéder aux variables d'instance et modifier l'état de l'objet.
+
+Utilisation : Ces méthodes sont utilisées lorsque l'opération doit dépendre de l'état d'une instance particulière de la classe.
+
+Exemple Illustratif
+Voici un exemple pour illustrer ces concepts :
+
+cpp
+Copy code
+class Compte {
+public:
+    static int getTotalAccounts() {
+        return totalAccounts; // Peut accéder à un membre statique
+    }
+
+    void deposit(int amount) {
+        balance += amount; // Accède à un membre non statique
+    }
+
+private:
+    static int totalAccounts; // Membre statique
+    int balance; // Membre non statique
+};
+
+// Initialisation des membres statiques
+int Compte::totalAccounts = 0;
+Conclusion
+En déclarant une méthode comme static, vous indiquez clairement qu'elle ne peut pas interagir avec les membres non statiques de la classe. Cela aide à :
+
+Éviter les erreurs : Si vous essayez d'accéder à un membre non statique dans une méthode statique, le compilateur générera une erreur, ce qui empêche des comportements inattendus.
+Clarifier le design : Cela rend le code plus facile à comprendre, car il est évident que la méthode ne dépend pas d'une instance spécifique.
+Cette séparation favorise une meilleure architecture et une plus grande clarté dans le code orienté objet.
+
+L'erreur que vous rencontrez, "undefined reference to", indique que le compilateur ne trouve pas les définitions des variables statiques que vous avez déclarées dans la classe Account. En C++, lorsque vous déclarez des variables statiques dans une classe, vous devez les définir en dehors de la classe pour que le compilateur puisse les utiliser.
+
+Voici comment corriger le problème :
+
+1. Déclaration et Définition des Membres Statiques
+Assurez-vous que vous avez bien défini les membres statiques en dehors de la classe. Par exemple, dans votre fichier Account.cpp, vous devez avoir quelque chose comme ceci :
+
+cpp
+Copy code
+// Fichier Account.cpp
+
+// Initialisation des membres statiques
+int Account::_nbAccounts = 0;
+int Account::_totalAmount = 0;
+int Account::_totalNbDeposits = 0;
+int Account::_totalNbWithdrawals = 0;
+int Account::_accountIndexCounter = 0;
+2. Vérification de la Déclaration dans le Fichier d'En-tête
+Assurez-vous que vos déclarations dans le fichier d'en-tête Account.hpp ressemblent à ceci :
+
+cpp
+Copy code
+class Account {
+public:
+    // Méthodes publiques...
+    
+private:
+    static int _nbAccounts;
+    static int _totalAmount;
+    static int _totalNbDeposits;
+    static int _totalNbWithdrawals;
+    static int _accountIndexCounter;
+
+    // Autres membres...
+};
+3. Recompilation
+Après avoir fait ces modifications, assurez-vous de bien recompter tout le projet. Si vous utilisez un Makefile, vous pouvez exécuter make clean pour nettoyer les fichiers objets précédents, puis make pour reconstruire votre projet.
+
+Conclusion
+Avec ces définitions, le compilateur devrait être capable de lier correctement vos variables statiques, et l'erreur de "undefined reference" devrait disparaître. Si vous avez d'autres questions ou si des erreurs persistent, n'hésitez pas à demander !
+
+
+VARIABLE STATIC ET CLASSE
+Pourquoi une variable statique dans une classe n'est pas toujours comprise par le compilateur en C++98 ?
+La déclaration d'une variable statique au sein d'une classe en C++98 nécessite une attention particulière pour éviter des erreurs de compilation.
+
+Comprendre les variables statiques dans une classe
+Nature: Les variables statiques dans une classe sont des membres de classe, mais elles ne sont pas associées à une instance particulière de cette classe. Elles existent en un seul exemplaire, partagé par toutes les instances de la classe.
+Durée de vie: Elles sont créées au démarrage du programme et détruites à la fin, contrairement aux variables membres ordinaires qui sont créées et détruites avec chaque instance de la classe.
+Raisons des erreurs de compilation
+Définition en dehors de la classe :
+
+Déclaration vs. définition: Déclarer une variable statique dans une classe ne suffit pas. Il faut également la définir en dehors de la classe, généralement dans un fichier .cpp.
+Lien externe: La définition lie le nom de la variable à sa représentation en mémoire. Sans cette définition, le lienneur ne sait pas où trouver la variable et génère une erreur de "symbole externe non résolu".
+Exemple:
+C++
+// MyClass.h
+class MyClass {
+public:
+    static int myStaticVar; // Déclaration
+};
+
+// MyClass.cpp
+int MyClass::myStaticVar = 0; // Définition
+Utilisez ce code avec précaution.
+
+Initialisation multiple:
+
+Une seule définition: Une variable statique ne peut être initialisée qu'une seule fois. Une initialisation multiple dans différents fichiers source entraînera une erreur de "multiple definition".
+En-tête: Il est généralement conseillé de déclarer la variable statique dans l'en-tête et de la définir dans un seul fichier .cpp.
+Ordre d'initialisation:
+
+Indéterminé: L'ordre d'initialisation des variables statiques de différentes classes peut être indéterminé, ce qui peut mener à des problèmes si ces variables dépendent les unes des autres.
+Solutions: Utiliser des constructeurs statiques pour garantir un ordre d'initialisation spécifique ou utiliser des mécanismes de chargement différés.
+Autres points à considérer
+Espace de noms: Les variables statiques de classe sont dans l'espace de noms de la classe, ce qui peut aider à éviter les conflits de noms.
+Accès: Les variables statiques peuvent être accédées depuis n'importe où dans le programme à l'aide de l'opérateur de résolution de portée (::).
+Utilisation: Les variables statiques sont utiles pour stocker des données partagées par toutes les instances d'une classe, comme des compteurs, des caches ou des paramètres de configuration.
+En résumé
+Pour éviter les erreurs de compilation avec les variables statiques en C++98, il est essentiel de :
+
+Définir la variable en dehors de la classe, dans un fichier .cpp.
+Initialiser la variable une seule fois.
+Gérer l'ordre d'initialisation si nécessaire.
+Comprendre l'espace de noms et l'accès aux variables statiques.
+En respectant ces règles, vous pourrez utiliser efficacement les variables statiques dans vos classes C++98.
+
+Exemple complet:
+
+C++
+// MyClass.h
+class MyClass {
+public:
+    static int myStaticVar;
+    static void incrementStaticVar() {
+        myStaticVar++;
+    }
+};
+
+// MyClass.cpp
+int MyClass::myStaticVar = 0;
+
+// main.cpp
+#include "MyClass.h"
+
+int main() {
+    MyClass::incrementStaticVar();
+    std::cout << MyClass::myStaticVar << std::endl; // Affiche 1
+    return 0;
+}
+
+DELETE
+C'est tout à fait correct ! Les delete que vous effectuez dans votre fonction main ne devraient pas être effectués dans le destructeur de la classe Zombie.
+
+Pourquoi ?
+
+Double libération: Si vous supprimez un objet à plusieurs reprises, cela entraîne un comportement indéfini et peut provoquer des plantages. Si vous supprimez l'objet dans le destructeur et que le code appelant (dans ce cas, votre main) essaie également de le supprimer, vous obtiendriez une double libération.
+Responsabilité du code appelant: C'est généralement au code qui alloue un objet de le supprimer. Le destructeur d'un objet sert à libérer les ressources qu'il a allouées en interne, mais pas à se détruire lui-même.
+Quelle est la meilleure approche ?
+
+Gestion manuelle de la mémoire: C'est ce que vous faites dans votre exemple. Vous allouez les objets dans main et vous les supprimez explicitement à la fin. Cette approche nécessite une attention particulière pour éviter les fuites de mémoire.
+Utilisation de pointeurs intelligents: Les pointeurs intelligents comme std::unique_ptr ou std::shared_ptr gèrent automatiquement la durée de vie des objets. Ils suppriment l'objet lorsqu'il n'est plus utilisé, évitant ainsi les fuites de mémoire.
+Exemple avec std::unique_ptr:
+
+C++
+#include <memory>
+
+int main() {
+    std::unique_ptr<Zombie> one = std::make_unique<Zombie>("Baptiste");
+    std::unique_ptr<Zombie> two = std::make_unique<Zombie>("Quentin");
+    std::unique_ptr<Zombie> three = std::make_unique<Zombie>("");
+
+    // ...
+
+    // Les objets seront automatiquement supprimés à la fin de ce bloc
+}
+Utilisez ce code avec précaution.
+
+En résumé:
+
+Évitez de supprimer un objet dans son propre destructeur.
+Utilisez des pointeurs intelligents pour une gestion simplifiée de la mémoire.
+Si vous gérez manuellement la mémoire, assurez-vous de supprimer chaque objet une fois et une seule.
+En suivant ces recommandations, vous écrirez du code C++ plus sûr et plus facile à maintenir.

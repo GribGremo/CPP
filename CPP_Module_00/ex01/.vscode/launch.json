@@ -1,0 +1,30 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Déboguer le programme C++",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/phonebook",  // Remplace avec le chemin vers ton exécutable
+            "args": [],  // Arguments à passer au programme, si nécessaire
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Activer l'affichage du mode source",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "build",  // Assure-toi d'avoir une tâche de construction nommée "build"
+            "miDebuggerPath": "/usr/bin/gdb",  // Chemin vers GDB
+            "internalConsoleOptions": "openOnSessionStart",
+            "logging": {
+                "engineLogging": true
+            }
+        }
+    ]
+}
