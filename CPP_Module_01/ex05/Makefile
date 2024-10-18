@@ -5,12 +5,12 @@
 #                                                     +:+ +:+         +:+      #
 #    By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/09/28 17:08:09 by sylabbe           #+#    #+#              #
-#    Updated: 2024/10/17 15:15:24 by sylabbe          ###   ########.fr        #
+#    Created: 2024/10/18 12:43:21 by sylabbe           #+#    #+#              #
+#    Updated: 2024/10/18 12:44:41 by sylabbe          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = filedup
+NAME = harl
 
 CFLAGS = -Werror -Wall -Wextra -std=c++98 #-fsanitize=address
 
@@ -19,7 +19,8 @@ SRC_MDT_DIR = .
 DEST_MDT_DIR = .
 
 # ls -1 *.c | sed -z 's/\n/ \\\n\t\t\t/g'
-SRC =	$(addprefix $(SRC_MDT_DIR)/, main.cpp)
+SRC =	$(addprefix $(SRC_MDT_DIR)/, main.cpp \
+										Harl.cpp)
 
 
 OBJECTS = $(SRC:$(SRC_MDT_DIR)/%.cpp=$(DEST_MDT_DIR)/%.o)
