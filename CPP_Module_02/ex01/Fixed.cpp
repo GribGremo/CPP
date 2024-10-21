@@ -3,28 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:48:04 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/10/20 12:10:20 by grib             ###   ########.fr       */
+/*   Updated: 2024/10/21 14:51:04 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
 #include <iostream>
+#include <iomanip>
+#include <math.h>
 
 /*CONTRUCTORS*/
 Fixed::Fixed(){
     std::cout << "Constructor Called" << std ::endl;
-    fixed_point = 0;
+    fixed_point = 0 << fractionnal_bits;//a voir
 }
 Fixed::Fixed(const int n){
     std::cout << "Int Constructor Called" << std ::endl;
-
+    fixed_point = n <<  fractionnal_bits;
 }
 Fixed::Fixed(const float nf){
     std::cout << "Float Constructor Called" << std ::endl;
-
+    fixed_point = (int)(roundf(nf * 256));
 }
 Fixed::Fixed(const Fixed& other){
     std::cout << "Copy contructor Called" << std ::endl;
@@ -58,8 +60,8 @@ void Fixed::setRawBits( int const raw ){
 
 /*FUNCTIONS*/
 float Fixed::toFloat( void ) const{
-    float result = this->fixed_point / (2 )
+    return ((float)fixed_point / 256);//
 }
 int Fixed::toInt( void ) const{
-
+    return (roundf((float)fixed_point / 256));
 }
