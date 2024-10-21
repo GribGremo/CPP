@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
+/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:48:04 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/10/19 16:07:55 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/10/20 12:10:20 by grib             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void Fixed::setRawBits( int const raw ){
 
 /*FUNCTIONS*/
 float Fixed::toFloat( void ) const{
-
+    float result = this->fixed_point / (2 )
 }
 int Fixed::toInt( void ) const{
 
