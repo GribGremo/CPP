@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:48:02 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/10/19 15:20:48 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/10/22 12:00:31 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ class Fixed{
     ~Fixed();
 
     Fixed& operator=(const Fixed& other);//Operateur de copie
-    friend std::ostream& operator<<(std::ostream& out, const Fixed& obj);
+    std::ostream& operator<<(std::ostream& out);
     
     int getRawBits( void ) const;
     void setRawBits( int const raw );
