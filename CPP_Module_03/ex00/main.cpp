@@ -5,20 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/22 12:06:00 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/10/23 12:29:34 by sylabbe          ###   ########.fr       */
+/*   Created: 2024/10/23 16:05:09 by sylabbe           #+#    #+#             */
+/*   Updated: 2024/10/23 16:06:39 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Point.hpp"
-
+#include "ClapTrap.cpp"
 
 int main()
 {
-    Point a(1,1);
-    Point b(1,4);
-    Point c(4,1);
-    Point p(2,1);
-    if(bsp(a,b,c,p))
-        std::cout<< "CWIN";
+
 }

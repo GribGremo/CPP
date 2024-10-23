@@ -6,9 +6,12 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:48:02 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/10/22 11:58:45 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/10/23 15:58:34 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef FIXED_HPP
+# define FIXED_HPP
 
 #include <iostream>
 
@@ -57,3 +60,7 @@ class Fixed{
     static const int fractionnal_bits = 8;
 
 };
+
+std::ostream& operator<<(std::ostream& out, const Fixed& src);
+
+#endif

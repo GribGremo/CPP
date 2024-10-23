@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:48:04 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/10/22 11:58:22 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/10/23 16:00:51 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ Fixed& Fixed::operator=(const Fixed& other){
     fixed_point = other.fixed_point;
     return (*this);//
 }
-std::ostream& Fixed::operator<<(std::ostream& out){
-    out << this->toFloat();
+std::ostream& operator<<(std::ostream& out, const Fixed& src){
+    out << src.toFloat();
     return (out);
 }
 //Comparisons operators
