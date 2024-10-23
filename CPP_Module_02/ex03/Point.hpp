@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   Point.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
+/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 12:06:02 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/10/22 17:24:33 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/10/22 20:56:01 by grib             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef POINT_HPP
 # define POINT_HPP
 # include "Fixed.hpp"
+
 class Point
 {
     public:
@@ -29,5 +30,7 @@ class Point
         const Fixed x;
         const Fixed y;
 };
+
+bool bsp( Point const a, Point const b, Point const c, Point const point);
 
 #endif

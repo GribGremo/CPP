@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Point.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
+/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 12:06:05 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/10/22 17:24:41 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/10/22 20:37:03 by grib             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ Point::~Point(){}
 
 //OPERATORS
 
-Point& Point::operator=(Point& org){}
+Point& Point::operator=(Point& org){
+    (void) org;
+    return (*this);
+}
 
 //GETTERS/SETTERS
 

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+         #
+#    By: grib <grib@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/18 15:47:27 by sylabbe           #+#    #+#              #
-#    Updated: 2024/10/18 16:00:17 by sylabbe          ###   ########.fr        #
+#    Updated: 2024/10/22 20:36:03 by grib             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,9 @@ DEST_MDT_DIR = .
 
 # ls -1 *.c | sed -z 's/\n/ \\\n\t\t\t/g'
 SRC =	$(addprefix $(SRC_MDT_DIR)/, main.cpp \
-										Fixed.cpp)
+										Fixed.cpp \
+										Point.cpp \
+										bsp.cpp)
 
 
 OBJECTS = $(SRC:$(SRC_MDT_DIR)/%.cpp=$(DEST_MDT_DIR)/%.o)
