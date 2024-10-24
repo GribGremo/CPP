@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ClapTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
+/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 16:05:07 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/10/23 16:59:48 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/10/23 21:28:14 by grib             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 class ClapTrap{
     public:
     ClapTrap();
+    ClapTrap(std::string& name);
     ClapTrap(ClapTrap& src);
     ~ClapTrap();
 
@@ -28,8 +29,8 @@ class ClapTrap{
     
     private:
     std::string _name;
-    int _hit_points = 10;
-    int _energy_points = 10;
-    int _attack_dmg = 0;
+    int _hit_points;
+    int _energy_points;
+    int _attack_dmg;
 };
 #endif
