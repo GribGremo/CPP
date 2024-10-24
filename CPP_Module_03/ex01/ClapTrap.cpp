@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 16:05:04 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/10/24 15:06:33 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/10/24 15:40:40 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ ClapTrap::~ClapTrap(){
     std::cout << "ClapTrap destructor called" << std::endl;
 }
 
+ClapTrap::ClapTrap(std::string name, int hit_points, int energy_points, int attack_dmg) : _name(name),_hit_points(hit_points),_energy_points(energy_points),_attack_dmg(attack_dmg){
+    std::cout << "ClapTrap derived custom constructor called" << std::endl;
+}
 
 //OPERATORS
 
@@ -38,6 +41,16 @@ ClapTrap& ClapTrap::operator=(ClapTrap& src){
     _attack_dmg = src._attack_dmg;
     return (*this);
 }
+//SETTERS/GETTERS
+
+std::string ClapTrap::getName(){
+    return (_name);
+}
+int ClapTrap::getAttackDmg(){
+    return (_attack_dmg);
+}
+
+
 
 //FUNCTIONS
 
