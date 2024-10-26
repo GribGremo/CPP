@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 16:05:09 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/10/25 21:24:59 by grib             ###   ########.fr       */
+/*   Updated: 2024/10/26 11:18:43 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,5 @@ int main()
     titi.guardGate();
     ScavTrap cpy = titi;
     std::cout <<cpy.getName() << " Attack: "<< cpy.getAttackdmg()<< " Energy: " <<cpy.getEnergypoints()<<" HP: "<<cpy.getHitpoints() << std::endl;
-    cpy.attack("test");
+    cpy.attack("titi");
 }

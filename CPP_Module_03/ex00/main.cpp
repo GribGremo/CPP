@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 16:05:09 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/10/25 21:13:47 by grib             ###   ########.fr       */
+/*   Updated: 2024/10/26 11:19:01 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,5 @@ int main()
     toto.takeDamage(5);
     ClapTrap cpy = toto;
     std::cout <<cpy.getName() << cpy.getAttackdmg()<<cpy.getEnergypoints()<<cpy.getHitpoints() << std::endl;
-    cpy.attack("test");
+    cpy.attack("toto");
 }

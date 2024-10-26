@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ClapTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
+/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 16:05:04 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/10/26 11:16:23 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/10/25 22:05:56 by grib             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,18 @@ ClapTrap::ClapTrap(): _name("Bryan"),_hit_points(10),_energy_points(10),_attack_
     std::cout << "ClapTrap default constructor called" << std::endl;
 }
 ClapTrap::ClapTrap(std::string& name):_name(name),_hit_points(10),_energy_points(10),_attack_dmg(0){
-    std::cout << "ClapTrap custom constructor called" << std::endl;
+    std::cout << "ClapTrap default constructor called" << std::endl;
     _name = name;
 }
 ClapTrap::ClapTrap(ClapTrap& src):_name(src._name),_hit_points(src._hit_points),_energy_points(src._energy_points),_attack_dmg(src._attack_dmg){
-    std::cout << "ClapTrap copy constructor called" << std::endl;
+    std::cout << "ClapTrap custom constructor called" << std::endl;
 }
 ClapTrap::~ClapTrap(){
     std::cout << "ClapTrap destructor called" << std::endl;
+}
+
+ClapTrap::ClapTrap(std::string name, int hit_points, int energy_points, int attack_dmg) : _name(name),_hit_points(hit_points),_energy_points(energy_points),_attack_dmg(attack_dmg){
+    std::cout << "ClapTrap derived custom constructor called" << std::endl;
 }
 
 //OPERATORS
@@ -37,7 +41,6 @@ ClapTrap& ClapTrap::operator=(ClapTrap& src){
     _attack_dmg = src._attack_dmg;
     return (*this);
 }
-
 
 //GETTERS/SETTERS
 
@@ -66,6 +69,9 @@ void ClapTrap::setEnergypoints(int energy_points){
 void ClapTrap::setAttackdmg(int attack_dmg){
     _attack_dmg = attack_dmg;
 }
+
+
+
 
 //FUNCTIONS
 
@@ -101,7 +107,7 @@ void ClapTrap::beRepaired(unsigned int amount){
         if (amount == 0)
             std::cout << "Well, " << _name << " is not even good at mechanics, he repairs nothing." << std::endl;
         else
-            std::cout <<  _name << " tried his best to keep accomplishing his duty, he repairs by " << amount << " points." << std::endl;
+            std::cout << _name << " tried his best to keep accomplishing his duty, he repairs by " << amount << " points." << std::endl;
         _energy_points--;
         _hit_points += amount;
     }
