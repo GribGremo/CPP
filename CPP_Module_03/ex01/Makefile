@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+         #
+#    By: grib <grib@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/23 16:05:12 by sylabbe           #+#    #+#              #
-#    Updated: 2024/10/24 15:09:03 by sylabbe          ###   ########.fr        #
+#    Updated: 2024/10/25 13:33:27 by grib             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = claptrap
+NAME = scavtrap
 
 CFLAGS = -Werror -Wall -Wextra -std=c++98 #-fsanitize=address
 

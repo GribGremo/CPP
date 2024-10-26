@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ClapTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
+/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 16:05:07 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/10/24 15:40:48 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/10/25 14:05:46 by grib             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,17 @@ class ClapTrap{
     void attack(const std::string& target);
     void takeDamage(unsigned int amount);
     void beRepaired(unsigned int amount);
+
     std::string getName();
-    int getAttackDmg();
+    int getHitpoints();
+    int getEnergypoints();
+    int getAttackdmg();
+
+    void setName(std::string name);
+    void setHitpoints(int hit_points);
+    void setEnergypoints(int energy_points);
+    void setAttackdmg(int attack_dmg);
+    
 
 
     protected:

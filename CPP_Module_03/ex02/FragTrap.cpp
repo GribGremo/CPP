@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   FragTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
+/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 15:58:21 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/10/24 16:48:40 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/10/25 21:06:45 by grib             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,12 @@ FragTrap::~FragTrap(){
 
 //OPERATORS
 
-// FragTrap& FragTrap::operator=(FragTrap& src){
-
-// }
+FragTrap& FragTrap::operator=(FragTrap& src){
+    this->setAttackdmg(src.getAttackdmg());
+    this->setEnergypoints(src.getEnergypoints());
+    this->setHitpoints(src.getHitpoints());
+    this->setName(src.getName());
+}
 
 //FUNCTIONS
 
