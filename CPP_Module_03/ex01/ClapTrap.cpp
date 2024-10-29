@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ClapTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 16:05:04 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/10/25 22:07:08 by grib             ###   ########.fr       */
+/*   Updated: 2024/10/29 15:21:47 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,6 @@ ClapTrap::ClapTrap(ClapTrap& src):_name(src._name),_hit_points(src._hit_points),
 }
 ClapTrap::~ClapTrap(){
     std::cout << "ClapTrap destructor called" << std::endl;
-}
-
-ClapTrap::ClapTrap(std::string name, int hit_points, int energy_points, int attack_dmg) : _name(name),_hit_points(hit_points),_energy_points(energy_points),_attack_dmg(attack_dmg){
-    std::cout << "ClapTrap derived custom constructor called" << std::endl;
 }
 
 //OPERATORS

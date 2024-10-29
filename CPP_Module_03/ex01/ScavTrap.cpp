@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScavTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 09:39:08 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/10/25 21:22:49 by grib             ###   ########.fr       */
+/*   Updated: 2024/10/29 11:51:29 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,18 @@
 
 //CONSTRUCTORS
 
-ScavTrap::ScavTrap() : ClapTrap("Bryan", 100, 50, 20){
+ScavTrap::ScavTrap() : ClapTrap(){
+    this->_name = "Default";
+    this->_hit_points = 100;
+    this->_energy_points = 50;
+    this->_attack_dmg = 20;
     std::cout << "ScavTrap default constructor called" << std::endl;
 }
-ScavTrap::ScavTrap(std::string& name) : ClapTrap(name, 100, 50, 20){
+ScavTrap::ScavTrap(std::string& name) : ClapTrap(){
+    this->_name = name;
+    this->_hit_points = 100;
+    this->_energy_points = 50;
+    this->_attack_dmg = 20;
     std::cout << "ScavTrap custom constructor called" << std::endl;
 }
 ScavTrap::ScavTrap(ScavTrap& src) : ClapTrap(src){

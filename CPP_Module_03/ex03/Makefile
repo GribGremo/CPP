@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: grib <grib@student.42.fr>                  +#+  +:+       +#+         #
+#    By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/23 16:05:12 by sylabbe           #+#    #+#              #
-#    Updated: 2024/10/25 13:33:42 by grib             ###   ########.fr        #
+#    Updated: 2024/10/29 16:59:04 by sylabbe          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ DEST_MDT_DIR = .
 SRC =	$(addprefix $(SRC_MDT_DIR)/, main.cpp \
 										ClapTrap.cpp \
 										ScavTrap.cpp \
-										FragTrap.cpp)
+										FragTrap.cpp \
+										DiamondTrap.cpp)
 
 
 OBJECTS = $(SRC:$(SRC_MDT_DIR)/%.cpp=$(DEST_MDT_DIR)/%.o)

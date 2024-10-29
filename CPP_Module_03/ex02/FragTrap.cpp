@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   FragTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 15:58:21 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/10/25 21:06:45 by grib             ###   ########.fr       */
+/*   Updated: 2024/10/29 15:25:01 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,19 @@
 
 //CONSTRUCTORS
 
-FragTrap::FragTrap() : ClapTrap("Bryan", 100, 100, 30){
+FragTrap::FragTrap() : ClapTrap(){
     std::cout << "FragTrap default constructor called" << std::endl;
+    this->_name = "Default";
+    this->_hit_points = 100;
+    this->_energy_points = 100;
+    this->_attack_dmg = 30;
 }
-FragTrap::FragTrap(std::string name) : ClapTrap(name, 100, 100, 30){
+FragTrap::FragTrap(std::string name) : ClapTrap(){
     std::cout << "FragTrap custom constructor called" << std::endl;
+    this->_name = name;
+    this->_hit_points = 100;
+    this->_energy_points = 100;
+    this->_attack_dmg = 30;
 }
 FragTrap::FragTrap(FragTrap& src) : ClapTrap(src){
     std::cout << "FragTrap constructor by copy called" << std::endl;
