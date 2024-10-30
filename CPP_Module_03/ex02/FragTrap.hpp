@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 15:58:23 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/10/24 16:08:58 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/10/30 14:22:54 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ class FragTrap : public ClapTrap{
     
     public:
     FragTrap();
-    FragTrap(std::string name);
-    FragTrap(FragTrap& src);
+    FragTrap(const std::string name);
+    FragTrap(const FragTrap& src);
     ~FragTrap();
 
-    FragTrap& operator=(FragTrap& src);
+    FragTrap& operator=(const FragTrap& src);
     
     void highFivesGuys(void);
 };

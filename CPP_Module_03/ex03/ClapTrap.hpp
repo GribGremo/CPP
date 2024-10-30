@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 16:05:07 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/10/29 15:29:49 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/10/30 17:21:12 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@
 class ClapTrap{
     public:
     ClapTrap();
-    ClapTrap(std::string& name);
-    ClapTrap(ClapTrap& src);
+    ClapTrap(const std::string& name);
+    ClapTrap(const ClapTrap& src);
     ~ClapTrap();
 
-    ClapTrap& operator=(ClapTrap& src);
+    ClapTrap& operator=(const ClapTrap& src);
 
     void attack(const std::string& target);
     void takeDamage(unsigned int amount);
@@ -36,7 +36,6 @@ class ClapTrap{
     void setHitpoints(int hit_points);
     void setEnergypoints(int energy_points);
     void setAttackdmg(int attack_dmg);
-
 
     protected:
     std::string _name;

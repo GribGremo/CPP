@@ -6,11 +6,11 @@
 #    By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/23 16:05:12 by sylabbe           #+#    #+#              #
-#    Updated: 2024/10/29 16:59:04 by sylabbe          ###   ########.fr        #
+#    Updated: 2024/10/30 12:56:54 by sylabbe          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = fragtrap
+NAME = diamondtrap
 
 CFLAGS = -Werror -Wall -Wextra -std=c++98 #-fsanitize=address
 

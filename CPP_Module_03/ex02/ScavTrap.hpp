@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 09:39:11 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/10/24 15:31:22 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/10/30 17:16:40 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,14 @@ class ScavTrap : public ClapTrap
 {
     public:
 	ScavTrap();
-	ScavTrap(std::string& name);
-    ScavTrap(ScavTrap& src);
+	ScavTrap(const std::string& name);
+    ScavTrap(const ScavTrap& src);
 	~ScavTrap();
 
     void guardGate();
     void attack(const std::string& target);
-
-    ScavTrap& operator=(ScavTrap& src);
-
-    private:
     
-
+    ScavTrap& operator=(const ScavTrap& src);
 };
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 16:05:04 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/10/29 15:22:35 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/10/30 14:22:14 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 //CONSTRUCTORS
 
-ClapTrap::ClapTrap(): _name("Bryan"),_hit_points(10),_energy_points(10),_attack_dmg(0){
+ClapTrap::ClapTrap(): _name("Default"),_hit_points(10),_energy_points(10),_attack_dmg(0){
     std::cout << "ClapTrap default constructor called" << std::endl;
 }
-ClapTrap::ClapTrap(std::string& name):_name(name),_hit_points(10),_energy_points(10),_attack_dmg(0){
+ClapTrap::ClapTrap(const std::string& name):_name(name),_hit_points(10),_energy_points(10),_attack_dmg(0){
     std::cout << "ClapTrap default constructor called" << std::endl;
     _name = name;
 }
-ClapTrap::ClapTrap(ClapTrap& src):_name(src._name),_hit_points(src._hit_points),_energy_points(src._energy_points),_attack_dmg(src._attack_dmg){
+ClapTrap::ClapTrap(const ClapTrap& src):_name(src._name),_hit_points(src._hit_points),_energy_points(src._energy_points),_attack_dmg(src._attack_dmg){
     std::cout << "ClapTrap custom constructor called" << std::endl;
 }
 ClapTrap::~ClapTrap(){
@@ -32,7 +32,7 @@ ClapTrap::~ClapTrap(){
 
 //OPERATORS
 
-ClapTrap& ClapTrap::operator=(ClapTrap& src){
+ClapTrap& ClapTrap::operator=(const ClapTrap& src){
     _name = src._name;
     _hit_points = src._hit_points;
     _energy_points = src._energy_points;
@@ -67,9 +67,6 @@ void ClapTrap::setEnergypoints(int energy_points){
 void ClapTrap::setAttackdmg(int attack_dmg){
     _attack_dmg = attack_dmg;
 }
-
-
-
 
 //FUNCTIONS
 

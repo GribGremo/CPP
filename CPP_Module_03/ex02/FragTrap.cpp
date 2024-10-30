@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 15:58:21 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/10/29 15:25:01 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/10/30 15:51:50 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,13 @@ FragTrap::FragTrap() : ClapTrap(){
     this->_energy_points = 100;
     this->_attack_dmg = 30;
 }
-FragTrap::FragTrap(std::string name) : ClapTrap(){
+FragTrap::FragTrap(std::string name) : ClapTrap(name){
     std::cout << "FragTrap custom constructor called" << std::endl;
-    this->_name = name;
     this->_hit_points = 100;
     this->_energy_points = 100;
     this->_attack_dmg = 30;
 }
-FragTrap::FragTrap(FragTrap& src) : ClapTrap(src){
+FragTrap::FragTrap(const FragTrap& src) : ClapTrap(src){
     std::cout << "FragTrap constructor by copy called" << std::endl;
 }
 FragTrap::~FragTrap(){
@@ -37,15 +36,22 @@ FragTrap::~FragTrap(){
 
 //OPERATORS
 
-FragTrap& FragTrap::operator=(FragTrap& src){
-    this->setAttackdmg(src.getAttackdmg());
-    this->setEnergypoints(src.getEnergypoints());
-    this->setHitpoints(src.getHitpoints());
-    this->setName(src.getName());
+FragTrap& FragTrap::operator=(const FragTrap& src){
+    _attack_dmg = src._attack_dmg;
+    _energy_points = src._energy_points;
+    _hit_points = src._hit_points;
+    _name = src._name;
+    return (*this);
 }
 
 //FUNCTIONS
 
 void FragTrap::highFivesGuys(void){
-    std::cout << "Hey Guys!!! friendly! "<< this->getName() << " requested a friendly gesture, not sure anyone is in the mood." << std::endl;
+    if (_hit_points <=0 || _energy_points <= 0)
+        std::cout << _name << "is too tired to be friendly. " << std::endl;
+    else
+    {
+        std::cout << "Hey Guys!!! friendly! "<< this->_name << " requested a friendly gesture, not sure anyone is in the mood." << std::endl;
+        _energy_points--;
+    }
 }

@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 11:26:31 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/10/29 17:56:27 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/10/30 09:45:35 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,6 @@ void DiamondTrap::whoAmI(){
 }
 
 void DiamondTrap::attack(const std::string& target){
-    std::cout << "I'M EVERYONE AND NOONE, CREATOR AND DESTRUCTOR OF UNIVERSE, FEAR AND BELIEVE, INSECT. " << _name << " inflicted " << _attack_dmg << " damages to " << target << std::endl;
+    ScavTrap::attack(target);
+    // std::cout << "I'M EVERYONE AND NOONE, CREATOR AND DESTRUCTOR OF UNIVERSE, FEAR AND BELIEVE, INSECT. " << _name << " inflicted " << _attack_dmg << " damages to " << target << std::endl;
 }
