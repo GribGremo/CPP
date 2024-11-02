@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 11:26:34 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/10/30 09:45:00 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/10/31 09:56:12 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ class DiamondTrap : public ScavTrap, public FragTrap
     public:
 
     DiamondTrap();
-    DiamondTrap(std::string name);
-    DiamondTrap(DiamondTrap& src);
+    DiamondTrap(const std::string name);
+    DiamondTrap( const DiamondTrap& src);
     ~DiamondTrap();
 
-    DiamondTrap& operator=(DiamondTrap& src);
+    DiamondTrap& operator=(const DiamondTrap& src);
 
     void whoAmI();
     void attack(const std::string& target);

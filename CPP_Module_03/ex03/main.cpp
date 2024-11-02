@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 16:05:09 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/10/29 16:57:26 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/10/31 11:15:23 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,18 +54,29 @@ int main()
     tutu.highFivesGuys();
 
     std::cout << std::endl;
-    std::string name4 = "tutu";
+    std::string name4 = "tete";
     DiamondTrap tete(name4);
+    std::cout <<tete.getName() << " Attack: "<< tete.getAttackdmg()<< " Energy: " <<tete.getEnergypoints()<<" HP: "<<tete.getHitpoints() << std::endl;
     tete.attack("papillon");
+    std::cout <<tete.getName() << " Attack: "<< tete.getAttackdmg()<< " Energy: " <<tete.getEnergypoints()<<" HP: "<<tete.getHitpoints() << std::endl;
     tete.takeDamage(5);
+    std::cout <<tete.getName() << " Attack: "<< tete.getAttackdmg()<< " Energy: " <<tete.getEnergypoints()<<" HP: "<<tete.getHitpoints() << std::endl;
     tete.beRepaired(0);
+    std::cout <<tete.getName() << " Attack: "<< tete.getAttackdmg()<< " Energy: " <<tete.getEnergypoints()<<" HP: "<<tete.getHitpoints() << std::endl;
     tete.beRepaired(5);
+    std::cout <<tete.getName() << " Attack: "<< tete.getAttackdmg()<< " Energy: " <<tete.getEnergypoints()<<" HP: "<<tete.getHitpoints() << std::endl;
     tete.takeDamage(10);
+    std::cout <<tete.getName() << " Attack: "<< tete.getAttackdmg()<< " Energy: " <<tete.getEnergypoints()<<" HP: "<<tete.getHitpoints() << std::endl;
     tete.beRepaired(10);
+    std::cout <<tete.getName() << " Attack: "<< tete.getAttackdmg()<< " Energy: " <<tete.getEnergypoints()<<" HP: "<<tete.getHitpoints() << std::endl;
     tete.attack("chenille");
+    std::cout <<tete.getName() << " Attack: "<< tete.getAttackdmg()<< " Energy: " <<tete.getEnergypoints()<<" HP: "<<tete.getHitpoints() << std::endl;
     tete.takeDamage(5);
+    std::cout <<tete.getName() << " Attack: "<< tete.getAttackdmg()<< " Energy: " <<tete.getEnergypoints()<<" HP: "<<tete.getHitpoints() << std::endl;
     tete.highFivesGuys();
+    std::cout <<tete.getName() << " Attack: "<< tete.getAttackdmg()<< " Energy: " <<tete.getEnergypoints()<<" HP: "<<tete.getHitpoints() << std::endl;
     tete.whoAmI();
+    std::cout <<tete.getName() << " Attack: "<< tete.getAttackdmg()<< " Energy: " <<tete.getEnergypoints()<<" HP: "<<tete.getHitpoints() << std::endl;
     DiamondTrap cpy = tete;
     std::cout <<cpy.getName() << " Attack: "<< cpy.getAttackdmg()<< " Energy: " <<cpy.getEnergypoints()<<" HP: "<<cpy.getHitpoints() << std::endl;
     cpy.attack("tete");

@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 16:05:07 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/10/30 17:21:12 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/10/31 09:39:06 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,6 @@ class ClapTrap{
     int _hit_points;
     int _energy_points;
     int _attack_dmg;
+    
 };
 #endif

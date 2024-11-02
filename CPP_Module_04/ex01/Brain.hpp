@@ -1,36 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*   Brain.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/31 12:08:32 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/02 10:09:43 by sylabbe          ###   ########.fr       */
+/*   Created: 2024/11/02 13:46:52 by sylabbe           #+#    #+#             */
+/*   Updated: 2024/11/02 14:20:29 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ANIMAL_HPP
-# define ANIMAL_HPP
-# include <iostream>
-
-class Animal{
+#ifndef BRAIN_HPP
+# define BRAIN_HPP
+#include <iostream>
+class Brain {
     public:
+    Brain();
+    Brain(const Brain& src);
+    ~Brain();
 
-    Animal();
-    Animal(const Animal& src);
-    virtual ~Animal();
+    Brain& operator=(const Brain& src);
 
-    Animal& operator=(const Animal& src);
+    std::string _ideas[100];
 
-    virtual void makeSound() const;
-
-    std::string getType() const;
-
-    protected:
-
-    std::string type;
-    
 };
 
 #endif

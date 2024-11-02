@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 11:26:31 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/10/30 09:45:35 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/10/31 10:09:14 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ DiamondTrap::DiamondTrap(): ClapTrap(),ScavTrap(), FragTrap() {
     this->_energy_points = ScavTrap::_energy_points;
     this->_attack_dmg = ScavTrap::_attack_dmg;
 }
-DiamondTrap::DiamondTrap(std::string name): ClapTrap(),ScavTrap(), FragTrap() {
+DiamondTrap::DiamondTrap( const std::string name): ClapTrap(),ScavTrap(), FragTrap() {
     std::cout << "DiamondTrap custom constructor called" << std::endl;
     this->name = "_name";
     ClapTrap::_name = name + "_clap_name";
@@ -30,7 +30,7 @@ DiamondTrap::DiamondTrap(std::string name): ClapTrap(),ScavTrap(), FragTrap() {
     this->_energy_points = ScavTrap::_energy_points;
     this->_attack_dmg = ScavTrap::_attack_dmg;
 }
-DiamondTrap::DiamondTrap(DiamondTrap& src){
+DiamondTrap::DiamondTrap(const DiamondTrap& src){
     std::cout << "DiamondTrap copy constructor called" << std::endl;
     this->name = "_name";
     *this = src;
@@ -40,7 +40,8 @@ DiamondTrap::~DiamondTrap(){
 }
 
 //OPERATORS
-DiamondTrap& DiamondTrap::operator=(DiamondTrap& src){
+DiamondTrap& DiamondTrap::operator=(const DiamondTrap& src){
+    this->name = "_name";
     ClapTrap::_name = src.ClapTrap::_name;
     this->_hit_points = src._hit_points;
     this->_energy_points = src._energy_points;
@@ -51,10 +52,15 @@ DiamondTrap& DiamondTrap::operator=(DiamondTrap& src){
 //FUNCTIONS
 
 void DiamondTrap::whoAmI(){
-    std::cout << "Whhooo...oo aammmm iiiIII ?!? " << this->name << " or " << this->_name << "? Whoo..'s my mommyyyy?" << std::endl;
+    if (_energy_points <=0 || _hit_points <= 0)
+        std::cout <<  this->name << " and " << this->_name << ", none of them could answer that question anymore." << std::endl;
+    else 
+    {
+        std::cout << "Whhooo...oo aammmm iiiIII ?!? " << this->name << " or " << this->_name << "? Whoo..'s my mommyyyy?" << std::endl;
+        _energy_points--;
+    }
 }
 
-void DiamondTrap::attack(const std::string& target){
+void DiamondTrap::attack(const std::string& target){    
     ScavTrap::attack(target);
-    // std::cout << "I'M EVERYONE AND NOONE, CREATOR AND DESTRUCTOR OF UNIVERSE, FEAR AND BELIEVE, INSECT. " << _name << " inflicted " << _attack_dmg << " damages to " << target << std::endl;
 }

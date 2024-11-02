@@ -6,7 +6,7 @@
 #    By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/31 12:08:19 by sylabbe           #+#    #+#              #
-#    Updated: 2024/11/02 11:42:26 by sylabbe          ###   ########.fr        #
+#    Updated: 2024/11/02 14:13:40 by sylabbe          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ SRC =	$(addprefix $(SRC_MDT_DIR)/, main.cpp \
 									Cat.cpp \
 									Dog.cpp \
 									WrongAnimal.cpp \
-									WrongCat.cpp)
+									WrongCat.cpp \
+									Brain.cpp)
 
 
 OBJECTS = $(SRC:$(SRC_MDT_DIR)/%.cpp=$(DEST_MDT_DIR)/%.o)

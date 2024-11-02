@@ -1,36 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*   Cat.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/31 12:08:32 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/02 10:09:43 by sylabbe          ###   ########.fr       */
+/*   Created: 2024/10/31 12:08:43 by sylabbe           #+#    #+#             */
+/*   Updated: 2024/11/02 13:58:28 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ANIMAL_HPP
-# define ANIMAL_HPP
-# include <iostream>
-
-class Animal{
+#ifndef CAT_HPP
+# define CAT_HPP
+# include "Animal.hpp"
+# include "Brain.hpp"
+class Cat : public Animal{
     public:
 
-    Animal();
-    Animal(const Animal& src);
-    virtual ~Animal();
+    Cat();
+    Cat(const Cat& src);
+    ~Cat();
 
-    Animal& operator=(const Animal& src);
+    Cat& operator=(const Cat& src);
 
-    virtual void makeSound() const;
+    void makeSound() const;
 
-    std::string getType() const;
-
-    protected:
-
-    std::string type;
-    
+    private:
+    Brain* b;
 };
 
 #endif
