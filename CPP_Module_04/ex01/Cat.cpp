@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Cat.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
+/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 12:08:39 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/02 14:00:02 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/03 08:10:19 by grib             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ Cat::Cat(){
     b = new Brain();
     std::cout << "Cat default constructor called" << std::endl;
 }
-Cat::Cat(const Cat& src){
+Cat::Cat(const Cat& src) : Animal(){
     type = src.type;
     std::cout << "Cat copy constructor called" << std::endl;
 }

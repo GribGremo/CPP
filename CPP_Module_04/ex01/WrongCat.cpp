@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   WrongCat.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
+/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 10:21:00 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/02 11:40:49 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/03 08:12:55 by grib             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ WrongCat::WrongCat(){
     type = "WrongCat";
     std::cout << "WrongCat default contructor called" << std::endl;
 }
-WrongCat::WrongCat(const WrongCat& src){
+WrongCat::WrongCat(const WrongCat& src): WrongAnimal(){
     this->type = src.type;
     std::cout << "WrongCat copy contructor called" << std::endl;
 }

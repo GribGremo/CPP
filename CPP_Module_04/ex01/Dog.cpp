@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Dog.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
+/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 12:08:34 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/02 13:59:42 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/03 08:12:16 by grib             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ Dog::Dog(){
     b = new Brain();
     std::cout << "Dog default constructor called" << std::endl;
 }
-Dog::Dog(const Dog& src){
+Dog::Dog(const Dog& src):Animal(){
     type = src.type;
     std::cout << "Dog copy constructor called" << std::endl;
 }
