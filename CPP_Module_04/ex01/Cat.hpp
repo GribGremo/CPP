@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 12:08:43 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/02 13:58:28 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/04 12:15:08 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,11 @@ class Cat : public Animal{
 
     void makeSound() const;
 
+    void setIdea(const std::string& idea, const int it_idea);
+    const std::string getIdea(const int it_idea);
+
     private:
-    Brain* b;
+    Brain* _b;
 };
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 12:08:28 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/01 17:25:42 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/04 12:20:10 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,14 @@ std::string Animal::getType() const{
 //FUNCTIONS
 
 void Animal::makeSound() const{
+}
+
+//SETTERS/GETTERS
+void Animal::setIdea(const std::string& idea, const int it_idea){
+    (void) idea;
+    (void)it_idea;
+}
+const std::string Animal::getIdea(const int it_idea){
+    (void)it_idea;
+    return("Help... please...");
 }

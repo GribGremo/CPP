@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Dog.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 12:08:34 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/03 08:12:16 by grib             ###   ########.fr       */
+/*   Updated: 2024/11/04 17:58:13 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,16 @@
 
 Dog::Dog(){
     type = "Dog";
-    b = new Brain();
+    _b = new Brain();
     std::cout << "Dog default constructor called" << std::endl;
 }
 Dog::Dog(const Dog& src):Animal(){
+    _b = new Brain(*src._b);
     type = src.type;
     std::cout << "Dog copy constructor called" << std::endl;
 }
 Dog::~Dog(){
-    delete b;
+    delete _b;
     std::cout << "Dog destructor called" << std::endl;
 }
 
@@ -32,8 +33,11 @@ Dog::~Dog(){
 
 Dog& Dog::operator=(const Dog& src){
     std::cout << "Dog operator" << std::endl;
-
-    type = src.type;
+    if (this != &src) {
+        delete _b;
+        _b = new Brain(*src._b);
+        type = src.type;
+    }
     return (*this);
 }
 
@@ -41,4 +45,16 @@ Dog& Dog::operator=(const Dog& src){
 
 void Dog::makeSound() const{
     std::cout << "*Bark bark*" << std::endl;
+}
+
+//SETTERS/GETTERS
+void Dog::setIdea(const std::string& idea, const int it_idea){
+        if (it_idea>99 || it_idea < 0)
+        return ;
+    _b->_ideas[it_idea] = idea; 
+}
+const std::string Dog::getIdea(const int it_idea){
+        if (it_idea>99|| it_idea < 0)
+        return ("");
+    return( _b->_ideas[it_idea]);
 }
