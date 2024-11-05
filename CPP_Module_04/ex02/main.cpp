@@ -6,20 +6,20 @@
 /*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 12:08:25 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/04 21:33:00 by grib             ###   ########.fr       */
+/*   Updated: 2024/11/04 21:40:13 by grib             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "WrongAnimal.hpp"
 #include "WrongCat.hpp"
-#include "Animal.hpp"
+#include "A_Animal.hpp"
 #include "Cat.hpp"
 #include "Dog.hpp"
 
 int main()
 {
     int array_size = 6;
-    Animal *array_animal[array_size];
+    A_Animal *array_animal[array_size];
     
     for(int i = 0; i < array_size / 2; i++)
     {

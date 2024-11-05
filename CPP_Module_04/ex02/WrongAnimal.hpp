@@ -1,39 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*   WrongAnimal.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/31 12:08:32 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/04 21:36:37 by grib             ###   ########.fr       */
+/*   Created: 2024/11/02 10:22:28 by sylabbe           #+#    #+#             */
+/*   Updated: 2024/11/02 11:47:06 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ANIMAL_HPP
-# define ANIMAL_HPP
+#ifndef WRONG_ANIMAL_HPP
+# define WRONG_ANIMAL_HPP
 # include <iostream>
-
-class Animal{
+class WrongAnimal {
     public:
+    WrongAnimal();
+    WrongAnimal(const WrongAnimal& src);
+    virtual ~WrongAnimal();
 
-    Animal();
-    Animal(const Animal& src);
-    virtual ~Animal();
+    WrongAnimal& operator=(const WrongAnimal& src);
 
-    virtual Animal& operator=(const Animal& src);
-
-    virtual void makeSound() const;
+    void makeSound() const;
 
     std::string getType() const;
 
-    virtual void setIdea(const std::string& idea, const int it_idea);
-    virtual const std::string getIdea(const int it_idea);
-
     protected:
-
     std::string type;
-    
 };
 
 #endif
