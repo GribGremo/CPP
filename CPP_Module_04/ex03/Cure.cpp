@@ -1,35 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.hpp                                            :+:      :+:    :+:   */
+/*   Cure.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/31 12:08:37 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/05 11:14:44 by sylabbe          ###   ########.fr       */
+/*   Created: 2024/11/05 16:48:03 by sylabbe           #+#    #+#             */
+/*   Updated: 2024/11/05 16:48:03 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DOG_HPP
-# define DOG_HPP
-#include "A_Animal.hpp"
-#include "Brain.hpp"
-class Dog : public A_Animal{
-    public:
+#include "Cure.hpp"
 
-    Dog();
-    Dog(const Dog& src);
-    ~Dog();
+//CONSTRUCTORS/DESTRUCTOR
+Cure::Cure(){
 
-    Dog& operator=(const Dog& src);
+}
+Cure::Cure(const Cure& src){
 
-    void makeSound() const;
-    
-    void setIdea(const std::string& idea, const int it_idea);
-    const std::string getIdea(const int it_idea);
+}
+Cure::~Cure(){
 
-    private:
-    Brain* _b;
-};
+}
 
-#endif
+//OPERATORS
+Cure& Cure::operator=(const Cure& src){
+
+}
+
+
+//FUNCTIONS
+AMateria* Cure::clone() const{
+
+}
+void Cure::use(ICharacter& target){
+
+}

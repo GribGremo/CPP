@@ -1,35 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.hpp                                            :+:      :+:    :+:   */
+/*   ICharacter.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/31 12:08:37 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/05 11:14:44 by sylabbe          ###   ########.fr       */
+/*   Created: 2024/11/05 17:20:35 by sylabbe           #+#    #+#             */
+/*   Updated: 2024/11/05 17:31:55 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DOG_HPP
-# define DOG_HPP
-#include "A_Animal.hpp"
-#include "Brain.hpp"
-class Dog : public A_Animal{
-    public:
+#include "ICharacter.hpp"
 
-    Dog();
-    Dog(const Dog& src);
-    ~Dog();
+//CONSTRUCTORS/DESTRUCTOR
+ICharacter::ICharacter(){
 
-    Dog& operator=(const Dog& src);
+}
+ICharacter::ICharacter(const ICharacter& src){
 
-    void makeSound() const;
-    
-    void setIdea(const std::string& idea, const int it_idea);
-    const std::string getIdea(const int it_idea);
+}
+ICharacter::~ICharacter(){
 
-    private:
-    Brain* _b;
-};
+}
 
-#endif
+//OPERATORS
+ICharacter& ICharacter::operator=(const ICharacter& src){
+
+}
+

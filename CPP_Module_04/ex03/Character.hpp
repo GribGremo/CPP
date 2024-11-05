@@ -1,35 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.hpp                                            :+:      :+:    :+:   */
+/*   Character.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/31 12:08:37 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/05 11:14:44 by sylabbe          ###   ########.fr       */
+/*   Created: 2024/11/05 17:37:20 by sylabbe           #+#    #+#             */
+/*   Updated: 2024/11/05 17:44:42 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DOG_HPP
-# define DOG_HPP
-#include "A_Animal.hpp"
-#include "Brain.hpp"
-class Dog : public A_Animal{
+#ifndef CHARACTER_HPP
+# define CHARACTER_HPP
+# include "ICharacter.hpp"
+
+class Character : public ICharacter
+{
     public:
+    Character();
+    Character(const Character& src);
+    ~Character();
 
-    Dog();
-    Dog(const Dog& src);
-    ~Dog();
+    Character& operator=(const Character& src);
 
-    Dog& operator=(const Dog& src);
+    std::string const & getName() const;
+    void equip(AMateria* m);
+    void unequip(int idx);
+    void use(int idx, ICharacter& target);
 
-    void makeSound() const;
-    
-    void setIdea(const std::string& idea, const int it_idea);
-    const std::string getIdea(const int it_idea);
-
-    private:
-    Brain* _b;
 };
 
 #endif

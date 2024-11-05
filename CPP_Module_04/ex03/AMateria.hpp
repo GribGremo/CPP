@@ -1,35 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.hpp                                            :+:      :+:    :+:   */
+/*   AMateria.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/31 12:08:37 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/05 11:14:44 by sylabbe          ###   ########.fr       */
+/*   Created: 2024/11/05 12:13:31 by sylabbe           #+#    #+#             */
+/*   Updated: 2024/11/05 16:28:34 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DOG_HPP
-# define DOG_HPP
-#include "A_Animal.hpp"
-#include "Brain.hpp"
-class Dog : public A_Animal{
+#ifndef AMATERIA_HPP
+# define AMATERIA_HPP
+# include <iostream>
+# include "ICharacter.hpp"
+class AMateria
+{
     public:
 
-    Dog();
-    Dog(const Dog& src);
-    ~Dog();
+    AMateria();
+    AMateria(std::string const & type);
+    AMateria(const AMateria& src);
+    ~AMateria();
 
-    Dog& operator=(const Dog& src);
+    AMateria& operator=(const AMateria& src);
 
-    void makeSound() const;
-    
-    void setIdea(const std::string& idea, const int it_idea);
-    const std::string getIdea(const int it_idea);
+    std::string const & getType() const;
 
-    private:
-    Brain* _b;
+    virtual AMateria* clone() const = 0;
+    virtual void use(ICharacter& target);
+
+    protected:
+
+    std::string type;
+
 };
 
 #endif

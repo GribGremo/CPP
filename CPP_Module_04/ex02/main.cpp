@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 12:08:25 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/04 21:40:13 by grib             ###   ########.fr       */
+/*   Updated: 2024/11/05 11:17:23 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 int main()
 {
     int array_size = 6;
+    // A_Animal a; // We cant instantiate Animal object anymore GG WP
     A_Animal *array_animal[array_size];
     
     for(int i = 0; i < array_size / 2; i++)
