@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:06:46 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/05 16:40:50 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/06 12:02:57 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define ICE_HPP
 # include <iostream>//
 # include "ICharacter.hpp"
-
-class Ice
+# include "AMateria.hpp"
+class Ice : public AMateria
 {
     public:
     Ice();

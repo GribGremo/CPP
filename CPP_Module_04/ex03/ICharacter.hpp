@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:19:34 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/05 17:26:05 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/06 12:57:54 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ class ICharacter
 
     protected:
     AMateria *inventory[4];
+    std::string name;//A voir si il faut le creer ici ou dans la derivee Character
 };
 #endif

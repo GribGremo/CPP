@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 17:37:20 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/05 17:44:42 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/06 13:08:27 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ class Character : public ICharacter
 {
     public:
     Character();
+    Character(const std::string name);
     Character(const Character& src);
     ~Character();
 

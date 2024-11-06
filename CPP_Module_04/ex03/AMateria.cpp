@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 15:04:22 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/05 18:19:25 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/06 14:10:55 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 //CONSTRUCTORS/DESTRUCTOR
 
-AMateria::AMateria(){
+AMateria::AMateria() : type("Default"){
     std::cout << "AMateria default constructor called" << std::endl;
 }
 AMateria::AMateria(std::string const& type):type(type){
