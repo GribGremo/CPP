@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 17:20:35 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/06 13:00:46 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/08 11:43:22 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ ICharacter::ICharacter(){
 }
 ICharacter::ICharacter(const ICharacter& src){
     std::cout << "ICharacter copy constructor called" << std::endl;
-
+    *this = src;
 }
 ICharacter::~ICharacter(){
     std::cout << "ICharacter destructor called" << std::endl;

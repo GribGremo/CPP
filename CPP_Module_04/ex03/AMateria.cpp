@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 15:04:22 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/06 14:10:55 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/08 10:52:43 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ AMateria& AMateria::operator=(const AMateria& src){
 //FUNCTIONS
 
 void AMateria::use(ICharacter& target){
-    //
+    (void) target;
 }
 
 

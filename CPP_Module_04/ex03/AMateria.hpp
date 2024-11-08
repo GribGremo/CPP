@@ -6,14 +6,15 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 12:13:31 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/05 16:28:34 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/08 11:42:16 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef AMATERIA_HPP
 # define AMATERIA_HPP
 # include <iostream>
-# include "ICharacter.hpp"
+// # include "ICharacter.hpp"
+class ICharacter;
 class AMateria
 {
     public:
@@ -21,7 +22,7 @@ class AMateria
     AMateria();
     AMateria(std::string const & type);
     AMateria(const AMateria& src);
-    ~AMateria();
+    virtual ~AMateria();
 
     AMateria& operator=(const AMateria& src);
 

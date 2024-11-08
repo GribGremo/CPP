@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 14:05:49 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/06 17:17:48 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/08 12:08:31 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ IMateriaSource::IMateriaSource(const IMateriaSource& src){
 }
 IMateriaSource::~IMateriaSource(){
     std::cout << "IMateriaSource destructor called" << std::endl;
-    for (int i = 0; i < 4; i++)
-    {
-        if (sources[i] != NULL)
-            delete sources[i];
-    }
+    // for (int i = 0; i < 4; i++) DEJA FREE DANS DESTRUCTOR MATERIA SOURCE?
+    // {
+    //     if (sources[i] != NULL)
+    //         delete sources[i];
+    // }
 }
 
 //OPERATORS
