@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 15:04:24 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/08 16:24:45 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/09 09:29:29 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,14 @@ int main()
 {
     std::cout << "TEST1" <<std::endl;
 
-    AMateria* empty = NULL;
     Ice* def = new Ice();
     AMateria* test = new Ice(*def);
+    std::cout << std::endl;
     AMateria* cl = test->clone();
+    delete test;
     std::cout << "clone: "<< cl->getType() << std::endl;
-    std::cout << "empty: " <<empty->getType()<< std::endl;
 
     delete def;
-    delete test;
     delete cl;
 
 

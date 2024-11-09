@@ -1,34 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Character.hpp                                      :+:      :+:    :+:   */
+/*   Ground.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/05 17:37:20 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/09 09:12:47 by sylabbe          ###   ########.fr       */
+/*   Created: 2024/11/09 10:19:43 by sylabbe           #+#    #+#             */
+/*   Updated: 2024/11/09 10:30:43 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CHARACTER_HPP
-# define CHARACTER_HPP
-# include "ICharacter.hpp"
+#ifndef GROUND_LIST_HPP
+# define GROUND_LIST_HPP
+#include "AMateria.hpp"
 
-class Character : public ICharacter
+class Ground_List
 {
     public:
-    Character();
-    Character(const std::string& name);
-    Character(const Character& src);
-    ~Character();
+    AMateria* head;
 
-    Character& operator=(const Character& src);
+    Ground_List();
+    Ground_List(const Ground_List& src);
+    ~Ground_List();
 
-    std::string const & getName() const;
-    void equip(AMateria* m);
-    void unequip(int idx);
-    void use(int idx, ICharacter& target);
+    Ground_List& operator=(const Ground_List& src);
 
+    void push(const AMateria* m);
+
+    void printList();
 };
 
 #endif

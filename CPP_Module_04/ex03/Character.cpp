@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 17:37:07 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/08 12:38:01 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/09 09:12:35 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@ Character::Character(){
     {
         inventory[i] = NULL;
     }
+    name = "Default";
 }
-Character::Character(const std::string name){
+Character::Character(const std::string& name){
     std::cout << "Character custom constructor called" << std::endl;
     this->name = name;
     for(int i = 0; i < 4; i++)

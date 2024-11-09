@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:19:34 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/08 10:59:14 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/09 09:14:12 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define ICHARACTER_HPP
 # include <iostream>
 # include "AMateria.hpp"
-// class AMateria; // ALLLLLLLLLLLLLLLLLOOO A VOIR
+
 class ICharacter
 {
     public:
