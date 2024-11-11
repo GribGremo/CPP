@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Character.hpp                                      :+:      :+:    :+:   */
+/*   Cure.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/05 17:37:20 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/11 15:50:38 by sylabbe          ###   ########.fr       */
+/*   Created: 2024/11/05 13:18:52 by sylabbe           #+#    #+#             */
+/*   Updated: 2024/11/06 12:33:08 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CHARACTER_HPP
-# define CHARACTER_HPP
+#ifndef CURE_HPP
+# define CURE_HPP
+# include <iostream>//
 # include "ICharacter.hpp"
 
-class Character : public ICharacter
+class Cure : public AMateria
 {
     public:
-    Character();
-    Character(const std::string& name);
-    Character(const Character& src);
-    ~Character();
+    Cure();
+    Cure(const Cure& src);
+    ~Cure();
+    
+    Cure& operator=(const Cure& src);
 
-    Character& operator=(const Character& src);
-
-    std::string const & getName() const;
-    void equip(AMateria* m);
-    void unequip(int idx);
-    void use(int idx, ICharacter& target);
+    AMateria* clone() const;
+    void use(ICharacter& target);
 
 };
 

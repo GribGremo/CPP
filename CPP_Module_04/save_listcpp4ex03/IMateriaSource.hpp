@@ -1,34 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Character.hpp                                      :+:      :+:    :+:   */
+/*   IMateriaSource.hpp                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/05 17:37:20 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/11 15:50:38 by sylabbe          ###   ########.fr       */
+/*   Created: 2024/11/05 14:06:01 by sylabbe           #+#    #+#             */
+/*   Updated: 2024/11/06 16:33:04 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CHARACTER_HPP
-# define CHARACTER_HPP
-# include "ICharacter.hpp"
+#ifndef IMATERIASOURCE_HPP
+# define IMATERIASOURCE_HPP
+# include "AMateria.hpp"
 
-class Character : public ICharacter
+class IMateriaSource
 {
     public:
-    Character();
-    Character(const std::string& name);
-    Character(const Character& src);
-    ~Character();
+    IMateriaSource();
+    IMateriaSource(const IMateriaSource& src);
+    virtual ~IMateriaSource();
 
-    Character& operator=(const Character& src);
+    IMateriaSource& operator=(const IMateriaSource& src);
 
-    std::string const & getName() const;
-    void equip(AMateria* m);
-    void unequip(int idx);
-    void use(int idx, ICharacter& target);
+    virtual void learnMateria(AMateria*) = 0;
+    virtual AMateria* createMateria(std::string const & type) = 0;
 
+    protected:
+    AMateria *sources[4];
 };
 
 #endif

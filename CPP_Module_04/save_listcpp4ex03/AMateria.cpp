@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 15:04:22 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/11 15:51:30 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/11 13:31:33 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,13 @@ AMateria::~AMateria(){
 std::string const & AMateria::getType() const{
     return(type);
 }
+AMateria* AMateria::getNext() const{
+    return (next);
+}
+void AMateria::setNext(AMateria* m){
+    this->next = m;
+}
+
 
 //OPERATORS
 
@@ -40,7 +47,11 @@ AMateria& AMateria::operator=(const AMateria& src){
     std::cout << "AMateria equal operator called" << std::endl;
     if (this != &src)
     {
-        type = src.type;        
+        type = src.type;
+        delete this->next;
+        this->next = NULL;
+        if (src.next != NULL)
+            this->next = new AMateria(*other.next); 
     }
     return (*this);
 }

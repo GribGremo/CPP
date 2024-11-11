@@ -6,11 +6,13 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 17:37:07 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/11 15:50:33 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/11 11:32:15 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Character.hpp"
+//STATIC
+    Ground_List* Character::ground = new Ground_List();
 
 //CONSTRUCTORS/DESTRUCTOR
 Character::Character(){

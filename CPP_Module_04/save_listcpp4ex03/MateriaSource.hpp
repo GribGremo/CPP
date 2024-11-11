@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Ground.hpp                                         :+:      :+:    :+:   */
+/*   MateriaSource.hpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/09 10:19:43 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/09 10:30:43 by sylabbe          ###   ########.fr       */
+/*   Created: 2024/11/05 17:45:55 by sylabbe           #+#    #+#             */
+/*   Updated: 2024/11/08 10:48:14 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GROUND_LIST_HPP
-# define GROUND_LIST_HPP
-#include "AMateria.hpp"
+#ifndef MATERIASOURCE_HPP
+# define MATERIASOURCE_HPP
+# include "IMateriaSource.hpp"
 
-class Ground_List
+class MateriaSource : public IMateriaSource
 {
     public:
-    AMateria* head;
+    MateriaSource();
+    MateriaSource(const MateriaSource& src);
+    ~MateriaSource();
 
-    Ground_List();
-    Ground_List(const Ground_List& src);
-    ~Ground_List();
+    MateriaSource& operator=(const MateriaSource& src);
 
-    Ground_List& operator=(const Ground_List& src);
+    void learnMateria(AMateria*);
+    AMateria* createMateria(std::string const & type);
 
-    void push(const AMateria* m);
-
-    void printList();
 };
 
 #endif
