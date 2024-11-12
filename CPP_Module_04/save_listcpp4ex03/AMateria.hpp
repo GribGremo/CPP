@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 12:13:31 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/11 12:42:32 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/12 12:59:46 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,11 @@ class AMateria
     AMateria(const AMateria& src);
     virtual ~AMateria();
 
-    AMateria& operator=(const AMateria& src);
+    virtual AMateria& operator=(const AMateria& src);
 
     std::string const & getType() const;
     AMateria* getNext() const;
     void setNext(AMateria* m);
-
 
     virtual AMateria* clone() const = 0;
     virtual void use(ICharacter& target);

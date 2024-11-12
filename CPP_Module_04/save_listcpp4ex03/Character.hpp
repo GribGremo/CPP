@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 17:37:20 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/11 11:32:07 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/12 13:22:29 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ class Character : public ICharacter
 {
     public:
     static Ground_List* ground;  // Pointeur statique vers Ground
-
+    static int countCharacter;
+    
     Character();
     Character(const std::string& name);
     Character(const Character& src);
@@ -32,9 +33,6 @@ class Character : public ICharacter
     void equip(AMateria* m);
     void unequip(int idx);
     void use(int idx, ICharacter& target);
-
-    private:
-
 };
 
 #endif
