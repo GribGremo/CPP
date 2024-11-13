@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 15:04:24 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/12 15:30:04 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/13 15:40:07 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,10 @@ int main()
     ICharacter* victim = new Character("victim");
     ICharacter* toto = new Character("toto");
     IMateriaSource* src3 = new MateriaSource();
+
+    Character::ground->printList();
+
+
     src3->learnMateria(new Ice());
     src3->learnMateria(new Cure());
     AMateria* clone_ice1 = src3->createMateria("ice");
@@ -59,8 +63,6 @@ int main()
     AMateria* clone_ice3 = src3->createMateria("ice");
     AMateria* clone_cure1 = src3->createMateria("cure");
     AMateria* clone_cure2 = src3->createMateria("cure");
-
-
 
     toto->use(0, *victim);
     toto->use(4, *victim);
@@ -74,10 +76,21 @@ int main()
     toto->unequip(0);
     toto->equip(clone_ice3);
     toto->use(0, *victim);
+    toto->unequip(0);
+    toto->unequip(1);
+    toto->unequip(2);
+    toto->unequip(3);
 
-    delete clone_ice1;
+    Character::ground->printList();
+    Ground_List cpy_ground(*Character::ground); //= *Character::ground;
+    toto->equip(new Cure);
+    toto->unequip(0);
+
+    Character::ground->printList();
+
+    cpy_ground.printList();
+
     delete victim;
     delete toto;
     delete src3;
-
 }

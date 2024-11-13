@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:40:55 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/06 12:42:19 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/13 16:34:37 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ Ice& Ice::operator=(const Ice& src){
     if (this != &src)
     {
         type = src.type;
+        next = NULL;//I chose to isolate my node this way, i don't intend to copy a full list of materia
     }
     return (*this);
 }

@@ -6,18 +6,20 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 17:37:07 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/12 16:18:31 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/13 10:14:54 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Character.hpp"
 //STATIC
-    Ground_List* Character::ground = new Ground_List();
+    Ground_List* Character::ground = NULL;
     int Character::countCharacter = 0;
 
 //CONSTRUCTORS/DESTRUCTOR
 Character::Character(){
     std::cout << "Character default constructor called" << std::endl;
+    if (Character::ground == NULL)
+        Character::ground = new Ground_List();
     for(int i = 0; i < 4; i++)
         inventory[i] = NULL;
     name = "Default";
@@ -26,6 +28,8 @@ Character::Character(){
 }
 Character::Character(const std::string& name){
     std::cout << "Character custom constructor called" << std::endl;
+    if (Character::ground == NULL)
+        Character::ground = new Ground_List();
     for(int i = 0; i < 4; i++)
         inventory[i] = NULL;
     this->name = name;
@@ -35,12 +39,13 @@ Character::Character(const std::string& name){
 }
 Character::Character(const Character& src){
     std::cout << "Character copy constructor called" << std::endl;
+    if (Character::ground == NULL)
+        Character::ground = new Ground_List();
     for(int i = 0; i < 4; i++)
         inventory[i] = src.inventory[i];
     name = src.name;
     Character::countCharacter++;
     std::cout << Character::countCharacter << " active characters."<< std::endl;
-
 }
 Character::~Character(){
     std::cout << "Character destructor called" << std::endl;
@@ -51,8 +56,11 @@ Character::~Character(){
     }
     Character::countCharacter--;
     std::cout << Character::countCharacter << " active characters."<< std::endl;
-    // if (Character::countCharacter == 0)
-    //     delete Character::ground;
+    if (Character::countCharacter == 0 && Character::ground != NULL)
+    {
+        delete Character::ground;
+        Character::ground = NULL;
+    }
 }
 
 //OPERATORS

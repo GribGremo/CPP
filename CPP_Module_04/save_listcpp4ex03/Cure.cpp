@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:48:03 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/12 13:09:53 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/13 15:29:21 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ Cure& Cure::operator=(const Cure& src){
     if (this != &src)
     {
         type = src.type;
+        next = NULL;//
     }
     return (*this);
 }
