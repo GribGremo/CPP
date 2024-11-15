@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:48:03 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/13 15:29:21 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/15 11:26:39 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ Cure::~Cure(){
     std::cout << "Cure destructor called" << std::endl;
 }
 
-//OPERATORS While assigning a Materia to another, copying the type doesn’t make sense.
+//OPERATORS 
 Cure& Cure::operator=(const Cure& src){
     std::cout << "Cure default constructor called" << std::endl;
     if (this != &src)
     {
         type = src.type;
-        next = NULL;//
+        next = NULL;
     }
     return (*this);
 }

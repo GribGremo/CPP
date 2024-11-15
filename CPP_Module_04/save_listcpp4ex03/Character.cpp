@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 17:37:07 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/13 10:14:54 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/15 11:31:43 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ Character::Character(){
         inventory[i] = NULL;
     name = "Default";
     Character::countCharacter++;
-    std::cout << Character::countCharacter << " active characters."<< std::endl;
 }
 Character::Character(const std::string& name){
     std::cout << "Character custom constructor called" << std::endl;
@@ -34,8 +33,6 @@ Character::Character(const std::string& name){
         inventory[i] = NULL;
     this->name = name;
     Character::countCharacter++;
-    std::cout << Character::countCharacter << " active characters."<< std::endl;
-
 }
 Character::Character(const Character& src){
     std::cout << "Character copy constructor called" << std::endl;
@@ -45,7 +42,6 @@ Character::Character(const Character& src){
         inventory[i] = src.inventory[i];
     name = src.name;
     Character::countCharacter++;
-    std::cout << Character::countCharacter << " active characters."<< std::endl;
 }
 Character::~Character(){
     std::cout << "Character destructor called" << std::endl;
@@ -55,7 +51,6 @@ Character::~Character(){
             delete inventory[i];
     }
     Character::countCharacter--;
-    std::cout << Character::countCharacter << " active characters."<< std::endl;
     if (Character::countCharacter == 0 && Character::ground != NULL)
     {
         delete Character::ground;
@@ -93,15 +88,13 @@ void Character::equip(AMateria* m){
         }
     }
     std::cout << "No empty slot in the inventory of " << name << "(Max slot 4)"<< std::endl;
-
 }
 void Character::unequip(int idx){
-    // ! Attention pense a sauvegarder ton pointeur de materia quelque part avant de mettre a null
     if (idx >=0 && idx < 4)
     {
         if (inventory[idx] != NULL)
         {
-            ground->push(inventory[idx]);//TEST ATTENTION TOUT SE PASSE LA
+            ground->push(inventory[idx]);
             std::cout << "Materia at slot " << idx << "("<< inventory[idx]->getType() << ") unequipped in the inventory of " << name << std::endl;
             inventory[idx] = NULL;
         }

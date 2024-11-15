@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 10:19:41 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/13 15:36:33 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/15 12:12:50 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,9 @@
 
 Ground_List::Ground_List():head(NULL){
     std::cout << "Ground_List default constructor called" << std::endl;
-
 }
 Ground_List::Ground_List(const Ground_List& src){
     std::cout << "Ground_List copy constructor called" << std::endl;
-    (void)src;
     AMateria* tempsrc = src.head;
     this->head = tempsrc->clone();
     AMateria* clone = this->head;
@@ -41,7 +39,7 @@ Ground_List::~Ground_List(){
     AMateria* temp;
     AMateria* head;
 
-    temp = this->head;//Character::ground->head;
+    temp = this->head;
     head = temp;
     while(head != NULL)
     {
@@ -54,18 +52,34 @@ Ground_List::~Ground_List(){
 Ground_List& Ground_List::operator=(const Ground_List& src){
     std::cout << "Ground_List equal operator called" << std::endl;
     (void)src;
-    // AMateria* temp;
-    // AMateria* cpy = NULL;
-    // AMateria* head_cpy = src.head;
+    AMateria* temp;
+    AMateria* head;
 
-    // temp = src.head;
-    // if (this != &src)
-    // {
-    //     while(temp != NULL)
-    //     {
+    temp = this->head;
+    head = temp;
+    while(head != NULL)
+    {
+        temp = head;
+        head = temp->getNext();
+        delete temp;
+    }
+    this->head = NULL;
 
-    //     }
-    // }
+    AMateria* tempsrc = src.head;
+    this->head = tempsrc->clone();
+    AMateria* clone = this->head;
+
+    while(tempsrc != NULL)
+    {
+        tempsrc = tempsrc->getNext();
+        if (tempsrc != NULL)
+        {
+            clone->setNext(tempsrc->clone());
+        }
+        else
+            clone->setNext(NULL);
+        clone = clone->getNext();
+    }
     return(*this);
 }
 

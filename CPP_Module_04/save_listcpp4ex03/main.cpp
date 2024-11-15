@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 15:04:24 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/13 15:40:07 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/15 11:14:01 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 int main()
 {
-    std::cout << "TEST1" <<std::endl;
+    std::cout << "TEST1 : Materia clone " <<std::endl;
 
     Ice* def = new Ice();
     AMateria* test = new Ice(*def);
@@ -30,7 +30,7 @@ int main()
     delete cl;
 
 
-    std::cout <<std::endl << "TEST2" <<std::endl;
+    std::cout <<std::endl << "TEST2 : Materia use" <<std::endl;
 
     IMateriaSource* src = new MateriaSource();
     src->learnMateria(new Ice());
@@ -48,11 +48,11 @@ int main()
     delete me;
     delete src;
 
-    std::cout <<std::endl << "TEST3" <<std::endl;
+    std::cout <<std::endl << "TEST3 : Unequip" <<std::endl;
     ICharacter* victim = new Character("victim");
     ICharacter* toto = new Character("toto");
     IMateriaSource* src3 = new MateriaSource();
-
+    std::cout<< "No materia on ground" << std::endl;
     Character::ground->printList();
 
 
@@ -81,14 +81,23 @@ int main()
     toto->unequip(2);
     toto->unequip(3);
 
+    std::cout<< "Materia on ground" << std::endl;
     Character::ground->printList();
     Ground_List cpy_ground(*Character::ground); //= *Character::ground;
     toto->equip(new Cure);
     toto->unequip(0);
 
+    std::cout<< "Materia on ground plus one cure" << std::endl;
     Character::ground->printList();
 
+    std::cout<< "No materia on copyground, this copy has been made before adding one Cure to ground" << std::endl;
     cpy_ground.printList();
+
+    std::cout<< "Transmit copyground to ground so without the last materia cure" << std::endl;
+
+    *Character::ground = cpy_ground;
+
+    Character::ground->printList();
 
     delete victim;
     delete toto;

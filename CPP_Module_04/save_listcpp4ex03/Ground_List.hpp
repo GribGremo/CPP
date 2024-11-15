@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 10:19:43 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/11 12:44:14 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/15 11:34:41 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 class Ground_List
 {
     public:
-    AMateria* head;
 
     Ground_List();
     Ground_List(const Ground_List& src);
@@ -28,6 +27,10 @@ class Ground_List
     void push(AMateria* m);
 
     void printList();
+
+    private:
+
+    AMateria* head;// VERIFIE Que le private pose pas probleme
 };
 
 #endif
