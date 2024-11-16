@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 17:26:22 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/09/28 16:55:06 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/16 15:12:03 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
     HumanB::HumanB() :  _weapon(NULL), _name("Anonymous"){
         std::cout << "HumanB custom constructor called" <<std::endl;
     }
-    HumanB::HumanB(std::string name) : _weapon(NULL), _name(name){
+    HumanB::HumanB(const std::string& name) : _weapon(NULL), _name(name){
         std::cout << "HumanB custom constructor called" <<std::endl;
     }
     HumanB::~HumanB(void){

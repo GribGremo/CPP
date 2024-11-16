@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 17:28:44 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/09/28 15:53:18 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/16 15:09:45 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ class HumanA
 {
     public:
 
-        HumanA(Weapon &weapon_type, std::string name);//?ref
+        HumanA(Weapon &weapon_type, const std::string& name);
         ~HumanA(void);
         void attack(void)const;
     private:

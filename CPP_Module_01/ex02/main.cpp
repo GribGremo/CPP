@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 16:58:15 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/09/19 17:22:49 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/16 11:29:44 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,4 @@ int main()
     std::cout << brain << std::endl;
     std::cout << *stringPTR << std::endl;
     std::cout << stringREF << std::endl;
-
 }

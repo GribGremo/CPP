@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 17:29:03 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/09/28 16:42:53 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/16 15:11:35 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ class HumanB
     public:
 
         HumanB(void);
-        HumanB(std::string name);//?ref
+        HumanB(const std::string& name);
         ~HumanB(void);
         void attack(void)const;
         void setWeapon(Weapon *weapon);

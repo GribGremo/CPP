@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 09:13:15 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/10/18 15:42:50 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/16 17:03:48 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "Harl.hpp"
 
 Harl::Harl(){
+    std::cout << "Harl default constructor called" << std::endl;
     fn_cmd[0] = "DEBUG";
     fn_cmd[1] = "INFO";
     fn_cmd[2] = "WARNING";
@@ -25,7 +26,7 @@ Harl::Harl(){
     fn[3] = &Harl::error;
 }
 Harl::~Harl(){
-
+    std::cout << "Harl destructor called" << std::endl;
 }
 void Harl::complain( std::string level){
     int i = 0;
@@ -37,13 +38,21 @@ void Harl::complain( std::string level){
         std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
         break;
     case 1:
+        std::cout << "[ DEBUG ]"<< std::endl;
         (this->*fn[0])();
+        std::cout <<std::endl;
     case 2:
+        std::cout << "[ INFO ]"<< std::endl;
         (this->*fn[1])();
+        std::cout <<std::endl;
     case 3:
+        std::cout << "[ WARNING ]"<< std::endl;
         (this->*fn[2])();
+        std::cout <<std::endl;
     case 4:
-        (this->*fn[2])();
+        std::cout << "[ ERROR ]"<< std::endl;
+        (this->*fn[3])();
+        std::cout <<std::endl;
     }
 }
 void Harl::debug( void ){

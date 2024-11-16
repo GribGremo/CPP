@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 18:03:15 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/09/19 11:13:19 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/16 12:57:37 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,9 @@ class Zombie
         std::string _name;
 };
 
-    Zombie* newZombie( std::string name );
-    void randomChump( std::string name );
+Zombie* newZombie( std::string name );
+Zombie* newZombie( const char* name );
+void randomChump( std::string name );
+void randomChump( const char* name );
 
 #endif

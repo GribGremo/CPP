@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 14:35:32 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/09/19 15:20:15 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/16 14:37:41 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ class Zombie
 {
     public:
 
-        Zombie();
         Zombie(std::string name);
         ~Zombie(void);
 
@@ -28,10 +27,11 @@ class Zombie
 
     private:
 
+        Zombie();
         std::string _name;
 };
 
 Zombie* zombieHorde( int N, std::string name );
-
+Zombie* zombieHorde( int N, const char* name );
 
 #endif

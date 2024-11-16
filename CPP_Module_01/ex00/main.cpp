@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 18:01:53 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/09/19 13:26:44 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/16 12:55:41 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int main()
 {
-    Zombie *one = newZombie("Baptiste");
+    std::string str("Thomas");
+    Zombie *one = newZombie(NULL);
     if(one == NULL)
     {
         std::cout << "Memory allocation issue";
@@ -32,12 +33,20 @@ int main()
         std::cout << "Memory allocation issue";
         return (1);
     }
+    Zombie *four = newZombie(str);
+    if(four == NULL)
+    {
+        std::cout << "Memory allocation issue";
+        return (1);
+    }
     randomChump("Douglas");
     randomChump("Steven");
     randomChump("");
+    randomChump(NULL);
     
     delete(one);
     delete(two);
     delete(three);
+    delete(four);
 }
 
