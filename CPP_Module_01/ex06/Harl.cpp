@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 09:13:15 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/16 17:03:48 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/19 14:12:05 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,23 +33,23 @@ void Harl::complain( std::string level){
     while(i < 4 && level != fn_cmd[i])
             i++;
 
-    switch(i + 1){
-    case 5:
+    switch(i){
+    default:
         std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
         break;
-    case 1:
+    case 0:
         std::cout << "[ DEBUG ]"<< std::endl;
         (this->*fn[0])();
         std::cout <<std::endl;
-    case 2:
+    case 1:
         std::cout << "[ INFO ]"<< std::endl;
         (this->*fn[1])();
         std::cout <<std::endl;
-    case 3:
+    case 2:
         std::cout << "[ WARNING ]"<< std::endl;
         (this->*fn[2])();
         std::cout <<std::endl;
-    case 4:
+    case 3:
         std::cout << "[ ERROR ]"<< std::endl;
         (this->*fn[3])();
         std::cout <<std::endl;

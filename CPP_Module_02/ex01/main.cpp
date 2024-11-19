@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:48:00 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/10/23 15:58:04 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/19 16:52:55 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 int main( void ) {
     Fixed a;   
     Fixed const b(-10);
-    Fixed const c( -42.42f );
+    Fixed const c( -42.62f );
     Fixed const d( b );
     a = Fixed( 1234.4321f );
 
