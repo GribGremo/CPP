@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:48:04 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/10/23 15:56:03 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/22 16:39:43 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 /*CONTRUCTORS*/
 Fixed::Fixed(){
     std::cout << "Constructor Called" << std ::endl;
-    fixed_point = 0 << fractionnal_bits;//a voir
+    fixed_point = 0 << fractionnal_bits;
 }
 Fixed::Fixed(const int n){
     std::cout << "Int Constructor Called" << std ::endl;
@@ -26,7 +26,7 @@ Fixed::Fixed(const int n){
 }
 Fixed::Fixed(const float nf){
     std::cout << "Float Constructor Called" << std ::endl;
-    fixed_point = (int)(roundf(nf * 256));
+    fixed_point = (int)(roundf(nf * (1 << fractionnal_bits)));
 }
 Fixed::Fixed(const Fixed& other){
     std::cout << "Copy contructor Called" << std ::endl;
@@ -60,8 +60,8 @@ void Fixed::setRawBits( int const raw ){
 
 /*FUNCTIONS*/
 float Fixed::toFloat( void ) const{
-    return ((float)fixed_point / 256);//
+    return ((float)fixed_point / (1 << fractionnal_bits));
 }
 int Fixed::toInt( void ) const{
-    return (roundf((float)fixed_point / 256));
+    return (roundf((float)fixed_point / (1 << fractionnal_bits)));
 }

@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:48:02 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/10/23 15:56:09 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/22 12:59:39 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ class Fixed{
     Fixed();
     Fixed(const int n);
     Fixed(const float nf);
-    Fixed(const Fixed& other);//Constructeur par copie
+    Fixed(const Fixed& other);
     ~Fixed();
 
-    Fixed& operator=(const Fixed& other);//Operateur de copie
+    Fixed& operator=(const Fixed& other);
     
     int getRawBits( void ) const;
     void setRawBits( int const raw );
