@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 17:12:05 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/16 10:56:46 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/22 10:01:30 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ std::string replace_str(std::string &line,std::string &to_find,std::string &to_r
 
 int main(int argc, char **argv)
 {
-    (void)argc;
-    if (argv[1] == NULL)
+    if (argc != 4)
     {
-        std::cerr <<"No filename detected" << std::endl;
-        return (1);
+        std::cerr <<"Invalid number of arguments" << std::endl;
+        return (1); 
     }
+
     std::string filename(argv[1]);
     if (filename.empty())
     {
@@ -53,17 +53,7 @@ int main(int argc, char **argv)
     }
     std::string filename_rep(argv[1]);
     filename_rep += ".replace";
-    if (argv[2] == NULL)
-    {
-        std::cerr <<"No 'string to search' detected" << std::endl;
-        return (1);
-    }
     std::string to_find(argv[2]);
-    if (argv[3] == NULL)
-    {
-        std::cerr <<"No 'replace string' detected" << std::endl;
-        return (1);
-    }
     std::string to_replace(argv[3]);
     std::ifstream ifs(filename.c_str());
     std::string line;

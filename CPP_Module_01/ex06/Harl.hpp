@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 09:13:17 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/19 14:22:06 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/22 10:12:43 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ class Harl
     Harl();
     ~Harl();
     void complain( std::string level);
-    // typedef void (Harl::*HarlFn)();
     
     private:
 
@@ -30,8 +29,6 @@ class Harl
     void warning( void );
     void error( void );
     std::string fn_cmd[4];
-    // HarlFn fn[4];
     void (Harl::*fn[4])();
 };
-
 #endif
