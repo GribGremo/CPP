@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:48:02 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/10/23 15:58:34 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/23 17:45:09 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ class Fixed{
     Fixed operator++(int);
     Fixed operator--(int);
     Fixed& operator=(const Fixed& other);//Operateur de copie
-    std::ostream& operator<<(std::ostream& out);
+    std::ostream& operator<<(std::ostream& out);//ATTENTION DOUBLON
     
     static Fixed& max(Fixed& a, Fixed& b);
     static Fixed& min(Fixed& a, Fixed& b);

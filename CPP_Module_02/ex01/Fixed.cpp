@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:48:04 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/22 16:39:43 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/23 16:06:16 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ Fixed::~Fixed(){
 Fixed& Fixed::operator=(const Fixed& other){
     std::cout << "Copy assignment operator called" << std ::endl;
     fixed_point = other.fixed_point;
-    return (*this);//
+    return (*this);
 }
 std::ostream& operator<<(std::ostream& out, const Fixed& src){
     out << src.toFloat();
