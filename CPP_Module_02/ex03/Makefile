@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: grib <grib@student.42.fr>                  +#+  +:+       +#+         #
+#    By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/18 15:47:27 by sylabbe           #+#    #+#              #
-#    Updated: 2024/10/22 20:36:03 by grib             ###   ########.fr        #
+#    Updated: 2024/11/24 15:20:39 by sylabbe          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = fixed
+NAME = bsp
 
 CFLAGS = -Werror -Wall -Wextra -std=c++98 #-fsanitize=address
 

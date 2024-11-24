@@ -1,0 +1,20 @@
+/*Here you don't see any construction or destruction even if i create temp,
+the reason why is due to compilator optimisation, temp is returned so the
+compilator didn't really "created" it, it is directly build into return space
+memory (see RVO=Return Value Optimisation, disable it with -fno-elide-constructors flag)*/
+
+    /*Here a difference, even if my operators return a rvalue,
+    if res already exists my RVO will not shut the the constructors 
+    destructors, in case an object already exist (affectation)
+    he has to modify an object, in case he is building it the 
+    compilator know that it is the same operation than in my operator 
+    function when i create temp, a construction and not an assignation,
+    so the RVO is authorized to shut the construction/destruction message,
+    no assignement operator will come in the middle, it grants the possibility
+    to the programmer to make an assignement operator custom*/
+    
+    /*Here msg is not a reference because "a++" return a rvalue,
+you can't put a reference to a rvalue, because a rvalue is
+temporary and does not have an address, accordingly it will
+make a copy of a Fixed object, this is why they appear when
+i call print color with a Fixed argument*/

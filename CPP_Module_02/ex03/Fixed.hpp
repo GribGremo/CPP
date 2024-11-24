@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:48:02 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/10/23 16:00:56 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/24 14:50:06 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ class Fixed{
     Fixed();
     Fixed(const int n);
     Fixed(const float nf);
-    Fixed(const Fixed& other);//Constructeur par copie
+    Fixed(const Fixed& other);
     ~Fixed();
 
     bool operator<(const Fixed& other);
@@ -40,8 +40,8 @@ class Fixed{
     Fixed& operator--();
     Fixed operator++(int);
     Fixed operator--(int);
-    Fixed& operator=(const Fixed& other);//Operateur de copie
-    std::ostream& operator<<(std::ostream& out);
+    Fixed& operator=(const Fixed& other);
+    // std::ostream& operator<<(std::ostream& out);
     
     static Fixed& max(Fixed& a, Fixed& b);
     static Fixed& min(Fixed& a, Fixed& b);
