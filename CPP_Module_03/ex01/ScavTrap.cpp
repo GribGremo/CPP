@@ -6,11 +6,16 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 09:39:08 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/10/30 14:13:51 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/25 14:12:13 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScavTrap.hpp"
+
+#define YELLOW "\033[33m"
+#define MAGENTA "\033[35m"
+#define CYAN "\033[36m"
+#define RESET "\033[0m"
 
 //CONSTRUCTORS
 
@@ -19,19 +24,19 @@ ScavTrap::ScavTrap() : ClapTrap(){
     this->_hit_points = 100;
     this->_energy_points = 50;
     this->_attack_dmg = 20;
-    std::cout << "ScavTrap default constructor called" << std::endl;
+    std::cout << YELLOW << "ScavTrap default constructor called"<<RESET << std::endl;
 }
 ScavTrap::ScavTrap(const std::string& name) : ClapTrap(name){
     this->_hit_points = 100;
     this->_energy_points = 50;
     this->_attack_dmg = 20;
-    std::cout << "ScavTrap custom constructor called" << std::endl;
+    std::cout << YELLOW << "ScavTrap custom constructor called" <<RESET<< std::endl;
 }
 ScavTrap::ScavTrap(const ScavTrap& src) : ClapTrap(src){
-    std::cout << "ScavTrap constructor by copy called" << std::endl;
+    std::cout << YELLOW<< "ScavTrap constructor by copy called" <<RESET<< std::endl;
 }
 ScavTrap::~ScavTrap(){
-    std::cout << "ScavTrap destructor called" << std::endl;
+    std::cout << YELLOW<< "ScavTrap destructor called" <<RESET<< std::endl;
 }
 
 //OPERATORS
@@ -47,15 +52,20 @@ ScavTrap& ScavTrap::operator=(const ScavTrap& src){
 
 //FUNCTIONS
 void ScavTrap::guardGate(){
-    if(_energy_points <= 0)
-        std::cout << this->_name <<" is too tired, time to rest." << std::endl;
+    if (_energy_points <= 0 || _hit_points <= 0)
+        std::cout<< YELLOW <<  this->_name << " is done, can't guard anymore." <<RESET<< std::endl;
     else
     {
-        std::cout << "Mwahaha, me the great " << this->_name <<", i'm the cerberus of your hell, do not trespass me, or you're doomed, Gate Keeper Mode engaged" << std::endl;
+        std::cout<< YELLOW << "Mwahaha, me the great " << this->getName() <<", i'm the cerberus of your hell, do not trespass me, or you're doomed, Gate Keeper Mode engaged" <<RESET<< std::endl;
         _energy_points--;
     }
 }
 void ScavTrap::attack(const std::string& target){
-    _energy_points--;
-    std::cout << "Thank god i'm not as useless as my cousin. " << this->_name << " dealt " << this->_attack_dmg << " damages to " << target << std::endl;
+    if (_energy_points <= 0 || _hit_points <=0)
+        std::cout<< YELLOW <<  this->_name << " is done, can't atack anymore." <<RESET<< std::endl;
+    else
+    {
+        std::cout<< YELLOW << "Thank god i'm not as useless as my cousin. " << this->_name << " dealt " << this->_attack_dmg << " damages to " << target <<RESET<< std::endl;
+        _energy_points--;
+    }
 }

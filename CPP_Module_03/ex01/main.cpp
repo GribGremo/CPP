@@ -6,48 +6,50 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 16:05:09 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/10/30 13:52:48 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/25 17:14:03 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScavTrap.hpp"
 
+void main_test(ClapTrap* trap);
+
+
 int main()
 {
-    std::string name1 = "toto";
-    ClapTrap toto(name1);
-    toto.attack("papillon");
-    toto.takeDamage(5);
-    toto.beRepaired(0);
-    toto.beRepaired(5);
-    toto.takeDamage(10);
-    toto.beRepaired(10);
-    toto.attack("chenille");
-    toto.takeDamage(5);
+    ClapTrap ptr("Clap");
+    ScavTrap ptr2("Scav");
     std::cout << std::endl;
 
-    std::string name2 = "titi";
-    ScavTrap titi(name2);
-    std::cout <<titi.getName() << " Attack: "<< titi.getAttackdmg()<< " Energy: " <<titi.getEnergypoints()<<" HP: "<<titi.getHitpoints() << std::endl;
-    titi.attack("papillon");
-    std::cout <<titi.getName() << " Attack: "<< titi.getAttackdmg()<< " Energy: " <<titi.getEnergypoints()<<" HP: "<<titi.getHitpoints() << std::endl;
-    titi.takeDamage(5);
-    std::cout <<titi.getName() << " Attack: "<< titi.getAttackdmg()<< " Energy: " <<titi.getEnergypoints()<<" HP: "<<titi.getHitpoints() << std::endl;
-    titi.beRepaired(0);
-    std::cout <<titi.getName() << " Attack: "<< titi.getAttackdmg()<< " Energy: " <<titi.getEnergypoints()<<" HP: "<<titi.getHitpoints() << std::endl;
-    titi.beRepaired(5);
-    std::cout <<titi.getName() << " Attack: "<< titi.getAttackdmg()<< " Energy: " <<titi.getEnergypoints()<<" HP: "<<titi.getHitpoints() << std::endl;
-    titi.takeDamage(10);
-    std::cout <<titi.getName() << " Attack: "<< titi.getAttackdmg()<< " Energy: " <<titi.getEnergypoints()<<" HP: "<<titi.getHitpoints() << std::endl;
-    titi.beRepaired(10);
-    std::cout <<titi.getName() << " Attack: "<< titi.getAttackdmg()<< " Energy: " <<titi.getEnergypoints()<<" HP: "<<titi.getHitpoints() << std::endl;
-    titi.attack("chenille");
-    std::cout <<titi.getName() << " Attack: "<< titi.getAttackdmg()<< " Energy: " <<titi.getEnergypoints()<<" HP: "<<titi.getHitpoints() << std::endl;
-    titi.takeDamage(5);
-    std::cout <<titi.getName() << " Attack: "<< titi.getAttackdmg()<< " Energy: " <<titi.getEnergypoints()<<" HP: "<<titi.getHitpoints() << std::endl;
-    titi.guardGate();
-    std::cout <<titi.getName() << " Attack: "<< titi.getAttackdmg()<< " Energy: " <<titi.getEnergypoints()<<" HP: "<<titi.getHitpoints() << std::endl;
-    ScavTrap cpy = titi;
-    std::cout <<cpy.getName() << " Attack: "<< cpy.getAttackdmg()<< " Energy: " <<cpy.getEnergypoints()<<" HP: "<<cpy.getHitpoints() << std::endl;
-    cpy.attack("titi");
+    main_test(&ptr);
+    std::cout <<std::endl<< ptr.getName() <<"'s Final Status" <<std::endl;
+    std::cout <<ptr.getName() << " Attack: "<< ptr.getAttackdmg()<< " Energy: " <<ptr.getEnergypoints()<<" HP: "<<ptr.getHitpoints() << std::endl <<std::endl;
+
+    main_test(&ptr2);
+    std::cout <<std::endl<< ptr.getName() <<"'s Final Status" <<std::endl;
+    std::cout <<ptr2.getName() << " Attack: "<< ptr2.getAttackdmg()<< " Energy: " <<ptr2.getEnergypoints()<<" HP: "<<ptr2.getHitpoints() << std::endl<<std::endl;
+
+}
+
+void main_test(ClapTrap* trap)
+{
+    std::cout << "~~~~~~~~~~~~~~~" << trap->getName() << "'s history~~~~~~~~~~~~~~~" <<std::endl <<std::endl;
+    std::cout <<trap->getName() << " Attack: "<< trap->getAttackdmg()<< " Energy: " <<trap->getEnergypoints()<<" HP: "<<trap->getHitpoints() << std::endl;
+    trap->attack("papillon");
+    std::cout <<trap->getName() << " Attack: "<< trap->getAttackdmg()<< " Energy: " <<trap->getEnergypoints()<<" HP: "<<trap->getHitpoints() << std::endl;
+    trap->takeDamage(5);
+    std::cout <<trap->getName() << " Attack: "<< trap->getAttackdmg()<< " Energy: " <<trap->getEnergypoints()<<" HP: "<<trap->getHitpoints() << std::endl;
+    trap->beRepaired(0);
+    std::cout <<trap->getName() << " Attack: "<< trap->getAttackdmg()<< " Energy: " <<trap->getEnergypoints()<<" HP: "<<trap->getHitpoints() << std::endl;
+    trap->beRepaired(5);
+    std::cout <<trap->getName() << " Attack: "<< trap->getAttackdmg()<< " Energy: " <<trap->getEnergypoints()<<" HP: "<<trap->getHitpoints() << std::endl;
+    trap->takeDamage(10);
+    std::cout <<trap->getName() << " Attack: "<< trap->getAttackdmg()<< " Energy: " <<trap->getEnergypoints()<<" HP: "<<trap->getHitpoints() << std::endl;
+    trap->beRepaired(10);
+    std::cout <<trap->getName() << " Attack: "<< trap->getAttackdmg()<< " Energy: " <<trap->getEnergypoints()<<" HP: "<<trap->getHitpoints() << std::endl;
+    trap->attack("chenille");
+    std::cout <<trap->getName() << " Attack: "<< trap->getAttackdmg()<< " Energy: " <<trap->getEnergypoints()<<" HP: "<<trap->getHitpoints() << std::endl;
+    trap->takeDamage(5);
+    std::cout <<trap->getName() << " Attack: "<< trap->getAttackdmg()<< " Energy: " <<trap->getEnergypoints()<<" HP: "<<trap->getHitpoints() << std::endl;
+    std::cout<<std::endl;
 }
