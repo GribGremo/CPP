@@ -6,62 +6,59 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 16:05:09 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/10/31 11:18:08 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/26 10:39:30 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScavTrap.hpp"
 #include "FragTrap.hpp"
 
+void main_test(ClapTrap* trap);
+
+
 int main()
 {
-    std::string name1 = "toto";
-    ClapTrap toto(name1);
-    toto.attack("papillon");
-    toto.takeDamage(5);
-    toto.beRepaired(0);
-    toto.beRepaired(5);
-    toto.takeDamage(10);
-    toto.beRepaired(10);
-    toto.attack("chenille");
-    toto.takeDamage(5);
+    ClapTrap ptr("Clap");
+    ScavTrap ptr2("Scav");
+    FragTrap ptr3("Frag");
     std::cout << std::endl;
 
-    std::string name2 = "titi";
-    ScavTrap titi(name2);
-    titi.attack("papillon");
-    titi.takeDamage(5);
-    titi.beRepaired(0);
-    titi.beRepaired(5);
-    titi.takeDamage(10);
-    titi.beRepaired(10);
-    titi.attack("chenille");
-    titi.takeDamage(5);
-    titi.guardGate();
-    std::cout << std::endl;
+    main_test(&ptr);
+    std::cout <<std::endl<< ptr.getName() <<"'s Final Status" <<std::endl;
+    std::cout <<ptr.getName() << " Attack: "<< ptr.getAttackdmg()<< " Energy: " <<ptr.getEnergypoints()<<" HP: "<<ptr.getHitpoints() << std::endl <<std::endl;
 
-    std::string name3 = "tutu";
-    FragTrap tutu(name3);
-    std::cout <<tutu.getName() << " Attack: "<< tutu.getAttackdmg()<< " Energy: " <<tutu.getEnergypoints()<<" HP: "<<tutu.getHitpoints() << std::endl;
-    tutu.attack("papillon");
-    std::cout <<tutu.getName() << " Attack: "<< tutu.getAttackdmg()<< " Energy: " <<tutu.getEnergypoints()<<" HP: "<<tutu.getHitpoints() << std::endl;
-    tutu.takeDamage(5);
-    std::cout <<tutu.getName() << " Attack: "<< tutu.getAttackdmg()<< " Energy: " <<tutu.getEnergypoints()<<" HP: "<<tutu.getHitpoints() << std::endl;
-    tutu.beRepaired(0);
-    std::cout <<tutu.getName() << " Attack: "<< tutu.getAttackdmg()<< " Energy: " <<tutu.getEnergypoints()<<" HP: "<<tutu.getHitpoints() << std::endl;
-    tutu.beRepaired(5);
-    std::cout <<tutu.getName() << " Attack: "<< tutu.getAttackdmg()<< " Energy: " <<tutu.getEnergypoints()<<" HP: "<<tutu.getHitpoints() << std::endl;
-    tutu.takeDamage(10);
-    std::cout <<tutu.getName() << " Attack: "<< tutu.getAttackdmg()<< " Energy: " <<tutu.getEnergypoints()<<" HP: "<<tutu.getHitpoints() << std::endl;
-    tutu.beRepaired(10);
-    std::cout <<tutu.getName() << " Attack: "<< tutu.getAttackdmg()<< " Energy: " <<tutu.getEnergypoints()<<" HP: "<<tutu.getHitpoints() << std::endl;
-    tutu.attack("chenille");
-    std::cout <<tutu.getName() << " Attack: "<< tutu.getAttackdmg()<< " Energy: " <<tutu.getEnergypoints()<<" HP: "<<tutu.getHitpoints() << std::endl;
-    tutu.takeDamage(5);
-    std::cout <<tutu.getName() << " Attack: "<< tutu.getAttackdmg()<< " Energy: " <<tutu.getEnergypoints()<<" HP: "<<tutu.getHitpoints() << std::endl;
-    tutu.highFivesGuys();
-    std::cout <<tutu.getName() << " Attack: "<< tutu.getAttackdmg()<< " Energy: " <<tutu.getEnergypoints()<<" HP: "<<tutu.getHitpoints() << std::endl;
-    FragTrap cpy = tutu;
-    std::cout <<cpy.getName() << " Attack: "<< cpy.getAttackdmg()<< " Energy: " <<cpy.getEnergypoints()<<" HP: "<<cpy.getHitpoints() << std::endl;
-    cpy.attack("tutu");
+    main_test(&ptr2);
+    std::cout << "Special function:" << std::endl;
+    ptr2.guardGate();
+    std::cout <<std::endl<< ptr.getName() <<"'s Final Status" <<std::endl;
+    std::cout <<ptr2.getName() << " Attack: "<< ptr2.getAttackdmg()<< " Energy: " <<ptr2.getEnergypoints()<<" HP: "<<ptr2.getHitpoints() << std::endl<<std::endl;
+
+    main_test(&ptr3);
+    std::cout << "Special function:" << std::endl;
+    ptr3.highFivesGuys();
+    std::cout <<std::endl<< ptr3.getName() <<"'s Final Status" <<std::endl;
+    std::cout <<ptr3.getName() << " Attack: "<< ptr3.getAttackdmg()<< " Energy: " <<ptr3.getEnergypoints()<<" HP: "<<ptr3.getHitpoints() << std::endl <<std::endl;
+}
+
+void main_test(ClapTrap* trap)
+{
+    std::cout << "~~~~~~~~~~~~~~~" << trap->getName() << "'s history~~~~~~~~~~~~~~~" <<std::endl <<std::endl;
+    std::cout <<trap->getName() << " Attack: "<< trap->getAttackdmg()<< " Energy: " <<trap->getEnergypoints()<<" HP: "<<trap->getHitpoints() << std::endl;
+    trap->attack("papillon");
+    std::cout <<trap->getName() << " Attack: "<< trap->getAttackdmg()<< " Energy: " <<trap->getEnergypoints()<<" HP: "<<trap->getHitpoints() << std::endl;
+    trap->takeDamage(5);
+    std::cout <<trap->getName() << " Attack: "<< trap->getAttackdmg()<< " Energy: " <<trap->getEnergypoints()<<" HP: "<<trap->getHitpoints() << std::endl;
+    trap->beRepaired(0);
+    std::cout <<trap->getName() << " Attack: "<< trap->getAttackdmg()<< " Energy: " <<trap->getEnergypoints()<<" HP: "<<trap->getHitpoints() << std::endl;
+    trap->beRepaired(5);
+    std::cout <<trap->getName() << " Attack: "<< trap->getAttackdmg()<< " Energy: " <<trap->getEnergypoints()<<" HP: "<<trap->getHitpoints() << std::endl;
+    trap->takeDamage(10);
+    std::cout <<trap->getName() << " Attack: "<< trap->getAttackdmg()<< " Energy: " <<trap->getEnergypoints()<<" HP: "<<trap->getHitpoints() << std::endl;
+    trap->beRepaired(10);
+    std::cout <<trap->getName() << " Attack: "<< trap->getAttackdmg()<< " Energy: " <<trap->getEnergypoints()<<" HP: "<<trap->getHitpoints() << std::endl;
+    trap->attack("chenille");
+    std::cout <<trap->getName() << " Attack: "<< trap->getAttackdmg()<< " Energy: " <<trap->getEnergypoints()<<" HP: "<<trap->getHitpoints() << std::endl;
+    trap->takeDamage(5);
+    std::cout <<trap->getName() << " Attack: "<< trap->getAttackdmg()<< " Energy: " <<trap->getEnergypoints()<<" HP: "<<trap->getHitpoints() << std::endl;
+    std::cout<<std::endl;
 }

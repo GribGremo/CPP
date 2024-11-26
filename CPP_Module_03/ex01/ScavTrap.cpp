@@ -6,15 +6,13 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 09:39:08 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/25 14:12:13 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/26 10:32:45 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScavTrap.hpp"
 
 #define YELLOW "\033[33m"
-#define MAGENTA "\033[35m"
-#define CYAN "\033[36m"
 #define RESET "\033[0m"
 
 //CONSTRUCTORS
@@ -24,19 +22,19 @@ ScavTrap::ScavTrap() : ClapTrap(){
     this->_hit_points = 100;
     this->_energy_points = 50;
     this->_attack_dmg = 20;
-    std::cout << YELLOW << "ScavTrap default constructor called"<<RESET << std::endl;
+    std::cout << YELLOW << "ScavTrap default constructor called"<< RESET << std::endl;
 }
 ScavTrap::ScavTrap(const std::string& name) : ClapTrap(name){
     this->_hit_points = 100;
     this->_energy_points = 50;
     this->_attack_dmg = 20;
-    std::cout << YELLOW << "ScavTrap custom constructor called" <<RESET<< std::endl;
+    std::cout << YELLOW << "ScavTrap custom constructor called" << RESET<< std::endl;
 }
 ScavTrap::ScavTrap(const ScavTrap& src) : ClapTrap(src){
-    std::cout << YELLOW<< "ScavTrap constructor by copy called" <<RESET<< std::endl;
+    std::cout << YELLOW << "ScavTrap constructor by copy called" << RESET<< std::endl;
 }
 ScavTrap::~ScavTrap(){
-    std::cout << YELLOW<< "ScavTrap destructor called" <<RESET<< std::endl;
+    std::cout << YELLOW << "ScavTrap destructor called" << RESET<< std::endl;
 }
 
 //OPERATORS

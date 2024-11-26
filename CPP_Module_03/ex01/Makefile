@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: grib <grib@student.42.fr>                  +#+  +:+       +#+         #
+#    By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/23 16:05:12 by sylabbe           #+#    #+#              #
-#    Updated: 2024/10/25 13:33:27 by grib             ###   ########.fr        #
+#    Updated: 2024/11/26 10:22:29 by sylabbe          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,4 +59,4 @@ re:
 
 MAKEFLAGS         += --no-print-directory
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re

@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 16:05:07 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/10/30 14:20:14 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/26 10:36:01 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ class ClapTrap{
     ClapTrap();
     ClapTrap(const std::string& name);
     ClapTrap(const ClapTrap& src);
-    ~ClapTrap();
+    virtual ~ClapTrap();
 
     ClapTrap& operator=(const ClapTrap& src);
 
-    void attack(const std::string& target);
+    virtual void attack(const std::string& target);
     void takeDamage(unsigned int amount);
     void beRepaired(unsigned int amount);
 

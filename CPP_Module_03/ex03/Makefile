@@ -6,7 +6,7 @@
 #    By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/23 16:05:12 by sylabbe           #+#    #+#              #
-#    Updated: 2024/10/30 12:56:54 by sylabbe          ###   ########.fr        #
+#    Updated: 2024/11/26 10:22:51 by sylabbe          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,4 +61,4 @@ re:
 
 MAKEFLAGS         += --no-print-directory
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re 
