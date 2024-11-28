@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 16:05:07 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/10/30 13:05:20 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/28 10:45:10 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ class ClapTrap{
 
     private:
     std::string _name;
-    int _hit_points;
+    unsigned int _hit_points;
     int _energy_points;
     int _attack_dmg;
 };

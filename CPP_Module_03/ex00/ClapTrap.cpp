@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 16:05:04 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/25 13:40:31 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/28 10:51:31 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,19 @@ void ClapTrap::attack(const std::string& target){
     }
 }
 void ClapTrap::takeDamage(unsigned int amount){
+    std::cout << "AMOUNT: " << amount <<std::endl;
+    // if ((int) amount < 0)
+    // {
+    //     std::cout << "Can't take negative values"<<std::endl;
+    //     return ;
+    // }
     if (_hit_points <= 0 || _energy_points <= 0)
         std::cout<< GREEN << "*No sound from " << _name << ", he is already dowm and a monster keep beating him*" << RESET<< std::endl;
     else
     {
+        std::cout << "unsigned hit points" << (unsigned int) _hit_points << std::endl;
         _hit_points -= amount;
+        std::cout << "hitpoints: " << _hit_points <<std::endl;
         if(_hit_points < 0)
             _hit_points = 0;
         if(_hit_points > 0)

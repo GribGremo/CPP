@@ -6,33 +6,36 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 12:08:34 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/04 17:58:13 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/28 16:17:29 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Dog.hpp"
+
+#define BLUE "\033[34m"
+#define RESET "\033[0m"
 
 //CONCTRUCTORS/DESTRUCTOR
 
 Dog::Dog(){
     type = "Dog";
     _b = new Brain();
-    std::cout << "Dog default constructor called" << std::endl;
+    std::cout << BLUE << "Dog default constructor called" << RESET << std::endl;
 }
 Dog::Dog(const Dog& src):Animal(){
     _b = new Brain(*src._b);
     type = src.type;
-    std::cout << "Dog copy constructor called" << std::endl;
+    std::cout << BLUE<< "Dog copy constructor called" << RESET<< std::endl;
 }
 Dog::~Dog(){
     delete _b;
-    std::cout << "Dog destructor called" << std::endl;
+    std::cout << BLUE<< "Dog destructor called" << RESET<< std::endl;
 }
 
 //OPERATORS
 
 Dog& Dog::operator=(const Dog& src){
-    std::cout << "Dog operator" << std::endl;
+    std::cout << BLUE<< "Dog operator" << RESET<< std::endl;
     if (this != &src) {
         delete _b;
         _b = new Brain(*src._b);
@@ -44,7 +47,7 @@ Dog& Dog::operator=(const Dog& src){
 //FUNCTIONS
 
 void Dog::makeSound() const{
-    std::cout << "*Bark bark*" << std::endl;
+    std::cout << BLUE<< "*Bark bark*" << RESET<< std::endl;
 }
 
 //SETTERS/GETTERS
