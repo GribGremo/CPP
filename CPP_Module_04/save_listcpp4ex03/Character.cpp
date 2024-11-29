@@ -6,18 +6,20 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 17:37:07 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/15 11:31:43 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/29 12:16:35 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Character.hpp"
+#define YELLOW "\033[33m"
+#define RESET "\033[0m"
 //STATIC
-    Ground_List* Character::ground = NULL;
-    int Character::countCharacter = 0;
+Ground_List* Character::ground = NULL;
+int Character::countCharacter = 0;
 
 //CONSTRUCTORS/DESTRUCTOR
 Character::Character(){
-    std::cout << "Character default constructor called" << std::endl;
+    std::cerr << YELLOW << "Character default constructor called" << RESET << std::endl;
     if (Character::ground == NULL)
         Character::ground = new Ground_List();
     for(int i = 0; i < 4; i++)
@@ -26,7 +28,7 @@ Character::Character(){
     Character::countCharacter++;
 }
 Character::Character(const std::string& name){
-    std::cout << "Character custom constructor called" << std::endl;
+    std::cerr << YELLOW << "Character custom constructor called" << RESET << std::endl;
     if (Character::ground == NULL)
         Character::ground = new Ground_List();
     for(int i = 0; i < 4; i++)
@@ -35,7 +37,7 @@ Character::Character(const std::string& name){
     Character::countCharacter++;
 }
 Character::Character(const Character& src){
-    std::cout << "Character copy constructor called" << std::endl;
+    std::cerr << YELLOW << "Character copy constructor called" << RESET << std::endl;
     if (Character::ground == NULL)
         Character::ground = new Ground_List();
     for(int i = 0; i < 4; i++)
@@ -44,7 +46,7 @@ Character::Character(const Character& src){
     Character::countCharacter++;
 }
 Character::~Character(){
-    std::cout << "Character destructor called" << std::endl;
+    std::cerr << YELLOW << "Character destructor called" << RESET << std::endl;
     for(int i = 0; i < 4; i++)
     {
         if (inventory[i] != NULL)
@@ -60,7 +62,7 @@ Character::~Character(){
 
 //OPERATORS
 Character& Character::operator=(const Character& src){
-    std::cout << "Character equal operator called" << std::endl;
+    std::cout << YELLOW << "Character equal operator called" << RESET << std::endl;
     for(int i = 0; i < 4; i++)
     {
         if (inventory[i] != NULL)
@@ -83,11 +85,11 @@ void Character::equip(AMateria* m){
         if (inventory[i] == NULL)
         {
             inventory[i] = m;
-            std::cout << "Materia " << m->getType() << " type equipped at slot "<< i << " in the inventory of " << name << std::endl;
+            std::cout << YELLOW << "Materia " << m->getType() << " type equipped at slot "<< i << " in the inventory of " << name << RESET << std::endl;
             return;
         }
     }
-    std::cout << "No empty slot in the inventory of " << name << "(Max slot 4)"<< std::endl;
+    std::cout << YELLOW << "No empty slot in the inventory of " << name << "(Max slot 4)"<< RESET << std::endl;
 }
 void Character::unequip(int idx){
     if (idx >=0 && idx < 4)
@@ -95,14 +97,14 @@ void Character::unequip(int idx){
         if (inventory[idx] != NULL)
         {
             ground->push(inventory[idx]);
-            std::cout << "Materia at slot " << idx << "("<< inventory[idx]->getType() << ") unequipped in the inventory of " << name << std::endl;
+            std::cout << YELLOW << "Materia at slot " << idx << "("<< inventory[idx]->getType() << ") unequipped in the inventory of " << name << RESET << std::endl;
             inventory[idx] = NULL;
         }
         else
-        std::cout << "No Materia at slot " << idx << " in the inventory of " << name << std::endl;
+        std::cout << YELLOW << "No Materia at slot " << idx << " in the inventory of " << name << RESET << std::endl;
     }
     else
-        std::cout << "No slot " << idx << " in the inventory of " << name << "(Max slot 4)"<< std::endl;
+        std::cout << YELLOW << "No slot " << idx << " in the inventory of " << name << "(Max slot 4)"<< RESET << std::endl;
 }
 void Character::use(int idx, ICharacter& target){
     if (idx >=0 && idx < 4)
@@ -110,8 +112,8 @@ void Character::use(int idx, ICharacter& target){
         if (inventory[idx] != NULL)
             inventory[idx]->use(target);
         else
-            std::cout << "No Materia at slot " << idx << " in the inventory of " << name << std::endl;
+            std::cout << YELLOW << "No Materia at slot " << idx << " in the inventory of " << name << RESET << std::endl;
     }
     else
-        std::cout << "No slot " << idx << " in the inventory of " << name << "(Max slot 4)"<< std::endl;
+        std::cout << YELLOW << "No slot " << idx << " in the inventory of " << name << "(Max slot 4)"<< RESET << std::endl;
 }

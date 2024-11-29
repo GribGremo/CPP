@@ -6,20 +6,23 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 17:49:42 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/08 12:44:13 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/29 14:04:12 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "MateriaSource.hpp"
 
+#define ORANGE "\033[38;5;166m"
+#define RESET "\033[0m"
+
 //CONSTRUCTORS//DESTRUCTOR
 MateriaSource::MateriaSource(){
-    std::cout << "MateriaSource default constructor called" << std::endl;
+    std::cerr << ORANGE << "MateriaSource default constructor called" << RESET << std::endl;
     for (int i = 0; i < 4; i++)
         sources[i] = NULL;
 }
 MateriaSource::MateriaSource(const MateriaSource& src){
-    std::cout << "MateriaSource copy constructor called" << std::endl;
+    std::cerr << ORANGE << "MateriaSource copy constructor called" << RESET << std::endl;
     for(int i = 0; i < 4; i++)
     {
         if (src.sources[i] != NULL)
@@ -29,7 +32,7 @@ MateriaSource::MateriaSource(const MateriaSource& src){
     }
 }
 MateriaSource::~MateriaSource(){
-    std::cout << "MateriaSource destructor called" << std::endl;
+    std::cerr << ORANGE << "MateriaSource destructor called" << RESET << std::endl;
     for (int i = 0; i < 4; i++)
     {
         if (sources[i] != NULL)
@@ -39,7 +42,7 @@ MateriaSource::~MateriaSource(){
 
 //OPERATORS
 MateriaSource& MateriaSource::operator=(const MateriaSource& src){
-    std::cout << "MateriaSource equal operator called" << std::endl;
+    std::cerr << ORANGE << "MateriaSource equal operator called" << RESET << std::endl;
     if (this != &src)
     {
         for (int i = 0; i < 4; i++)
@@ -65,20 +68,23 @@ void MateriaSource::learnMateria(AMateria* m){// Est-ce qu'on doit free la mater
     {
         if (sources[i] == NULL){
             sources[i] = m;
-            std::cout << "Materia " << sources[i]->getType() << " learned." << std::endl;
+            std::cout << ORANGE << "Materia " << sources[i]->getType() << " learned." << RESET << std::endl;
             return ;
         }
     }
+    std::cout << ORANGE << "No more slots on Materia Source" << RESET << std::endl;
+
 }
 AMateria* MateriaSource::createMateria(std::string const & type){
     for (int i = 0; i < 4; i++)
     {
         if (sources[i] != NULL && sources[i]->getType() == type)
         {
-            std::cout << "Materia " << sources[i]->getType() << " created." << std::endl;
+            std::cout << ORANGE << "Materia " << sources[i]->getType() << " created." << RESET << std::endl;
             AMateria* temp = sources[i]->clone();
             return (temp);
         }
     }
+    std::cout << ORANGE << "Can't find Materia of type " << type << " in materia source." << RESET << std::endl;
     return (NULL);
 }

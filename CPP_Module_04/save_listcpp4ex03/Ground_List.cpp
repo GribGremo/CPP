@@ -6,18 +6,21 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 10:19:41 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/15 12:12:50 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/29 12:16:13 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Ground_List.hpp"
 #include "Character.hpp"
 
+#define GREY    "\033[38;5;242m"
+#define RESET "\033[0m"
+
 Ground_List::Ground_List():head(NULL){
-    std::cout << "Ground_List default constructor called" << std::endl;
+    std::cerr << GREY << "Ground_List default constructor called" << RESET << std::endl;
 }
 Ground_List::Ground_List(const Ground_List& src){
-    std::cout << "Ground_List copy constructor called" << std::endl;
+    std::cerr << GREY << "Ground_List copy constructor called" << RESET << std::endl;
     AMateria* tempsrc = src.head;
     this->head = tempsrc->clone();
     AMateria* clone = this->head;
@@ -35,7 +38,7 @@ Ground_List::Ground_List(const Ground_List& src){
     }
 }
 Ground_List::~Ground_List(){
-    std::cout << "Ground_List destructor called" << std::endl;
+    std::cerr << GREY << "Ground_List destructor called" << RESET << std::endl;
     AMateria* temp;
     AMateria* head;
 
@@ -50,7 +53,7 @@ Ground_List::~Ground_List(){
 }
 
 Ground_List& Ground_List::operator=(const Ground_List& src){
-    std::cout << "Ground_List equal operator called" << std::endl;
+    std::cerr << GREY << "Ground_List equal operator called" << RESET << std::endl;
     (void)src;
     AMateria* temp;
     AMateria* head;
@@ -99,15 +102,15 @@ void Ground_List::push(AMateria* m){
 void Ground_List::printList(){
     AMateria *temp = this->head;
     int i = 1;
-    std::cout << std::endl<< "MATERIA ON GROUND"<<std::endl;
+    std::cout << GREY << std::endl<< "MATERIA ON GROUND"<< RESET <<std::endl;
     if (temp == NULL)
     {
-        std::cout <<std::endl << "none" <<std::endl<<std::endl;
+        std::cout << GREY <<std::endl << "none" << RESET <<std::endl<<std::endl;
         return ;
     }
     while(temp != NULL)
     {
-        std::cout << std::endl << "-------------" << std::endl << "Materia " << i << std::endl << "Type: " << temp->getType() << std::endl;
+        std::cout << GREY << std::endl << "-------------" << std::endl << "Materia " << i << std::endl << "Type: " << temp->getType() << RESET << std::endl;
         temp = temp->getNext();
         i++;
     }
