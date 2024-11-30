@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 12:13:31 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/12 12:59:46 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/30 16:00:50 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ class AMateria
     protected:
 
     std::string type;
-    AMateria* next; // TEST
+    AMateria* next;
 };
 
 #endif

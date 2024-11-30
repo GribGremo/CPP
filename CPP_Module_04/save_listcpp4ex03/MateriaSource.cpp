@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 17:49:42 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/29 14:04:12 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/30 14:54:13 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,15 @@ MateriaSource& MateriaSource::operator=(const MateriaSource& src){
 //FUNCTIONS
 
 void MateriaSource::learnMateria(AMateria* m){// Est-ce qu'on doit free la materia passer en entree
+    if (m == NULL)
+    {
+        std::cout << ORANGE << "Entry 'm' is NULL, no actions made on materia source" << RESET << std::endl;
+        return ;
+    }
     for (int i = 0; i < 4; i++)
     {
         if (sources[i] == NULL){
-            sources[i] = m;
+            sources[i] = m->clone();
             std::cout << ORANGE << "Materia " << sources[i]->getType() << " learned." << RESET << std::endl;
             return ;
         }

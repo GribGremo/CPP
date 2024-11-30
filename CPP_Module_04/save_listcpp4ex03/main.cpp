@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 15:04:24 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/29 15:57:30 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/30 15:58:49 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,33 @@
 
 int main()
 {
+    std::cout << "~~~~~~~~~~~~~TEST1 : AMateria~~~~~~~~~~~~~" <<std::endl;
+
+    AMateria* ice = new Ice;
+    AMateria* cure = new Cure;
+    AMateria* test = new Cure;
+
+    std::cout << "Test type:" << test->getType() << std::endl;
+    *test = *ice;
+    std::cout << "Test type:" << test->getType() << std::endl;
+    *test = *cure;
+    std::cout << "Test type:" << test->getType() << std::endl << std::endl;
+
+    AMateria* cpyi(ice); 
+    std::cout << "Test type:" << cpyi->getType() << std::endl;
+    AMateria* cpyc(cure); 
+    std::cout << "Test type:" << cpyc->getType() << std::endl << std::endl;
+
+
+
     std::cout << "~~~~~~~~~~~~~TEST1 : Materia clone~~~~~~~~~~~~~" <<std::endl;
 
     Ice* def = new Ice();
-    AMateria* test = new Ice(*def);
+    AMateria* test1 = new Ice(*def);
     std::cout << std::endl;
 
-    AMateria* cl = test->clone();
-    delete test;
+    AMateria* cl = test1->clone();
+    delete test1;
     std::cout << "clone: "<< cl->getType() << std::endl;
 
     delete def;
@@ -36,13 +55,10 @@ int main()
     IMateriaSource* src = new MateriaSource();
     src->learnMateria(new Ice());
     src->learnMateria(new Cure());
-    ICharacter* me = new Character("me");
-    AMateria* tmp;
-    tmp = src->createMateria("ice");
-    me->equip(tmp);
-    tmp = src->createMateria("cure");
-    me->equip(tmp);
-    ICharacter* bob = new Character("bob");
+    Character* me = new Character("me");
+    me->equip(src->createMateria("ice"));
+    me->equip(src->createMateria("cure"));
+    Character* bob = new Character("bob");
     
     std::cout << std::endl;
     me->use(0, *bob);
@@ -52,19 +68,29 @@ int main()
     std::cout << std::endl;
 
     IMateriaSource* cpyms(src);/////////
-    tmp = cpyms->createMateria("ice");
     std::cout << std::endl;
 
-    me->equip(tmp);
+    me->equip(cpyms->createMateria("ice"));
     me->use(0, *bob);
-    std::cout << "WHER AM I"<< std::endl;
 
-    ICharacter cpych(bob);
-    cpych->use(1,*me);
-    cpych->equip(tmp);
-    cpych->use(1,*me);
+    Character* cpych = new Character(*me);
+    me->print_inventory();
+    cpych->print_inventory();
+    me->equip(cpyms->createMateria("ice"));
+    cpych->equip(cpyms->createMateria("cure"));
+    me->print_inventory();
+    cpych->print_inventory();
+    bob->equip(cpyms->createMateria("cure"));
+    bob->print_inventory();
+    *bob = *cpych;
+    cpych->print_inventory();
+    bob->print_inventory();
+    bob->equip(cpyms->createMateria("ice"));
+    cpych->equip(cpyms->createMateria("cure"));
+    cpych->print_inventory();
+    bob->print_inventory();
 
-
+    delete cpych;
     delete bob;
     delete me;
     delete src;

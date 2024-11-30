@@ -6,13 +6,15 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 17:37:07 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/29 12:16:35 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/30 14:03:02 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Character.hpp"
+
 #define YELLOW "\033[33m"
 #define RESET "\033[0m"
+
 //STATIC
 Ground_List* Character::ground = NULL;
 int Character::countCharacter = 0;
@@ -41,7 +43,12 @@ Character::Character(const Character& src){
     if (Character::ground == NULL)
         Character::ground = new Ground_List();
     for(int i = 0; i < 4; i++)
-        inventory[i] = src.inventory[i];
+    {
+        if (src.inventory[i] != NULL)
+            this->inventory[i] = src.inventory[i]->clone();
+        else    
+            this->inventory[i] = NULL;
+    }
     name = src.name;
     Character::countCharacter++;
 }
@@ -62,12 +69,15 @@ Character::~Character(){
 
 //OPERATORS
 Character& Character::operator=(const Character& src){
-    std::cout << YELLOW << "Character equal operator called" << RESET << std::endl;
+    std::cerr << YELLOW << "Character equal operator called" << RESET << std::endl;
     for(int i = 0; i < 4; i++)
     {
         if (inventory[i] != NULL)
             delete inventory[i];
-        inventory[i] = src.inventory[i];
+        if (src.inventory[i] != NULL)
+            this->inventory[i] = src.inventory[i]->clone();
+        else    
+            this->inventory[i] = NULL;
     }
     name = src.name;
     return (*this);
@@ -80,6 +90,11 @@ std::string const & Character::getName() const{
 
 //FUNCTIONS
 void Character::equip(AMateria* m){
+    if (m == NULL)
+    {
+        std::cout << YELLOW << "Entry 'm' is NULL, no actions made on "<< name << "'s inventory" << RESET << std::endl;
+        return ;
+    }
     for(int i = 0; i < 4; i++)
     {
         if (inventory[i] == NULL)
@@ -116,4 +131,18 @@ void Character::use(int idx, ICharacter& target){
     }
     else
         std::cout << YELLOW << "No slot " << idx << " in the inventory of " << name << "(Max slot 4)"<< RESET << std::endl;
+}
+
+void Character::print_inventory(){
+    std::cout << YELLOW<< "~~~~~~~~INVENTORY~~~~~~~~" << RESET<< std::endl;
+    std::cout << YELLOW<< "Character: " << this->name << RESET<< std::endl;
+    std::cout << std::endl;
+    for(int i = 0; i < 4; i++)
+    {
+        if (inventory[i] != NULL)
+            std::cout << YELLOW<< "Slot " << i << ": " << inventory[i]->getType() << RESET<< std::endl;
+        else
+            std::cout << YELLOW<< "Slot " << i << ": empty" << RESET<< std::endl;
+    }
+    std::cout << YELLOW<< "~~~~~~~~~~~~~~~~~~~~~~~~~" << RESET<< std::endl;
 }

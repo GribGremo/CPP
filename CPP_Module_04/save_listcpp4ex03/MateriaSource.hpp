@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 17:45:55 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/08 10:48:14 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/11/30 14:08:59 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ class MateriaSource : public IMateriaSource
 
     void learnMateria(AMateria*);
     AMateria* createMateria(std::string const & type);
+
+    private:
+    AMateria *sources[4];
 
 };
 
