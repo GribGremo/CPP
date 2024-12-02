@@ -6,7 +6,7 @@
 #    By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/05 17:52:07 by sylabbe           #+#    #+#              #
-#    Updated: 2024/11/11 15:51:01 by sylabbe          ###   ########.fr        #
+#    Updated: 2024/11/11 11:33:21 by sylabbe          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,8 @@ SRC =	$(addprefix $(SRC_MDT_DIR)/, main.cpp \
 										Ice.cpp \
 										ICharacter.cpp \
 										IMateriaSource.cpp \
-										MateriaSource.cpp)
+										MateriaSource.cpp \
+										Ground_List.cpp)
 
 
 OBJECTS = $(SRC:$(SRC_MDT_DIR)/%.cpp=$(DEST_MDT_DIR)/%.o)

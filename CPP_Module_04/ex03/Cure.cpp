@@ -6,31 +6,38 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:48:03 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/06 12:41:11 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/12/02 14:42:48 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cure.hpp"
 
+#define MAGENTA "\033[35m"
+#define RESET "\033[0m"
+
 //CONSTRUCTORS/DESTRUCTOR
 Cure::Cure(){
-    std::cout << "Cure default constructor called" << std::endl;
+    std::cerr << MAGENTA << "Cure default constructor called" << RESET << std::endl;
     type = "cure";
 }
 Cure::Cure(const Cure& src){
-    std::cout << "Cure copy constructor called" << std::endl;
-    *this = src;
+    std::cerr << MAGENTA <<"Cure copy constructor called" << RESET<< std::endl;
+    this->type = src.type;
+    this->next = NULL;
 }
+//Careful, we  need to set-up type for constructor by copy cause we can attribute it to a AMateria* who has type set-up as default
+
 Cure::~Cure(){
-    std::cout << "Cure destructor called" << std::endl;
+    std::cerr << MAGENTA <<"Cure destructor called" << RESET<< std::endl;
 }
 
-//OPERATORS While assigning a Materia to another, copying the type doesn’t make sense.
+//OPERATORS 
 Cure& Cure::operator=(const Cure& src){
-    std::cout << "Cure default constructor called" << std::endl;
+    std::cerr << MAGENTA <<"Cure assignment operator called" << RESET<< std::endl;
     if (this != &src)
     {
-        type = src.type;
+        // type = src.type;
+        next = NULL;
     }
     return (*this);
 }
@@ -41,5 +48,5 @@ AMateria* Cure::clone() const{
     return m;
 }
 void Cure::use(ICharacter& target){
-    std::cout << "* heals " << target.getName() << "’s wounds *" << std::endl;
+    std::cout << MAGENTA <<"* heals " << target.getName() << "’s wounds *" << RESET<< std::endl;
 }

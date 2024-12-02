@@ -5,12 +5,12 @@
 #                                                     +:+ +:+         +:+      #
 #    By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/11/05 17:52:07 by sylabbe           #+#    #+#              #
-#    Updated: 2024/11/11 11:33:21 by sylabbe          ###   ########.fr        #
+#    Created: 2024/12/02 17:07:22 by sylabbe           #+#    #+#              #
+#    Updated: 2024/12/02 17:40:13 by sylabbe          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = amateria
+NAME = Bureaucrat
 
 CFLAGS = -Werror -Wall -Wextra -std=c++98 #-fsanitize=address
 
@@ -20,14 +20,7 @@ DEST_MDT_DIR = .
 
 # ls -1 *.c | sed -z 's/\n/ \\\n\t\t\t/g'
 SRC =	$(addprefix $(SRC_MDT_DIR)/, main.cpp \
-										AMateria.cpp \
-										Character.cpp \
-										Cure.cpp \
-										Ice.cpp \
-										ICharacter.cpp \
-										IMateriaSource.cpp \
-										MateriaSource.cpp \
-										Ground_List.cpp)
+										Bureaucrat.cpp)
 
 
 OBJECTS = $(SRC:$(SRC_MDT_DIR)/%.cpp=$(DEST_MDT_DIR)/%.o)

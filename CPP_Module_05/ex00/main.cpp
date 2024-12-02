@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   IMateriaSource.hpp                                 :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/05 14:06:01 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/11/30 14:09:34 by sylabbe          ###   ########.fr       */
+/*   Created: 2024/12/02 17:07:20 by sylabbe           #+#    #+#             */
+/*   Updated: 2024/12/02 17:47:52 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef IMATERIASOURCE_HPP
-# define IMATERIASOURCE_HPP
-# include "AMateria.hpp"
+#include "Bureaucrat.hpp"
 
-class IMateriaSource
+int main()
 {
-    public:
-    virtual ~IMateriaSource();
+    Bureaucrat bob;
 
-    virtual void learnMateria(AMateria*) = 0;
-    virtual AMateria* createMateria(std::string const & type) = 0;
 
-};
-
-#endif
+}
