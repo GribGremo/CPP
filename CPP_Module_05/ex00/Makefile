@@ -6,13 +6,13 @@
 #    By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/02 17:07:22 by sylabbe           #+#    #+#              #
-#    Updated: 2024/12/02 17:40:13 by sylabbe          ###   ########.fr        #
+#    Updated: 2024/12/05 15:31:42 by sylabbe          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = Bureaucrat
 
-CFLAGS = -Werror -Wall -Wextra -std=c++98 #-fsanitize=address
+CFLAGS = -Werror -Wall -Wextra -std=c++98 #-fno-elide-constructors #-fsanitize=address
 
 SRC_MDT_DIR = .
 

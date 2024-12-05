@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 17:07:17 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/12/03 16:17:15 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/12/05 13:15:32 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,31 +20,23 @@
 
 class Bureaucrat
 {
+
+    public:
+
     class GradeTooHighException : public std::exception {
-        private:
-        std::string message;
-
         public:
-        GradeTooHighException(const std::string& msg) : message(msg) {}// PAS NECESSAIRE
-
         virtual const char* what() const throw() {
-            return message.c_str();
+            return "Invalid grade: Grade too high, max. grade 1";
         }
     };
     
     class GradeTooLowException : public std::exception {
-        private:
-        std::string message;
-
         public:
-        GradeTooLowException(const std::string& msg) : message(msg) {}
-
         virtual const char* what() const throw() {
-            return message.c_str();
+            return "Invalid grade: Grade too low, min. grade 150";
         }
     };
 
-    public:
     Bureaucrat();
     Bureaucrat(const Bureaucrat& src);
     Bureaucrat(const int grade, const std::string& name);
@@ -54,9 +46,11 @@ class Bureaucrat
 
     int getGrade() const ;
     std::string getName() const;
+    void checkGrade()const;
 
     void incGrade() ;//inverse grade 1 top
     void decGrade() ;
+
 
     private:
     const std::string _name;
