@@ -6,11 +6,12 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 17:07:20 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/12/07 12:36:09 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/12/07 16:23:18 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
+// #include "Form.hpp"
 
 #define RESET "\033[0m"
 #define RED "\033[31m"
@@ -19,64 +20,59 @@ Bureaucrat* createBureaucrat(int grade, std::string& name);
 void printBureaucrat(Bureaucrat* br, std::string& name);
 void changeGrade(Bureaucrat* br, std::string& name, void (Bureaucrat::*change)());
 
+Form* createForm(int grade_to_sign, int grade_to_execute, std::string& name);
+void printForm(Form* br, std::string& name);
 
 int main()
 {
     std::string name1 = "Bob";
     std::string name2 = "Steve";
-    std::string name3 = "Bernard";
-    std::string name4 = "Andre";
+
+    std::string name3 = "A-75";
+    std::string name4 = "B-34";
+    std::string name5 = "C-22";
+    std::string name6 = "D-26";
+    std::string name7 = "E-89";
+    std::string name8 = "F-47";
 
 
     std::cout << "~~~~~~~~~~~BUREAUCRAT CREATION~~~~~~~~~~~" << std::endl;
+
     Bureaucrat* Bob = createBureaucrat(1, name1);
     Bureaucrat* Steve = createBureaucrat(150, name2);
-    Bureaucrat* Bernard = createBureaucrat(0, name3);
-    Bureaucrat* Andre = createBureaucrat(151, name4);
     std::cout << std::endl;
 
+    std::cout << "~~~~~~~~~~~FORM CREATION~~~~~~~~~~~" << std::endl;
 
-    std::cout << "~~~~~~~~~~~BUREAUCRAT PRINT~~~~~~~~~~~" << std::endl;
-
-    printBureaucrat(Bob, name1);
-    printBureaucrat(Steve, name2);
-    printBureaucrat(Bernard, name3);
-    printBureaucrat(Andre, name4);
+    Form* a75 = createForm(1, 1, name3);
+    Form* b34 = createForm(150, 150, name4);
+    Form* c22 = createForm(0, 1, name5);
+    Form* d26 = createForm(1, 0, name6);
+    Form* e89 = createForm(150, 151, name7);
+    Form* f47 = createForm(151, 150, name8);
     std::cout << std::endl;
 
+    std::cout << "~~~~~~~~~~~FORM PRINT~~~~~~~~~~~" << std::endl;
 
-    std::cout << "~~~~~~~~~~~BOB CHANGE GRADE~~~~~~~~~~~" << std::endl;
+    printForm(a75, name3);
+    printForm(b34, name4);
+    printForm(c22, name5);
+    printForm(d26, name6);
+    printForm(e89, name7);
+    printForm(f47, name8);
 
-    changeGrade(Bob, name1, &Bureaucrat::decGrade);
-    printBureaucrat(Bob, name1);
+    std::cout << "~~~~~~~~~~~SIGN FORM~~~~~~~~~~~" << std::endl;
 
-    changeGrade(Bob, name1, &Bureaucrat::incGrade);
-    printBureaucrat(Bob, name1);
-    
-    changeGrade(Bob, name1, &Bureaucrat::incGrade);
-    printBureaucrat(Bob, name1);
-    std::cout << std::endl;
+    Bob->signForm(*a75);
+    Bob->signForm(*b34);
 
-
-    std::cout << "~~~~~~~~~~~STEVE CHANGE GRADE~~~~~~~~~~~" << std::endl;
-
-
-    changeGrade(Steve, name2, &Bureaucrat::incGrade);
-    printBureaucrat(Steve, name2);
-
-    changeGrade(Steve, name2, &Bureaucrat::decGrade);
-    printBureaucrat(Steve, name2);
-
-    changeGrade(Steve, name2, &Bureaucrat::decGrade);
-    printBureaucrat(Steve, name2);
-    std::cout << std::endl;
+    Steve->signForm(*a75);
+    Steve->signForm(*b34);
 
     std::cout << "~~~~~~~~~~~BUREAUCRAT DESTRUCTION~~~~~~~~~~~" << std::endl;
 
     delete Bob;
     delete Steve;
-    delete Bernard;//Those two have not been allocated, the try of constructor fail
-    delete Andre;//
 }
 
 Bureaucrat* createBureaucrat(int grade, std::string& name)
@@ -85,7 +81,6 @@ Bureaucrat* createBureaucrat(int grade, std::string& name)
     try
     {
         br = new Bureaucrat(grade, name);
-        //Here if an exception occured during the constructor, RAII (Resource Acquisition Is Initialization) handle everything (allocation, fd, mutex), meaning nothing is allocated anymore 
         return br;
     }
     catch (Bureaucrat::GradeTooLowException& e)
@@ -100,8 +95,6 @@ Bureaucrat* createBureaucrat(int grade, std::string& name)
     {
         std::cerr << RED << "Cannot build \"" << name << "\": " << e.what() << RESET << std::endl;
     }
-    // Here we can see that br doesn't exists if an exception has been thrown, the object has not been finished 
-    // std::cout << br << std::endl;
     return br;
 }
 
@@ -141,24 +134,33 @@ void changeGrade(Bureaucrat* br, std::string& name, void (Bureaucrat::*change)()
     return ;
 }
 
-/*
-C++17
+Form* createForm(int grade_to_sign, int grade_to_execute, std::string& name)
+{
+    Form* fm = NULL;
+    try
+    {
+        fm = new Form(name, grade_to_sign, grade_to_execute);
+        return fm;
+    }
+    catch (Form::GradeTooLowException& e)
+    {
+        std::cerr << RED << "Cannot build form \"" << name << "\": " << e.what() << RESET << std::endl;
+    }
+    catch (Form::GradeTooHighException& e)
+    {
+        std::cerr << RED << "Cannot build form \"" << name << "\": " << e.what() << RESET << std::endl;
+    }
+    catch(std::exception& e)
+    {
+        std::cerr << RED << "Cannot build form \"" << name << "\": " << e.what() << RESET << std::endl;
+    }
+    return fm;
+}
 
-Ce qu'il faut savoir
-std::get :
-
-L'appel à std::get<Type>(variant) lève une exception de type std::bad_variant_access si le type demandé n'est pas celui actuellement contenu dans le std::variant.
-std::holds_alternative<Type> (préférable !) :
-
-Une méthode plus propre pour tester le type avant d'utiliser std::get est d'utiliser std::holds_alternative<Type>(variant).
-Cela retourne un booléen, évitant les exceptions.
-
- if (std::holds_alternative<std::string>(myVariant)) {
-        std::cout << "It's a std::string: " << std::get<std::string>(myVariant) << std::endl;
-    } else if (std::holds_alternative<int>(myVariant)) {
-        std::cout << "It's an int: " << std::get<int>(myVariant) << std::endl;
-    } else if (std::holds_alternative<char*>(myVariant)) {
-        std::cout << "It's a char*: " << std::get<char*>(myVariant) << std::endl;
-    } else {
-        std::cout << "Unknown type!" << std::endl;
-*/
+void printForm(Form* br, std::string& name)
+{
+    if(br != NULL)
+        std::cout << *br << std::endl;
+    else
+        std::cout << RED << name << " is not instantiated" << RESET << std::endl;
+}

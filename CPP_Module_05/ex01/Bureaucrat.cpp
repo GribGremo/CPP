@@ -6,11 +6,12 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 17:07:13 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/12/07 15:16:04 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/12/07 16:30:12 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 #define GREEN "\033[32m"
 #define RESET "\033[0m"
@@ -34,7 +35,7 @@ Bureaucrat::~Bureaucrat(){
 //OPERATORS
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat& src){
     std::cout << GREEN << "Bureaucrat assigment operator called" << RESET << std::endl;
-    (std::string)this->_name = src._name;//
+    const_cast<std::string&>(this->_name) = src._name;//TO SEE
     this->_grade = src._grade;
     return (*this);
 }
@@ -77,4 +78,14 @@ void Bureaucrat::checkGrade( int grade )const{
         throw GradeTooHighException();
     else if (grade > 150)
         throw GradeTooLowException();
+}
+
+void Bureaucrat::signForm(Form& fm){
+    try{
+        fm.beSigned(*this);
+    }
+    catch(Form::GradeTooLowException& e){
+        std::cout << this->_name << " couldn't sign " << fm.getName() << " because " << e.what() << std::endl;
+    }
+    std::cout << this->_name << " signed " << fm.getName() << std::endl;
 }

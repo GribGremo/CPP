@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 17:07:17 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/12/07 11:37:30 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/12/07 16:29:53 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 # include <iostream>
 # include <string>
 # include <exception> 
-
-
+// # include "Form.hpp"
+class Form;
 class Bureaucrat
 {
 
@@ -46,10 +46,11 @@ class Bureaucrat
 
     int getGrade() const ;
     std::string getName() const;
-    void checkGrade( int grade )const;
 
-    void incGrade() ;//inverse grade 1 top
+    void incGrade() ;
     void decGrade() ;
+    void signForm(Form& fm);//loop .hpp
+    void checkGrade( int grade )const;
 
 
     private:

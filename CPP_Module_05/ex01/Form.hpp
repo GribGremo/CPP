@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Bureaucrat.hpp                                     :+:      :+:    :+:   */
+/*   Form.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/02 17:07:17 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/12/07 11:37:30 by sylabbe          ###   ########.fr       */
+/*   Created: 2024/12/07 12:37:38 by sylabbe           #+#    #+#             */
+/*   Updated: 2024/12/07 16:29:11 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUREAUCRAT_HPP
-# define BUREAUCRAT_HPP
-
+#ifndef FORM_HPP
+# define FORM_HPP
 # include <iostream>
-# include <string>
-# include <exception> 
+// # include "Bureaucrat.hpp"//
+class Bureaucrat;
 
-
-class Bureaucrat
-{
-
+class Form{
     public:
 
     class GradeTooHighException : public std::exception {
@@ -37,27 +33,30 @@ class Bureaucrat
         }
     };
 
-    Bureaucrat();
-    Bureaucrat(const Bureaucrat& src);
-    Bureaucrat(const int grade, const std::string& name);
-    ~Bureaucrat();
+    Form();
+    Form(const Form& src);
+    Form(std::string& name, int grade_to_sign, int grade_to_execute);
+    ~Form();
 
-    Bureaucrat& operator=(const Bureaucrat& src);
+    Form&       operator=(const Form& src);
 
-    int getGrade() const ;
-    std::string getName() const;
-    void checkGrade( int grade )const;
+    std::string getName();
+    bool        getSignedBool();
+    int         getGradeToSign();
+    int         getGradeToExecute();
 
-    void incGrade() ;//inverse grade 1 top
-    void decGrade() ;
-
+    void        beSigned(Bureaucrat& br);
+    void        checkGrade( int grade )const;
 
     private:
-    const std::string _name;
-    int _grade; 
+
+    const std::string   _name;
+    bool                _signed_bool;
+    const int           _grade_to_sign;
+    const int           _grade_to_execute;
 
 };
 
-std::ostream& operator<<(std::ostream& out, const Bureaucrat& src);
+std::ostream& operator<<(std::ostream& out, const Form& src);
 
 #endif
