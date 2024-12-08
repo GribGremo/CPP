@@ -6,7 +6,7 @@
 #    By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/02 17:07:22 by sylabbe           #+#    #+#              #
-#    Updated: 2024/12/08 10:37:24 by sylabbe          ###   ########.fr        #
+#    Updated: 2024/12/08 12:58:39 by sylabbe          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,10 @@ DEST_MDT_DIR = .
 # ls -1 *.c | sed -z 's/\n/ \\\n\t\t\t/g'
 SRC =	$(addprefix $(SRC_MDT_DIR)/, main.cpp \
 										Bureaucrat.cpp \
-										Form.cpp)
+										AForm.cpp \
+										ShrubberyCreationForm.cpp \
+										PresidentialPardonForm.cpp \
+										RobottomyRequestForm.cpp)
 
 
 OBJECTS = $(SRC:$(SRC_MDT_DIR)/%.cpp=$(DEST_MDT_DIR)/%.o)

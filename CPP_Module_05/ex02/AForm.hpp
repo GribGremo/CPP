@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.hpp                                           :+:      :+:    :+:   */
+/*   AForm.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/07 12:37:38 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/12/08 11:41:46 by sylabbe          ###   ########.fr       */
+/*   Created: 2024/12/08 11:55:48 by sylabbe           #+#    #+#             */
+/*   Updated: 2024/12/08 13:29:49 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FORM_HPP
-# define FORM_HPP
+#ifndef AFORM_HPP
+# define AFORM_HPP
+
 # include <iostream>
+# include <exception>
 
 class Bureaucrat;
 
-class Form{
+class AForm{
     public:
-
     class GradeTooHighException : public std::exception {
         public:
         virtual const char* what() const throw() {
@@ -33,12 +34,13 @@ class Form{
         }
     };
 
-    Form();
-    Form(const Form& src);
-    Form(std::string& name, int grade_to_sign, int grade_to_execute);
-    ~Form();
 
-    Form&       operator=(const Form& src);
+    AForm();
+    AForm(const AForm& src);
+    AForm(const std::string& name, int grade_to_sign, int grade_to_execute);//Const std::string& allow me to send "defaultname" in derived
+    virtual ~AForm();
+    
+    AForm& operator=(const AForm& src);
 
     std::string getName();
     bool        getSignedBool();
@@ -47,6 +49,7 @@ class Form{
 
     void        beSigned(Bureaucrat& br);
     void        checkGrade( int grade )const;
+    void        execute(Bureaucrat const & executor);
 
     private:
 
@@ -54,9 +57,7 @@ class Form{
     bool                _signed_bool;
     const int           _grade_to_sign;
     const int           _grade_to_execute;
-
 };
 
-std::ostream& operator<<(std::ostream& out, Form& src);
 
 #endif

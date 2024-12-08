@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 17:07:17 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/12/08 11:40:11 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/12/08 12:51:24 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <string>
 # include <exception> 
 
-class Form;
+class AForm;
 class Bureaucrat
 {
 
@@ -49,7 +49,8 @@ class Bureaucrat
 
     void incGrade() ;
     void decGrade() ;
-    void signForm(Form& fm);//loop .hpp
+    void signForm(AForm& fm);
+    void executeForm(AForm const & form);
     void checkGrade( int grade )const;
 
 

@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 17:07:13 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/12/07 15:16:04 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/12/08 11:30:40 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,21 +54,12 @@ std::ostream& operator<<(std::ostream& out, const Bureaucrat& src){
 
 //METHODS
 void Bureaucrat::incGrade(){
-    try{
-        checkGrade(this->_grade - 1);
-    }
-    catch(const Bureaucrat::GradeTooHighException& e){
-        throw ;
-    }
+    checkGrade(this->_grade - 1);
     this->_grade--;
 }
 void Bureaucrat::decGrade(){
-    try{
-        checkGrade(this->_grade + 1);
-    }
-    catch(const Bureaucrat::GradeTooLowException& e){
-        throw ;
-    }
+
+    checkGrade(this->_grade + 1);
     this->_grade++;
 }
 
