@@ -6,12 +6,12 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 17:07:13 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/12/08 11:37:15 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/12/09 14:42:41 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
-# include "Form.hpp"
+# include "AForm.hpp"
 
 #define GREEN "\033[32m"
 #define RESET "\033[0m"
@@ -70,7 +70,7 @@ void Bureaucrat::checkGrade( int grade )const{
         throw GradeTooLowException();
 }
 
-void Bureaucrat::signForm(Form& fm){
+void Bureaucrat::signForm(AForm& fm){
     if (fm.getSignedBool() == true)
     {
         std::cout << GREEN << "Form " << fm.getName() << " is already signed" << RESET << std::endl;
@@ -80,7 +80,7 @@ void Bureaucrat::signForm(Form& fm){
         fm.beSigned(*this);
         std::cout << GREEN << this->_name << " signed " << fm.getName() << RESET << std::endl;
     }
-    catch(Form::GradeTooLowException& e){
+    catch(AForm::GradeTooLowException& e){
         std::cout << GREEN << this->_name << " couldn't sign " << fm.getName() << " because " << e.what() << RESET << std::endl;
     }
 }

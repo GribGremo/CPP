@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 11:56:05 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/12/08 13:28:23 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/12/09 15:34:58 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,27 @@ std::ostream& operator<<(std::ostream& out, AForm& src){
 std::string AForm::getName(){
     return (this->_name);
 }
-bool        AForm::getSignedBool(){
+bool        AForm::getSignedBool() const{
     return (this->_signed_bool);
 }
-int   AForm::getGradeToSign(){
+int         AForm::getGradeToSign() const{
     return (this->_grade_to_sign);
 }
-int   AForm::getGradeToExecute(){
+int         AForm::getGradeToExecute() const{
     return (this->_grade_to_execute);
+}
+
+std::string AForm::setName(std::string& name){
+    const_cast<std::string&>(this->_name) = name;
+}
+bool        AForm::setSignedBool(bool b){
+    this->_signed_bool = b;
+}
+int         AForm::setGradeToSign(int gts){
+    const_cast<int&>(this->_grade_to_sign) = gts;
+}
+int         AForm::setGradeToExecute(int gte){
+    const_cast<int&>(this->_grade_to_execute) = gte;
 }
 
 //FUNCTIONS

@@ -20,12 +20,17 @@ class ShrubberyCreationForm : public AForm{
     public:
     ShrubberyCreationForm();
     ShrubberyCreationForm(const ShrubberyCreationForm& src);
-    ShrubberyCreationForm(const std::string& target, const std::string& name);
+    ShrubberyCreationForm(const std::string& target);
     ~ShrubberyCreationForm();
 
     ShrubberyCreationForm& operator=(const ShrubberyCreationForm& src);
-    void createShrubbery();
-    
+
+    std::string getTarget();
+
+    void execute(Bureaucrat const & executor) const;
+    void executeShrubbery() const;
+    void checkGranted(Bureaucrat const & executor) const;
+    void checkSigned(Bureaucrat const & executor) const;
 
     private:
 
@@ -33,5 +38,7 @@ class ShrubberyCreationForm : public AForm{
 
 
 };
+
+std::ostream& operator<<(std::ostream& out, ShrubberyCreationForm& src);
 
 #endif

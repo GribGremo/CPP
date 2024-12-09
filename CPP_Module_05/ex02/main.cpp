@@ -6,12 +6,15 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 17:07:20 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/12/08 11:17:01 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/12/09 17:59:04 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "PresidentialPardonForm.hpp"
+#include "AForm.hpp"
 
 #define RESET "\033[0m"
 #define RED "\033[31m"
@@ -20,21 +23,13 @@ Bureaucrat* createBureaucrat(int grade, std::string& name);
 void printBureaucrat(Bureaucrat* br, std::string& name);
 void changeGrade(Bureaucrat* br, std::string& name, void (Bureaucrat::*change)());
 
-Form* createForm(int grade_to_sign, int grade_to_execute, std::string& name);
-void printForm(Form* br, std::string& name);
+AForm* createForm(const std::string& target, const std::string& formType);
+void printForm(AForm* br, std::string& name);
 
 int main()
 {
     std::string name1 = "Bob";
     std::string name2 = "Steve";
-
-    std::string name3 = "A-75";
-    std::string name4 = "B-34";
-    std::string name5 = "C-22";
-    std::string name6 = "D-26";
-    std::string name7 = "E-89";
-    std::string name8 = "F-47";
-
 
     std::cout << "~~~~~~~~~~~BUREAUCRAT CREATION~~~~~~~~~~~" << std::endl;
 
@@ -44,35 +39,36 @@ int main()
 
     std::cout << "~~~~~~~~~~~FORM CREATION~~~~~~~~~~~" << std::endl;
 
-    Form* a75 = createForm(1, 1, name3);
-    Form* b34 = createForm(150, 150, name4);
-    Form* c22 = createForm(0, 1, name5);
-    Form* d26 = createForm(1, 0, name6);
-    Form* e89 = createForm(150, 151, name7);
-    Form* f47 = createForm(151, 150, name8);
+    AForm* shruberry = createForm(".", "Shrubbery");
+    AForm* presidentialpardon = createForm("","PresidentialPardon");
+    AForm* robotomy = createForm("", "Robotomy");
+
     std::cout << std::endl;
 
     std::cout << "~~~~~~~~~~~FORM PRINT~~~~~~~~~~~" << std::endl;
 
-    printForm(a75, name3);
-    printForm(b34, name4);
-    printForm(c22, name5);
-    printForm(d26, name6);
-    printForm(e89, name7);
-    printForm(f47, name8);
+    // printForm(shruberry);
+    // printForm(presidentialpardon);
+    // printForm(robotomy);
+
     std::cout << std::endl;
 
 
     std::cout << "~~~~~~~~~~~SIGN FORM~~~~~~~~~~~" << std::endl;
 
-    Steve->signForm(*a75);
-    Steve->signForm(*b34);
+    Steve->signForm(*shruberry);
+    Steve->signForm(*presidentialpardon);
+    Steve->signForm(*presidentialpardon);
 
-    printForm(a75, name3);
-    printForm(b34, name4);
 
-    Bob->signForm(*a75);
-    Bob->signForm(*b34);
+
+
+    // printForm(a75, name3);
+    // printForm(b34, name4);
+
+    Bob->signForm(*shruberry);
+    Bob->signForm(*presidentialpardon);
+    Bob->signForm(*presidentialpardon);
 
     printForm(a75, name3);
     printForm(b34, name4);
@@ -86,12 +82,10 @@ int main()
 
     std::cout << "~~~~~~~~~~~FORM DESTRUCTION~~~~~~~~~~~" << std::endl;
 
-    delete a75;
-    delete b34;
-    delete c22;//Not necessary again
-    delete d26;//
-    delete e89;//
-    delete f47;//
+    delete shruberry;
+    delete presidentialpardon;
+    delete robotomy;
+
     std::cout << std::endl;
 
 }
@@ -155,33 +149,42 @@ void changeGrade(Bureaucrat* br, std::string& name, void (Bureaucrat::*change)()
     return ;
 }
 
-Form* createForm(int grade_to_sign, int grade_to_execute, std::string& name)
+AForm* createForm(const std::string& target, const std::string& formType)
 {
-    Form* fm = NULL;
+    AForm* fm = NULL;
+    if (formType != "Shrubbery" && formType != "Robotomy" && formType != "PresidentialPardon")
+    {
+        std::cout << "Invalid form type, none created" << std::endl;
+    }
     try
     {
-        fm = new Form(name, grade_to_sign, grade_to_execute);
+        if (formType == "Shrubbery")
+            fm = new ShrubberyCreationForm(target);
+        else if (formType == "Robotomy")
+            fm = new RobotomyRequestForm(target);
+        else if (formType == "PresidentialPardon")
+            fm = new PresidentialPardonForm(target);
         return fm;
     }
-    catch (Form::GradeTooLowException& e)
+    catch (AForm::GradeTooLowException& e)
     {
-        std::cerr << RED << "Cannot build form \"" << name << "\": " << e.what() << RESET << std::endl;
+        std::cerr << RED << "Cannot build form \"" << formType << "\": " << e.what() << RESET << std::endl;
     }
-    catch (Form::GradeTooHighException& e)
+    catch (AForm::GradeTooHighException& e)
     {
-        std::cerr << RED << "Cannot build form \"" << name << "\": " << e.what() << RESET << std::endl;
+        std::cerr << RED << "Cannot build form \"" << formType << "\": " << e.what() << RESET << std::endl;
     }
     catch(std::exception& e)
     {
-        std::cerr << RED << "Cannot build form \"" << name << "\": " << e.what() << RESET << std::endl;
+        std::cerr << RED << "Cannot build form \"" << formType << "\": " << e.what() << RESET << std::endl;
     }
     return fm;
 }
 
-void printForm(Form* br, std::string& name)
-{
-    if(br != NULL)
-        std::cout << *br << std::endl;
-    else
-        std::cout << RED << name << " is not instantiated" << RESET << std::endl;
-}
+// void printForm(AForm* br, std::string& name)
+// {
+//     if(br != NULL)
+//         std::cout << *br << std::endl;
+//     else
+//         std::cout << RED << name << " is not instantiated" << RESET << std::endl;
+// }
