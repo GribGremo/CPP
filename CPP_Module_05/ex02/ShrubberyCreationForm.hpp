@@ -30,7 +30,8 @@ class ShrubberyCreationForm : public AForm{
     void execute(Bureaucrat const & executor) const;
     void executeShrubbery() const;
     void checkGranted(Bureaucrat const & executor) const;
-    void checkSigned(Bureaucrat const & executor) const;
+    void checkSigned() const;
+    void pform();
 
     private:
 
@@ -39,6 +40,5 @@ class ShrubberyCreationForm : public AForm{
 
 };
 
-std::ostream& operator<<(std::ostream& out, ShrubberyCreationForm& src);
 
 #endif

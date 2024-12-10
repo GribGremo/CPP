@@ -6,11 +6,12 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 17:07:20 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/12/10 13:53:06 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/12/10 15:55:13 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
+#include "Intern.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include "PresidentialPardonForm.hpp"
@@ -28,23 +29,20 @@ void printForm(AForm* br, std::string& name);
 
 int main()
 {
-    std::string name1 = "Bob";
-    std::string name2 = "Steve";
-
     std::cout << "~~~~~~~~~~~BUREAUCRAT CREATION~~~~~~~~~~~" << std::endl;
 
-    Bureaucrat* drunge = new Bureaucrat();
-    Bureaucrat* sign_s = createBureaucrat(140, "Bob");
-    Bureaucrat* sign_r = createBureaucrat(50, "Steve");
-    Bureaucrat* sign_p = createBureaucrat(15, "Thomas");
     Bureaucrat* boss = createBureaucrat(1, "Gaetan");
+    std::cout << std::endl;
+
+    std::cout << "~~~~~~~~~~~INTERN CREATION~~~~~~~~~~~" << std::endl;
+    Intern drunge;
     std::cout << std::endl;
 
     std::cout << "~~~~~~~~~~~FORM CREATION~~~~~~~~~~~" << std::endl;
 
-    AForm* shruberry = createForm("forest", "Shrubbery");
-    AForm* robotomy = createForm("Corrector", "Robotomy");
-    AForm* presidentialpardon = createForm("Doc","PresidentialPardon");
+    AForm* shruberry = drunge.makeForm("ShrubberyCreationForm", "forest");
+    AForm* robotomy = drunge.makeForm("RobotomyRequestForm", "Corrector");
+    AForm* presidentialpardon = drunge.makeForm("PresidentialPardonForm", "forest");
     std::cout << std::endl;
 
     std::cout << "~~~~~~~~~~~FORM PRINT~~~~~~~~~~~" << std::endl;
@@ -62,41 +60,12 @@ int main()
     boss->executeForm(*presidentialpardon);
     std::cout << std::endl;
 
-
     std::cout << "~~~~~~~~~~~SIGN FORM~~~~~~~~~~~" << std::endl;
 
-    std::cout << "Grade 150:" << std::endl;
-    drunge->signForm(*shruberry);
-    drunge->signForm(*robotomy);
-    drunge->signForm(*presidentialpardon);
-    std::cout << std::endl;
-
-    std::cout << "~~~~~~~~~~~FORM PRINT~~~~~~~~~~~" << std::endl;
-
-    shruberry->pform();
-    robotomy->pform();
-    presidentialpardon->pform();
-    std::cout << std::endl;
-
-    std::cout << "~~~~~~~~~~~SIGN FORM~~~~~~~~~~~" << std::endl;
-
-    std::cout << "Grade 140:" << std::endl;
-    sign_s->signForm(*shruberry);
-    sign_s->signForm(*robotomy);
-    sign_s->signForm(*presidentialpardon);
-    std::cout << std::endl;
-
-    std::cout << "Grade 50:" << std::endl;
-    sign_r->signForm(*shruberry);
-    sign_r->signForm(*robotomy);
-    sign_r->signForm(*presidentialpardon);
-
-    std::cout << std::endl;
-
-    std::cout << "Grade 15:" << std::endl;
-    sign_p->signForm(*shruberry);
-    sign_p->signForm(*robotomy);
-    sign_p->signForm(*presidentialpardon);
+    std::cout << "Grade 1:" << std::endl;
+    boss->signForm(*shruberry);
+    boss->signForm(*robotomy);
+    boss->signForm(*presidentialpardon);
     std::cout << std::endl;
 
     std::cout << "~~~~~~~~~~~FORM PRINT~~~~~~~~~~~" << std::endl;
@@ -107,23 +76,6 @@ int main()
     std::cout << std::endl;
 
     std::cout << "~~~~~~~~~~~EXECUTE FORM~~~~~~~~~~~" << std::endl;
-    std::cout << "Grade 140:" << std::endl;
-    sign_s->executeForm(*shruberry);
-    sign_r->executeForm(*shruberry);
-    sign_p->executeForm(*shruberry);
-    std::cout << std::endl;
-
-    std::cout << "Grade 50:" << std::endl;
-    sign_s->executeForm(*robotomy);
-    sign_r->executeForm(*robotomy);
-    sign_p->executeForm(*robotomy);
-    std::cout << std::endl;
-
-    std::cout << "Grade 15:" << std::endl;
-    sign_s->executeForm(*presidentialpardon);
-    sign_r->executeForm(*presidentialpardon);
-    sign_p->executeForm(*presidentialpardon);
-    std::cout << std::endl;
 
     std::cout << "Grade 1:" << std::endl;
     boss->executeForm(*shruberry);
@@ -134,12 +86,7 @@ int main()
 
     std::cout << "~~~~~~~~~~~BUREAUCRAT DESTRUCTION~~~~~~~~~~~" << std::endl;
 
-    delete drunge;
-    delete sign_s;
-    delete sign_r;
-    delete sign_p;
     delete boss;
-
 
     std::cout << std::endl;
 

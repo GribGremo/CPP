@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 11:57:32 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/12/10 13:12:35 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/12/10 16:17:40 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,10 @@ RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& src): AForm(
     srand(static_cast<unsigned int>(time(NULL)));
 }
 RobotomyRequestForm::RobotomyRequestForm(const std::string& target): AForm("Robotomy_request_form", 72, 45), _target(target){
+    std::cout << BLUE << "RobotomyRequestForm custom constructor called" << RESET << std::endl;
+    srand(static_cast<unsigned int>(time(NULL)));
+}
+RobotomyRequestForm::RobotomyRequestForm(const std::string& formname, const std::string& target): AForm(formname, 72, 45), _target(target){
     std::cout << BLUE << "RobotomyRequestForm custom constructor called" << RESET << std::endl;
     srand(static_cast<unsigned int>(time(NULL)));
 }

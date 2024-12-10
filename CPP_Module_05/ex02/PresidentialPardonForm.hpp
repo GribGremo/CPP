@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 11:57:30 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/12/09 17:25:03 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/12/10 13:13:23 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,12 @@ class PresidentialPardonForm : public AForm{
     void execute(Bureaucrat const & executor) const;
     void executePresidentialPardon() const;
     void checkGranted(Bureaucrat const & executor) const;
-    void checkSigned(Bureaucrat const & executor) const;
+    void checkSigned() const;
+    void pform();
 
     private:
 
     std::string _target;
-
-
 };
-
-std::ostream& operator<<(std::ostream& out, PresidentialPardonForm& src);
 
 #endif

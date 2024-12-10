@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 11:57:36 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/12/10 11:03:52 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/12/10 16:17:54 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ class RobotomyRequestForm : public AForm{
     RobotomyRequestForm();
     RobotomyRequestForm(const RobotomyRequestForm& src);
     RobotomyRequestForm(const std::string& target);
+    RobotomyRequestForm(const std::string& formname, const std::string& target);
     ~RobotomyRequestForm();
 
     RobotomyRequestForm& operator=(const RobotomyRequestForm& src);

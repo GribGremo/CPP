@@ -6,7 +6,7 @@
 #    By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/02 17:07:22 by sylabbe           #+#    #+#              #
-#    Updated: 2024/12/10 11:03:36 by sylabbe          ###   ########.fr        #
+#    Updated: 2024/12/10 14:54:18 by sylabbe          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ SRC =	$(addprefix $(SRC_MDT_DIR)/, main.cpp \
 										AForm.cpp \
 										ShrubberyCreationForm.cpp \
 										PresidentialPardonForm.cpp \
-										RobotomyRequestForm.cpp)
+										RobotomyRequestForm.cpp \
+										Intern.cpp)
 
 
 OBJECTS = $(SRC:$(SRC_MDT_DIR)/%.cpp=$(DEST_MDT_DIR)/%.o)
