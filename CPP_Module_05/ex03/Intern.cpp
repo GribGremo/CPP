@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 14:27:01 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/12/10 16:19:59 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/12/12 17:09:13 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,31 @@ Intern& Intern::operator=(const Intern& src){
 }
 
 //METHODS
+bool checkFormname(std::string formname, const std::string& namemodel)
+{
+    std::string::const_iterator itf = formname.begin();
+    for(std::string::const_iterator itn = namemodel.begin(); itn != namemodel.end(); itn++)
+    {
+        while(*itf == ' ')
+            *itf++;
+        std::cout << "itn:" << *itn <<std::endl;
+        if((itf != formname.end() && *itf != *itn && *itf != std::toupper(*itn)))
+            return (false);
+        itf++;
+    }
+    return (true);
+}
 AForm* Intern::makeForm(const std::string& formname, const std::string& target){
+
     int i = 0;
     AForm* form = NULL;
     for (i = 0; i < 3; i++)
     {
-        if (formname == array[i])
+        if (checkFormname(formname,array[i]))
             break;
+        // checkFormname(formname,array[i]);
+        // if (formname == array[i])
+        //     break;
     }
     switch (i)
     {
@@ -68,3 +86,4 @@ AForm* Intern::makeForm(const std::string& formname, const std::string& target){
     }
     return (form);
 }
+

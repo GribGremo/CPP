@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 12:37:36 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/12/08 11:42:10 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/12/12 10:41:09 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ Form::~Form(){
 
 Form&       Form::operator=(const Form& src){
     std::cout << YELLOW << "Form assignment operator called" << RESET << std::endl;
-    const_cast<std::string&>(this->_name) = src._name;//Not sure if we are supposed to force the change of those const members
+    const_cast<std::string&>(this->_name) = src._name;//Again chose to change const attributes anyway
     this->_signed_bool = src._signed_bool;
     const_cast<int&>(this->_grade_to_sign) = src._grade_to_sign;//
     const_cast<int&>(this->_grade_to_execute) = src._grade_to_execute;//

@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 17:07:20 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/12/10 15:55:13 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/12/12 17:08:34 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,72 +31,75 @@ int main()
 {
     std::cout << "~~~~~~~~~~~BUREAUCRAT CREATION~~~~~~~~~~~" << std::endl;
 
-    Bureaucrat* boss = createBureaucrat(1, "Gaetan");
+    // Bureaucrat* boss = createBureaucrat(1, "Gaetan");
     std::cout << std::endl;
 
     std::cout << "~~~~~~~~~~~INTERN CREATION~~~~~~~~~~~" << std::endl;
     Intern drunge;
     std::cout << std::endl;
 
-    std::cout << "~~~~~~~~~~~FORM CREATION~~~~~~~~~~~" << std::endl;
 
-    AForm* shruberry = drunge.makeForm("ShrubberyCreationForm", "forest");
-    AForm* robotomy = drunge.makeForm("RobotomyRequestForm", "Corrector");
-    AForm* presidentialpardon = drunge.makeForm("PresidentialPardonForm", "forest");
-    std::cout << std::endl;
+    AForm* test = drunge.makeForm("robotomy   request", "osef");
+    test->pform();
+    // std::cout << "~~~~~~~~~~~FORM CREATION~~~~~~~~~~~" << std::endl;
 
-    std::cout << "~~~~~~~~~~~FORM PRINT~~~~~~~~~~~" << std::endl;
+    // AForm* shruberry = drunge.makeForm("ShrubberyCreationForm", "forest");
+    // AForm* robotomy = drunge.makeForm("robotomy   request", "Corrector");
+    // AForm* presidentialpardon = drunge.makeForm("PresidentialPardonForm", "forest");
+    // std::cout << std::endl;
 
-    shruberry->pform();
-    robotomy->pform();
-    presidentialpardon->pform();
-    std::cout << std::endl;
+    // std::cout << "~~~~~~~~~~~FORM PRINT~~~~~~~~~~~" << std::endl;
 
-    std::cout << "~~~~~~~~~~~EXECUTE FORM~~~~~~~~~~~" << std::endl;
+    // shruberry->pform();
+    // robotomy->pform();
+    // presidentialpardon->pform();
+    // std::cout << std::endl;
 
-    std::cout << "Grade 1: Unsigned form:" << std::endl;
-    boss->executeForm(*shruberry);
-    boss->executeForm(*robotomy);
-    boss->executeForm(*presidentialpardon);
-    std::cout << std::endl;
+    // std::cout << "~~~~~~~~~~~EXECUTE FORM~~~~~~~~~~~" << std::endl;
 
-    std::cout << "~~~~~~~~~~~SIGN FORM~~~~~~~~~~~" << std::endl;
+    // std::cout << "Grade 1: Unsigned form:" << std::endl;
+    // boss->executeForm(*shruberry);
+    // boss->executeForm(*robotomy);
+    // boss->executeForm(*presidentialpardon);
+    // std::cout << std::endl;
 
-    std::cout << "Grade 1:" << std::endl;
-    boss->signForm(*shruberry);
-    boss->signForm(*robotomy);
-    boss->signForm(*presidentialpardon);
-    std::cout << std::endl;
+    // std::cout << "~~~~~~~~~~~SIGN FORM~~~~~~~~~~~" << std::endl;
 
-    std::cout << "~~~~~~~~~~~FORM PRINT~~~~~~~~~~~" << std::endl;
+    // std::cout << "Grade 1:" << std::endl;
+    // boss->signForm(*shruberry);
+    // boss->signForm(*robotomy);
+    // boss->signForm(*presidentialpardon);
+    // std::cout << std::endl;
 
-    shruberry->pform();
-    presidentialpardon->pform();
-    robotomy->pform();
-    std::cout << std::endl;
+    // std::cout << "~~~~~~~~~~~FORM PRINT~~~~~~~~~~~" << std::endl;
 
-    std::cout << "~~~~~~~~~~~EXECUTE FORM~~~~~~~~~~~" << std::endl;
+    // shruberry->pform();
+    // presidentialpardon->pform();
+    // robotomy->pform();
+    // std::cout << std::endl;
 
-    std::cout << "Grade 1:" << std::endl;
-    boss->executeForm(*shruberry);
-    boss->executeForm(*presidentialpardon);
-    for (int i = 0; i < 10; i++)
-        boss->executeForm(*robotomy);
-    std::cout << std::endl;
+    // std::cout << "~~~~~~~~~~~EXECUTE FORM~~~~~~~~~~~" << std::endl;
 
-    std::cout << "~~~~~~~~~~~BUREAUCRAT DESTRUCTION~~~~~~~~~~~" << std::endl;
+    // std::cout << "Grade 1:" << std::endl;
+    // boss->executeForm(*shruberry);
+    // boss->executeForm(*presidentialpardon);
+    // for (int i = 0; i < 10; i++)
+    //     boss->executeForm(*robotomy);
+    // std::cout << std::endl;
 
-    delete boss;
+    // std::cout << "~~~~~~~~~~~BUREAUCRAT DESTRUCTION~~~~~~~~~~~" << std::endl;
 
-    std::cout << std::endl;
+    // delete boss;
 
-    std::cout << "~~~~~~~~~~~FORM DESTRUCTION~~~~~~~~~~~" << std::endl;
+    // std::cout << std::endl;
 
-    delete shruberry;
-    delete presidentialpardon;
-    delete robotomy;
+    // std::cout << "~~~~~~~~~~~FORM DESTRUCTION~~~~~~~~~~~" << std::endl;
 
-    std::cout << std::endl;
+    // delete shruberry;
+    // delete presidentialpardon;
+    // delete robotomy;
+
+    // std::cout << std::endl;
 
 }
 

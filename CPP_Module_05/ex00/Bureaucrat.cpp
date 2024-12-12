@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 17:07:13 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/12/08 11:30:40 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/12/12 10:21:46 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ Bureaucrat::~Bureaucrat(){
 //OPERATORS
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat& src){
     std::cout << GREEN << "Bureaucrat assigment operator called" << RESET << std::endl;
-    (std::string)this->_name = src._name;//
+    const_cast<std::string&>(this->_name) = src._name;//Here i chose to modify it even if const, nothing specified in subject but canonical form must-have
     this->_grade = src._grade;
     return (*this);
 }

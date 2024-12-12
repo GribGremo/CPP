@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 17:07:20 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/12/08 11:17:01 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/12/12 10:43:59 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void printBureaucrat(Bureaucrat* br, std::string& name);
 void changeGrade(Bureaucrat* br, std::string& name, void (Bureaucrat::*change)());
 
 Form* createForm(int grade_to_sign, int grade_to_execute, std::string& name);
-void printForm(Form* br, std::string& name);
+void printForm(Form* br, const std::string& name);
 
 int main()
 {
@@ -76,6 +76,14 @@ int main()
 
     printForm(a75, name3);
     printForm(b34, name4);
+    std::cout << std::endl;
+
+    std::cout << "~~~~~~~~~~~FORM COPY~~~~~~~~~~~" << std::endl;
+
+    *a75 = *b34;
+    printForm(a75, name3);
+    Form test(*a75);
+    printForm(&test, "test");
     std::cout << std::endl;
 
     std::cout << "~~~~~~~~~~~BUREAUCRAT DESTRUCTION~~~~~~~~~~~" << std::endl;
@@ -178,7 +186,7 @@ Form* createForm(int grade_to_sign, int grade_to_execute, std::string& name)
     return fm;
 }
 
-void printForm(Form* br, std::string& name)
+void printForm(Form* br, const std::string& name)
 {
     if(br != NULL)
         std::cout << *br << std::endl;

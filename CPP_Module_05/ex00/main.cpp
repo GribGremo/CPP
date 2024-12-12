@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 17:07:20 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/12/07 12:36:09 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/12/12 10:25:10 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #define RED "\033[31m"
 
 Bureaucrat* createBureaucrat(int grade, std::string& name);
-void printBureaucrat(Bureaucrat* br, std::string& name);
+void printBureaucrat(Bureaucrat* br, const std::string& name);
 void changeGrade(Bureaucrat* br, std::string& name, void (Bureaucrat::*change)());
 
 
@@ -71,6 +71,14 @@ int main()
     printBureaucrat(Steve, name2);
     std::cout << std::endl;
 
+    std::cout << "~~~~~~~~~~~BUREAUCRAT COPY TEST~~~~~~~~~~~" << std::endl;
+
+    *Bob=*Steve;
+    printBureaucrat(Bob, name1);
+    Bureaucrat test(*Bob);
+    printBureaucrat(&test, "test");
+    std::cout << std::endl;
+
     std::cout << "~~~~~~~~~~~BUREAUCRAT DESTRUCTION~~~~~~~~~~~" << std::endl;
 
     delete Bob;
@@ -105,7 +113,7 @@ Bureaucrat* createBureaucrat(int grade, std::string& name)
     return br;
 }
 
-void printBureaucrat(Bureaucrat* br, std::string& name)
+void printBureaucrat(Bureaucrat* br,const std::string& name)
 {
     if(br != NULL)
         std::cout << *br << std::endl;
@@ -140,25 +148,3 @@ void changeGrade(Bureaucrat* br, std::string& name, void (Bureaucrat::*change)()
     }
     return ;
 }
-
-/*
-C++17
-
-Ce qu'il faut savoir
-std::get :
-
-L'appel à std::get<Type>(variant) lève une exception de type std::bad_variant_access si le type demandé n'est pas celui actuellement contenu dans le std::variant.
-std::holds_alternative<Type> (préférable !) :
-
-Une méthode plus propre pour tester le type avant d'utiliser std::get est d'utiliser std::holds_alternative<Type>(variant).
-Cela retourne un booléen, évitant les exceptions.
-
- if (std::holds_alternative<std::string>(myVariant)) {
-        std::cout << "It's a std::string: " << std::get<std::string>(myVariant) << std::endl;
-    } else if (std::holds_alternative<int>(myVariant)) {
-        std::cout << "It's an int: " << std::get<int>(myVariant) << std::endl;
-    } else if (std::holds_alternative<char*>(myVariant)) {
-        std::cout << "It's a char*: " << std::get<char*>(myVariant) << std::endl;
-    } else {
-        std::cout << "Unknown type!" << std::endl;
-*/

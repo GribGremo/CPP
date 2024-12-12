@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 11:57:27 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/12/10 13:14:09 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/12/12 11:20:01 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@
 
 //CONSTRUCTORS/DESTRUCTOR
 
-PresidentialPardonForm::PresidentialPardonForm(): AForm("Presidential_pardon_form", 25, 5), _target("defaultTarget") {
+PresidentialPardonForm::PresidentialPardonForm(): AForm("PresidentialPardonForm", 25, 5), _target("defaultTarget") {
     std::cout << CYAN << "PresidentialPardonForm default constructor called" << RESET << std::endl;
 }
 PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& src): AForm(src), _target(src._target){
     std::cout << CYAN << "PresidentialPardonForm copy constructor called" << RESET << std::endl;
 }
-PresidentialPardonForm::PresidentialPardonForm(const std::string& target): AForm("Presidential_pardon_form", 25, 5), _target(target){
+PresidentialPardonForm::PresidentialPardonForm(const std::string& target): AForm("PresidentialPardonForm", 25, 5), _target(target){
     std::cout << CYAN << "PresidentialPardonForm custom constructor called" << RESET << std::endl;
 }
 PresidentialPardonForm::~PresidentialPardonForm(){

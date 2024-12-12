@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 11:55:48 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/12/10 16:20:13 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/12/12 11:18:25 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ class AForm{
 
     AForm();
     AForm(const AForm& src);
-    AForm(const std::string& name, int grade_to_sign, int grade_to_execute);//Const std::string& allow me to send "defaultname" in derived even if seeking for a reference
+    AForm(const std::string& name, int grade_to_sign, int grade_to_execute);
     virtual             ~AForm();
     
     AForm&              operator=(const AForm& src);

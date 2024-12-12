@@ -25,13 +25,13 @@
 
 //CONSTRUCTORS/DESTRUCTOR
 
-ShrubberyCreationForm::ShrubberyCreationForm(): AForm("Shrubbery_creation_form", 145, 137), _target("defaultTarget") {
+ShrubberyCreationForm::ShrubberyCreationForm(): AForm("ShrubberyCreationForm", 145, 137), _target("defaultTarget") {
     std::cout << MAGENTA << "ShrubberyCreationForm default constructor called" << RESET << std::endl;
 }
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& src): AForm(src), _target(src._target){
     std::cout << MAGENTA << "ShrubberyCreationForm copy constructor called" << RESET << std::endl;
 }
-ShrubberyCreationForm::ShrubberyCreationForm(const std::string& target): AForm("Shrubbery_creation_form", 145, 137), _target(target){
+ShrubberyCreationForm::ShrubberyCreationForm(const std::string& target): AForm("ShrubberyCreationForm", 145, 137), _target(target){
     std::cout << MAGENTA << "ShrubberyCreationForm custom constructor called" << RESET << std::endl;
 }
 ShrubberyCreationForm::~ShrubberyCreationForm(){

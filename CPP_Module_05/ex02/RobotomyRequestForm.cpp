@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 11:57:32 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/12/10 13:12:35 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/12/12 11:20:42 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 
 //CONSTRUCTORS/DESTRUCTOR
 
-RobotomyRequestForm::RobotomyRequestForm(): AForm("Robotomy_request_form", 72, 45), _target("defaultTarget") {
+RobotomyRequestForm::RobotomyRequestForm(): AForm("RobotomyRequestForm", 72, 45), _target("defaultTarget") {
     std::cout << BLUE << "RobotomyRequestForm default constructor called" << RESET << std::endl;
     srand(static_cast<unsigned int>(time(NULL))); 
     /* Here we initialise the seed used by rand for this object, to avoid multiple call to time that returns the
@@ -35,7 +35,7 @@ RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& src): AForm(
     std::cout << BLUE << "RobotomyRequestForm copy constructor called" << RESET << std::endl;
     srand(static_cast<unsigned int>(time(NULL)));
 }
-RobotomyRequestForm::RobotomyRequestForm(const std::string& target): AForm("Robotomy_request_form", 72, 45), _target(target){
+RobotomyRequestForm::RobotomyRequestForm(const std::string& target): AForm("RobotomyRequestForm", 72, 45), _target(target){
     std::cout << BLUE << "RobotomyRequestForm custom constructor called" << RESET << std::endl;
     srand(static_cast<unsigned int>(time(NULL)));
 }

@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 17:07:17 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/12/07 11:37:30 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/12/12 10:09:43 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ class Bureaucrat
     std::string getName() const;
     void checkGrade( int grade )const;
 
-    void incGrade() ;//inverse grade 1 top
-    void decGrade() ;
+    void incGrade();
+    void decGrade();
 
 
     private:

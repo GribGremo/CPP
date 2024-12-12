@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 11:56:05 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/12/10 16:21:50 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/12/12 10:46:49 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ AForm::~AForm(){
 
 AForm&       AForm::operator=(const AForm& src){
     std::cout << YELLOW << "AForm assignment operator called" << RESET << std::endl;
-    const_cast<std::string&>(this->_name) = src._name;//Not sure if we are supposed to force the change of those const members
+    const_cast<std::string&>(this->_name) = src._name;//
     this->_signed_bool = src._signed_bool;
     const_cast<int&>(this->_grade_to_sign) = src._grade_to_sign;//
     const_cast<int&>(this->_grade_to_execute) = src._grade_to_execute;//
