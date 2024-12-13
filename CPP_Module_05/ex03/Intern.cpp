@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 14:27:01 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/12/12 17:09:13 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/12/13 14:08:27 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 //CONSTRUCTORS/DESTRUCTOR
 Intern::Intern(){
     std::cout << BRIGHT_ORANGE << "Intern default constructor called" << RESET << std::endl;
-    array[0]= "ShrubberyCreationForm";
-    array[1]= "RobotomyRequestForm";
-    array[2]= "PresidentialPardonForm";
+    array[0]= "shrubbery creation";
+    array[1]= "robotomy request";
+    array[2]= "presidential pardon";
 }
 Intern::Intern(const Intern& src){
     std::cout << BRIGHT_ORANGE << "Intern copy constructor called" << RESET << std::endl;
@@ -40,31 +40,15 @@ Intern& Intern::operator=(const Intern& src){
 }
 
 //METHODS
-bool checkFormname(std::string formname, const std::string& namemodel)
-{
-    std::string::const_iterator itf = formname.begin();
-    for(std::string::const_iterator itn = namemodel.begin(); itn != namemodel.end(); itn++)
-    {
-        while(*itf == ' ')
-            *itf++;
-        std::cout << "itn:" << *itn <<std::endl;
-        if((itf != formname.end() && *itf != *itn && *itf != std::toupper(*itn)))
-            return (false);
-        itf++;
-    }
-    return (true);
-}
+
 AForm* Intern::makeForm(const std::string& formname, const std::string& target){
 
     int i = 0;
     AForm* form = NULL;
     for (i = 0; i < 3; i++)
     {
-        if (checkFormname(formname,array[i]))
+        if (formname == Intern::array[i])
             break;
-        // checkFormname(formname,array[i]);
-        // if (formname == array[i])
-        //     break;
     }
     switch (i)
     {
