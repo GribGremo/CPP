@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 16:31:34 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/12/10 16:40:46 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/12/14 10:11:47 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 class ScalarConverter
 {
     public:
-
 
     static void convert(const std::string& str);
 
