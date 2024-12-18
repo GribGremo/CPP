@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 16:31:37 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/12/14 14:52:27 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/12/18 13:32:50 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <cmath>
 #include <algorithm>
 #include <string>
+#include <climits>
 
 
 
@@ -70,33 +71,71 @@ bool strIsPrintable(const std::string& str)
 //     return (0.0f);
 // }
 
+bool isFormatInt(const std::string& str)
+{
+    size_t i = 0;
+    if (str.size() != i && (str[i] == '+' || str[i] == '-'))
+        i++;
+    if (i == str.size())
+        return (false);
+    while(i != str.size())
+    {
+        if (!isdigit(str[i]))
+            return (false);
+        i++;
+    }
+    char* end = NULL;
+    const char* strc = str.c_str();
+    int n = strtol(strc, &end, 10);
+    if (n < INT_MIN || n > INT_MAX)
+        return (false);
+    return (true); 
+}
+
 bool isFormatDouble(const std::string& str)
 {
-    if (std::count(str.begin(),str.end(), '.') != 1)
+    size_t i = 0;
+    if(std::count(str.begin(), str.end(),'.') != 1)// Check number of '.' in str
         return (false);
-    if (str.find_first_not_of("0123456789.") != std::string::npos)
+    if (str.size() != i && (str[i] == '+' || str[i] == '-'))//Skip sign
+        i++;
+    if (i == str.size() || str[i] == '.' || str.find_first_of(".") == str.size())// Ckeck '.' emplacement
         return (false);
-    if (*str.begin() == '.' || *(str.end() - 1) == '.')
+    while(i != str.size())
+    {
+        if (!isdigit(str[i]) && str[i] != '.')
+            return (false);
+        i++;
+    }
+    char* end = NULL;
+    const char* strc = str.c_str();
+    int n = strtol(strc, &end, 10);
+    if (n < INT_MIN || n > INT_MAX)
         return (false);
     return (true); 
 }
 
 bool isFormatFloat(const std::string& str)
 {
-    if (std::count(str.begin(),str.end(), '.') != 1 || std::count(str.begin(),str.end(), 'f') != 1)
+    size_t i = 0;
+    if(std::count(str.begin(), str.end(),'.') != 1 || std::count(str.begin(), str.end(),'f') != 1)// Check number of '.' in str
         return (false);
-    if (str.find_first_not_of("0123456789.f") != std::string::npos)
+    if (str.size() != i && (str[i] == '+' || str[i] == '-'))//Skip sign
+        i++;
+    if (i == str.size() || str[i] == '.' || str.find_first_of(".") == str.size() || str.find_first_of("f") != str.size())// Ckeck '.' and 'f' emplacement
         return (false);
-    if (*(str.end() - 1) != 'f')
-        return (false);
-    if (*str.begin() == '.' || *(str.end() - 2) == '.')
-        return (false);
+    while(i != str.size())
+    {
+        if (!isdigit(str[i]) && str[i] != '.' && str[i] != 'f')
+            return (false);
+        i++;
+    }
     return (true); 
 }
 
 const std::string findType(const std::string& str)
 {
-    if (str.find_first_not_of("0123456789") == std::string::npos)//Only digit case
+    if (isFormatInt(str))//Only digit case
         return ("int");
     if (isFormatDouble(str) || str == "nan" || str == "-inf" || str == "+inf")//Only digit + '.' not at start not at end +  pseudo literals double
         return ("double");
@@ -106,6 +145,36 @@ const std::string findType(const std::string& str)
         return ("char");
     return ("Invalid format");
 } 
+
+char    stringToChar(const std::string& str){
+    char    c;
+
+    c = *str.begin();
+    return (c);
+}
+
+int     stringToInt(const std::string& str){
+    (void)str;
+    int n = 0;
+
+    char* end = NULL;
+    const char* strc = str.c_str();
+    n = strtol(strc, &end, 10);
+    return (n);
+}
+
+double  stringToDouble(const std::string& str){
+    (void) str;
+    double d = 0.0f;
+    // const char* strc = str.c_str();
+    return (d);
+}
+
+float   stringToFloat(const std::string& str){
+    (void) str;
+    float f = 0.0;
+    return (f);
+}
 
 void ScalarConverter::convert(const std::string& str){
     std::string type;
@@ -118,17 +187,30 @@ void ScalarConverter::convert(const std::string& str){
     {
         type = findType(str);
         if (type == "char")
+        {
             std::cout << type << std::endl;
             // displayFromChar(stringToChar(str));
+            std::cout << stringToChar(str) << std::endl;
+        }
         else if (type == "int")
+        {
             std::cout << type << std::endl;
             // displayFromInt(stringToInt(str));
+            std::cout << stringToInt(str) << std::endl;
+
+        }
         else if (type == "float")
+        {
             std::cout << type << std::endl;
             // displayFromFloat(stringToFloat(str));
+            std::cout << stringToFloat(str) << std::endl;
+        }
         else if (type == "double")
+        {
             std::cout << type << std::endl;
             // displayFromDouble(stringToDouble(str));
+            std::cout << stringToDouble(str) << std::endl;
+        }
         else
             std::cout << "Impossible conversion: Invalid format" << std::endl;
     }
@@ -136,31 +218,7 @@ void ScalarConverter::convert(const std::string& str){
         std::cout << "Impossible conversion: Not printable" << std::endl;
 }
 
-char    stringToChar(const std::string& str){
-    char    c;
 
-    c = *str.begin();
-    return (c);
-}
-
-int     stringToInt(const std::string& str){
-    int n;
-
-    char* end = NULL;
-    const char* strc = str.c_str();
-    n = strtol(strc, &end, 10);
-    return (n);
-}
-
-double  stringToDouble(const std::string& str){
-    double d;
-
-    d = 
-}
-
-float   stringToFloat(const std::string& str){
-
-}
 
 
 // int charToInt(char c){

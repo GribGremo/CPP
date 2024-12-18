@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 16:29:51 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/12/14 14:34:17 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/12/18 09:34:46 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int main(int argc, char **argv)
  int maintest()
  {
     std::string t1 = "a";
-    std::string t2 = "0";
+    std::string t2 = "5";
     std::string t3 = "0.0";
     std::string t4 = "0.0f";
 
@@ -52,35 +52,35 @@ int main(int argc, char **argv)
     std::string t14 = ".00";
     std::string t15 = "0..0";
 
-    std::cout << t1 << std::endl;
+    std::cout << "Base: " << t1 << std::endl;
     ScalarConverter::convert(t1);
-    std::cout << t2 << std::endl;
+    std::cout << "Base: " << t2 << std::endl;
     ScalarConverter::convert(t2);
-    std::cout << t3 << std::endl;
+    std::cout << "Base: " << t3 << std::endl;
     ScalarConverter::convert(t3);
-    std::cout << t4 << std::endl;
+    std::cout << "Base: " << t4 << std::endl;
     ScalarConverter::convert(t4);
-    std::cout << t5 << std::endl;
+    std::cout << "Base: " << t5 << std::endl;
     ScalarConverter::convert(t5);
-    std::cout << t6 << std::endl;
+    std::cout << "Base: " << t6 << std::endl;
     ScalarConverter::convert(t6);
-    std::cout << t7 << std::endl;
+    std::cout << "Base: " << t7 << std::endl;
     ScalarConverter::convert(t7);
-    std::cout << t8 << std::endl;
+    std::cout << "Base: " << t8 << std::endl;
     ScalarConverter::convert(t8);
-    std::cout << t9 << std::endl;
+    std::cout << "Base: " << t9 << std::endl;
     ScalarConverter::convert(t9);
-    std::cout << t10 << std::endl;
+    std::cout << "Base: " << t10 << std::endl;
     ScalarConverter::convert(t10);
-    std::cout << t11 << std::endl;
+    std::cout << "Base: " << t11 << std::endl;
     ScalarConverter::convert(t11);
-    std::cout << t12 << std::endl;
+    std::cout << "Base: " << t12 << std::endl;
     ScalarConverter::convert(t11);
-    std::cout << t13 << std::endl;
+    std::cout << "Base: " << t13 << std::endl;
     ScalarConverter::convert(t11);
-    std::cout << t14 << std::endl;
+    std::cout << "Base: " << t14 << std::endl;
     ScalarConverter::convert(t11);
-    std::cout << t15 << std::endl;
+    std::cout << "Base: " << t15 << std::endl;
     ScalarConverter::convert(t11);
     
     return 0;
