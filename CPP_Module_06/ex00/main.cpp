@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 16:29:51 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/12/19 18:54:34 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/12/19 19:39:24 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int main(int argc, char **argv)
  {
     ScalarConverter::convert("42");
     std::cout <<std::endl;
+    
     ScalarConverter::convert("-42");
     std::cout <<std::endl;
 
@@ -66,19 +67,19 @@ int main(int argc, char **argv)
     ScalarConverter::convert("nanf");
     std::cout <<std::endl;
 
-    ScalarConverter::convert("abc");
+    ScalarConverter::convert("abc");//
     std::cout <<std::endl;
 
-    ScalarConverter::convert("3.14abc");
+    ScalarConverter::convert("3.14abc");//
     std::cout <<std::endl;
 
     ScalarConverter::convert("123f.456");
     std::cout <<std::endl;
 
-    ScalarConverter::convert("--42");
+    ScalarConverter::convert("--42");//
     std::cout <<std::endl;
 
-    ScalarConverter::convert("+-42");
+    ScalarConverter::convert("+-42");//
     std::cout <<std::endl;
 
     ScalarConverter::convert(".123");
@@ -117,13 +118,13 @@ int main(int argc, char **argv)
     ScalarConverter::convert("NANf");
     std::cout <<std::endl;
 
-    ScalarConverter::convert("   42   ");
+    ScalarConverter::convert("   42   ");//
     std::cout <<std::endl;
     
-    ScalarConverter::convert("123.45abc");
+    ScalarConverter::convert("123.45abc");//
     std::cout <<std::endl;
 
-    ScalarConverter::convert("abc123.45");
+    ScalarConverter::convert("abc123.45");//
     std::cout <<std::endl;
 
     ScalarConverter::convert("123e10");
@@ -135,7 +136,7 @@ int main(int argc, char **argv)
     ScalarConverter::convert("123e+10");
     std::cout <<std::endl;
 
-    ScalarConverter::convert("123e");
+    ScalarConverter::convert("123e");//
     std::cout <<std::endl;
 
     ScalarConverter::convert("42.5f");

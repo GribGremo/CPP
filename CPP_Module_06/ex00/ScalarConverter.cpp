@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 16:31:37 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/12/19 18:51:49 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/12/19 19:25:38 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,61 +57,83 @@ bool strIsPrintable(const std::string& str)
 //ISTYPE
 bool isFormatInt(const std::string& str)
 {
-    size_t i = 0;
-    if (str.size() != i && (str[i] == '+' || str[i] == '-'))
-        i++;
-    if (i == str.size())
+    char *end = NULL;
+    long int n = strtol(str.c_str(), &end,10);
+    std::cout <<"int"<< *end << std::endl;
+    if (*end != '\0' || n < INT_MIN || n > INT_MAX)
         return (false);
-    while(i != str.size())
-    {
-        if (!isdigit(str[i]))
-            return (false);
-        i++;
-    }
-    long long int n = strtol(str.c_str(), NULL, 10);
-    if (n < INT_MIN || n > INT_MAX)
-        return (false);
-    return (true); 
+    return (true);
+    // size_t i = 0;
+    // if (str.size() != i && (str[i] == '+' || str[i] == '-'))
+    //     i++;
+    // if (i == str.size())
+    //     return (false);
+    // while(i != str.size())
+    // {
+    //     if (!isdigit(str[i]))
+    //         return (false);
+    //     i++;
+    // }
+    // long long int n = strtol(str.c_str(), NULL, 10);
+    // if (n < INT_MIN || n > INT_MAX)
+    //     return (false);
+    // return (true);
 }
 
 bool isFormatDouble(const std::string& str)
 {
-    if (str == "nan" || str == "+inf" || str == "-inf")
-        return (true);
-    size_t i = 0;
-    if(std::count(str.begin(), str.end(),'.') != 1)// Check number of '.' in str
+    char *end = NULL;
+    double d = strtod(str.c_str(), &end);
+    (void) d;
+    std::cout <<"double"<< *end << std::endl;
+    if (*end != '\0')
         return (false);
-    if (str.size() != i && (str[i] == '+' || str[i] == '-'))//Skip sign
-        i++;
-    if (i == str.size() || str[i] == '.' || str.find_first_of(".") == str.size())// Ckeck '.' emplacement
-        return (false);
-    while(i != str.size())
-    {
-        if (!isdigit(str[i]) && str[i] != '.')
-            return (false);
-        i++;
-    }
     return (true);
+
+    // if (str == "nan" || str == "+inf" || str == "-inf")
+    //     return (true);
+    // size_t i = 0;
+    // if(std::count(str.begin(), str.end(),'.') != 1)// Check number of '.' in str
+    //     return (false);
+    // if (str.size() != i && (str[i] == '+' || str[i] == '-'))//Skip sign
+    //     i++;
+    // if (i == str.size() || str[i] == '.' || str.find_first_of(".") == str.size())// Ckeck '.' emplacement
+    //     return (false);
+    // while(i != str.size())
+    // {
+    //     if (!isdigit(str[i]) && str[i] != '.')
+    //         return (false);
+    //     i++;
+    // }
+    // return (true);
 }
 
 bool isFormatFloat(const std::string& str)
 {
-    if (str == "nanf" || str == "+inff" || str == "-inff")
-        return (true);
-    size_t i = 0;
-    if(std::count(str.begin(), str.end(),'.') != 1 || std::count(str.begin(), str.end(),'f') != 1)// Check number of '.' in str
+    char *end = NULL;
+    float f = strtof(str.c_str(), &end);
+    (void) f;
+    std::cout <<"float"<< *end << std::endl;
+    if (*end != '\0' && *end != 'f')
         return (false);
-    if (str.size() != i && (str[i] == '+' || str[i] == '-'))//Skip sign
-        i++;
-    if (i == str.size() || str[i] == '.' || str.find_first_of(".") == str.size() - 1|| str.find_first_of("f") != str.size() - 1)// Ckeck '.' and 'f' emplacement
-        return (false);
-    while(i != str.size())
-    {
-        if (!isdigit(str[i]) && str[i] != '.' && str[i] != 'f')
-            return (false);
-        i++;
-    }
-    return (true); 
+    return (true);
+
+    // if (str == "nanf" || str == "+inff" || str == "-inff")
+    //     return (true);
+    // size_t i = 0;
+    // if(std::count(str.begin(), str.end(),'.') != 1 || std::count(str.begin(), str.end(),'f') != 1)// Check number of '.' in str
+    //     return (false);
+    // if (str.size() != i && (str[i] == '+' || str[i] == '-'))//Skip sign
+    //     i++;
+    // if (i == str.size() || str[i] == '.' || str.find_first_of(".") == str.size() - 1|| str.find_first_of("f") != str.size() - 1)// Ckeck '.' and 'f' emplacement
+    //     return (false);
+    // while(i != str.size())
+    // {
+    //     if (!isdigit(str[i]) && str[i] != '.' && str[i] != 'f')
+    //         return (false);
+    //     i++;
+    // }
+    // return (true); 
 }
 
 const std::string findType(const std::string& str)
