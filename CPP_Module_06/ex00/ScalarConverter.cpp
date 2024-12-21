@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 16:31:37 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/12/19 19:25:38 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/12/21 16:12:38 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,15 +110,46 @@ bool isFormatDouble(const std::string& str)
 
 bool isFormatFloat(const std::string& str)
 {
-    char *end = NULL;
-    float f = strtof(str.c_str(), &end);
-    (void) f;
-    std::cout <<"float"<< *end << std::endl;
-    if (*end != '\0' && *end != 'f')
-        return (false);
-    return (true);
+    // char *end = NULL;
+    // float f = strtof(str.c_str(), &end);
+    // (void) f;
+    // std::cout <<"float"<< *end << std::endl;
+    // if (std::count(str.begin(), str.end(),'f') != 1 || (*end != '\0' && *end != 'f') || (*end == 'f' && str.size() == 1))
+    //     return (false);
+    // return (true);
 
-    // if (str == "nanf" || str == "+inff" || str == "-inff")
+    size_t e_pos = str.find('e');
+    size_t point_pos = str.find('.');
+    size_t f_pos = str.find('f');
+
+    if (str == "nanf" || str == "+inff" || str == "-inff" || str == "inff")
+        return (true);
+    if(std::count(str.begin(), str.end(),'f') != 1 || str.size() - 1 != f_pos)// Check number of '.' in str
+        return (false);
+
+
+    if(e_pos != std::string::npos)
+    {
+        if(point_pos != std::string::npos)//if str contain '.' e must be after it
+        {
+            if(e_pos < point_pos)
+                return (false);
+        }
+        if(str.find_first_of("0123456789") > e_pos || (!isdigit(str[e_pos + 1]) && str[e_pos + 1] != '+' || str[e_pos + 1] != '-'))// digit must be before e; digit or sign after
+            return (false);
+        if ((str[e_pos +1] == '-' ||str[e_pos +1] == '+') && !isdigit(str[e_pos + 2]))//if epos + 1 = + or -, next char must be a digit
+            return (false);
+    }
+    size_t i = 0;
+    while(str[i] != '\0')
+    {
+        if ((str[i] == '+' || str[i] == '-') && (i != 0 || i != str.find_first_of('e') + 1))//+- at start or after e
+            return (false);
+        if (str[i] == 'e' && str.find_first_of("0123456789") > str.find_first_of('e') || )
+            return (false);
+    }
+
+    // if (str == "nanf" || str == "+inff" || str == "-inff" || str == "inff")
     //     return (true);
     // size_t i = 0;
     // if(std::count(str.begin(), str.end(),'.') != 1 || std::count(str.begin(), str.end(),'f') != 1)// Check number of '.' in str
@@ -149,48 +180,6 @@ const std::string findType(const std::string& str)
     return ("Invalid format");
 } 
 
-//CONVERT
-char    stringToChar(const std::string& str){
-    char    c;
-
-    c = *str.begin();
-    return (c);
-}
-
-int     stringToInt(const std::string& str){
-    (void)str;
-    int n = 0;
-
-    char* end = NULL;
-    const char* strc = str.c_str();
-    n = strtol(strc, &end, 10);
-    return (n);
-}
-
-double  stringToDouble(const std::string& str){
-    double d = strtod(str.c_str(), NULL);
-    // int sgn = 1;
-    // if (*str.begin() == '-')//May take care of space
-    //     sgn = -1;
-    // if (std::isinf(d))
-    //     return d;//(std::numeric_limits<double>::infinity() * sgn);
-    // else if (std::isnan(d))
-    //     return d;//std::numeric_limits<double>::quiet_NaN();
-    return (d);
-}
-
-float   stringToFloat(const std::string& str){
-    float f = strtof(str.c_str(), NULL);
-    // int sgn = 1;
-    // if (*str.begin() == '-')//May take care of space
-    //     sgn = -1;
-    // if (std::isinf(f))
-    //     return f;//(std::numeric_limits<float>::infinity() * sgn);
-    // else if (std::isnan(f))
-    //     return f;//std::numeric_limits<float>::quiet_NaN();
-    return (f);
-}
-
 //DISPLAY
 void displayFromChar(char c){
     std::cout << "char: '" << c << "'" << std::endl;
@@ -209,22 +198,32 @@ void displayFromInt(int n){
     std::cout << "double: " << std::fixed << std::setprecision(1) << static_cast<double>(n) << std::endl;
 }
 
-void displayFromFloat(float f){
-    if (isprint(static_cast<char>(f)))
+void displayFromFloat(float f, const std::string& str){
+    if (str == "nan" || str == "nanf" || str == "inf" || str == "+inf" || str == "-inf" || str == "inff" || str == "+inff" || str == "-inff" )
+        std::cout << "char: impossible" << std::endl;
+    else if (isprint(static_cast<char>(f)))
         std::cout << "char: '" << static_cast<char>(f) << "'" << std::endl;
     else
         std::cout << "char: Non displayable" << std::endl;
-    std::cout << "int: " << static_cast<int>(f) << std::endl;
+    if(f < static_cast<float>(INT_MIN) || f >static_cast<float>(INT_MAX))
+        std::cout << "int: Overflow" << std::endl;
+    else
+        std::cout << "int: " << static_cast<int>(f) << std::endl;
     std::cout << "float: " << std::fixed << std::setprecision(1) << f << "f" << std::endl;
     std::cout << "double: " << std::fixed << std::setprecision(1) << static_cast<double>(f) << std::endl;    
 }
 
-void displayFromDouble(double d){
-    if (isprint(static_cast<char>(d)))
+void displayFromDouble(double d, const std::string& str){
+    if (str == "nan" || str == "nanf" || str == "inf" || str == "+inf" || str == "-inf" || str == "inff" || str == "+inff" || str == "-inff" )
+        std::cout << "char: impossible" << std::endl;
+    else if (isprint(static_cast<char>(d)))
         std::cout << "char: '" << static_cast<char>(d) << "'" << std::endl;
     else
         std::cout << "char: Non displayable" << std::endl;
-    std::cout << "int: " << static_cast<int>(d) << std::endl;
+    if(d < static_cast<double>(INT_MIN) || d >static_cast<double>(INT_MAX))
+        std::cout << "int: Overflow" << std::endl;
+    else
+        std::cout << "int: " << static_cast<int>(d) << std::endl;
     std::cout << "float: " << std::fixed << std::setprecision(1) << std::fixed << std::setprecision(1) << static_cast<float>(d) << "f" << std::endl;
     std::cout << "double: " << std::fixed << std::setprecision(1) << d << std::endl;   
 }
@@ -242,25 +241,13 @@ void ScalarConverter::convert(const std::string& str){
         type = findType(str);
         std::cout << "TYPE: " << type << std::endl;
         if (type == "char")
-        {
-            std::cout << "VALUE: " << stringToChar(str) << std::endl;
-            displayFromChar(stringToChar(str));
-        }
+            displayFromChar(*str.begin());
         else if (type == "int")
-        {
-            std::cout << "VALUE: " << stringToInt(str) << std::endl;
-            displayFromInt(stringToInt(str));
-        }
+            displayFromInt(strtol(str.c_str(), NULL, 10));
         else if (type == "float")
-        {
-            std::cout << "VALUE: " << stringToFloat(str) << std::endl;
-            displayFromFloat(stringToFloat(str));
-        }
+            displayFromFloat(strtof(str.c_str(), NULL),str);
         else if (type == "double")
-        {
-            std::cout << "VALUE: " << stringToDouble(str) << std::endl;
-            displayFromDouble(stringToDouble(str));
-        }
+            displayFromDouble(strtod(str.c_str(), NULL),str);
         else
             std::cout << "Impossible conversion: Invalid format" << std::endl;
     }

@@ -6,11 +6,12 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 16:29:51 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/12/19 19:39:24 by sylabbe          ###   ########.fr       */
+/*   Updated: 2024/12/21 15:51:05 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
+#include <regex.h>
 
 int maintest();
 int main(int argc, char **argv)
@@ -31,116 +32,151 @@ int main(int argc, char **argv)
 
  int maintest()
  {
-    ScalarConverter::convert("42");
+    ScalarConverter::convert("0.0f");
     std::cout <<std::endl;
+
+    ScalarConverter::convert("+.0f");
+    std::cout <<std::endl;
+
+    ScalarConverter::convert("0.0f");
+    std::cout <<std::endl;
+
+    ScalarConverter::convert("0.0f");
+    std::cout <<std::endl;
+
+    ScalarConverter::convert("0.0f");
+    std::cout <<std::endl;
+
+    ScalarConverter::convert("0.0f");
+    std::cout <<std::endl;
+
+    ScalarConverter::convert("0.0f");
+    std::cout <<std::endl;
+
+    ScalarConverter::convert("0.0f");
+    std::cout <<std::endl;
+    // float f = 1e1f;
+    // double d = 5.e1;
     
-    ScalarConverter::convert("-42");
-    std::cout <<std::endl;
+    // std::cout << f << std::endl;
+    // std::cout << d << std::endl;
 
-    ScalarConverter::convert("3.14");
-    std::cout <<std::endl;
+    // ScalarConverter::convert("-.0f");
+    // std::cout <<std::endl;
 
-    ScalarConverter::convert("-3.14");
-    std::cout <<std::endl;
+    // ScalarConverter::convert("0f");
+    // std::cout <<std::endl;
 
-    ScalarConverter::convert("1.0f");
-    std::cout <<std::endl;
-
-    ScalarConverter::convert("-1.0f");
-    std::cout <<std::endl;
-
-    ScalarConverter::convert("inf");
-    std::cout <<std::endl;
-
-    ScalarConverter::convert("-inf");
-    std::cout <<std::endl;
-
-    ScalarConverter::convert("inff");
-    std::cout <<std::endl;
-
-    ScalarConverter::convert("-inff");
-    std::cout <<std::endl;
-
-    ScalarConverter::convert("nan");
-    std::cout <<std::endl;
-
-    ScalarConverter::convert("nanf");
-    std::cout <<std::endl;
-
-    ScalarConverter::convert("abc");//
-    std::cout <<std::endl;
-
-    ScalarConverter::convert("3.14abc");//
-    std::cout <<std::endl;
-
-    ScalarConverter::convert("123f.456");
-    std::cout <<std::endl;
-
-    ScalarConverter::convert("--42");//
-    std::cout <<std::endl;
-
-    ScalarConverter::convert("+-42");//
-    std::cout <<std::endl;
-
-    ScalarConverter::convert(".123");
-    std::cout <<std::endl;
-
-    ScalarConverter::convert("123.");
-    std::cout <<std::endl;
-
-    ScalarConverter::convert(".");
-    std::cout <<std::endl;
-
-    ScalarConverter::convert("f");
-    std::cout <<std::endl;
-
-    ScalarConverter::convert("3.4028235e39f");
-    std::cout <<std::endl;
-
-    ScalarConverter::convert("1.7976931348623157e309");
-    std::cout <<std::endl;
-
-    ScalarConverter::convert("+0");
-    std::cout <<std::endl;
-
-    ScalarConverter::convert("-0");
-    std::cout <<std::endl;
-
-    ScalarConverter::convert("+inf");
-    std::cout <<std::endl;
-
-    ScalarConverter::convert("-infinity");
-    std::cout <<std::endl;
-
-    ScalarConverter::convert("NaN");
-    std::cout <<std::endl;
-
-    ScalarConverter::convert("NANf");
-    std::cout <<std::endl;
-
-    ScalarConverter::convert("   42   ");//
-    std::cout <<std::endl;
+    // ScalarConverter::convert("42");
+    // std::cout <<std::endl;
     
-    ScalarConverter::convert("123.45abc");//
-    std::cout <<std::endl;
+    // ScalarConverter::convert("-42");
+    // std::cout <<std::endl;
 
-    ScalarConverter::convert("abc123.45");//
-    std::cout <<std::endl;
+    // ScalarConverter::convert("3.14");
+    // std::cout <<std::endl;
 
-    ScalarConverter::convert("123e10");
-    std::cout <<std::endl;
+    // ScalarConverter::convert("-3.14");
+    // std::cout <<std::endl;
 
-    ScalarConverter::convert("123e-10");
-    std::cout <<std::endl;
+    // ScalarConverter::convert("1.0f");
+    // std::cout <<std::endl;
 
-    ScalarConverter::convert("123e+10");
-    std::cout <<std::endl;
+    // ScalarConverter::convert("-1.0f");
+    // std::cout <<std::endl;
 
-    ScalarConverter::convert("123e");//
-    std::cout <<std::endl;
+    // ScalarConverter::convert("inf");
+    // std::cout <<std::endl;
 
-    ScalarConverter::convert("42.5f");
-    std::cout <<std::endl;
+    // ScalarConverter::convert("-inf");
+    // std::cout <<std::endl;
+
+    // ScalarConverter::convert("inff");
+    // std::cout <<std::endl;
+
+    // ScalarConverter::convert("-inff");
+    // std::cout <<std::endl;
+
+    // ScalarConverter::convert("nan");
+    // std::cout <<std::endl;
+
+    // ScalarConverter::convert("nanf");
+    // std::cout <<std::endl;
+
+    // ScalarConverter::convert("abc");//
+    // std::cout <<std::endl;
+
+    // ScalarConverter::convert("3.14abc");//
+    // std::cout <<std::endl;
+
+    // ScalarConverter::convert("123f.456");
+    // std::cout <<std::endl;
+
+    // ScalarConverter::convert("--42");//
+    // std::cout <<std::endl;
+
+    // ScalarConverter::convert("+-42");//
+    // std::cout <<std::endl;
+
+    // ScalarConverter::convert(".123");
+    // std::cout <<std::endl;
+
+    // ScalarConverter::convert("123.");
+    // std::cout <<std::endl;
+
+    // ScalarConverter::convert(".");
+    // std::cout <<std::endl;
+
+    // ScalarConverter::convert("f");
+    // std::cout <<std::endl;
+
+    // ScalarConverter::convert("3.4028235e39f");
+    // std::cout <<std::endl;
+
+    // ScalarConverter::convert("1.7976931348623157e309");
+    // std::cout <<std::endl;
+
+    // ScalarConverter::convert("+0");
+    // std::cout <<std::endl;
+
+    // ScalarConverter::convert("-0");
+    // std::cout <<std::endl;
+
+    // ScalarConverter::convert("+inf");
+    // std::cout <<std::endl;
+
+    // ScalarConverter::convert("-infinity");
+    // std::cout <<std::endl;
+
+    // ScalarConverter::convert("NaN");
+    // std::cout <<std::endl;
+
+    // ScalarConverter::convert("NANf");
+    // std::cout <<std::endl;
+
+    // ScalarConverter::convert("   42   ");//
+    // std::cout <<std::endl;
+    
+    // ScalarConverter::convert("123.45abc");//
+    // std::cout <<std::endl;
+
+    // ScalarConverter::convert("abc123.45");//
+    // std::cout <<std::endl;
+
+    // ScalarConverter::convert("123e10");
+    // std::cout <<std::endl;
+
+    // ScalarConverter::convert("123e-10");
+    // std::cout <<std::endl;
+
+    // ScalarConverter::convert("123e+10");
+    // std::cout <<std::endl;
+
+    // ScalarConverter::convert("123e");//
+    // std::cout <<std::endl;
+
+    // ScalarConverter::convert("42.5f");
+    // std::cout <<std::endl;
 
     // ScalarConverter::convert("0");
     // std::cout << std::endl;
