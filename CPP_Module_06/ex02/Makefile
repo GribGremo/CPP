@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/12/23 16:08:57 by sylabbe           #+#    #+#              #
-#    Updated: 2024/12/25 17:52:36 by sylabbe          ###   ########.fr        #
+#    Created: 2024/12/25 18:14:15 by sylabbe           #+#    #+#              #
+#    Updated: 2024/12/25 20:15:42 by sylabbe          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ DEST_MDT_DIR = .
 
 # ls -1 *.c | sed -z 's/\n/ \\\n\t\t\t/g'
 SRC =	$(addprefix $(SRC_MDT_DIR)/, main.cpp \
-										Serializer.cpp)
+										Base.cpp)
 
 
 OBJECTS = $(SRC:$(SRC_MDT_DIR)/%.cpp=$(DEST_MDT_DIR)/%.o)

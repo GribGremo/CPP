@@ -1,40 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Serializer.hpp                                     :+:      :+:    :+:   */
+/*   iter.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/23 16:08:54 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/12/25 17:48:02 by sylabbe          ###   ########.fr       */
+/*   Created: 2024/12/25 23:02:46 by sylabbe           #+#    #+#             */
+/*   Updated: 2024/12/25 23:42:12 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SERIALIZER_HPP
-#define SERIALIZER_HPP
-
 #include <iostream>
-#include <stdint.h>
 
-struct Data{
-    int i;
-    float f;
-    double d;
-    char c;
-};
+template<typename A, typename L, typename F>
+void    iter(A& address, const L& length, F fn){
+    for (L i = 0; i < length; i++){
+        fn(address[i]);
+    }
+}
 
-class Serializer
-{
-    private:
-    Serializer();
-    Serializer(const Serializer& src);
-    ~Serializer();
-    Serializer& operator=(const Serializer& src);
+template<typename T>
+void  incr(T& value){
+    value++;
+}
 
-    public:
-
-    static uintptr_t serialize(Data* ptr);
-    static Data* deserialize(uintptr_t raw);
-};
-
-#endif
+template<typename T>
+void  square(T& value){
+    value = value * value;
+}

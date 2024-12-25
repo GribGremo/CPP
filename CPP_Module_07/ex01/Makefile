@@ -5,12 +5,12 @@
 #                                                     +:+ +:+         +:+      #
 #    By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/12/23 16:08:57 by sylabbe           #+#    #+#              #
-#    Updated: 2024/12/25 17:52:36 by sylabbe          ###   ########.fr        #
+#    Created: 2024/12/25 23:01:47 by sylabbe           #+#    #+#              #
+#    Updated: 2024/12/25 23:02:06 by sylabbe          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = Serialization
+NAME = Iter
 
 CFLAGS = -Werror -Wall -Wextra -std=c++98 #-fno-elide-constructors #-fsanitize=address
 
@@ -19,8 +19,7 @@ SRC_MDT_DIR = .
 DEST_MDT_DIR = .
 
 # ls -1 *.c | sed -z 's/\n/ \\\n\t\t\t/g'
-SRC =	$(addprefix $(SRC_MDT_DIR)/, main.cpp \
-										Serializer.cpp)
+SRC =	$(addprefix $(SRC_MDT_DIR)/, main.cpp)
 
 
 OBJECTS = $(SRC:$(SRC_MDT_DIR)/%.cpp=$(DEST_MDT_DIR)/%.o)

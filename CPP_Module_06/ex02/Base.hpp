@@ -1,40 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Serializer.hpp                                     :+:      :+:    :+:   */
+/*   Base.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/23 16:08:54 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/12/25 17:48:02 by sylabbe          ###   ########.fr       */
+/*   Created: 2024/12/25 18:14:27 by sylabbe           #+#    #+#             */
+/*   Updated: 2024/12/25 18:16:47 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SERIALIZER_HPP
-#define SERIALIZER_HPP
+#ifndef BASE_HPP
+#define BASE_HPP
 
 #include <iostream>
-#include <stdint.h>
 
-struct Data{
-    int i;
-    float f;
-    double d;
-    char c;
-};
-
-class Serializer
+class Base
 {
-    private:
-    Serializer();
-    Serializer(const Serializer& src);
-    ~Serializer();
-    Serializer& operator=(const Serializer& src);
-
     public:
-
-    static uintptr_t serialize(Data* ptr);
-    static Data* deserialize(uintptr_t raw);
+    virtual ~Base();
 };
 
 #endif
