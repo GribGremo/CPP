@@ -5,12 +5,12 @@
 #                                                     +:+ +:+         +:+      #
 #    By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/12/25 23:01:47 by sylabbe           #+#    #+#              #
-#    Updated: 2024/12/26 10:15:07 by sylabbe          ###   ########.fr        #
+#    Created: 2024/12/26 11:43:39 by sylabbe           #+#    #+#              #
+#    Updated: 2024/12/26 11:50:13 by sylabbe          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = Iter
+NAME = Array
 
 CFLAGS = -Werror -Wall -Wextra #-std=c++98 #-fno-elide-constructors #-fsanitize=address
 
