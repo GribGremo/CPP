@@ -1,41 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Array.hpp                                          :+:      :+:    :+:   */
+/*   Array.tpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/26 11:43:37 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/12/30 18:19:45 by grib             ###   ########.fr       */
+/*   Created: 2024/12/30 14:01:15 by grib              #+#    #+#             */
+/*   Updated: 2024/12/30 14:20:43 by grib             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
+#include "Array.hpp"
 
-template <typename T>
+//CONSTRUCTORS/DESTRUCTOR
+//     Array::Array(){
+//         this->a = NULL;
+//     }
+//     Array::Array(const unsigned int s){
+        
+//     }
+//     Array::Array(const Array& src){
+        
+//     }
+//     Array::~Array(){
+        
+//     }
 
-class Array{
-    public:
-    Array(){
-        array = NULL;
-    }
-    Array(const unsigned int s){
-        array = new T[s];
-    }
-    Array(const Array& src){
+// //OPERATORS
+//     Array& Array::operator=(const Array& src){
         
-    }
-    ~Array(){
+//     }
+//     const T& Array::operator[](const unsigned int i){
         
-    }
-
-    Array& operator=(const Array& src){
-        
-    }
-    const T& operator[](const unsigned int i){
-        return array[i];
-    }
-    
-    private:
-    T *array;
-};
+//     }
