@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 23:02:13 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/12/26 11:01:25 by sylabbe          ###   ########.fr       */
+/*   Updated: 2025/01/21 15:53:43 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,22 +38,9 @@ int main(){
     std::cout <<"str: "<< str << std::endl;
     std::cout << std::endl;
 
-    iter(&str[0],str.size(),incrChar);// I change address from reference to pointer so he can accept rvalue
+    iter(&str[0],str.size(),incrChar);
     std::cout << "str: " << str << std::endl;
     std::cout << std::endl;
 
     iter(static_cast<char*>(NULL),str.size(),incrChar);//Here compilator doesn't understand NULL as a pointer due to implicit conversion between void* and typed pointer not allowed in C++
 }
-
-/*
-lambda: anonymous function defined inline
- auto incr = [factor](int& x) { x += factor; };
-
-functor : class or object with an operator() able to be used as a function
-class Increment {
-public:
-    void operator()(int& x) const {
-        x++; 
-    }
-};
-*/

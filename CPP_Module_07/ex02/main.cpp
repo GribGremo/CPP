@@ -6,30 +6,24 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 12:59:31 by grib              #+#    #+#             */
-/*   Updated: 2025/01/14 19:49:45 by sylabbe          ###   ########.fr       */
+/*   Updated: 2025/01/21 14:50:28 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Array.hpp"
 
-void print_cell(Array<int>& a, int i);
-void print_cell(Array<std::string>& a, int i);
-
 int main() {
-    // int * a = new int();
-    // *a = 1;
-    // std::cout << *a <<std::endl;
     Array<int> intm(4);
     Array<int> inta(5);
     Array<int> intp(6);
 
     std::cout << "~~~~~~~~~~~PRINT DEFAULT ARRAY~~~~~~~~~~~" <<std::endl;
-    print_cell(inta,0);
-    print_cell(inta,1);
-    print_cell(inta,2);
-    print_cell(inta,3);
-    print_cell(inta,4);
-    print_cell(inta,5);
+    inta.print_cell(inta,0);
+    inta.print_cell(inta,1);
+    inta.print_cell(inta,2);
+    inta.print_cell(inta,3);
+    inta.print_cell(inta,4);
+    inta.print_cell(inta,5);
     std::cout << std::endl;
 
     std::cout << "~~~~~~~~~~~PRINT MODIFY ARRAY~~~~~~~~~~~" <<std::endl;
@@ -39,31 +33,31 @@ int main() {
     inta[3] = 2; 
     inta[4] = 1; 
 
-    print_cell(inta,0);
-    print_cell(inta,1);
-    print_cell(inta,2);
-    print_cell(inta,3);
-    print_cell(inta,4);
-    print_cell(inta,5);
+    inta.print_cell(inta,0);
+    inta.print_cell(inta,1);
+    inta.print_cell(inta,2);
+    inta.print_cell(inta,3);
+    inta.print_cell(inta,4);
+    inta.print_cell(inta,5);
     std::cout << std::endl;
 
     std::cout << "~~~~~~~~~~~PRINT 4CELLS ARRAY~~~~~~~~~~~" <<std::endl;
-    print_cell(intm,0);
-    print_cell(intm,1);
-    print_cell(intm,2);
-    print_cell(intm,3);
-    print_cell(intm,4);
-    print_cell(intm,5);
+    intm.print_cell(intm,0);
+    intm.print_cell(intm,1);
+    intm.print_cell(intm,2);
+    intm.print_cell(intm,3);
+    intm.print_cell(intm,4);
+    intm.print_cell(intm,5);
     std::cout << std::endl;
 
     std::cout << "~~~~~~~~~~~PRINT 6CELLS ARRAY~~~~~~~~~~~" <<std::endl;
 
-    print_cell(intp,0);
-    print_cell(intp,1);
-    print_cell(intp,2);
-    print_cell(intp,3);
-    print_cell(intp,4);
-    print_cell(intp,5);
+    intp.print_cell(intp,0);
+    intp.print_cell(intp,1);
+    intp.print_cell(intp,2);
+    intp.print_cell(intp,3);
+    intp.print_cell(intp,4);
+    intp.print_cell(intp,5);
     std::cout << std::endl;
 
     std::cout << "~~~~~~~~~~~ASSIGNATION TO BASE ARRAY FOR 4CELLS AND 6CELLS~~~~~~~~~~~" <<std::endl;
@@ -75,39 +69,39 @@ int main() {
     Array<int> intcpy(inta);
 
     std::cout << "~~~~~~~~~~~PRINT 4CELLS ARRAY~~~~~~~~~~~" <<std::endl;
-    print_cell(intm,0);
-    print_cell(intm,1);
-    print_cell(intm,2);
-    print_cell(intm,3);
-    print_cell(intm,4);
-    print_cell(intm,5);
+    intm.print_cell(intm,0);
+    intm.print_cell(intm,1);
+    intm.print_cell(intm,2);
+    intm.print_cell(intm,3);
+    intm.print_cell(intm,4);
+    intm.print_cell(intm,5);
     std::cout << std::endl;
 
     std::cout << "~~~~~~~~~~~PRINT 6CELLS ARRAY~~~~~~~~~~~" <<std::endl;
-    print_cell(intp,0);
-    print_cell(intp,1);
-    print_cell(intp,2);
-    print_cell(intp,3);
-    print_cell(intp,4);
-    print_cell(intp,5);
+    intp.print_cell(intp,0);
+    intp.print_cell(intp,1);
+    intp.print_cell(intp,2);
+    intp.print_cell(intp,3);
+    intp.print_cell(intp,4);
+    intp.print_cell(intp,5);
     std::cout << std::endl;
 
     std::cout << "~~~~~~~~~~~PRINT COPY ARRAY~~~~~~~~~~~" <<std::endl;
-    print_cell(intcpy,0);
-    print_cell(intcpy,1);
-    print_cell(intcpy,2);
-    print_cell(intcpy,3);
-    print_cell(intcpy,4);
-    print_cell(intcpy,5);
+    intcpy.print_cell(intcpy,0);
+    intcpy.print_cell(intcpy,1);
+    intcpy.print_cell(intcpy,2);
+    intcpy.print_cell(intcpy,3);
+    intcpy.print_cell(intcpy,4);
+    intcpy.print_cell(intcpy,5);
     std::cout << std::endl;
 
     std::cout << "~~~~~~~~~~~PRINT BASE ARRAY~~~~~~~~~~~" <<std::endl;
-    print_cell(inta,0);
-    print_cell(inta,1);
-    print_cell(inta,2);
-    print_cell(inta,3);
-    print_cell(inta,4);
-    print_cell(inta,5);
+    inta.print_cell(inta,0);
+    inta.print_cell(inta,1);
+    inta.print_cell(inta,2);
+    inta.print_cell(inta,3);
+    inta.print_cell(inta,4);
+    inta.print_cell(inta,5);
     std::cout << std::endl;
 
     std::string str1("one");
@@ -130,37 +124,10 @@ int main() {
 
     std::cout << "~~~~~~~~~~~PRINT STRING ARRAY~~~~~~~~~~~" <<std::endl;
 
-    print_cell(stra,0);
-    print_cell(stra,1);
-    print_cell(stra,2);
-    print_cell(stra,3);
-    print_cell(stra,4);
-    print_cell(stra,5);
-}
-
-void print_cell(Array<int>& a, int i){
-    try{
-        std::cout << a[i] << std::endl;
-    }
-    catch(const std::exception&){
-        std::cout << "Invalid index" << std::endl;
-    }
-}
-
-void mod_cell(Array<int>& a, int i, int x){
-    try{
-        a[i] = x;
-    }
-    catch(const std::exception&){
-        std::cout << "Invalid index" << std::endl;
-    }
-}
-
-void print_cell(Array<std::string>& a, int i){
-    try{
-        std::cout << a[i] << std::endl;
-    }
-    catch(const std::exception&){
-        std::cout << "Invalid index" << std::endl;
-    }
+    stra.print_cell(stra,0);
+    stra.print_cell(stra,1);
+    stra.print_cell(stra,2);
+    stra.print_cell(stra,3);
+    stra.print_cell(stra,4);
+    stra.print_cell(stra,5);
 }

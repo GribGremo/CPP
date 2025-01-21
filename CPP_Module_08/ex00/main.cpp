@@ -1,31 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   whatever.hpp                                       :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/25 22:10:21 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/01/21 14:34:22 by sylabbe          ###   ########.fr       */
+/*   Created: 2025/01/21 16:00:25 by sylabbe           #+#    #+#             */
+/*   Updated: 2025/01/21 16:43:16 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
+#include "easyfind.hpp"
+#include <vector>
+#include <deque>
+#include <list>
+#include <string>
+#include <set>
+#include <map>
+#include <stack>
+#include <queue>
 
-template <typename T>
-const T&   max(const T& x,const T& y){
-    return (x > y ? x : y);
-}
+int main()
+{
+    std::vector<int> vec = {1,2,3};
+    std::deque<int> dq = {4,5,6};
+    std::list<int> lst = {7,8,9};
 
-template <typename T>
-const T&   min(const T& x,const T& y){
-    return (x < y ? x : y);
-}
 
-template <typename T>
-void   swap(T& x,T& y){
-    T temp;
-    temp = x;
-    x = y;
-    y = temp;
+    easyfind(vec,1);
+    easyfind(dq,5);
+    easyfind(lst,9);
+    
+    easyfind(vec,4);
+    
+
 }

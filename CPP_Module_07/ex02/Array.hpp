@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 11:43:37 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/01/14 19:36:08 by sylabbe          ###   ########.fr       */
+/*   Updated: 2025/01/21 14:56:27 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ class Array{
             return (*this);
         delete[] array;
         n = src.n;
-        array = new T[src.n];// A VOIR
+        array = new T[src.n];
         for (unsigned int i = 0; i < src.n; i++)
         {
             array[i] = src.array[i];
@@ -61,6 +61,26 @@ class Array{
             throw(std::exception());
         return array[i];
     }
+
+
+    void print_cell(Array<T>& a, int i){
+        try{
+            std::cout << a[i] << std::endl;
+        }
+        catch(const std::exception&){
+            std::cout << "Invalid index" << std::endl;
+        }
+    }
+
+    void mod_cell(Array<T>& a, int i, int x){
+        try{
+            a[i] = x;
+        }
+        catch(const std::exception&){
+            std::cout << "Invalid index" << std::endl;
+        }
+    }
+
     
     private:
     unsigned int n;
