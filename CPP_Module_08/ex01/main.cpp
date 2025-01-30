@@ -5,39 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/21 16:00:25 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/01/30 15:33:10 by sylabbe          ###   ########.fr       */
+/*   Created: 2025/01/30 15:36:05 by sylabbe           #+#    #+#             */
+/*   Updated: 2025/01/30 15:45:40 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "easyfind.hpp"
+#include "Span.hpp"
 
-#include <vector>
-#include <deque>
-#include <list>
-
-
-int main()
-{
-    std::vector<int> vec = {1,2,3};
-    std::deque<int> dq = {4,5,6};
-    std::list<int> lst = {7,8,9};
-
-    easyfind(vec,0);
-    easyfind(vec,1);
-    easyfind(vec,2);
-    easyfind(vec,3);
-    easyfind(vec,4);
-
-    easyfind(dq,3);
-    easyfind(dq,4);
-    easyfind(dq,5);
-    easyfind(dq,6);
-    easyfind(dq,7);
-
-    easyfind(lst,6);
-    easyfind(lst,7);
-    easyfind(lst,8);
-    easyfind(lst,9);
-    easyfind(lst,10);
+int main(){
+    
 }

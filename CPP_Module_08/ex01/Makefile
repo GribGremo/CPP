@@ -5,13 +5,12 @@
 #                                                     +:+ +:+         +:+      #
 #    By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/01/21 16:00:20 by sylabbe           #+#    #+#              #
-#    Updated: 2025/01/30 15:34:20 by sylabbe          ###   ########.fr        #
+#    Created: 2025/01/30 15:34:52 by sylabbe           #+#    #+#              #
+#    Updated: 2025/01/30 15:35:00 by sylabbe          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-
-NAME = Easyfind
+NAME = Span
 
 CFLAGS = -Werror -Wall -Wextra #-std=c++98 #-fno-elide-constructors #-fsanitize=address
 

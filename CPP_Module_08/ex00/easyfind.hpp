@@ -6,23 +6,24 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 16:00:12 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/01/21 17:01:02 by sylabbe          ###   ########.fr       */
+/*   Updated: 2025/01/30 13:52:29 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
+#include <algorithm>
 
 template<typename T>
 void easyfind(T t, int n){
-    for (T::iterator it = std::find(t.begin()); i < t.size() ; i++){ // A VOIR size end ou autre
-        if (t[i] == n)
-        {
-            std::cout << "Find occurence of " << n << "at index " << i << std::endl; 
-            return ;
-        }
+
+    typename T::iterator it = std::find(t.begin(), t.end(), n); // Use of template T::iterator might be a C type or class member, b ydefault it's considered as as a variable or function, but we want it to be a type, so we put typename before it
+    if (it != t.end())
+    {
+        std::cout << "Find occurence of " << n << " at index " << std::distance(t.begin(), it) << std::endl; 
+        return ;
     }
-    std::cout << "No occurence of " << n << "found in container" << std::endl;
-     
+    else
+        std::cout << "No occurence of " << n << " found in container" << std::endl;  
 }
 
 /*
