@@ -1,0 +1,17 @@
+int countFractionalDigits(const std::string& s){
+    size_t result = 1;
+    size_t start = s.find(".", 0);
+    if (start == std::string::npos)
+        return (result);
+    size_t end = s.find_first_of("ef",start + 1);
+    if (end != std::string::npos && s[end] != 'e')
+        result = (end - 1) - start;
+    else if (end != std::string::npos && s[end] == 'e')
+        result = ((end - 1) - start) - atoi(s.substr(end + 1).c_str());
+    else
+        result = (s.length() -1) - start;
+    if (result == 0)
+        return (1);
+    return (result);
+}
+

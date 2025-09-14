@@ -6,12 +6,13 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 20:14:02 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/12/25 20:15:29 by sylabbe          ###   ########.fr       */
+/*   Updated: 2025/09/14 16:33:20 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Base.hpp"
 
+//CONSTRUCTORS/DESTRUCTOR
 Base::~Base(){
 
 }

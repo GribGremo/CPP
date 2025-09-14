@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 18:28:25 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/12/25 20:44:16 by sylabbe          ###   ########.fr       */
+/*   Updated: 2025/09/14 17:15:14 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ void identify(Base* p){
     if (p == NULL)
         return;
     if(dynamic_cast<A*>(p))
-        std::cout << "p is A class type." << std::endl;
+        std::cout << "p is a pointer to A class type." << std::endl;
     else if (dynamic_cast<B*>(p))
-        std::cout << "p is B class type." << std::endl;
+        std::cout << "p is a pointer to B class type." << std::endl;
     else if (dynamic_cast<C*>(p))
-        std::cout << "p is C class type." << std::endl;
+        std::cout << "p is a pointer to C class type." << std::endl;
     else
         std::cout << "p does not match derived class from Base." << std::endl;
 }
@@ -51,28 +51,26 @@ void identify(Base* p){
 void identify(Base& p){    
     try{
         Base& ref = dynamic_cast<A&>(p);
-        std::cout << "p is A class type." << std::endl;
+        std::cout << "p is a reference to A class type." << std::endl;
         (void)ref;
     }
-    catch(...){
-        try{
-            Base& ref = dynamic_cast<B&>(p);
-            std::cout << "p is B class type." << std::endl;
-            (void)ref;
-        }
-        catch(...){
-            try{
-                Base& ref = dynamic_cast<C&>(p);
-                std::cout << "p is C class type." << std::endl;
-                (void)ref;
-            }
-            catch(...){
-                std::cout << "p does not match derived class from Base." << std::endl;
-            }
-        }
+    catch(...){}
+    try{
+        Base& ref = dynamic_cast<B&>(p);
+        std::cout << "p is a reference to B class type." << std::endl;
+        (void)ref;
     }
-}
-int main()//fn or methods?
+    catch(...){}
+    try{
+        Base& ref = dynamic_cast<C&>(p);
+        std::cout << "p is a reference to C class type." << std::endl;
+        (void)ref;
+    }
+    catch(...){}
+        std::cout << "p does not match derived class from Base." << std::endl;
+    }
+    
+int main()
 {
     srand(static_cast<unsigned int>(time(NULL))); 
 

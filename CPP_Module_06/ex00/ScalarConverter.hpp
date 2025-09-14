@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 16:31:34 by sylabbe           #+#    #+#             */
-/*   Updated: 2024/12/14 10:11:47 by sylabbe          ###   ########.fr       */
+/*   Updated: 2025/09/13 17:20:25 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,6 @@ class ScalarConverter
     ~ScalarConverter();
 
     ScalarConverter& operator=(const ScalarConverter& src);
-
-
 };
-
 
 #endif
