@@ -6,128 +6,130 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 12:59:31 by grib              #+#    #+#             */
-/*   Updated: 2025/01/21 14:50:28 by sylabbe          ###   ########.fr       */
+/*   Updated: 2025/09/16 18:28:29 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Array.hpp"
+#include "test.hpp"
+int main() {    
+    Array<int> intm;
+    Array<int> inta;
+    Array<int> intp;
+    
+    try{
+        Array<int> a(4);
+        Array<int> b(5);
+        Array<int> c(6);
 
-int main() {
-    Array<int> intm(4);
-    Array<int> inta(5);
-    Array<int> intp(6);
-
-    std::cout << "~~~~~~~~~~~PRINT DEFAULT ARRAY~~~~~~~~~~~" <<std::endl;
-    inta.print_cell(inta,0);
-    inta.print_cell(inta,1);
-    inta.print_cell(inta,2);
-    inta.print_cell(inta,3);
-    inta.print_cell(inta,4);
-    inta.print_cell(inta,5);
-    std::cout << std::endl;
-
-    std::cout << "~~~~~~~~~~~PRINT MODIFY ARRAY~~~~~~~~~~~" <<std::endl;
-    inta[0] = 5; 
-    inta[1] = 4; 
-    inta[2] = 3; 
-    inta[3] = 2; 
-    inta[4] = 1; 
-
-    inta.print_cell(inta,0);
-    inta.print_cell(inta,1);
-    inta.print_cell(inta,2);
-    inta.print_cell(inta,3);
-    inta.print_cell(inta,4);
-    inta.print_cell(inta,5);
-    std::cout << std::endl;
-
-    std::cout << "~~~~~~~~~~~PRINT 4CELLS ARRAY~~~~~~~~~~~" <<std::endl;
-    intm.print_cell(intm,0);
-    intm.print_cell(intm,1);
-    intm.print_cell(intm,2);
-    intm.print_cell(intm,3);
-    intm.print_cell(intm,4);
-    intm.print_cell(intm,5);
-    std::cout << std::endl;
-
-    std::cout << "~~~~~~~~~~~PRINT 6CELLS ARRAY~~~~~~~~~~~" <<std::endl;
-
-    intp.print_cell(intp,0);
-    intp.print_cell(intp,1);
-    intp.print_cell(intp,2);
-    intp.print_cell(intp,3);
-    intp.print_cell(intp,4);
-    intp.print_cell(intp,5);
-    std::cout << std::endl;
-
-    std::cout << "~~~~~~~~~~~ASSIGNATION TO BASE ARRAY FOR 4CELLS AND 6CELLS~~~~~~~~~~~" <<std::endl;
-    std::cout << std::endl;
+        intm = a;
+        inta = b;
+        intp = c;
+        std::cout << "~~~~~~~~~~~PRINT ARRAY~~~~~~~~~~~" <<std::endl;
+    
+        intm.printArray(); // ALL SET UP 0; 4,5,6CELLS
+        inta.printArray();
+        intp.printArray();
 
     
-    intm = inta;
-    intp = inta;
-    Array<int> intcpy(inta);
+        std::cout << "~~~~~~~~~~~INIT CELLS INTA~~~~~~~~~~~" <<std::endl;
 
-    std::cout << "~~~~~~~~~~~PRINT 4CELLS ARRAY~~~~~~~~~~~" <<std::endl;
-    intm.print_cell(intm,0);
-    intm.print_cell(intm,1);
-    intm.print_cell(intm,2);
-    intm.print_cell(intm,3);
-    intm.print_cell(intm,4);
-    intm.print_cell(intm,5);
-    std::cout << std::endl;
+        try{
+            int j = 5;
+            for (int i = 0; i < 7; i++){
+                std::cout << "Init cell " << i << ": ";
+                inta[i] = j;
+                std::cout << inta[i] << std::endl;
+                j--;
+            }
+        }
+        catch(const std::exception& e){
+            std::cout << e.what() << std::endl;
+        }
+        std::cout << std::endl;
 
-    std::cout << "~~~~~~~~~~~PRINT 6CELLS ARRAY~~~~~~~~~~~" <<std::endl;
-    intp.print_cell(intp,0);
-    intp.print_cell(intp,1);
-    intp.print_cell(intp,2);
-    intp.print_cell(intp,3);
-    intp.print_cell(intp,4);
-    intp.print_cell(intp,5);
-    std::cout << std::endl;
+        std::cout << "~~~~~~~~~~~INIT CELLS INTM~~~~~~~~~~~" <<std::endl;
 
-    std::cout << "~~~~~~~~~~~PRINT COPY ARRAY~~~~~~~~~~~" <<std::endl;
-    intcpy.print_cell(intcpy,0);
-    intcpy.print_cell(intcpy,1);
-    intcpy.print_cell(intcpy,2);
-    intcpy.print_cell(intcpy,3);
-    intcpy.print_cell(intcpy,4);
-    intcpy.print_cell(intcpy,5);
-    std::cout << std::endl;
+        try{
+            for (int i = 0; i < 7; i++){
+                std::cout << "Init cell " << i << ": ";
+                intm[i] = 8;
+                std::cout << intm[i] << std::endl;
+            }
+        }
+        catch(const std::exception& e){
+            std::cout << e.what() << std::endl;
+        }
+        std::cout << std::endl;
 
-    std::cout << "~~~~~~~~~~~PRINT BASE ARRAY~~~~~~~~~~~" <<std::endl;
-    inta.print_cell(inta,0);
-    inta.print_cell(inta,1);
-    inta.print_cell(inta,2);
-    inta.print_cell(inta,3);
-    inta.print_cell(inta,4);
-    inta.print_cell(inta,5);
-    std::cout << std::endl;
+        std::cout << "~~~~~~~~~~~INIT CELLS INTP~~~~~~~~~~~" <<std::endl;
 
-    std::string str1("one");
-    std::string str2("two");
-    std::string str3("three");
-    std::string str4("four");
-    std::string str5("five");
+        try{
+            for (int i = 0; i < 7; i++){
+                std::cout << "Init cell " << i << ": ";
+                intp[i] = 100;
+                std::cout << intp[i] << std::endl;
+            }
+        }
+        catch(const std::exception& e){
+            std::cout << e.what() << std::endl;
+        }
+        std::cout << std::endl;
 
-    std::cout << "~~~~~~~~~~~CREATION STRING ARRAY~~~~~~~~~~~" <<std::endl;
-
-
-    Array<std::string> stra(5);
-
-    stra[0] = str1;
-    stra[1] = str2;
-    stra[2] = str3;
-    stra[3] = str4;
-    stra[4] = str5;
+        std::cout << "~~~~~~~~~~~PRINT ARRAY MODIFY~~~~~~~~~~~" <<std::endl;
+        intm.printArray();//SET UP 8,4CELLS
+        inta.printArray();//SET UP 54321,5 CELLS
+        intp.printArray();//SET UP 100, 6CELLS
 
 
-    std::cout << "~~~~~~~~~~~PRINT STRING ARRAY~~~~~~~~~~~" <<std::endl;
 
-    stra.print_cell(stra,0);
-    stra.print_cell(stra,1);
-    stra.print_cell(stra,2);
-    stra.print_cell(stra,3);
-    stra.print_cell(stra,4);
-    stra.print_cell(stra,5);
+        std::cout << "~~~~~~~~~~~ASSIGNATION/COPY CELL MOD~~~~~~~~~~~" <<std::endl;
+        std::cout << std::endl;
+    
+        intm = inta;
+        intp = inta;
+        Array<int> intcpy(inta);
+        try{
+            intm[4] = 20;
+            intp[0] = intm[4];
+            intcpy[4] = 12;
+
+            intcpy[12] = 4;//INVALID WILL BE CATCH
+        }
+        catch(const std::exception& e){
+            std::cout << e.what() << std::endl;
+        }
+
+        std::cout << "~~~~~~~~~~~PRINT ARRAY MODIFY~~~~~~~~~~~" <<std::endl;
+        intm.printArray();
+        inta.printArray();
+        intp.printArray();   
+        intcpy.printArray();
+    
+        //INIT STRINGS
+        std::string str1("one");
+        std::string str2("two");
+        std::string str3("three");
+        std::string str4("four");
+        std::string str5("five");
+    
+        std::cout << "~~~~~~~~~~~CREATION STRING ARRAY~~~~~~~~~~~" <<std::endl;
+    
+        Array<std::string> stra(5);
+    
+        stra[0] = str1;
+        stra[1] = str2;
+        stra[2] = str3;
+        stra[3] = str4;
+        stra[4] = str5;
+    
+        std::cout << "~~~~~~~~~~~PRINT STRING ARRAY~~~~~~~~~~~" <<std::endl;
+    
+        stra.printArray();
+    }
+    catch(...){
+        std::cout << "AN ERROR OCCURED" << std::endl;
+    }
+
+
 }

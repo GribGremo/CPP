@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 22:10:23 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/01/21 14:20:02 by sylabbe          ###   ########.fr       */
+/*   Updated: 2025/09/15 11:46:05 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int main(){
     std::cout << "c = " << c << ", d = " << d << std::endl;
     std::cout << "min( c, d ) = " << ::min( c, d ) << std::endl;
     std::cout << "max( c, d ) = " << ::max( c, d ) << std::endl;
+
 
 
     // int a = 5;
@@ -52,4 +53,12 @@ int main(){
     // std::cout << "d: " << d <<std::endl;
     // std::cout << "e: " << e <<std::endl;
     // std::cout << "f: " << f <<std::endl;
+
+
+    // std::cout << "adresse a: " << &a << std::endl;
+    // std::cout << "adresse b: " << &b << std::endl;
+
+    // b = a;
+    // std::cout << "min( a, b )(supposed return b) = " << &::min( a, b ) << std::endl;
+    // std::cout << "max( a, b )(supposed return b) = " << &::max( a, b ) << std::endl;
 }
