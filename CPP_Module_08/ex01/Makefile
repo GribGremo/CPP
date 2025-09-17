@@ -6,13 +6,13 @@
 #    By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/30 15:34:52 by sylabbe           #+#    #+#              #
-#    Updated: 2025/01/30 15:35:00 by sylabbe          ###   ########.fr        #
+#    Updated: 2025/09/17 16:59:42 by sylabbe          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = Span
 
-CFLAGS = -Werror -Wall -Wextra #-std=c++98 #-fno-elide-constructors #-fsanitize=address
+CXXFLAGS = -Werror -Wall -Wextra #-std=c++98 #-fno-elide-constructors #-fsanitize=address
 
 SRC_MDT_DIR = .
 
@@ -24,7 +24,7 @@ SRC =	$(addprefix $(SRC_MDT_DIR)/, main.cpp)
 
 OBJECTS = $(SRC:$(SRC_MDT_DIR)/%.cpp=$(DEST_MDT_DIR)/%.o)
 
-CC = c++
+CXX = c++
 
 RM = rm -f
 
@@ -32,12 +32,12 @@ all: $(NAME)
 
 
 $(NAME): $(OBJECTS)
-	@${CC} ${CFLAGS} $(OBJECTS) -o $(NAME) 
+	@${CXX} ${CXXFLAGS} $(OBJECTS) -o $(NAME) 
 	@echo "\033[0;32mMANDATORY COMPILED\033[0m"
 
 
 $(DEST_MDT_DIR)/%.o: $(SRC_MDT_DIR)/%.cpp #| obj
-	@$(CC) $(CFLAGS) -c $< -o $@ -g
+	@$(CXX) $(CXXFLAGS) -c $< -o $@ -g
 
 
 #obj:

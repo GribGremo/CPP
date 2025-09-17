@@ -6,10 +6,9 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 15:36:07 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/01/30 16:23:15 by sylabbe          ###   ########.fr       */
+/*   Updated: 2025/09/17 17:01:47 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 template<typename T>
 #ifndef SPAN_HPP

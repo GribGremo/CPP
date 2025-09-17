@@ -6,82 +6,37 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 16:00:12 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/01/30 13:52:29 by sylabbe          ###   ########.fr       */
+/*   Updated: 2025/09/17 16:58:06 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/*Containers supported in c++98: vector, deque, list, stack, queue, priority queue, set, multiset, map, multimap
+Vector: Array that can grow, not really efficient reallocating, good accessing cell
+Deque: Similar to vector but grow more efficiently even at beginning
+List: double link list, good inserting, removing, deplacing elements, link costs more memory and no []
+Stack: Operations accessible from the end(add,remove), seems to just store data
+Queue: Add to end, remove from start
+Priority-queue: Encore une heap mais ???
+Set: Const unique values, sorted by "value"
+Multiset: same but multiple identical  values allowed
+Map: Hah table(key value identify and sort elements) map value(content), both associated in a pair
+Multimap: Same but identical key value allowed(i imagined it useful if u want to store same object and use them(uniquely))*/
 
 #include <iostream>
 #include <algorithm>
 
 template<typename T>
-void easyfind(T t, int n){
+typename T::iterator easyfind(T& t, int n){
+    return (std::find(t.begin(), t.end(), n)); // Use of template T::iterator might be a C type or class member, by default it's considered as as a variable or function, but we want it to be a type, so we put typename before it 
+}
 
-    typename T::iterator it = std::find(t.begin(), t.end(), n); // Use of template T::iterator might be a C type or class member, b ydefault it's considered as as a variable or function, but we want it to be a type, so we put typename before it
-    if (it != t.end())
-    {
-        std::cout << "Find occurence of " << n << " at index " << std::distance(t.begin(), it) << std::endl; 
-        return ;
-    }
+template <typename T>
+void printResult( T& c, int v){
+    typename T::iterator it = easyfind(c,v);
+    if( it != c.end())
+        std::cout << "Find occurence of " << v << " at index " << std::distance(c.begin(), it) << std::endl;
     else
-        std::cout << "No occurence of " << n << " found in container" << std::endl;  
+        std::cout << "No value " << v << " found" << std::endl;
 }
 
-/*
-Pour créer une fonction easyfind capable de rechercher une valeur dans un conteneur quelconque, vous devez utiliser des itérateurs au lieu d'accéder directement aux éléments par index. Tous les conteneurs STL (comme std::vector, std::list, std::set, etc.) supportent les itérateurs, mais seuls certains (comme std::vector) permettent l'accès par index.
-
-Voici une version générique et corrigée de easyfind qui fonctionne avec n'importe quel conteneur compatible avec les itérateurs :
-
-Solution avec itérateurs
-cpp
-Copy
-Edit
-#include <iostream>
-#include <algorithm> // Pour std::find
-#include <vector>
-#include <list>
-
-template<typename T>
-void easyfind(T& container, int value) {
-    // Utilisation de std::find pour rechercher la valeur
-    typename T::iterator it = std::find(container.begin(), container.end(), value);
-
-    if (it != container.end()) {
-        std::cout << "Found occurrence of " << value 
-                  << " at index " << std::distance(container.begin(), it) << std::endl;
-    } else {
-        std::cout << "No occurrence of " << value << " found in container" << std::endl;
-    }
-}
-
-int main() {
-    std::vector<int> vec = {1, 2, 3, 4, 5};
-    easyfind(vec, 3); // Trouve 3
-
-    std::list<int> lst = {10, 20, 30, 40};
-    easyfind(lst, 25); // Ne trouve pas 25
-
-    return 0;
-}
-Explication du code
-std::find :
-
-La fonction std::find est une fonction standard de la STL.
-Elle parcourt un conteneur à l'aide d'itérateurs et retourne un itérateur pointant vers la première occurrence de l'élément recherché, ou container.end() si l'élément n'est pas trouvé.
-Utilisation des itérateurs :
-
-Pour garantir la compatibilité avec tout type de conteneur, on utilise typename T::iterator.
-Cela permet à la fonction de travailler avec des types comme std::vector, std::list, ou même std::deque.
-Calcul de l'index :
-
-La fonction std::distance est utilisée pour calculer la distance entre container.begin() et l'itérateur renvoyé par std::find. Cela donne l'index de l'élément trouvé.
-Notez que l'index n'a pas de sens dans un conteneur comme std::list, mais cela reste une manière de décrire la position relative.
-Conteneurs compatibles :
-
-Cette version fonctionne avec tout conteneur qui supporte les itérateurs (par exemple, std::vector, std::list, std::deque, etc.).
-Avantages de cette approche
-Compatible avec tous les conteneurs STL.
-Utilise les outils standard de la STL (std::find), rendant le code clair et concis.
-Ne dépend pas de l'accès par index ([]), ce qui le rend générique.
-Note
-Si vous travaillez uniquement avec des conteneurs spécifiques qui supportent l'accès par index (std::vector, std::deque), votre approche initiale pourrait fonctionner, mais elle serait limitée et non générique.
-*/
+/*No operator [] on some containers so preferably used algorithm function that will focus on "smart pointers" with the help of containers::iterators, some containers handle theyre "items" memory not contiguously, which mean this objet memory are not ordered object 3 could be placed 1st in mepory"*/

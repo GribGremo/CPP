@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 16:00:25 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/01/30 15:33:10 by sylabbe          ###   ########.fr       */
+/*   Updated: 2025/09/17 16:41:00 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,28 +16,27 @@
 #include <deque>
 #include <list>
 
-
 int main()
 {
     std::vector<int> vec = {1,2,3};
     std::deque<int> dq = {4,5,6};
     std::list<int> lst = {7,8,9};
 
-    easyfind(vec,0);
-    easyfind(vec,1);
-    easyfind(vec,2);
-    easyfind(vec,3);
-    easyfind(vec,4);
+    printResult(vec,0);
+    printResult(vec,1);
+    printResult(vec,2);
+    printResult(vec,3);
+    printResult(vec,4);
 
-    easyfind(dq,3);
-    easyfind(dq,4);
-    easyfind(dq,5);
-    easyfind(dq,6);
-    easyfind(dq,7);
+    printResult(dq,3);
+    printResult(dq,4);
+    printResult(dq,5);
+    printResult(dq,6);
+    printResult(dq,7);
 
-    easyfind(lst,6);
-    easyfind(lst,7);
-    easyfind(lst,8);
-    easyfind(lst,9);
-    easyfind(lst,10);
+    printResult(lst,6);
+    printResult(lst,7);
+    printResult(lst,8);
+    printResult(lst,9);
+    printResult(lst,10);
 }

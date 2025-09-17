@@ -1,0 +1,13 @@
+Assignement name: vect2
+Expected files: vect2.cpp vect2.hpp
+
+Create a class vect2 representing a mathematical vectorof dimmension 2 containing elements of type int.
+
+It must support addition, substraction, and multiplication by such as the expression (Vect2(2,2)*2==Vect2(4,4) is true).
+
+The operator [] can be used to access the components of your vector (using indices 0 and 1), no bound checking is required.
+
+Your object must be printable with << operator, such that 
+    std::cout << v << std::endl;
+produces the same output as:
+    std::cout << "{" << v[0] << ", " << v[1] << "}" << std::endl;
