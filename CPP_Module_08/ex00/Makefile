@@ -6,14 +6,14 @@
 #    By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/21 16:00:20 by sylabbe           #+#    #+#              #
-#    Updated: 2025/09/17 14:23:50 by sylabbe          ###   ########.fr        #
+#    Updated: 2025/09/18 14:42:04 by sylabbe          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
-NAME = Easyfind
+NAME = Span
 
-CXXFLAGS = -Werror -Wall -Wextra #-std=c++98 #-fno-elide-constructors #-fsanitize=address
+CXXFLAGS = -Werror -Wall -Wextra -std=c++98 #-fno-elide-constructors #-fsanitize=address
 
 SRC_MDT_DIR = .
 
