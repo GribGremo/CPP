@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Span.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 15:36:07 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/09/18 21:25:12 by grib             ###   ########.fr       */
+/*   Updated: 2025/09/19 10:52:30 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ class Span {
     unsigned int longestSpan();
     void fillT(std::vector<int>::iterator& begin,std::vector<int>::iterator& end);
 
+    void printContainer();
     std::multiset<int>& getT();
 };
 

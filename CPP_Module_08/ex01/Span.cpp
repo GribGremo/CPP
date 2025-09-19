@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Span.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 15:36:09 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/09/18 23:21:45 by grib             ###   ########.fr       */
+/*   Updated: 2025/09/19 16:21:46 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
         else
             _t.insert(value);
     }
-    unsigned int Span::shortestSpan(){//Securite 0,1 value
+    unsigned int Span::shortestSpan(){
         if (_t.size() < 2)
             throw std::exception();
         unsigned int r = 4294967295;
@@ -46,16 +46,32 @@
         }
         return (r);
     }
-    unsigned int Span::longestSpan(){//Securite 0,1 value
+    unsigned int Span::longestSpan(){
         if (_t.size() < 2)
             throw std::exception();
         return (*(--_t.end()) - *_t.begin());
     }
 
     void Span::fillT(std::vector<int>::iterator& begin,std::vector<int>::iterator& end){
+        unsigned int s_fill = 0;
+        unsigned int a_space = _n - _t.size();
         if (begin > end)
             return;//
-        _t.insert(begin, end);
+        for (std::vector<int>::iterator it = begin;it != end;it++)
+            s_fill++;
+        if(a_space >= s_fill)
+            _t.insert(begin,end);
+        else{
+            _t.insert(begin, begin + a_space); 
+            throw std::exception();
+        }
+    }
+    
+    void Span::printContainer(){
+        std::cout << "~~~~~~~~~~~~~~~PRINT CONTAINER~~~~~~~~~~~~~~~" << std::endl;
+        for (std::multiset<int>::iterator it = _t.begin(); it != _t.end(); it++)
+            std::cout << *it << std::endl;
+        std::cout << std::endl;
     }
 
     std::multiset<int>& Span::getT(){
