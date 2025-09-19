@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Span.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
+/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 15:36:09 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/09/18 16:28:38 by sylabbe          ###   ########.fr       */
+/*   Updated: 2025/09/18 23:21:45 by grib             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,12 @@
         if (_t.size() < 2)
             throw std::exception();
         return (*(--_t.end()) - *_t.begin());
+    }
+
+    void Span::fillT(std::vector<int>::iterator& begin,std::vector<int>::iterator& end){
+        if (begin > end)
+            return;//
+        _t.insert(begin, end);
     }
 
     std::multiset<int>& Span::getT(){

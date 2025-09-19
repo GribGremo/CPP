@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Span.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
+/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 15:36:07 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/09/18 16:48:53 by sylabbe          ###   ########.fr       */
+/*   Updated: 2025/09/18 21:25:12 by grib             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,7 @@ class Span {
     void addNumber(int value);
     unsigned int shortestSpan();
     unsigned int longestSpan();
-    void fillT(std::vector<int>::iterator& begin,std::vector<int>::iterator& end){
-        _t.insert(begin, end);
-    }
+    void fillT(std::vector<int>::iterator& begin,std::vector<int>::iterator& end);
 
     std::multiset<int>& getT();
 };
