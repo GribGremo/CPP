@@ -9,9 +9,9 @@ template <typename T>
 class  MutantStack : public std::stack{
     private:
     std::deque<T> st;
-    typename iterator;
-
+    
     public:
+    typedef typename std::deque<T>::iterator iterator;
 
     MutantStack(){
 
@@ -20,7 +20,7 @@ class  MutantStack : public std::stack{
         st.push_back(cell);
     }
     MutantStack(const MutantStack& src){
-        if (this = src)
+        if (this = &src)
             this = *src;
     }
     ~MutantStack(){
@@ -31,10 +31,10 @@ class  MutantStack : public std::stack{
 
     }
 
-    void push(T& cell){
+    void push(T cell){
         st.push_back(cell);
     }
-    T& top(){
+    iterator top(){
         return (st.back());   
     }
     void pop(){
@@ -43,10 +43,12 @@ class  MutantStack : public std::stack{
     size_t size(){
         return (st.size());
     }
-    std::deque::iterator& begin(){
+
+
+    iterator begin(){
         return (st.begin());
     }
-    std::deque::iterator& end(){
+    iterator end(){
         return (st.end());
     }
 
