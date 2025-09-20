@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Span.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
+/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 15:36:07 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/09/19 10:52:30 by sylabbe          ###   ########.fr       */
+/*   Updated: 2025/09/19 20:54:58 by grib             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 #include <set>
 #include <vector>
 
-// template <typename IT>
 class Span {
     private:
     unsigned int _n;
@@ -25,7 +24,7 @@ class Span {
 
     public:
     Span();
-    Span(unsigned int n);
+    Span(int n);
     Span(const Span& src);
     ~Span();
 

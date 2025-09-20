@@ -3,17 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   Span.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
+/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 15:36:09 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/09/19 16:21:46 by sylabbe          ###   ########.fr       */
+/*   Updated: 2025/09/19 21:31:21 by grib             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
     #include "Span.hpp"
 
-    Span::Span() : _n(0){    }
-    Span::Span(unsigned int n) : _n(n){}
+    Span::Span() : _n(0){
+    }
+    Span::Span(int n){
+        if (n < 0)
+            _n = -n;
+        else
+            _n = n;
+    }
     Span::Span(const Span& src): _n(src._n){
         this->_t =src._t;
     }
@@ -56,7 +62,7 @@
         unsigned int s_fill = 0;
         unsigned int a_space = _n - _t.size();
         if (begin > end)
-            return;//
+            return;
         for (std::vector<int>::iterator it = begin;it != end;it++)
             s_fill++;
         if(a_space >= s_fill)
