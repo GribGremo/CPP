@@ -9,6 +9,7 @@ template <typename T>
 class  MutantStack : public std::stack{
     private:
     std::deque<T> st;
+    typename iterator;
 
     public:
 
@@ -30,15 +31,26 @@ class  MutantStack : public std::stack{
 
     }
 
-    void push(T& cell);//
-    T& top();// Renvoie reference de element de type INT ou TEMPLATE
-    void pop();
-    size_t size();
-    std::deque::iterator& begin();
-    std::deque::iterator& enf();
+    void push(T& cell){
+        st.push_back(cell);
+    }
+    T& top(){
+        return (st.back());   
+    }
+    void pop(){
+        st.pop_back();
+    };
+    size_t size(){
+        return (st.size());
+    }
+    std::deque::iterator& begin(){
+        return (st.begin());
+    }
+    std::deque::iterator& end(){
+        return (st.end());
+    }
 
     // ++ -- iterator
-    // std::stack
 };
 
 #endif
