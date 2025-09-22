@@ -2,57 +2,57 @@
 #define MUTANTSTACK_HPP
 #include <iostream>
 #include <stack>
-// #include <deque>
 
-
-template <typename T> 
-class  MutantStack : public std::stack{
-    private:
-    std::deque<T> st;
+template <typename T, typename Container = std::deque<T> > 
+class  MutantStack : public std::stack<T, Container>{
     
     public:
-    typedef typename std::deque<T>::iterator iterator;
+    typedef typename Container::iterator iterator;
+    typedef typename Container::const_iterator const_iterator;
+    typedef typename Container::reverse_iterator reverse_iterator;
+    typedef typename Container::const_reverse_iterator const_reverse_iterator;
 
-    MutantStack(){
-
-    }
-    MutantStack(T& cell){
-        st.push_back(cell);
-    }
-    MutantStack(const MutantStack& src){
-        if (this = &src)
-            this = *src;
-    }
-    ~MutantStack(){
-
-    }
+    MutantStack() : std::stack<T, Container>(){}
+    MutantStack(const MutantStack& src) : std::stack<T, Container>(src){}
+    ~MutantStack(){}
 
     MutantStack& operator=(const MutantStack& src){
-
+        if (this != &src)
+            this->c = src.c;
+        return (*this);
     }
-
-    void push(T cell){
-        st.push_back(cell);
-    }
-    iterator top(){
-        return (st.back());   
-    }
-    void pop(){
-        st.pop_back();
-    };
-    size_t size(){
-        return (st.size());
-    }
-
 
     iterator begin(){
-        return (st.begin());
-    }
-    iterator end(){
-        return (st.end());
+        return (this->c.begin());
     }
 
-    // ++ -- iterator
+    iterator end(){
+        return (this->c.end());
+    }
+
+    reverse_iterator rbegin(){
+        return (this->c.rbegin());
+    }
+
+    reverse_iterator rend(){
+        return (this->c.rend());
+    }
+
+    const_iterator cbegin()const{//cbegin not allowed in c++98
+        return (this->c.begin());
+    }
+
+    const_iterator cend()const{
+        return (this->c.end());
+    }
+
+    const_reverse_iterator crbegin()const{//crbegin not allowed in c++98
+        return (this->c.rbegin());
+    }
+
+    const_reverse_iterator crend()const{
+        return (this->c.rend());
+    }
 };
 
 #endif

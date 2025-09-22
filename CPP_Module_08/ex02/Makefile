@@ -1,6 +1,6 @@
 NAME = MutantStack
 
-CXXFLAGS = -Werror -Wall -Wextra -std=c++98 #-fno-elide-constructors #-fsanitize=address
+CXXFLAGS = -Werror -Wall -Wextra -std=c++98 #-pedantic #-fno-elide-constructors #-fsanitize=address
 
 SRC_MDT_DIR = .
 

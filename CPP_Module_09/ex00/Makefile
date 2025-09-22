@@ -6,11 +6,11 @@
 #    By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/20 17:20:41 by sylabbe           #+#    #+#              #
-#    Updated: 2025/09/20 18:10:15 by sylabbe          ###   ########.fr        #
+#    Updated: 2025/09/22 13:50:14 by sylabbe          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = BitcoinExchange
+NAME = btc
 
 CXXFLAGS = -Werror -Wall -Wextra -std=c++98 #-fno-elide-constructors #-fsanitize=address
 
