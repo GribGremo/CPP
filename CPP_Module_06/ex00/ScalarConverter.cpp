@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 16:31:37 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/09/14 15:24:09 by sylabbe          ###   ########.fr       */
+/*   Updated: 2025/09/24 13:34:48 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ void displayFromFloat(float f){
 
 //Print results for original string as double format
 void displayFromDouble(double d){
+    std::cout<< "DOUBLE"<<std::endl;
     if (std::isnan(d) || std::isinf(d) )
         std::cout << "char: impossible" << std::endl;
     else if (d >= 0 && d <= 127 && isprint(static_cast<unsigned char>(d)))
