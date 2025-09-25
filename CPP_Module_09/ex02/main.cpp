@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
+/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 17:20:55 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/09/24 15:40:05 by sylabbe          ###   ########.fr       */
+/*   Updated: 2025/09/24 21:58:54 by grib             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,69 +20,68 @@
 #include <iomanip>
 #include <sys/time.h>
 
-
+//STRUCTURES
 template <typename T>
-
 struct result{
     T sorted;
     T unsorted;
     double execTime;
-
-
-    Result(const Container& sorted, const Container& unsorted, double time)
-        : sorted(sorted), unsorted(unsorted), execTime(time) {}
 };
 
-long time_diff_microseconds(const timeval& start, const timeval& end) {
-    return (end.tv_sec - start.tv_sec) * 1000000L + (end.tv_usec - start.tv_usec);
-}
-
-
-template <typename T >
-
-T& sortFJ(T container){
-    (void)container;
-
-    return(temp);
-}
-
-void printFJ(){
+bool    parseArgs(int argc, char **argv){
+    if (argc < 2)
+    {
+        std::cout << "Error: Invalid number of arguments" << std::endl;
+        return true;
+    }
+    for (int i = 1; i < argc; i++)
+    {
+        if(std::)
+        // std::string arg = argv[i];
+        // for (std::string::const_iterator it = arg.begin(); it != arg.end(); it++)
+        // {
+        //     while((std::isspace(*it) || *it=='+' || *it == '-') && it + 1 != arg.end())
+        //         it++;
+        // }
+    }
+    return false;
     
 }
+//FUNCTIONS
+template<typename V, typename L>
+void printFJ(result<V>& rVec, result<L>& rLst){
+    std::cout << "Before: " << "INTERGRER LA LISTE" << std::endl;
+    std::cout << "After:  " << "INTERGRER LA LISTE" << std::endl;
+
+    std::cout << "Time to process a range of " << rVec.unsorted.size() << " elements with " << "A VOIR CONTAINER TYPE" << " : " << rVec.execTime << " UNITE DE TEMPS"<< std::endl;
+    std::cout << "Time to process a range of " << rLst.unsorted.size() << " elements with " << "A VOIR CONTAINER TYPE" << " : " << rLst.execTime << " UNITE DE TEMPS"<< std::endl;
+}
 
 
-template <typename T >
-
-T timeSort(T container, double& time){
+template <typename T>
+void timeSort(result<T>& r, int argc, char **argv){
     timeval start;
     timeval end;
-    
-    gettimeofday(&start,NULL);
+    (void) argc;
+    (void) argv;
 
-    parseArgs(container);
-    sortFJ();
+    gettimeofday(&start,NULL);
+    usleep(100);
+    parseArgs(argc, argv);
+    // sortFJ();
 
     gettimeofday(&end,NULL);
-    time = (end.tv_sec - start.tv_sec) *1000000L + (end.tv_usec - start.tv_usec);
-    return (container);
+    r.execTime = (end.tv_sec - start.tv_sec) *1000000L + (end.tv_usec - start.tv_usec);
 }
 
 int main(int argc, char **argv){
-    (void)argv;
-    result rVec(std::vector<int> sorted, std::vector<int> unsorted, double d);
-    std::vector<int> vec;
-    std::list<int> lst;
-    double timeVec = 0.0;
-    double timeLst = 0.0;
+    result<std::vector<int> > rVec;
+    result<std::list<int> > rLst;
 
-    timeSort(vec, timeVec);
-    timeSort(lst, timeLst);
+    timeSort(rVec, argc, argv);
+    timeSort(rLst, argc, argv);
 
-
-
-    // printFJ();
-
-    
+    printFJ(rVec,rLst);
 }
 
 /*Ford-Johnson algorithm 
