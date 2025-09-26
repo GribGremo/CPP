@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 17:20:55 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/09/26 07:40:54 by grib             ###   ########.fr       */
+/*   Updated: 2025/09/26 16:31:00 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ struct result{
     double execTime;
 };
 
+//SKETCH
+
 // template <typename T>
 // std::vector<typename std::pair<T,T> >   pairing(std::vector<T> vec){
 //     std::vector<T> pairVec;
@@ -43,21 +45,27 @@ struct result{
 //     //     pairVec.push_back(std::pair<T,T>(*(--it), NULL));
 
 // }
-template <typename T>
-void swapExp(T c, int e){
-    int lmt = std::pow(2, e);
+
+// template <typename T>
+// void swapExp(T c, int e){
+//     int lmt = std::pow(2, e);
+//     if (lmt == 2)
+//     {
+//         for(T::iterator it = c.begin(); it)
+//     }
     
-    
-}
+// }
+
+//DEBUG
 
 template <typename T>
-bool sortFJ(result<T> r){
-    (void)r;
-    // std::vector<typename std::pair<T,T> > v = pairing(r.unsorted);
-    std::cout << std::pow(2,2) <<std::endl;
-    return (false);
+void printCont(T& c){
+    for(typename T::iterator it = c.begin(); it != c.end(); it++)
+        std::cout << " " << *(*it);
+    std::cout << std::endl;
 }
 
+//PARSING
 bool isArgValid(char* str, long int& value){
     char *end = NULL;
     errno = 0;
@@ -89,10 +97,69 @@ bool    parseArgs(result<T>& r, int argc, char **argv){
     return false; 
 }
 
-//FUNCTIONS
+//SORTING
+template <typename T>
+void vecIt(T& c, std::vector<typename T::iterator>& even, std::vector<typename T::iterator>& odd){
+    int i = 0;
+    for(typename T::iterator it = c.begin(); it != c.end(); ++it)
+    {
+        if(i % 2 == 0)
+            even.push_back(it);
+        else
+            odd.push_back(it);
+        i++;
+    }
+    // printCont(even);
+    // printCont(odd);
+}
+
+template <typename T>
+void swapE(std::vector<typename T::iterator>& even,std::vector<typename T::iterator>& odd, unsigned int exp){
+    typename std::vector<typename T::iterator>::iterator itev = even.begin();
+    typename std::vector<typename T::iterator>::iterator itod = odd.begin();
+    typename std::vector<typename T::iterator>::iterator iteve = even.end(); 
+    typename std::vector<typename T::iterator>::iterator itode = odd.end();
+    int temp = 0;
+    (void) exp;
+    std::cout << exp << std::endl;
+    while(itev != iteve && itod != itode)
+    {
+        if(**itev > **itod)
+        {
+            temp = **itod;
+            **itod = **itev;
+            **itev = temp;
+        }
+        itev++;
+        itod++;
+    }
+}
+
+template <typename T>
+bool sortFJ(result<T>& r){
+    std::vector<typename T::iterator> even;
+    std::vector<typename T::iterator> odd;
+    
+    vecIt(r.sorted,even,odd);
+    
+    // printCont(even);
+    // printCont(odd);
+    
+    for (unsigned int i = 2; i / 2 < even.size(); i = pow(i,2))
+        swapE<T>(even,odd,i);
+
+    // printCont(even);
+    // printCont(odd);
+
+    // std::vector<typename std::pair<T,T> > v = pairing(r.unsorted);
+    return (false);
+}
+
+//MAIN
 template<typename V, typename L>
 void printFJ(result<V>& rVec, result<L>& rLst){
     std::cout << "Before:" ;
+    // printCont(rVec.unsorted);
     for(typename V::iterator it = rVec.unsorted.begin(); it != rVec.unsorted.end(); it++)
         std::cout << " " << *it;
     std::cout << std::endl;
@@ -135,7 +202,7 @@ int main(int argc, char **argv){
 }
 
 /*Ford-Johnson algorithm 
--
+-1er:Trier par paire
 -
 -
 -
