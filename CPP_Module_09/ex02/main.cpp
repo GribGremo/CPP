@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
+/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 17:20:55 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/09/25 13:39:31 by sylabbe          ###   ########.fr       */
+/*   Updated: 2025/09/26 07:40:54 by grib             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 #include <unistd.h>
 #include <iomanip>
 #include <sys/time.h>
+#include <cmath>
 //STRUCTURES
 template <typename T>
 struct result{
@@ -29,24 +30,32 @@ struct result{
     double execTime;
 };
 
-template <typename T>
-std::vector<typename std::pair<T,T> >   pairing(std::vector<T> vec){
-    std::vector<T> pairVec;
-    int ip = 0;
-    for(typename std::vector<T>::iterator it = vec.begin(); it != vec.end(); it++){
-        if(++ip % 2 == 0)
-            pairVec.push_back(std::pair<T,T>(*(--it), *it));
-    }
-    return (pairVec);
-    // if (++ip % 2 == 1)
-    //     pairVec.push_back(std::pair<T,T>(*(--it), NULL));
+// template <typename T>
+// std::vector<typename std::pair<T,T> >   pairing(std::vector<T> vec){
+//     std::vector<T> pairVec;
+//     int ip = 0;
+//     for(typename std::vector<T>::iterator it = vec.begin(); it != vec.end(); it++){
+//         if(++ip % 2 == 0)
+//             pairVec.push_back(std::pair<T,T>(*(--it), *it));
+//     }
+//     return (pairVec);
+//     // if (++ip % 2 == 1)
+//     //     pairVec.push_back(std::pair<T,T>(*(--it), NULL));
 
+// }
+template <typename T>
+void swapExp(T c, int e){
+    int lmt = std::pow(2, e);
+    
+    
 }
 
 template <typename T>
 bool sortFJ(result<T> r){
-    std::vector<typename std::pair<T,T> > v = pairing(r.unsorted);
-    std::cout << v.front().first <<std::endl;
+    (void)r;
+    // std::vector<typename std::pair<T,T> > v = pairing(r.unsorted);
+    std::cout << std::pow(2,2) <<std::endl;
+    return (false);
 }
 
 bool isArgValid(char* str, long int& value){
@@ -146,3 +155,70 @@ For calculate Jnum at index i: J[i] = (2expi - (-1)expi) / 3; pour i =5 array[5]
 <pair>
 */
 
+/*
+C MARRANT HEIN LE TYPAGE DYNAMIQUE RECURSIF?
+
+template <int Depth>
+struct NestedPair {
+    typedef std::pair<
+        typename NestedPair<Depth - 1>::type,
+        typename NestedPair<Depth - 1>::type
+    > type;
+};
+
+template <>
+struct NestedPair<0> {
+    typedef std::pair<int, int> type;
+};
+
+// Pour accéder à la paire terminale à gauche
+template <int Depth, typename PairType>
+std::pair<int, int>& get_left_leaf(PairType& p) {
+    return get_left_leaf<Depth - 1>(p.first);
+}
+
+template <typename PairType>
+std::pair<int, int>& get_left_leaf<0>(PairType& p) {
+    return p; // on est au fond
+}
+
+#include <iostream>
+#include <utility>
+
+template <int Depth>
+struct NestedPair {
+    typedef std::pair<
+        typename NestedPair<Depth - 1>::type,
+        typename NestedPair<Depth - 1>::type
+    > type;
+};
+
+template <>
+struct NestedPair<0> {
+    typedef std::pair<int, int> type;
+};
+
+template <int Depth, typename PairType>
+std::pair<int, int>& get_left_leaf(PairType& p) {
+    return get_left_leaf<Depth - 1>(p.first);
+}
+
+template <typename PairType>
+std::pair<int, int>& get_left_leaf<0>(PairType& p) {
+    return p;
+}
+
+int main() {
+    const int Depth = 3;
+    NestedPair<Depth>::type np;
+
+    // Accès à la paire la plus à gauche
+    std::pair<int, int>& leaf = get_left_leaf<Depth>(np);
+
+    leaf.first = 42;
+    leaf.second = 99;
+
+    std::cout << "leaf = (" << leaf.first << ", " << leaf.second << ")\n";
+}
+
+*/
