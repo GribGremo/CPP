@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
+/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 17:20:55 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/09/26 16:31:00 by sylabbe          ###   ########.fr       */
+/*   Updated: 2025/09/29 07:42:15 by grib             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 #include <iomanip>
 #include <sys/time.h>
 #include <cmath>
+
 //STRUCTURES
 template <typename T>
 struct result{
@@ -30,6 +31,13 @@ struct result{
     double execTime;
 };
 
+template <typename T>
+struct sqc{
+    std::vector<typename T::iterator> seq;
+    int id_seq;
+    int id_rec;
+    bool full;
+};
 //SKETCH
 
 // template <typename T>
@@ -56,6 +64,100 @@ struct result{
     
 // }
 
+
+
+//OUF CA FAIT MAL////////////////////////////////////////////////////////////////////////
+// template <typename T>
+// void vecIt(T& c, std::vector<typename T::iterator>& even, std::vector<typename T::iterator>& odd){
+//     int i = 0;
+//     for(typename T::iterator it = c.begin(); it != c.end(); ++it)
+//     {
+//         if(i % 2 == 0)
+//             even.push_back(it);
+//         else
+//             odd.push_back(it);
+//         i++;
+//     }
+//     // printCont(even);
+//     // printCont(odd);
+// }
+
+// template <typename T>
+// void swapRange(typename std::vector<typename T::iterator>::iterator& itev, typename std::vector<typename T::iterator>::iterator& itod, unsigned int exp){
+//     int temp = 0;
+//     unsigned int i = exp;
+//     while(exp > 0)
+//     {
+//         temp = **itod;
+//         **itod = **itev;
+//         **itev = temp;
+//         exp--;
+//         itev--;
+//         itod--;
+//     }
+//     while(exp != i)
+//     {
+//         exp++;
+//         itev++;
+//         itod++;
+//     }
+// }
+
+// template <typename T>
+// void swapE(std::vector<typename T::iterator>& even,std::vector<typename T::iterator>& odd, unsigned int exp){
+//     typename std::vector<typename T::iterator>::iterator itev = even.begin();
+//     typename std::vector<typename T::iterator>::iterator itod = odd.begin();
+//     typename std::vector<typename T::iterator>::iterator iteve = even.end(); 
+//     typename std::vector<typename T::iterator>::iterator itode = odd.end();
+//     // int temp = 0;
+//     // typename T::iterator temp;
+//     // (void) exp;
+//     // std::cout << exp << std::endl;
+//     while(itev != iteve && itod != itode)
+//     {
+//         for (unsigned int i = 1; i < exp && itev != iteve && itod != itode; i++)
+//         {
+//             itev++;
+//             itod++;
+//         }
+//         if(itev != iteve && itod != itode && **itev > **itod)
+//         {
+//             // std::cout << **itev << " "<< **itod << std::endl;
+//             swapRange<T>(itev, itod, exp);
+//             // temp = **itod;
+//             // **itod = **itev;
+//             // **itev = temp;
+//         }
+//         if (itev != iteve && itod != itode)
+//         {
+//             itod++;
+//             itev++;
+//         }
+//     }
+// }
+
+// template <typename T>
+// bool sortFJ(result<T>& r){
+//     std::vector<typename T::iterator> even;
+//     std::vector<typename T::iterator> odd;
+    
+//     // vecIt(r.sorted,even,odd);
+    
+//     for (unsigned int i = 1; i < (r.unsorted.size() / 2); i *= 2)
+//     {
+//         std::cout << "A" <<std::endl;
+//         vecIt(r.sorted,even,odd);
+//         printCont(even);
+//         printCont(odd);
+//         swapE<T>(even,odd,i);
+//         even.clear();
+//         odd.clear();
+//     }
+
+
+//     // std::vector<typename std::pair<T,T> > v = pairing(r.unsorted);
+//     return (false);
+// }
 //DEBUG
 
 template <typename T>
@@ -63,6 +165,21 @@ void printCont(T& c){
     for(typename T::iterator it = c.begin(); it != c.end(); it++)
         std::cout << " " << *(*it);
     std::cout << std::endl;
+}
+
+template <typename T>
+void printStruct(sqc<T> u){
+    std::cout << "Sequence: ";
+    printCont(u.seq);
+    std::cout << "Full: " << u.full << std::endl;
+    std::cout << "Index vector: " << u.id_seq << std::endl;
+    std::cout << "Recursive: " << u.id_rec << std::endl << std::endl;
+}
+
+template <typename T>
+void printVecStruct(std::vector<sqc<T> > v){
+    for(typename std::vector<sqc<T> >::iterator it = v.begin(); it != v.end(); it++)
+        printStruct(*it);
 }
 
 //PARSING
@@ -97,61 +214,90 @@ bool    parseArgs(result<T>& r, int argc, char **argv){
     return false; 
 }
 
+//INIT_VEC_SEQ
+template <typename T>
+std::vector<typename T::iterator>    initSeq(sqc<T>& u, typename T::iterator& it, typename T::iterator end, unsigned int idx_rec){
+    std::vector<typename T::iterator> vecIt;
+    // std::cout << "VEC2"<<std::endl;
+
+    for (unsigned int i = 0; i < idx_rec && it != end; i++)
+    {
+        vecIt.push_back(it);
+        it++;
+    }
+    if (vecIt.size() != idx_rec) //secur e not full, en voie struct
+        u.full = false;
+    else
+        u.full = true;
+    return (vecIt);
+}
+
+template <typename T>
+sqc<T> initStructSeq(typename T::iterator& it, typename T::iterator end, int n_seq, int idx_rec){
+    sqc<T> u;
+    // std::cout << "STRUCT1"<<std::endl;
+ 
+    u.seq = initSeq<T>(u, it, end, idx_rec);
+    u.id_seq = n_seq;
+    u.id_rec = idx_rec;
+    return (u);
+}
+
+template <typename T>
+std::vector<sqc<T> > initVecStructSeq(result<T>& r, int idx_rec){//RETURN REF?
+    std::vector<sqc<T> > vec;
+    int n_seq = 1;
+    // std::cout << "VEC1"<<std::endl;
+    for(typename T::iterator it = r.sorted.begin(); it != r.sorted.end(); it = it)//IT = IT ATTENTION A LA BOUCLE INITSEQ
+    {
+        vec.push_back(initStructSeq<T>(it, r.sorted.end(), n_seq, idx_rec));
+        n_seq++;
+    }
+    return (vec);
+}
+
 //SORTING
 template <typename T>
-void vecIt(T& c, std::vector<typename T::iterator>& even, std::vector<typename T::iterator>& odd){
-    int i = 0;
-    for(typename T::iterator it = c.begin(); it != c.end(); ++it)
+void swapRange(std::vector<typename T::iterator>& v1, std::vector<typename T::iterator>& v2){
+    typename std::vector<typename T::iterator>::iterator it1 = v1.begin();
+    typename std::vector<typename T::iterator>::iterator it2 = v2.begin();
+    while(it1 != v1.end() && it2 != v2.end())
     {
-        if(i % 2 == 0)
-            even.push_back(it);
-        else
-            odd.push_back(it);
-        i++;
+        std::iter_swap(*it1,*it2);
+        it1++;
+        it2++;
     }
-    // printCont(even);
-    // printCont(odd);
 }
 
 template <typename T>
-void swapE(std::vector<typename T::iterator>& even,std::vector<typename T::iterator>& odd, unsigned int exp){
-    typename std::vector<typename T::iterator>::iterator itev = even.begin();
-    typename std::vector<typename T::iterator>::iterator itod = odd.begin();
-    typename std::vector<typename T::iterator>::iterator iteve = even.end(); 
-    typename std::vector<typename T::iterator>::iterator itode = odd.end();
-    int temp = 0;
-    (void) exp;
-    std::cout << exp << std::endl;
-    while(itev != iteve && itod != itode)
-    {
-        if(**itev > **itod)
-        {
-            temp = **itod;
-            **itod = **itev;
-            **itev = temp;
+void    sortPairs(std::vector<sqc<T> >& pairing){
+    typename std::vector<sqc<T> >::iterator it1 = pairing.begin();
+    typename std::vector<sqc<T> >::iterator it2 = it1 + 1;
+    while(it1 != pairing.end() && it2 != pairing.end()){
+        if(*(it1->seq.back()) > *(it2->seq.back()) && it2->full == true ){//ATTENTION POTENTIELLEMENT IT2 N'EXISTE PAS
+            swapRange<T>(it1->seq, it2->seq);
         }
-        itev++;
-        itod++;
+        it1 += 2;
+        if (it1 != pairing.end())
+            it2 += 2;
     }
+    // printVecStruct(pairing);
+
 }
 
 template <typename T>
-bool sortFJ(result<T>& r){
-    std::vector<typename T::iterator> even;
-    std::vector<typename T::iterator> odd;
+bool sortFJ(result<T>& r,unsigned int idx_rec){
+    std::vector<sqc<T> > pairing = initVecStructSeq(r, idx_rec);
+    // printVecStruct(pairing);
+    sortPairs<T>(pairing);
+    for(unsigned int i = idx_rec; i < r.sorted.size(); i *= 2)
+        sortFJ(r,i);
+    printVecStruct(pairing);
+    // while (idx_rec < r.unsorted.size()){
+        
+    //     idx_rec *= 2;
+    // }
     
-    vecIt(r.sorted,even,odd);
-    
-    // printCont(even);
-    // printCont(odd);
-    
-    for (unsigned int i = 2; i / 2 < even.size(); i = pow(i,2))
-        swapE<T>(even,odd,i);
-
-    // printCont(even);
-    // printCont(odd);
-
-    // std::vector<typename std::pair<T,T> > v = pairing(r.unsorted);
     return (false);
 }
 
@@ -182,7 +328,7 @@ bool timeSort(result<T>& r, int argc, char **argv){
     usleep(100);
     if(parseArgs(r,argc, argv))
         return (true);
-    sortFJ(r);
+    sortFJ(r, 1);
 
     gettimeofday(&end,NULL);
     r.execTime = (end.tv_sec - start.tv_sec) *1000000L + (end.tv_usec - start.tv_usec);
@@ -195,6 +341,7 @@ int main(int argc, char **argv){
 
     if(timeSort(rVec, argc, argv))
         return 1;
+    std::cout << std::endl;
     if (timeSort(rLst, argc, argv))
         return 1;
     
