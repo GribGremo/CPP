@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 17:20:55 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/09/29 07:42:15 by grib             ###   ########.fr       */
+/*   Updated: 2025/09/29 15:41:50 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,7 +225,8 @@ std::vector<typename T::iterator>    initSeq(sqc<T>& u, typename T::iterator& it
         vecIt.push_back(it);
         it++;
     }
-    if (vecIt.size() != idx_rec) //secur e not full, en voie struct
+    // std::cout << vecIt.size() <<" "<< idx_rec<<std::endl;
+    if (vecIt.size() != idx_rec) //secure not full, envoie struct
         u.full = false;
     else
         u.full = true;
@@ -248,7 +249,7 @@ std::vector<sqc<T> > initVecStructSeq(result<T>& r, int idx_rec){//RETURN REF?
     std::vector<sqc<T> > vec;
     int n_seq = 1;
     // std::cout << "VEC1"<<std::endl;
-    for(typename T::iterator it = r.sorted.begin(); it != r.sorted.end(); it = it)//IT = IT ATTENTION A LA BOUCLE INITSEQ
+    for(typename T::iterator it = r.sorted.begin(); it != r.sorted.end(); )//IT = IT ATTENTION A LA BOUCLE INITSEQ
     {
         vec.push_back(initStructSeq<T>(it, r.sorted.end(), n_seq, idx_rec));
         n_seq++;
@@ -288,16 +289,15 @@ void    sortPairs(std::vector<sqc<T> >& pairing){
 template <typename T>
 bool sortFJ(result<T>& r,unsigned int idx_rec){
     std::vector<sqc<T> > pairing = initVecStructSeq(r, idx_rec);
+    // std::cout << "idx_rec: " << idx_rec << std::endl;
     // printVecStruct(pairing);
     sortPairs<T>(pairing);
-    for(unsigned int i = idx_rec; i < r.sorted.size(); i *= 2)
-        sortFJ(r,i);
-    printVecStruct(pairing);
-    // while (idx_rec < r.unsorted.size()){
-        
-    //     idx_rec *= 2;
-    // }
-    
+    idx_rec *= 2;
+    if(idx_rec < r.sorted.size())
+        sortFJ(r,idx_rec);
+    // std::cout << *(++(r.sorted.rbegin()))<< std::endl;
+    r.sorted.insert(++(r.sorted.begin()), (r.advance((r.sorted.rbegin(),3)).base(),((r.sorted.rbegin()) + 1).base());
+
     return (false);
 }
 
