@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
+/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 17:20:55 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/09/30 15:43:28 by sylabbe          ###   ########.fr       */
+/*   Updated: 2025/10/04 19:53:24 by grib             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <vector>
 #include <list>
+#include <deque>
 #include <time.h>
 
 #include <cstdlib>
@@ -22,7 +23,7 @@
 #include <iomanip>
 #include <sys/time.h>
 #include <cmath>
-
+#include "PmergeMe.hpp"
 //STRUCTURES
 template <typename T>
 struct result{
@@ -308,8 +309,6 @@ void swapRange(std::list<typename T::iterator>& v1, std::list<typename T::iterat
     }
 }
 
-
-
 template <typename T>
 void    sortPairs(std::list<sqc<T> >& pairing){
     typename std::list<sqc<T> >::iterator it1 = pairing.begin();
@@ -374,16 +373,23 @@ bool timeSort(result<T>& r, int argc, char **argv){
 }
 
 int main(int argc, char **argv){
-    result<std::vector<int> > rVec;
-    result<std::list<int> > rLst;
+    // result<std::vector<int> > rVec;
+    // result<std::list<int> > rLst;
 
-    if(timeSort(rVec, argc, argv))
-        return 1;
-    std::cout << std::endl;
-    if (timeSort(rLst, argc, argv))
-        return 1;
+    // if(timeSort(rVec, argc, argv))
+    //     return 1;
+    // std::cout << std::endl;
+    // if (timeSort(rLst, argc, argv))
+    //     return 1;
     
-    printFJ(rVec,rLst);
+    // printFJ(rVec,rLst);
+
+
+    //Main test class
+    PmergeMe<std::vector<int> > vec(argc,argv);
+    PmergeMe<std::list<int> > list(argc,argv);
+    // PmergeMe<std::deque<int> > deque(argc,argv);
+
 }
 
 /*Ford-Johnson algorithm 
