@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 17:20:55 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/10/06 16:20:35 by sylabbe          ###   ########.fr       */
+/*   Updated: 2025/10/07 09:52:39 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -386,8 +386,8 @@ int main(int argc, char **argv){
 
 
     //Main test class
-    PmergeMe<std::vector<int> > vec(argc,argv);
-    // PmergeMe<std::list<int> > list(argc,argv);
+    // PmergeMe<std::vector<int> > vec(argc,argv);
+    PmergeMe<std::list<int> > list(argc,argv);
     // PmergeMe<std::deque<int> > deque(argc,argv);
 
 }

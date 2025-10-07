@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 17:21:03 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/10/06 16:05:22 by sylabbe          ###   ########.fr       */
+/*   Updated: 2025/10/07 09:53:51 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 #include <list>
 
 #include "sortVector.cpp"
+#include "sortList.cpp"
+
 
 template <typename Container>
 struct result{
