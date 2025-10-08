@@ -122,8 +122,41 @@ void insertListFJ(pairer pairing){
     printLstSqc(pending);
 }
 
-void binarySearch(std::list<sqc_list>::iterator start, std::list<sqc_list>::iterator end, int cmp){
-    
+std::list<sqc_list>::iterator& getItFromId(std::list<sqc_list>& lst, int id){
+    std::list<sqc_list>::iterator it;
+    while (id != it->idSeq && it != lst.end())
+        it++;
+    return (it);
+}
+
+std::list<sqc_list>::iterator getPrev(std::list<sqc_list>& lst, std::list<sqc_list>::iterator it){
+    if (it == lst.begin())
+        return (lst.end());
+    it--;
+    return (it);
+}
+
+std::list<sqc_list>::iterator getNext(std::list<sqc_list>& lst, std::list<sqc_list>::iterator it){
+    if (it == lst.end())
+        return (it);
+    it++;
+    return (it);
+}
+
+ std::list<sqc_list>::iterator binarySearch(std::list<sqc_list> lst, std::list<sqc_list>::iterator start, std::list<sqc_list>::iterator end, int cmp){
+    int mid = ((end->idSeq - start->idSeq) / 2) + start->idSeq;
+    std::list<sqc_list>::iterator searched = getItFromId(lst, mid);
+    while(true)//!(*searched->last > *getPrev(lst,searched)->last && *searched->last > *getNext(lst,searched)->last))
+    {
+        if(cmp > *searched->last){
+
+        }
+        else if (cmp < *searched->last){
+
+        }
+        else if (cmp == *searched->last)
+    }
+
 }
 
 //INIT_VEC_SEQ
@@ -228,5 +261,5 @@ Pour 2.pow(x) - 1 taille de sequence, il faut x comparaisons max
           |                       |            2
     |           |           |           |      3
  |     |     |     |     |     |     |     |   4
-Comment deduit il la taille de ma sequence en fonction de jacobstal?
+
 */
