@@ -1,6 +1,6 @@
 #include <list>
 #include <iostream>
-
+#include <cmath>
 struct sqc_list{
     // std::list<std::list<int>::iterator> seq;
     std::list<int>::iterator first;
@@ -42,7 +42,9 @@ void printContIt(std::list<std::list<int>::iterator>& c){
 
 void printLstSqc(std::list<sqc_list> lst){
     for(std::list<sqc_list>::iterator it = lst.begin(); it != lst.end();it++){
+        std::cout << "{";
         printFL(*it);
+        std::cout << " }";
         std::cout << std::endl;
     }
 }
@@ -79,14 +81,14 @@ void insertListFJ(pairer pairing);
 void sortFJ_Container(std::list<int>& v, unsigned int seqLen){
     pairer pairing = initPairing(v,seqLen);
     // printCont(v);
-    printStruct(pairing);
+    // printStruct(pairing);
     sortPairs(pairing);
-    printStruct(pairing);
+    // printStruct(pairing);
     // printLstStruct(pairing);
     seqLen *= 2;
     if(seqLen < v.size() / 2)
         sortFJ_Container(v, seqLen);
-    printCont(v);
+    // printCont(v);
     insertListFJ(pairing);
     printCont(v);
 }
@@ -96,7 +98,7 @@ void insertListFJ(pairer pairing){
     std::list<sqc_list> pending;
     std::list<sqc_list>::iterator itmin = pairing.min.begin();
     std::list<sqc_list>::iterator itmax = pairing.max.begin();
-
+    int idJS = (std::pow(2,2) - std::pow(-1,2)) / 3;//3 tout simplement?
     main.push_back(*itmin);
     itmin++;
     while(itmax != pairing.max.end() && itmax->full == true){
@@ -110,11 +112,18 @@ void insertListFJ(pairer pairing){
     if(itmax != pairing.max.end())//PAS SUR OBLIGE?
         pending.push_back(*itmax);
 
+    for (int x = 2; idJS < pairing.max.rbegin()->idSeq; x++){
 
+        idJS = (std::pow(2,x) - std::pow(-1,x)) / 3;
+    }
     std::cout << "MAIN:" <<std::endl;
     printLstSqc(main);
     std::cout << "PENDING:" <<std::endl;
     printLstSqc(pending);
+}
+
+void binarySearch(std::list<sqc_list>::iterator start, std::list<sqc_list>::iterator end, int cmp){
+    
 }
 
 //INIT_VEC_SEQ
@@ -198,23 +207,23 @@ void    sortPairs(pairer& pairing){
     }
 }//ATTENTION TU DEREFERENCES IT2->LAST, MAIS IL PEUT ETRE A END(), POTENTIELLEMENT REFAIRE TON LAST A -1
 
-
+// 11 2 17 0 16 8 6 15 10 3 21 1 18 9 14 19 12 5 4 20 13 7
 /*
 https://vivekupadhyay125.wordpress.com/wp-content/uploads/2013/08/donald-e-knuth-the-art-of-computer-programming-vol-3.pdf  p.197
 */
 
 /*
 Pour 2.pow(x) - 1 taille de sequence, il faut x comparaisons max
- .  .  .                                       3 unites
-    |                                          1 comparaison
+ *  *  *                                       3 unites
+ .  |  .                                       1 comparaison
  |     |                                       2 comparaisons max
 
- .  .  .  .  .  .  .                           5
-          |                                    1
-    |           |                              2
+ *  *  *  *  *  *  *                           5
+ .  .  .  |  .  .  .                           1
+ .  |  .     .  |  .                           2
  |     |     |     |                           3
 
- .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  11
+ *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  11
                       |                        1
           |                       |            2
     |           |           |           |      3
