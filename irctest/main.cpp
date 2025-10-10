@@ -6,9 +6,11 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 13:23:35 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/10/09 17:10:40 by sylabbe          ###   ########.fr       */
+/*   Updated: 2025/10/10 10:59:28 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "server.hpp"
 
 #include <cstdlib> //strtol
 #include <climits> //USHRT_MAX
@@ -39,12 +41,9 @@ Gestion de signaux propre : sigaction, sigemptyset
 htons: convert a unsigned short into in_port_t format(a kind of unsigned short but for network)
 inet_addr: convert string IP address into in_addr(format structure)
 listen: rend disponible ce socket pour la reception de clients(2earg: nombre de clients en attente de validation a acceder au socket)
+fcntl: permet de gerer le comportement d'un fd (le rendre non-bloquant par exemple)
 */
 
-struct pars{
-    u_short port;
-    std::string password;
-};
 
 bool isFormatPasswordCompatible(std::string password){
     if ((password.size() > 64 || password.size() < 1))
@@ -74,49 +73,50 @@ int main(int argc, char **argv){
     pars p;
     if (!parsing(argc,argv,p))
         return (1);
+    server serv = server(p);
+    serv.launch();
 
-    int fdSocketServer = socket(AF_INET, SOCK_STREAM, 0);//IPPROTO_TCP = 0, SOCKSTREAM suffit a faire comprendre qu'on utilisera le protocole TCP
-    if(fdSocketServer == -1){//errno possible
-        std::cout << "Error: Socket failed to create"<< std::endl;
-        return (1);
-    }
+    // int fdSocketServer = socket(AF_INET, SOCK_STREAM, 0);//IPPROTO_TCP = 0, SOCKSTREAM suffit a faire comprendre qu'on utilisera le protocole TCP
+    // if(fdSocketServer == -1){//errno possible
+    //     std::cout << "Error: Socket failed to create"<< std::endl;
+    //     return (1);
+    // }
 
-    sockaddr_in addressServer;//Describes an IPV4 internet domain socket address
-    addressServer.sin_family = AF_INET;
-    addressServer.sin_port = htons(p.port);
-    addressServer.sin_addr.s_addr = inet_addr("127.0.0.1");//defaut a voir
+    // sockaddr_in addressServer;//Describes an IPV4 internet domain socket address
+    // addressServer.sin_family = AF_INET;
+    // addressServer.sin_port = htons(p.port);
+    // addressServer.sin_addr.s_addr = inet_addr("127.0.0.1");//defaut a voir
 
-    if(bind(fdSocketServer, (struct sockaddr*)&addressServer,sizeof(addressServer)) == - 1)//errno possible(interessant erreur port)
-    {
-        std::cout << "Error: Bind failed to associate address to socket" << std::endl;
-        return (1);
-    }
+    // if(bind(fdSocketServer, (struct sockaddr*)&addressServer,sizeof(addressServer)) == - 1)//errno possible(interessant erreur port)
+    // {
+    //     std::cout << "Error: Bind failed to associate address to socket" << std::endl;
+    //     return (1);
+    // }
 
-    if(listen(fdSocketServer,10) == - 1)//errno possible
-    {
-        std::cout << "Error: Listen failed" << std::endl;
-        return (1);
-    }
-    while(true)
-    {
-        sockaddr_in addressClient;
-        socklen_t addressClientLen = sizeof(addressClient);
-        int fdSocketClient = accept(fdSocketServer,(struct sockaddr*)&addressServer,&addressClientLen);
-        if(fdSocketClient == - 1)
-        {
-            std::cout << "Error: Accept failed" << std::endl;
-            return (1);
-        }
+    // if(listen(fdSocketServer,10) == - 1)//errno possible
+    // {
+    //     std::cout << "Error: Listen failed" << std::endl;
+    //     return (1);
+    // }
+    // while(true)
+    // {
+    //     sockaddr_in addressClient;
+    //     socklen_t addressClientLen = sizeof(addressClient);
+    //     int fdSocketClient = accept(fdSocketServer,(struct sockaddr*)&addressServer,&addressClientLen);
+    //     if(fdSocketClient == - 1)
+    //     {
+    //         std::cout << "Error: Accept failed" << std::endl;
+    //         return (1);
+    //     }
 
 
-        std::cout << "Un client s'est connecté !\n";
+    //     std::cout << "Un client s'est connecté !\n";
 
-        const char* msg = "Hello !\n";
+    //     const char* msg = "Hello !\n";
 
-        close(fdSocketClient); // On ferme la socket du client, mais le serveur reste en écoute
-    }
-    
-    close(fdSocketServer);
+    //     close(fdSocketClient); // On ferme la socket du client, mais le serveur reste en écoute
+    // }
+    // close(fdSocketServer);
 }
 /*
 ___sockaddr_in____

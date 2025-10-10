@@ -1,52 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.hpp                                         :+:      :+:    :+:   */
+/*   client.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/10 08:30:22 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/10/10 14:19:12 by sylabbe          ###   ########.fr       */
+/*   Created: 2025/10/10 09:39:21 by sylabbe           #+#    #+#             */
+/*   Updated: 2025/10/10 13:03:57 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SERVER_HPP
-#define SERVER_HPP
 
-#include "client.hpp"
+#ifndef CLIENT_HPP
+#define CLIENT_HPP
 
-#include <unistd.h>
-#include <fcntl.h>
-
-#include <list>
-#include <cerrno>//temp?
-#include <cstring>//temp?
 #include <iostream>
+
+#include <fcntl.h>
+#include <unistd.h>
 #include <netinet/in.h>//sockaddr_in
 #include <arpa/inet.h>//inet_addr()
-#include <sys/epoll.h>//epoll()
 
 
-struct pars{
-    u_short port;
-    std::string password;
-};
-
-class server{
+class client{
     public:
-    server();
-    server(pars& p);
-    server(const server& src);
-    ~server();
-    server& operator=(const server& src);
-
-    void launch();
+    client();
+    client(int fdSocketClient);
+    client(const client& src);
+    ~client();
+    client& operator=(const client& src);
 
     private:
-    int _fdSocketServer;
-    sockaddr_in _addressServer;
-    pars _p;
-    std::list<client> _lst;
+    int _fdSocketClient;
+    sockaddr_in _addressClient;//A voir
 };
 
 #endif
