@@ -113,8 +113,12 @@ void insertListFJ(pairer pairing){
         pending.push_back(*itmax);
 
     for (int x = 2; idJS < pairing.max.rbegin()->idSeq; x++){
-
+        std::cout << "TOUR" << std::endl;
         idJS = (std::pow(2,x) - std::pow(-1,x)) / 3;
+        for ( std::list<sqc_list>::iterator it = getItFromId(pending,idJS); getPrev(pending,it) != it; it = getPrev(pending,it)){
+            
+            pending.splice(binarySearch(main,getNext(main,main.begin()),getItFromId(main,idJS)),pending,it)
+        }
     }
     std::cout << "MAIN:" <<std::endl;
     printLstSqc(main);
@@ -122,7 +126,7 @@ void insertListFJ(pairer pairing){
     printLstSqc(pending);
 }
 
-std::list<sqc_list>::iterator& getItFromId(std::list<sqc_list>& lst, int id){
+std::list<sqc_list>::iterator getItFromId(std::list<sqc_list>& lst, int id){
     std::list<sqc_list>::iterator it;
     while (id != it->idSeq && it != lst.end())
         it++;
@@ -149,14 +153,18 @@ std::list<sqc_list>::iterator getNext(std::list<sqc_list>& lst, std::list<sqc_li
     while(true)//!(*searched->last > *getPrev(lst,searched)->last && *searched->last > *getNext(lst,searched)->last))
     {
         if(cmp > *searched->last){
-
+            if(*getNext(lst,searched)->last > cmp)
+                return (getNext(lst,searched));
+            binarySearch(lst,start,searched,cmp);
         }
         else if (cmp < *searched->last){
-
+            if(*getPrev(lst,searched)->last < cmp)
+                return (searched);
+            binarySearch(lst,searched,end,cmp);
         }
         else if (cmp == *searched->last)
+            return (searched);
     }
-
 }
 
 //INIT_VEC_SEQ
