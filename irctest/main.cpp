@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
+/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 13:23:35 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/10/10 10:59:28 by sylabbe          ###   ########.fr       */
+/*   Updated: 2025/10/11 19:14:20 by grib             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,49 +74,12 @@ int main(int argc, char **argv){
     if (!parsing(argc,argv,p))
         return (1);
     server serv = server(p);
-    serv.launch();
-
-    // int fdSocketServer = socket(AF_INET, SOCK_STREAM, 0);//IPPROTO_TCP = 0, SOCKSTREAM suffit a faire comprendre qu'on utilisera le protocole TCP
-    // if(fdSocketServer == -1){//errno possible
-    //     std::cout << "Error: Socket failed to create"<< std::endl;
-    //     return (1);
-    // }
-
-    // sockaddr_in addressServer;//Describes an IPV4 internet domain socket address
-    // addressServer.sin_family = AF_INET;
-    // addressServer.sin_port = htons(p.port);
-    // addressServer.sin_addr.s_addr = inet_addr("127.0.0.1");//defaut a voir
-
-    // if(bind(fdSocketServer, (struct sockaddr*)&addressServer,sizeof(addressServer)) == - 1)//errno possible(interessant erreur port)
-    // {
-    //     std::cout << "Error: Bind failed to associate address to socket" << std::endl;
-    //     return (1);
-    // }
-
-    // if(listen(fdSocketServer,10) == - 1)//errno possible
-    // {
-    //     std::cout << "Error: Listen failed" << std::endl;
-    //     return (1);
-    // }
-    // while(true)
-    // {
-    //     sockaddr_in addressClient;
-    //     socklen_t addressClientLen = sizeof(addressClient);
-    //     int fdSocketClient = accept(fdSocketServer,(struct sockaddr*)&addressServer,&addressClientLen);
-    //     if(fdSocketClient == - 1)
-    //     {
-    //         std::cout << "Error: Accept failed" << std::endl;
-    //         return (1);
-    //     }
-
-
-    //     std::cout << "Un client s'est connecté !\n";
-
-    //     const char* msg = "Hello !\n";
-
-    //     close(fdSocketClient); // On ferme la socket du client, mais le serveur reste en écoute
-    // }
-    // close(fdSocketServer);
+    try{
+        serv.launch();
+    }
+    catch(std::exception& e){
+        std::cout << e.what() << std::endl;
+    }
 }
 /*
 ___sockaddr_in____

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
+/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 09:39:21 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/10/10 13:03:57 by sylabbe          ###   ########.fr       */
+/*   Updated: 2025/10/12 11:46:14 by grib             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ class client{
     client& operator=(const client& src);
 
     private:
+    std::string buffer;
     int _fdSocketClient;
     sockaddr_in _addressClient;//A voir
 };
