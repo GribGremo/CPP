@@ -177,7 +177,7 @@ std::list<sqc_list>::iterator getNext(std::list<sqc_list>& lst, std::list<sqc_li
         JS = (std::pow(2,x) - std::pow(-1,x)) / 3;
     // std::cout << *start->last << " " << *end->last <<std::endl;
     // std::cout << *searched->last <<std::endl;
-    for (int i = 0; i < x;i++)//!(*searched->last > *getPrev(lst,searched)->last && *searched->last > *getNext(lst,searched)->last))
+    for (int i = 0; i < x; i++)//!(*searched->last > *getPrev(lst,searched)->last && *searched->last > *getNext(lst,searched)->last))
     {
         if(cmp > *searched->last){
             if(*getNext(lst,searched)->last > cmp)
