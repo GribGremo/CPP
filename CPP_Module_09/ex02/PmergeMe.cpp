@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
+/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 17:21:00 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/10/06 16:47:14 by sylabbe          ###   ########.fr       */
+/*   Updated: 2025/10/18 15:12:56 by grib             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,15 @@ template <typename Container>
 void PmergeMe<Container>::sortFJ(){
     // std::cout << "Container Vector, good shit" << std::endl;
     // (void)c;
-    sortFJ_Container(_res.sorted, 1);
+    _res.sorted = sortFJ_Container(_res.sorted, 1);
     // std::vector<sqc<Container> > pairing = initPairing(seqLen);
     // sortPairs(pairing);
     // // printLstStruct(pairing);
     // seqLen *= 2;
     // if(seqLen < _res.sorted.size() / 2)
     //     sortFJ(seqLen);
+    std::cout << std::endl<< std::endl<< std::endl <<"FINAL LIST:"<< std::endl;
+    printCont(_res.sorted);
 }
 
 // template <typename Container>
