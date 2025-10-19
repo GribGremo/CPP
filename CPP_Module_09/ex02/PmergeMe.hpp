@@ -3,22 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
+/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 17:21:03 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/10/07 09:53:51 by sylabbe          ###   ########.fr       */
+/*   Updated: 2025/10/19 17:33:21 by grib             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PMERGEME_HPP
 #define PMERGEME_HPP
 
+#include <sys/time.h>
+
 #include <iostream>
 #include <vector>
 #include <list>
+#include <cmath>
 
-#include "sortVector.cpp"
-#include "sortList.cpp"
+// #include "sortVector.cpp"
+// #include "sortList.cpp"
 
 
 template <typename Container>
@@ -65,7 +68,9 @@ class PmergeMe{
     // std::vector<sqc<std::vector<int> > > initPairing(int seqLen);
     
 };
+std::list<int> sortFJ_Container(std::list<int>& v, unsigned int seqLen);
+void printCont(std::list<int>& c);
 
-
-#include "PmergeMe.cpp"
+// #include "test.hpp"
+#include "PmergeMe.tpp"
 #endif
