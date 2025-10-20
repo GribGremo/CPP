@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Span.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 15:36:09 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/09/19 21:31:21 by grib             ###   ########.fr       */
+/*   Updated: 2025/10/20 17:53:25 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
         else
             _t.insert(value);
     }
+
     unsigned int Span::shortestSpan(){
         if (_t.size() < 2)
             throw std::exception();
@@ -52,6 +53,7 @@
         }
         return (r);
     }
+
     unsigned int Span::longestSpan(){
         if (_t.size() < 2)
             throw std::exception();

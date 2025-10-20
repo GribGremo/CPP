@@ -3,21 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.tpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 17:21:00 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/10/19 23:51:30 by grib             ###   ########.fr       */
+/*   Updated: 2025/10/20 17:53:25 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // #include "PmergeMe.cpp"
 // #include "test.hpp"
 
-//CONSTRUCTORS/
+/*~~~~~~~~~~~~~~~~~~~~~CONSTRUCTORS~~~~~~~~~~~~~~~~~~~~~*/
+
 
 // template <typename Container>
 template<template<typename> class Container>
 PmergeMe<Container>::PmergeMe(){}
+
+template<template<typename> class Container>
+PmergeMe<Container>::PmergeMe(const PmergeMe& src){
+    _res = src._res;
+}
 
 // template <typename Container>
 template<template<typename> class Container>
@@ -29,6 +35,19 @@ PmergeMe<Container>::PmergeMe(int argc, char **argv){
 // template <typename Container>
 template<template<typename> class Container>
 PmergeMe<Container>::~PmergeMe(){}
+
+
+/*~~~~~~~~~~~~~~~~~~~~~OPERATORS~~~~~~~~~~~~~~~~~~~~~*/
+
+template<template<typename> class Container>
+PmergeMe<Container> PmergeMe<Container>::operator=(const PmergeMe& src){
+    if (this == &src)
+        return (this);
+    
+    _res = src._res;
+    return (*this);
+}
+
 
 //METHODS
 
