@@ -6,29 +6,34 @@
 /*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 17:21:00 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/10/19 13:58:48 by grib             ###   ########.fr       */
+/*   Updated: 2025/10/19 23:51:30 by grib             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // #include "PmergeMe.cpp"
 // #include "test.hpp"
 
-//CONSTRUCTORS/DESTRUCTOR
-template <typename Container>
+//CONSTRUCTORS/
+
+// template <typename Container>
+template<template<typename> class Container>
 PmergeMe<Container>::PmergeMe(){}
 
-template <typename Container>
+// template <typename Container>
+template<template<typename> class Container>
 PmergeMe<Container>::PmergeMe(int argc, char **argv){
     checkContainerType(*this,_res.containerType);
     timeSort(argc, argv);
 }
 
-template <typename Container>
+// template <typename Container>
+template<template<typename> class Container>
 PmergeMe<Container>::~PmergeMe(){}
 
 //METHODS
 
-template <typename Container>
+// template <typename Container>
+template<template<typename> class Container>
 void PmergeMe<Container>::timeSort(int argc , char **argv){
     timeval start;
     timeval end;
@@ -43,17 +48,20 @@ void PmergeMe<Container>::timeSort(int argc , char **argv){
 }
 
 //CHECKER_TYPE
-template <typename T>
-void checkContainerType(PmergeMe<T>&, std::string& containerType){
+// template <typename T>
+template<template<typename> class Container>
+void checkContainerType(PmergeMe<Container>&, std::string& containerType){
     containerType = "Invalid container";
     throw std::runtime_error("Invalid container type");
 }
 
-void checkContainerType(PmergeMe<std::vector<int> >&, std::string& containerType){
+template <>
+void checkContainerType(PmergeMe<std::vector>&, std::string& containerType){
     containerType = "std::vector<int>";
 }
 
-void checkContainerType(PmergeMe<std::list<int> >&, std::string& containerType){
+template <>
+void checkContainerType(PmergeMe<std::list>&, std::string& containerType){
     containerType = "std::list<int>";
 }
 
@@ -66,7 +74,7 @@ void checkContainerType(PmergeMe<std::list<int> >&, std::string& containerType){
 // }
 
 
-template <typename Container>
+// template <typename Container>
 void PmergeMe<Container>::sortFJ(){
     // std::cout << "Container Vector, good shit" << std::endl;
     // (void)c;
@@ -90,7 +98,7 @@ void PmergeMe<Container>::sortFJ(){
 // }
 
 //PARSING
-template <typename Container>
+// template <typename Container>
 bool PmergeMe<Container>::isArgValid(char* str, long int& value){
     char *end = NULL;
     errno = 0;
@@ -103,7 +111,7 @@ bool PmergeMe<Container>::isArgValid(char* str, long int& value){
     return (true);
 }
 
-template <typename Container>
+// template <typename Container>
 bool    PmergeMe<Container>::parseArgs(int argc, char **argv){
     long int value = 0;
     if (argc < 2)

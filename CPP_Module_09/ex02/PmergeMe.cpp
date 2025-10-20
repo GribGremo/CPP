@@ -13,7 +13,7 @@
 |                                                 |
 \~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-struct sqc_list{
+struct sqc{
     // std::list<std::list<int>::iterator> seq;
     std::list<int>::iterator first;
     std::list<int>::iterator last;
@@ -22,8 +22,8 @@ struct sqc_list{
     bool full;
 };
 struct pairer{
-    std::list<sqc_list> min;
-    std::list<sqc_list> max;
+    std::list<sqc> min;
+    std::list<sqc> max;
     int seqLen;
 };
 
@@ -31,7 +31,7 @@ struct pairer{
 //DEBUG
 
 
-void printFL(sqc_list u){
+void printFL(sqc u){
     if (u.full == false)
     std::cout << "\033[1;31m";
     while(u.first != u.last){
@@ -48,14 +48,14 @@ void printCont(std::list<int>& c){
     std::cout << std::endl;
 }
 
-void printContIt(std::list<std::list<int>::iterator>& c){
-    for(std::list<std::list<int>::iterator>::iterator it = c.begin(); it != c.end(); it++)
-    std::cout << " " << *(*it);
-    std::cout << std::endl;
-}
+// void printContIt(std::list<std::list<int>::iterator>& c){
+//     for(std::list<std::list<int>::iterator>::iterator it = c.begin(); it != c.end(); it++)
+//     std::cout << " " << *(*it);
+//     std::cout << std::endl;
+// }
 
-void printLstSqc(std::list<sqc_list> lst){
-    for(std::list<sqc_list>::iterator it = lst.begin(); it != lst.end();it++){
+void printLstSqc(std::list<sqc> lst){
+    for(std::list<sqc>::iterator it = lst.begin(); it != lst.end();it++){
         std::cout << "{";
         printFL(*it);
         std::cout << " }";
@@ -64,8 +64,8 @@ void printLstSqc(std::list<sqc_list> lst){
 }
 
 void printStruct(pairer pairing){
-    std::list<sqc_list>::iterator itmin = pairing.min.begin();
-    std::list<sqc_list>::iterator itmax = pairing.max.begin();
+    std::list<sqc>::iterator itmin = pairing.min.begin();
+    std::list<sqc>::iterator itmax = pairing.max.begin();
     std::cout << "Sequence:"<< std::endl;
     while(itmin != pairing.min.end())
     {
@@ -85,8 +85,8 @@ void printStruct(pairer pairing){
 // std::list<int> pairerToList(pairer pairing){
 //     std::list<int> lst;
 //     std::list<int>::iterator end = lst.end();
-//     std::list<sqc_list>::iterator itMax = pairing.min.begin();
-//     for(std::list<sqc_list>::iterator itMin = pairing.min.begin(); itMin != pairing.min.end(); itMin++){
+//     std::list<sqc>::iterator itMax = pairing.min.begin();
+//     for(std::list<sqc>::iterator itMin = pairing.min.begin(); itMin != pairing.min.end(); itMin++){
 //         // for(std::list<int>::iterator it = itMin->first; it != itMin->last;it++)
 //         //     lst.push_back(*it);
 //         lst.insert(end,itMin->first,itMin->last);
@@ -105,7 +105,7 @@ void printStruct(pairer pairing){
 
 
 //INIT_VEC_SEQ
-// void    initSeq(sqc_list& u, std::list<int>::iterator& it, std::list<int>::iterator end){
+// void    initSeq(sqc& u, std::list<int>::iterator& it, std::list<int>::iterator end){
 //     int i = 0;
 //     u.first = it;
 //     while(i < seqLen && it != end){
@@ -119,11 +119,11 @@ void printStruct(pairer pairing){
 //         u.full = true;
 // }
 
-std::list<int> listSqcToListInt(std::list<sqc_list> lstSqc){
+std::list<int> listSqcToListInt(std::list<sqc> lstSqc){
     std::list<int> lst;
     // printLstSqc(lstSqc);
     std::list<int>::iterator end = lst.end();
-    for(std::list<sqc_list>::iterator it = lstSqc.begin(); it != lstSqc.end(); it++){
+    for(std::list<sqc>::iterator it = lstSqc.begin(); it != lstSqc.end(); it++){
         lst.insert(end,it->first,it->last);
         lst.push_back(*it->last); 
     }
@@ -133,10 +133,10 @@ std::list<int> listSqcToListInt(std::list<sqc_list> lstSqc){
 }
 
 // std::list<int> sortFJ_Container(std::list<int>& v, unsigned int seqLen);
-void    initSeq(sqc_list& u, std::list<int>::iterator& it, std::list<int>::iterator end);
-sqc_list initStructSeq(std::list<int>::iterator& it, std::list<int>::iterator end, int idSeq, int seqLen);
+void    initSeq(sqc& u, std::list<int>::iterator& it, std::list<int>::iterator end);
+sqc initStructSeq(std::list<int>::iterator& it, std::list<int>::iterator end, int idSeq, int seqLen);
 pairer initPairing(std::list<int>& v, int seqLen);
-void swapRange(sqc_list& u1, sqc_list& u2);
+void swapRange(sqc& u1, sqc& u2);
 void    sortPairs(pairer& pairing);
 std::list<int> insertListFJ(pairer& pairing);
 
@@ -144,8 +144,8 @@ std::list<int> insertListFJ(pairer& pairing);
 //////////////////////////////////////UTILS////////////////////////////////////////
 
 
-std::list<sqc_list>::iterator getItFromId(std::list<sqc_list>& lst, int id){
-    std::list<sqc_list>::iterator it = lst.begin();
+std::list<sqc>::iterator getItFromId(std::list<sqc>& lst, int id){
+    std::list<sqc>::iterator it = lst.begin();
     while (it != lst.end() && id != it->idSeq){
         // std::cout << "TOUR GETITFROMID" << std::endl;
         it++;
@@ -153,8 +153,8 @@ std::list<sqc_list>::iterator getItFromId(std::list<sqc_list>& lst, int id){
     return (it);
 }
 
-std::list<sqc_list>::iterator getItFromindex(std::list<sqc_list>& lst, int id){
-    std::list<sqc_list>::iterator it = lst.begin();
+std::list<sqc>::iterator getItFromindex(std::list<sqc>& lst, int id){
+    std::list<sqc>::iterator it = lst.begin();
     while (it != lst.end() && id != it->i){
         // std::cout << "TOUR GETITFROMINDEX" << std::endl;
         it++;
@@ -162,14 +162,14 @@ std::list<sqc_list>::iterator getItFromindex(std::list<sqc_list>& lst, int id){
     return (it);
 }
 
-std::list<sqc_list>::iterator getPrev(std::list<sqc_list>& lst, std::list<sqc_list>::iterator it){
+std::list<sqc>::iterator getPrev(std::list<sqc>& lst, std::list<sqc>::iterator it){
     if (it == lst.begin())
         return (lst.end());
     it--;
     return (it);
 }
 
-std::list<sqc_list>::iterator getNext(std::list<sqc_list>& lst, std::list<sqc_list>::iterator it){
+std::list<sqc>::iterator getNext(std::list<sqc>& lst, std::list<sqc>::iterator it){
     if (it == lst.end())
         return (it);
     it++;
@@ -180,14 +180,14 @@ std::list<sqc_list>::iterator getNext(std::list<sqc_list>& lst, std::list<sqc_li
 //////////////////////////////////////INSERT_LIST_FJ_JS////////////////////////////////////////
 
 
- std::list<sqc_list>::iterator binarySearch(std::list<sqc_list>& lst, std::list<sqc_list>::iterator start, std::list<sqc_list>::iterator end, int cmp){
+ std::list<sqc>::iterator binarySearch(std::list<sqc>& lst, std::list<sqc>::iterator start, std::list<sqc>::iterator end, int cmp){
     // std::cout << "COMPARATEUR~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << cmp << std::endl;
     // std::cout <<"endid:"<< end->i<<"startid:"<< start->i << std::endl;
     int diff = end->i - start->i;
     int mid = ((diff / 2) + start->i) ;
     // std::cout << "MID:" << mid << std::endl;
-    std::list<sqc_list>::iterator itmid = getItFromindex(lst, mid);
-    std::list<sqc_list>::iterator res;
+    std::list<sqc>::iterator itmid = getItFromindex(lst, mid);
+    std::list<sqc>::iterator res;
     // if (diff < 0)
         // std::cout <<"DIFF"<< diff << std::endl;
     if(cmp > *itmid->last){
@@ -218,7 +218,7 @@ std::list<sqc_list>::iterator getNext(std::list<sqc_list>& lst, std::list<sqc_li
     // int diff = end->idSeq - start->idSeq;
     // int mid = ((diff / 2) + start->idSeq) + 1;
     // int JS = (std::pow(2,2) - std::pow(-1,2)) / 3;
-    // std::list<sqc_list>::iterator searched = getItFromId(lst, mid);
+    // std::list<sqc>::iterator searched = getItFromId(lst, mid);
     // for (int x = 2; diff <= JS; x++)
     //     JS = (std::pow(2,x) - std::pow(-1,x)) / 3;
     // // std::cout << *start->last << " " << *end->last <<std::endl;
@@ -242,10 +242,10 @@ std::list<sqc_list>::iterator getNext(std::list<sqc_list>& lst, std::list<sqc_li
 
 
 
-void initIdList(std::list<sqc_list>& lst, std::list<sqc_list>::iterator& start, std::list<sqc_list>::iterator& end)
+void initIdList(std::list<sqc>& lst, std::list<sqc>::iterator& start, std::list<sqc>::iterator& end)
 {
     int i = 1;
-    for(std::list<sqc_list>::iterator it = start; it != getNext(lst,end); it++){
+    for(std::list<sqc>::iterator it = start; it != getNext(lst,end); it++){
         // std::cout << i <<std::endl;
         it->i = i;
         i++;
@@ -253,10 +253,10 @@ void initIdList(std::list<sqc_list>& lst, std::list<sqc_list>::iterator& start, 
 }
 
 
-void execJS(std::list<sqc_list>& main,std::list<sqc_list>& pending,int idJS){
-    std::list<sqc_list>::iterator itMinMain = main.begin();//getNext(main, main.begin());
-    std::list<sqc_list>::iterator itMaxMain = getPrev(main, getItFromId(main, idJS));
-    std::list<sqc_list>::iterator target;
+void execJS(std::list<sqc>& main,std::list<sqc>& pending,int idJS){
+    std::list<sqc>::iterator itMinMain = main.begin();//getNext(main, main.begin());
+    std::list<sqc>::iterator itMaxMain = getPrev(main, getItFromId(main, idJS));
+    std::list<sqc>::iterator target;
 
 
     // std::cout << "MAIN:" <<std::endl;
@@ -264,7 +264,7 @@ void execJS(std::list<sqc_list>& main,std::list<sqc_list>& pending,int idJS){
     // std::cout << "PENDING:" <<std::endl;
     // printLstSqc(pending);
 
-    for ( std::list<sqc_list>::iterator itToInsert = getItFromId(pending,idJS); itToInsert != pending.end(); itToInsert = getItFromId(pending,idJS)){
+    for ( std::list<sqc>::iterator itToInsert = getItFromId(pending,idJS); itToInsert != pending.end(); itToInsert = getItFromId(pending,idJS)){
         // std::cout << "IDJS" << idJS <<std::endl;
         itMinMain = main.begin();
         itMaxMain = getPrev(main, getItFromId(main, idJS));
@@ -278,9 +278,9 @@ void execJS(std::list<sqc_list>& main,std::list<sqc_list>& pending,int idJS){
     // printLstSqc(main);
 }
 
-void setupJS(pairer& pairing, std::list<sqc_list>& main,std::list<sqc_list>& pending, std::list<sqc_list>& rest){
-    std::list<sqc_list>::iterator itmin = pairing.min.begin();
-    std::list<sqc_list>::iterator itmax = pairing.max.begin();
+void setupJS(pairer& pairing, std::list<sqc>& main,std::list<sqc>& pending, std::list<sqc>& rest){
+    std::list<sqc>::iterator itmin = pairing.min.begin();
+    std::list<sqc>::iterator itmax = pairing.max.begin();
     // printStruct(pairing);
     main.push_back(*itmin);
     itmin++;
@@ -305,12 +305,12 @@ void setupJS(pairer& pairing, std::list<sqc_list>& main,std::list<sqc_list>& pen
 }
 
 
-void insertRest(std::list<sqc_list>& main, std::list<sqc_list>& pending){
-    // std::list<sqc_list>::iterator endPending = pending.end();
-    std::list<sqc_list>::iterator it = getPrev(pending,pending.end());
-    std::list<sqc_list>::iterator itMaxMain = getPrev(main,main.end());
-    std::list<sqc_list>::iterator itMinMain = main.begin();
-    std::list<sqc_list>::iterator target;
+void insertRest(std::list<sqc>& main, std::list<sqc>& pending){
+    // std::list<sqc>::iterator endPending = pending.end();
+    std::list<sqc>::iterator it = getPrev(pending,pending.end());
+    std::list<sqc>::iterator itMaxMain = getPrev(main,main.end());
+    std::list<sqc>::iterator itMinMain = main.begin();
+    std::list<sqc>::iterator target;
 
     if (it == pending.end())
         return ;
@@ -332,10 +332,10 @@ void insertRest(std::list<sqc_list>& main, std::list<sqc_list>& pending){
 
 //Jacosthal:Creation of main pending => until JS index higher than pending index => binarysearch on limited sequence with the help of JS
 std::list<int> insertListFJ(pairer& pairing){
-    std::list<sqc_list> main;
-    std::list<sqc_list> pending;
-    std::list<sqc_list> rest;
-    // std::list<sqc_list>::iterator target;
+    std::list<sqc> main;
+    std::list<sqc> pending;
+    std::list<sqc> rest;
+    // std::list<sqc>::iterator target;
     std::list<int> lst;
     int x = 3;
 
@@ -376,7 +376,7 @@ std::list<int> insertListFJ(pairer& pairing){
 
 
 
-void swapRange(sqc_list& u1, sqc_list& u2){
+void swapRange(sqc& u1, sqc& u2){
     std::list<int>::iterator it1 = u1.first;
     std::list<int>::iterator it2 = u2.first;
 
@@ -390,8 +390,8 @@ void swapRange(sqc_list& u1, sqc_list& u2){
 }
 
 void    sortPairs(pairer& pairing){
-    std::list<sqc_list>::iterator itmin = pairing.min.begin();
-    std::list<sqc_list>::iterator itmax = pairing.max.begin();
+    std::list<sqc>::iterator itmin = pairing.min.begin();
+    std::list<sqc>::iterator itmax = pairing.max.begin();
 
     while(itmin != pairing.min.end() && itmax != pairing.max.end()){
         if(*(itmin->last) > *(itmax->last) && itmax->full == true ){
@@ -407,8 +407,8 @@ void    sortPairs(pairer& pairing){
 /*will create and return a structure sqc_container
 It will incorporate 2 iterators representing the first and last numer of our sequence, it will also include idSeq, will be used with JS BS,
  to know wich sstructure is link to the other, will also use an index i*/
-sqc_list initStructSeq(std::list<int>::iterator& it, std::list<int>::iterator end, int idSeq, int seqLen){
-    sqc_list u;
+sqc initStructSeq(std::list<int>::iterator& it, std::list<int>::iterator end, int idSeq, int seqLen){
+    sqc u;
     int i = 0;
     u.first = it;
     while(i < seqLen - 1 && it != end){
@@ -534,12 +534,12 @@ Pour 2.pow(x) - 1 taille de sequence, il faut x comparaisons max
 */
 
 
-// void insertRest(std::list<sqc_list>& main, std::list<sqc_list>& pending){
-//     // std::list<sqc_list>::iterator endPending = pending.end();
-//     std::list<sqc_list>::iterator it = getPrev(pending,pending.end());
-//     std::list<sqc_list>::iterator itMaxMain;
-//     std::list<sqc_list>::iterator itMinMain;
-//     std::list<sqc_list>::iterator target;
+// void insertRest(std::list<sqc>& main, std::list<sqc>& pending){
+//     // std::list<sqc>::iterator endPending = pending.end();
+//     std::list<sqc>::iterator it = getPrev(pending,pending.end());
+//     std::list<sqc>::iterator itMaxMain;
+//     std::list<sqc>::iterator itMinMain;
+//     std::list<sqc>::iterator target;
 
 //     if (it == pending.end())
 //         return ;

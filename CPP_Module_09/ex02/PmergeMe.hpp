@@ -6,7 +6,7 @@
 /*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 17:21:03 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/10/19 17:33:21 by grib             ###   ########.fr       */
+/*   Updated: 2025/10/19 22:32:06 by grib             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,44 +20,108 @@
 #include <list>
 #include <cmath>
 
-// #include "sortVector.cpp"
-// #include "sortList.cpp"
-
-
-template <typename Container>
-struct result{
-    Container sorted;
-    Container unsorted;
-    double execTime;
-    std::string containerType;
-};
-
+    
 // template <typename Container>
-// struct sqc{
-//     typename Container::iterator first;
-//     typename Container::iterator last;
-//     int idMinPair;
-//     int idMaxPair;
-//     int idSeq;
-//     int seqLen;
-//     bool full;
-// };
-
-template <typename Container>
+template <template <typename> class Container>
 class PmergeMe{
+    
     private:
+
+    /*~~~~~~~~~~~~~~~~~~~~~TYPEDEF~~~~~~~~~~~~~~~~~~~~~*/
+    
+    
+    typedef typename Container<int>::iterator   it_cont_int;
+    typedef typename std::list<int>::iterator   it_lst_int;
+    typedef typename std::list<sqc>::iterator   it_lst_sqc;
+    
+    /*~~~~~~~~~~~~~~~~~~~~~STRUCTURES~~~~~~~~~~~~~~~~~~~~~*/
+
+    // template <typename Container>
+    struct result{
+        Container<int>   sorted;
+        Container<int>   unsorted;
+        double      execTime;
+        std::string containerType;
+    };
+
+    struct sqc{
+        it_cont_int first;
+        it_cont_int last;
+        int idSeq;
+        int i;
+        bool full;
+    };
+    
+    struct pairer{
+        Container<sqc> min;
+        Container<sqc> max;
+        int seqLen;
+    };
+    
+
+    /*~~~~~~~~~~~~~~~~~~~~~METHODS~~~~~~~~~~~~~~~~~~~~~*/    
+    
+    //DEBUG
+    void                            printFL(sqc u);
+    void                            printCont(std::list<int>& c);
+    void                            printLstSqc(std::list<sqc> lst);
+    void                            printStruct(pairer pairing);
+
+    //CHECKER TYPE
+    void                            checkContainerType(PmergeMe<T>&, std::string& containerType);
+    void                            checkContainerType(PmergeMe<std::vector<int> >&, std::string& containerType);
+    void                            checkContainerType(PmergeMe<std::list<int> >&, std::string& containerType);
+    
+    
+    //UTILS
+    std::list<int>                  listSqcToListInt(std::list<sqc> lstSqc);
+    std::list<sqc>::iterator        getItFromId(std::list<sqc>& lst, int id);
+    std::list<sqc>::iterator        getItFromindex(std::list<sqc>& lst, int id);
+    std::list<sqc>::iterator        getPrev(std::list<sqc>& lst, std::list<sqc>::iterator it);
+    std::list<sqc>::iterator        getNext(std::list<sqc>& lst, std::list<sqc>::iterator it);
+    
+    //MERGE INSERT
+    std::list<sqc>::iterator        binarySearch(std::list<sqc>& lst, std::list<sqc>::iterator start, std::list<sqc>::iterator end, int cmp);
+    void                            initIdList(std::list<sqc>& lst, std::list<sqc>::iterator& start, std::list<sqc>::iterator& end);
+    void                            execJS(std::list<sqc>& main,std::list<sqc>& pending,int idJS);
+    void                            setupJS(pairer& pairing, std::list<sqc>& main,std::list<sqc>& pending, std::list<sqc>& rest);
+    void                            insertRest(std::list<sqc>& main, std::list<sqc>& pending);
+    std::list<int>                  insertListFJ(pairer& pairing);
+    
+    //SORT PAIRS
+    void                            swapRange(sqc& u1, sqc& u2);
+    void                            sortPairs(pairer& pairing);
+    
+    //INIT PAIRER SEQUENCE
+    sqc                             initStructSeq(it_cont_int& it, it_cont_int end, int idSeq, int seqLen);
+    pairer                          initPairing(std::list<int>& v, int seqLen);
+    
+    //SORT
+    void                            timeSort(int argc , char **argv);
+    void                            sortFJ();
+    std::list<int>                  sortFJ_Container(std::list<int>& v, unsigned int seqLen);
+    
+    //PARSING
+    bool                            parseArgs(int argc, char **argv);
+    bool                            isArgValid(char* str, long int& value);
+    
+    /*~~~~~~~~~~~~~~~~~~~~~CONSTRUCTOR~~~~~~~~~~~~~~~~~~~~~*/    
+    
     PmergeMe();
     
-    result<Container> _res;
+    /*~~~~~~~~~~~~~~~~~~~~~MEMBERS~~~~~~~~~~~~~~~~~~~~~*/    
+    
+    result _res;
+    
     
     public:
-    PmergeMe(int argc, char **argv);
+    
+    /*~~~~~~~~~~~~~~~~~~~~~CONSTRUCTOR~~~~~~~~~~~~~~~~~~~~~*/    
+
+    PmergeMe(int argc, char **argv);//OUBLIE PAS LA CANNONIQUE BOUFFON
     ~PmergeMe();
     //MAIN
-    bool parseArgs(int argc, char **argv);
-    bool isArgValid(char* str, long int& value);
-    void timeSort(int argc , char **argv);
-    void sortFJ();
+
     // void sortFJ<std::list<int> >(unsigned int seqLen);
     // void sortFJ(Container c, unsigned int seqLen);
 
@@ -71,6 +135,6 @@ class PmergeMe{
 std::list<int> sortFJ_Container(std::list<int>& v, unsigned int seqLen);
 void printCont(std::list<int>& c);
 
-// #include "test.hpp"
 #include "PmergeMe.tpp"
+
 #endif
