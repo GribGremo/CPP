@@ -21,6 +21,7 @@ struct sqc{
     int i;
     bool full;
 };
+
 struct pairer{
     std::list<sqc> min;
     std::list<sqc> max;
@@ -131,14 +132,6 @@ std::list<int> listSqcToListInt(std::list<sqc> lstSqc){
     // printCont(lst);
     return (lst);   
 }
-
-// std::list<int> sortFJ_Container(std::list<int>& v, unsigned int seqLen);
-void    initSeq(sqc& u, std::list<int>::iterator& it, std::list<int>::iterator end);
-sqc initStructSeq(std::list<int>::iterator& it, std::list<int>::iterator end, int idSeq, int seqLen);
-pairer initPairing(std::list<int>& v, int seqLen);
-void swapRange(sqc& u1, sqc& u2);
-void    sortPairs(pairer& pairing);
-std::list<int> insertListFJ(pairer& pairing);
 
 
 //////////////////////////////////////UTILS////////////////////////////////////////

@@ -6,7 +6,7 @@
 /*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 17:20:55 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/10/19 14:02:34 by grib             ###   ########.fr       */
+/*   Updated: 2025/10/22 21:29:25 by grib             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -340,38 +340,22 @@
 // }
 
 //MAIN
-template<typename V, typename L>
-void printFJ(result<V>& rVec, result<L>& rLst){
-    std::cout << "Before:" ;
-    // printCont(rVec.unsorted);
-    for(typename V::iterator it = rVec.unsorted.begin(); it != rVec.unsorted.end(); it++)
-        std::cout << " " << *it;
-    std::cout << std::endl;
+// template<typename V, typename L>
+// void printFJ(result<V>& rVec, result<L>& rLst){
+//     std::cout << "Before:" ;
+//     // printCont(rVec.unsorted);
+//     for(typename V::iterator it = rVec.unsorted.begin(); it != rVec.unsorted.end(); it++)
+//         std::cout << " " << *it;
+//     std::cout << std::endl;
 
-    std::cout << "After: ";
-    for(typename V::iterator it = rVec.sorted.begin(); it != rVec.sorted.end(); it++)
-        std::cout << " " << *it;
-    std::cout << std::endl;
+//     std::cout << "After: ";
+//     for(typename V::iterator it = rVec.sorted.begin(); it != rVec.sorted.end(); it++)
+//         std::cout << " " << *it;
+//     std::cout << std::endl;
 
-    std::cout << "Time to process a range of " << rVec.unsorted.size() << " elements with " << "A VOIR CONTAINER TYPE" << " : " << rVec.execTime << " UNITE DE TEMPS"<< std::endl;
-    std::cout << "Time to process a range of " << rLst.unsorted.size() << " elements with " << "A VOIR CONTAINER TYPE" << " : " << rLst.execTime << " UNITE DE TEMPS"<< std::endl;
-}
-
-template <typename T>
-bool timeSort(result<T>& r, int argc, char **argv){
-    timeval start;
-    timeval end;
-
-    gettimeofday(&start,NULL);
-    usleep(100);
-    if(parseArgs(r,argc, argv))
-        return (true);
-    sortFJ(r, 1);
-
-    gettimeofday(&end,NULL);
-    r.execTime = (end.tv_sec - start.tv_sec) *1000000L + (end.tv_usec - start.tv_usec);
-    return (false);
-}
+//     std::cout << "Time to process a range of " << rVec.unsorted.size() << " elements with " << "A VOIR CONTAINER TYPE" << " : " << rVec.execTime << " UNITE DE TEMPS"<< std::endl;
+//     std::cout << "Time to process a range of " << rLst.unsorted.size() << " elements with " << "A VOIR CONTAINER TYPE" << " : " << rLst.execTime << " UNITE DE TEMPS"<< std::endl;
+// }
 
 int main(int argc, char **argv){
     // result<std::vector<int> > rVec;
@@ -388,7 +372,7 @@ int main(int argc, char **argv){
 
     //Main test class
     // PmergeMe<std::vector<int> > vec(argc,argv);
-    PmergeMe<std::list<int> > list(argc,argv);
+    PmergeMe<std::list> list(argc,argv);
     // PmergeMe<std::deque<int> > deque(argc,argv);
 
 }

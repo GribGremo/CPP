@@ -3110,3 +3110,731 @@ Summary: 69/69 passed (100%)
 ========================================
 
 Full log saved to: test_results.log
+========================================
+Test session: Sat Oct 25 08:39:09 AM CEST 2025
+========================================
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    TESTS DE ROBUSTESSE - PmergeMe    
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+═══ 1. CAS LIMITES ═══
+  Test: empty - PASS (0 elements)
+
+  Test: single - PASS (1 elements)
+
+  Test: two_sorted - PASS (2 elements)
+
+  Test: two_reverse - PASS (2 elements)
+
+  Test: three - PASS (3 elements)
+
+
+═══ 2. PETITES TAILLES ═══
+  Test: size_4 - PASS (4 elements)
+
+  Test: size_5 - PASS (5 elements)
+
+  Test: size_7 - PASS (7 elements)
+
+  Test: size_8 - PASS (8 elements)
+
+  Test: size_15 - PASS (15 elements)
+
+  Test: size_16 - PASS (16 elements)
+
+  Test: size_31 - PASS (31 elements)
+
+  Test: size_32 - PASS (32 elements)
+
+
+═══ 3. DOUBLONS ═══
+  Test: all_same - PASS (8 elements)
+
+  Test: many_duplicates - PASS (50 elements)
+
+  Test: some_duplicates - PASS (100 elements)
+
+
+═══ 4. CAS EXTRÊMES D'ORDRE ═══
+  Test: sorted_100 - PASS (100 elements)
+
+  Test: reverse_100 - PASS (100 elements)
+
+  Test: sorted_1000 - PASS (1000 elements)
+
+
+═══ 5. PUISSANCES DE 2 ═══
+  Test: power2_64 - PASS (64 elements)
+
+  Test: power2_128 - PASS (128 elements)
+
+  Test: power2_256 - PASS (256 elements)
+
+  Test: power2_512 - PASS (512 elements)
+
+  Test: power2_1024 - PASS (1024 elements)
+
+
+═══ 6. TAILLES 2^n - 1 ═══
+  Test: power2minus1_63 - PASS (63 elements)
+
+  Test: power2minus1_127 - PASS (127 elements)
+
+  Test: power2minus1_255 - PASS (255 elements)
+
+  Test: power2minus1_511 - PASS (511 elements)
+
+  Test: power2minus1_1023 - PASS (1023 elements)
+
+
+═══ 7. TAILLES 2^n + 1 ═══
+  Test: power2plus1_65 - PASS (65 elements)
+
+  Test: power2plus1_129 - PASS (129 elements)
+
+  Test: power2plus1_257 - PASS (257 elements)
+
+  Test: power2plus1_513 - PASS (513 elements)
+
+
+═══ 8. TAILLES JACOBSTHAL ═══
+  Test: jacobsthal_1 - PASS (1 elements)
+
+  Test: jacobsthal_3 - PASS (3 elements)
+
+  Test: jacobsthal_5 - PASS (5 elements)
+
+  Test: jacobsthal_11 - PASS (11 elements)
+
+  Test: jacobsthal_21 - PASS (21 elements)
+
+  Test: jacobsthal_43 - PASS (43 elements)
+
+  Test: jacobsthal_85 - PASS (85 elements)
+
+  Test: jacobsthal_171 - PASS (171 elements)
+
+  Test: jacobsthal_341 - PASS (341 elements)
+
+  Test: jacobsthal_683 - PASS (683 elements)
+
+
+═══ 9. GROSSES TAILLES ═══
+  Test: large_1000 - PASS (1000 elements)
+
+  Test: large_2000 - PASS (2000 elements)
+
+  Test: large_3000 - PASS (3000 elements)
+
+  Test: large_5000 - PASS (5000 elements)
+
+
+═══ 10. VALEURS EXTRÊMES ═══
+  Test: max_int - PASS (4 elements)
+
+  Test: large_range - PASS (100 elements)
+
+
+═══ 11. TESTS ALÉATOIRES MULTIPLES ═══
+  Test: random_1 - PASS (391 elements)
+
+  Test: random_2 - PASS (436 elements)
+
+  Test: random_3 - PASS (691 elements)
+
+  Test: random_4 - PASS (895 elements)
+
+  Test: random_5 - PASS (863 elements)
+
+  Test: random_6 - PASS (974 elements)
+
+  Test: random_7 - PASS (633 elements)
+
+  Test: random_8 - PASS (775 elements)
+
+  Test: random_9 - PASS (500 elements)
+
+  Test: random_10 - PASS (770 elements)
+
+  Test: random_11 - PASS (453 elements)
+
+  Test: random_12 - PASS (532 elements)
+
+  Test: random_13 - PASS (434 elements)
+
+  Test: random_14 - PASS (432 elements)
+
+  Test: random_15 - PASS (131 elements)
+
+  Test: random_16 - PASS (470 elements)
+
+  Test: random_17 - PASS (776 elements)
+
+  Test: random_18 - PASS (526 elements)
+
+  Test: random_19 - PASS (823 elements)
+
+  Test: random_20 - PASS (906 elements)
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+         RÉSUMÉ DES TESTS             
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Total: 69 tests
+Passed: 69
+Failed: 0
+
+🎉 ALL TESTS PASSED! 🎉
+
+Summary: 69/69 passed (100%)
+========================================
+
+Full log saved to: test_results.log
+========================================
+Test session: Sat Oct 25 08:39:24 AM CEST 2025
+========================================
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    TESTS DE ROBUSTESSE - PmergeMe    
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+═══ 1. CAS LIMITES ═══
+  Test: empty - PASS (0 elements)
+
+  Test: single - PASS (1 elements)
+
+  Test: two_sorted - PASS (2 elements)
+
+  Test: two_reverse - PASS (2 elements)
+
+  Test: three - PASS (3 elements)
+
+
+═══ 2. PETITES TAILLES ═══
+  Test: size_4 - PASS (4 elements)
+
+  Test: size_5 - PASS (5 elements)
+
+  Test: size_7 - PASS (7 elements)
+
+  Test: size_8 - PASS (8 elements)
+
+  Test: size_15 - PASS (15 elements)
+
+  Test: size_16 - PASS (16 elements)
+
+  Test: size_31 - PASS (31 elements)
+
+  Test: size_32 - PASS (32 elements)
+
+
+═══ 3. DOUBLONS ═══
+  Test: all_same - PASS (8 elements)
+
+  Test: many_duplicates - PASS (50 elements)
+
+  Test: some_duplicates - PASS (100 elements)
+
+
+═══ 4. CAS EXTRÊMES D'ORDRE ═══
+  Test: sorted_100 - PASS (100 elements)
+
+  Test: reverse_100 - PASS (100 elements)
+
+  Test: sorted_1000 - PASS (1000 elements)
+
+
+═══ 5. PUISSANCES DE 2 ═══
+  Test: power2_64 - PASS (64 elements)
+
+  Test: power2_128 - PASS (128 elements)
+
+  Test: power2_256 - PASS (256 elements)
+
+  Test: power2_512 - PASS (512 elements)
+
+  Test: power2_1024 - PASS (1024 elements)
+
+
+═══ 6. TAILLES 2^n - 1 ═══
+  Test: power2minus1_63 - PASS (63 elements)
+
+  Test: power2minus1_127 - PASS (127 elements)
+
+  Test: power2minus1_255 - PASS (255 elements)
+
+  Test: power2minus1_511 - PASS (511 elements)
+
+  Test: power2minus1_1023 - PASS (1023 elements)
+
+
+═══ 7. TAILLES 2^n + 1 ═══
+  Test: power2plus1_65 - PASS (65 elements)
+
+  Test: power2plus1_129 - PASS (129 elements)
+
+  Test: power2plus1_257 - PASS (257 elements)
+
+  Test: power2plus1_513 - PASS (513 elements)
+
+
+═══ 8. TAILLES JACOBSTHAL ═══
+  Test: jacobsthal_1 - PASS (1 elements)
+
+  Test: jacobsthal_3 - PASS (3 elements)
+
+  Test: jacobsthal_5 - PASS (5 elements)
+
+  Test: jacobsthal_11 - PASS (11 elements)
+
+  Test: jacobsthal_21 - PASS (21 elements)
+
+  Test: jacobsthal_43 - PASS (43 elements)
+
+  Test: jacobsthal_85 - PASS (85 elements)
+
+  Test: jacobsthal_171 - PASS (171 elements)
+
+  Test: jacobsthal_341 - PASS (341 elements)
+
+  Test: jacobsthal_683 - PASS (683 elements)
+
+
+═══ 9. GROSSES TAILLES ═══
+  Test: large_1000 - PASS (1000 elements)
+
+  Test: large_2000 - PASS (2000 elements)
+
+  Test: large_3000 - PASS (3000 elements)
+
+  Test: large_5000 - PASS (5000 elements)
+
+
+═══ 10. VALEURS EXTRÊMES ═══
+  Test: max_int - PASS (4 elements)
+
+  Test: large_range - PASS (100 elements)
+
+
+═══ 11. TESTS ALÉATOIRES MULTIPLES ═══
+  Test: random_1 - PASS (303 elements)
+
+  Test: random_2 - PASS (935 elements)
+
+  Test: random_3 - PASS (304 elements)
+
+  Test: random_4 - PASS (555 elements)
+
+  Test: random_5 - PASS (119 elements)
+
+  Test: random_6 - PASS (437 elements)
+
+  Test: random_7 - PASS (884 elements)
+
+  Test: random_8 - PASS (754 elements)
+
+  Test: random_9 - PASS (833 elements)
+
+  Test: random_10 - PASS (1085 elements)
+
+  Test: random_11 - PASS (902 elements)
+
+  Test: random_12 - PASS (771 elements)
+
+  Test: random_13 - PASS (879 elements)
+
+  Test: random_14 - PASS (500 elements)
+
+  Test: random_15 - PASS (227 elements)
+
+  Test: random_16 - PASS (895 elements)
+
+  Test: random_17 - PASS (627 elements)
+
+  Test: random_18 - PASS (543 elements)
+
+  Test: random_19 - PASS (280 elements)
+
+  Test: random_20 - PASS (945 elements)
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+         RÉSUMÉ DES TESTS             
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Total: 69 tests
+Passed: 69
+Failed: 0
+
+🎉 ALL TESTS PASSED! 🎉
+
+Summary: 69/69 passed (100%)
+========================================
+
+Full log saved to: test_results.log
+========================================
+Test session: Sat Oct 25 08:53:44 AM CEST 2025
+========================================
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    TESTS DE ROBUSTESSE - PmergeMe    
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+═══ 1. CAS LIMITES ═══
+  Test: empty - PASS (0 elements)
+
+  Test: single - PASS (1 elements)
+
+  Test: two_sorted - PASS (2 elements)
+
+  Test: two_reverse - PASS (2 elements)
+
+  Test: three - PASS (3 elements)
+
+
+═══ 2. PETITES TAILLES ═══
+  Test: size_4 - PASS (4 elements)
+
+  Test: size_5 - PASS (5 elements)
+
+  Test: size_7 - PASS (7 elements)
+
+  Test: size_8 - PASS (8 elements)
+
+  Test: size_15 - PASS (15 elements)
+
+  Test: size_16 - PASS (16 elements)
+
+  Test: size_31 - PASS (31 elements)
+
+  Test: size_32 - PASS (32 elements)
+
+
+═══ 3. DOUBLONS ═══
+  Test: all_same - PASS (8 elements)
+
+  Test: many_duplicates - PASS (50 elements)
+
+  Test: some_duplicates - PASS (100 elements)
+
+
+═══ 4. CAS EXTRÊMES D'ORDRE ═══
+  Test: sorted_100 - PASS (100 elements)
+
+  Test: reverse_100 - PASS (100 elements)
+
+  Test: sorted_1000 - PASS (1000 elements)
+
+
+═══ 5. PUISSANCES DE 2 ═══
+  Test: power2_64 - PASS (64 elements)
+
+  Test: power2_128 - PASS (128 elements)
+
+  Test: power2_256 - PASS (256 elements)
+
+  Test: power2_512 - PASS (512 elements)
+
+  Test: power2_1024 - PASS (1024 elements)
+
+
+═══ 6. TAILLES 2^n - 1 ═══
+  Test: power2minus1_63 - PASS (63 elements)
+
+  Test: power2minus1_127 - PASS (127 elements)
+
+  Test: power2minus1_255 - PASS (255 elements)
+
+  Test: power2minus1_511 - PASS (511 elements)
+
+  Test: power2minus1_1023 - PASS (1023 elements)
+
+
+═══ 7. TAILLES 2^n + 1 ═══
+  Test: power2plus1_65 - PASS (65 elements)
+
+  Test: power2plus1_129 - PASS (129 elements)
+
+  Test: power2plus1_257 - PASS (257 elements)
+
+  Test: power2plus1_513 - PASS (513 elements)
+
+
+═══ 8. TAILLES JACOBSTHAL ═══
+  Test: jacobsthal_1 - PASS (1 elements)
+
+  Test: jacobsthal_3 - PASS (3 elements)
+
+  Test: jacobsthal_5 - PASS (5 elements)
+
+  Test: jacobsthal_11 - PASS (11 elements)
+
+  Test: jacobsthal_21 - PASS (21 elements)
+
+  Test: jacobsthal_43 - PASS (43 elements)
+
+  Test: jacobsthal_85 - PASS (85 elements)
+
+  Test: jacobsthal_171 - PASS (171 elements)
+
+  Test: jacobsthal_341 - PASS (341 elements)
+
+  Test: jacobsthal_683 - PASS (683 elements)
+
+
+═══ 9. GROSSES TAILLES ═══
+  Test: large_1000 - PASS (1000 elements)
+
+  Test: large_2000 - PASS (2000 elements)
+
+  Test: large_3000 - PASS (3000 elements)
+
+  Test: large_5000 - PASS (5000 elements)
+
+
+═══ 10. VALEURS EXTRÊMES ═══
+  Test: max_int - PASS (4 elements)
+
+  Test: large_range - PASS (100 elements)
+
+
+═══ 11. TESTS ALÉATOIRES MULTIPLES ═══
+  Test: random_1 - PASS (744 elements)
+
+  Test: random_2 - PASS (467 elements)
+
+  Test: random_3 - PASS (440 elements)
+
+  Test: random_4 - PASS (523 elements)
+
+  Test: random_5 - PASS (936 elements)
+
+  Test: random_6 - PASS (531 elements)
+
+  Test: random_7 - PASS (548 elements)
+
+  Test: random_8 - PASS (211 elements)
+
+  Test: random_9 - PASS (987 elements)
+
+  Test: random_10 - PASS (148 elements)
+
+  Test: random_11 - PASS (260 elements)
+
+  Test: random_12 - PASS (934 elements)
+
+  Test: random_13 - PASS (739 elements)
+
+  Test: random_14 - PASS (748 elements)
+
+  Test: random_15 - PASS (928 elements)
+
+  Test: random_16 - PASS (872 elements)
+
+  Test: random_17 - PASS (210 elements)
+
+  Test: random_18 - PASS (900 elements)
+
+  Test: random_19 - PASS (723 elements)
+
+  Test: random_20 - PASS (1076 elements)
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+         RÉSUMÉ DES TESTS             
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Total: 69 tests
+Passed: 69
+Failed: 0
+
+🎉 ALL TESTS PASSED! 🎉
+
+Summary: 69/69 passed (100%)
+========================================
+
+Full log saved to: test_results.log
+========================================
+Test session: Sat Oct 25 08:53:48 AM CEST 2025
+========================================
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    TESTS DE ROBUSTESSE - PmergeMe    
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+═══ 1. CAS LIMITES ═══
+  Test: empty - PASS (0 elements)
+
+  Test: single - PASS (1 elements)
+
+  Test: two_sorted - PASS (2 elements)
+
+  Test: two_reverse - PASS (2 elements)
+
+  Test: three - PASS (3 elements)
+
+
+═══ 2. PETITES TAILLES ═══
+  Test: size_4 - PASS (4 elements)
+
+  Test: size_5 - PASS (5 elements)
+
+  Test: size_7 - PASS (7 elements)
+
+  Test: size_8 - PASS (8 elements)
+
+  Test: size_15 - PASS (15 elements)
+
+  Test: size_16 - PASS (16 elements)
+
+  Test: size_31 - PASS (31 elements)
+
+  Test: size_32 - PASS (32 elements)
+
+
+═══ 3. DOUBLONS ═══
+  Test: all_same - PASS (8 elements)
+
+  Test: many_duplicates - PASS (50 elements)
+
+  Test: some_duplicates - PASS (100 elements)
+
+
+═══ 4. CAS EXTRÊMES D'ORDRE ═══
+  Test: sorted_100 - PASS (100 elements)
+
+  Test: reverse_100 - PASS (100 elements)
+
+  Test: sorted_1000 - PASS (1000 elements)
+
+
+═══ 5. PUISSANCES DE 2 ═══
+  Test: power2_64 - PASS (64 elements)
+
+  Test: power2_128 - PASS (128 elements)
+
+  Test: power2_256 - PASS (256 elements)
+
+  Test: power2_512 - PASS (512 elements)
+
+  Test: power2_1024 - PASS (1024 elements)
+
+
+═══ 6. TAILLES 2^n - 1 ═══
+  Test: power2minus1_63 - PASS (63 elements)
+
+  Test: power2minus1_127 - PASS (127 elements)
+
+  Test: power2minus1_255 - PASS (255 elements)
+
+  Test: power2minus1_511 - PASS (511 elements)
+
+  Test: power2minus1_1023 - PASS (1023 elements)
+
+
+═══ 7. TAILLES 2^n + 1 ═══
+  Test: power2plus1_65 - PASS (65 elements)
+
+  Test: power2plus1_129 - PASS (129 elements)
+
+  Test: power2plus1_257 - PASS (257 elements)
+
+  Test: power2plus1_513 - PASS (513 elements)
+
+
+═══ 8. TAILLES JACOBSTHAL ═══
+  Test: jacobsthal_1 - PASS (1 elements)
+
+  Test: jacobsthal_3 - PASS (3 elements)
+
+  Test: jacobsthal_5 - PASS (5 elements)
+
+  Test: jacobsthal_11 - PASS (11 elements)
+
+  Test: jacobsthal_21 - PASS (21 elements)
+
+  Test: jacobsthal_43 - PASS (43 elements)
+
+  Test: jacobsthal_85 - PASS (85 elements)
+
+  Test: jacobsthal_171 - PASS (171 elements)
+
+  Test: jacobsthal_341 - PASS (341 elements)
+
+  Test: jacobsthal_683 - PASS (683 elements)
+
+
+═══ 9. GROSSES TAILLES ═══
+  Test: large_1000 - PASS (1000 elements)
+
+  Test: large_2000 - PASS (2000 elements)
+
+  Test: large_3000 - PASS (3000 elements)
+
+  Test: large_5000 - PASS (5000 elements)
+
+
+═══ 10. VALEURS EXTRÊMES ═══
+  Test: max_int - PASS (4 elements)
+
+  Test: large_range - PASS (100 elements)
+
+
+═══ 11. TESTS ALÉATOIRES MULTIPLES ═══
+  Test: random_1 - PASS (290 elements)
+
+  Test: random_2 - PASS (200 elements)
+
+  Test: random_3 - PASS (728 elements)
+
+  Test: random_4 - PASS (814 elements)
+
+  Test: random_5 - PASS (950 elements)
+
+  Test: random_6 - PASS (165 elements)
+
+  Test: random_7 - PASS (854 elements)
+
+  Test: random_8 - PASS (127 elements)
+
+  Test: random_9 - PASS (803 elements)
+
+  Test: random_10 - PASS (1051 elements)
+
+  Test: random_11 - PASS (174 elements)
+
+  Test: random_12 - PASS (309 elements)
+
+  Test: random_13 - PASS (1050 elements)
+
+  Test: random_14 - PASS (574 elements)
+
+  Test: random_15 - PASS (689 elements)
+
+  Test: random_16 - PASS (975 elements)
+
+  Test: random_17 - PASS (340 elements)
+
+  Test: random_18 - PASS (769 elements)
+
+  Test: random_19 - PASS (693 elements)
+
+  Test: random_20 - PASS (758 elements)
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+         RÉSUMÉ DES TESTS             
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Total: 69 tests
+Passed: 69
+Failed: 0
+
+🎉 ALL TESTS PASSED! 🎉
+
+Summary: 69/69 passed (100%)
+========================================
+
+Full log saved to: test_results.log

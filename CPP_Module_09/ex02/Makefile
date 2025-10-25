@@ -6,7 +6,7 @@
 #    By: grib <grib@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/20 17:20:58 by sylabbe           #+#    #+#              #
-#    Updated: 2025/10/19 14:01:07 by grib             ###   ########.fr        #
+#    Updated: 2025/10/22 17:15:08 by grib             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,7 @@ SRC_MDT_DIR = .
 DEST_MDT_DIR = .
 
 # ls -1 *.c | sed -z 's/\n/ \\\n\t\t\t/g'
-SRC =	$(addprefix $(SRC_MDT_DIR)/, main.cpp \
-									PmergeMe.cpp)
+SRC =	$(addprefix $(SRC_MDT_DIR)/, main.cpp)
 
 
 OBJECTS = $(SRC:$(SRC_MDT_DIR)/%.cpp=$(DEST_MDT_DIR)/%.o)
