@@ -5,7 +5,7 @@
 
 template <typename T, typename Container = std::deque<T> > 
 class  MutantStack : public std::stack<T, Container>{
-    
+
     public:
     typedef typename Container::iterator iterator;
     typedef typename Container::const_iterator const_iterator;
@@ -38,7 +38,7 @@ class  MutantStack : public std::stack<T, Container>{
         return (this->c.rend());
     }
 
-    const_iterator cbegin()const{//cbegin not allowed in c++98
+    const_iterator cbegin()const{
         return (this->c.begin());
     }
 
@@ -46,7 +46,7 @@ class  MutantStack : public std::stack<T, Container>{
         return (this->c.end());
     }
 
-    const_reverse_iterator crbegin()const{//crbegin not allowed in c++98
+    const_reverse_iterator crbegin()const{
         return (this->c.rbegin());
     }
 

@@ -61,6 +61,8 @@
         "cinttypes": "cpp",
         "variant": "cpp",
         "stack": "cpp",
-        "set": "cpp"
+        "set": "cpp",
+        "queue": "cpp",
+        "ranges": "cpp"
     }
 }

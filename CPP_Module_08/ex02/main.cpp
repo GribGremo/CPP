@@ -5,6 +5,7 @@
 
 int main()
 {
+    //mutantstack
     std::cout << "MUTANTSTACK RESULT" << std::endl;
 
     MutantStack<int> mstack;
@@ -22,48 +23,22 @@ int main()
     MutantStack<int>::iterator ite = mstack.end();
     ++it;
     --it;
-    
+
     while (it != ite)
     {
         std::cout << *it << std::endl;
         ++it;
     }
     std::stack<int> s(mstack);
-
-    // additional test
-    std::cout << "additional tests" << std::endl;
-    MutantStack<int>::reverse_iterator itr = mstack.rbegin();
-    std::cout << "REBEG: " << *itr << std::endl;
-    itr = mstack.rend();
-    std::cout << "REEND: " << *(--itr) << std::endl;
-    MutantStack<int>::const_iterator itc = mstack.cbegin();
-    itc++;
-    // *itc =15; //const so impossible to change value at this iterator
-    MutantStack<int>::const_reverse_iterator itrc = mstack.crbegin();
-    std::cout << "rcb: " << *itrc << std::endl;
-    itrc++;
-    std::cout << "rcb+1: " << *itrc << std::endl;
-    // *itrc = 15; //same here
-    MutantStack<int,std::vector<int> > test;
-    test.push(1);
-    test.push(2);
-    test.push(3);
-    std::cout << test.top() << std::endl;
-    test.pop();
-    std::cout << test.top() << std::endl;
-    MutantStack<int, std::vector<int> >::iterator t = test.begin();
-    std::cout << *t << std::endl;
-    t++;
-    std::cout << *t << std::endl;
-
-
+    std::cout <<std::endl;
 
     //vector
     std::cout << "VECTOR RESULT" << std::endl;
+
     std::vector<int> vec;
     vec.push_back(5);
     vec.push_back(17);
-    std::cout << vec.back() << std::endl;//back close to top
+    std::cout << vec.back() << std::endl;
     vec.pop_back();
     std::cout << vec.size() << std::endl;
     vec.push_back(3);
@@ -82,8 +57,9 @@ int main()
         ++itv;
     }
     std::vector<int> sv(vec);
+    std::cout <<std::endl;
 
-
+    //list
     std::cout << "LIST RESULT" << std::endl;
 
     std::list<int> lst;
@@ -108,6 +84,74 @@ int main()
         ++itl;
     }
     std::list<int> l(lst);
+    std::cout <<std::endl;
     
+    // additional test
+    std::cout << "additional tests" << std::endl;
+    MutantStack<int>::reverse_iterator itr = mstack.rbegin();
+    std::cout << "REBEG: " << *itr << std::endl;
+    itr = mstack.rend();
+    std::cout << "REEND: " << *(--itr) << std::endl;
+    MutantStack<int>::const_iterator itc = mstack.cbegin();
+    itc++;
+    std::cout << "ITC:" << *itc <<std::endl;
+    MutantStack<int>::const_reverse_iterator itrc = mstack.crbegin();
+    std::cout << "RCB: " << *itrc << std::endl;
+    itrc++;
+    std::cout << "RCB+1: " << *itrc << std::endl;
+    MutantStack<int,std::vector<int> > test;
+    test.push(1);
+    test.push(2);
+    test.push(3);
+    std::cout << "TOP" << test.top() << std::endl;
+    test.pop();
+    std::cout << "TOP" << test.top() << std::endl;
+    MutantStack<int, std::vector<int> >::iterator t = test.begin();
+    std::cout << "SIMPLE:" << *t << std::endl;
+    t++;
+    std::cout << "SIMPLE:" << *t << std::endl;
+    std::cout <<std::endl;
+
+    std::cout << "TEST STACK VEC:" <<std::endl;
+    MutantStack<int, std::vector<int> > msvec;
+    msvec.push(1);
+    msvec.push(2);
+    msvec.push(3);
+    MutantStack<int, std::vector<int> >::iterator itmsvec = msvec.begin();
+    std::cout << "MSVEC:" << *itmsvec << " " << *++itmsvec << " " << *++itmsvec <<std::endl;
+    std::cout <<std::endl;
+
+    std::cout << "TEST STACK LIST:" <<std::endl;
+    MutantStack<int, std::list<int> > mslst;
+    mslst.push(1);
+    mslst.push(2);
+    mslst.push(3);
+    MutantStack<int, std::list<int> >::iterator itmslst = mslst.begin();
+    std::cout << "MSLST:" << *itmslst << " " << *++itmslst << " " << *++itmslst <<std::endl;
+    std::cout <<std::endl;
+   
+
+    std::cout << "TEST OPERATOR=:" <<std::endl;
+
+    MutantStack<int, std::list<int> > mslst2 = mslst;
+
+    MutantStack<int, std::list<int> >::iterator itmslst2 = mslst2.begin();
+    std::cout << "MSLST2:" << *itmslst2 << " " << *++itmslst2 << " " << *++itmslst2 <<std::endl;
+    std::cout <<std::endl;
+
+    std::cout << "TEST COPY CONSTRUCTOR:" <<std::endl;
+
+    MutantStack<int, std::list<int> > mslst3(mslst);
+
+    MutantStack<int, std::list<int> >::iterator itmslst3 = mslst3.begin();
+    std::cout << "MSLST3:" << *itmslst3 << " " << *++itmslst3 << " " << *++itmslst3 <<std::endl;
+    std::cout <<std::endl;
+
+    std::cout << "TEST OPERATOR= ERASE:" <<std::endl;
+
+    mslst3 = mslst2;
+    MutantStack<int, std::list<int> >::iterator itmslst3_ = mslst3.begin();
+    std::cout << "MSLST3:" << *itmslst3_ << " " << *++itmslst3_ << " " << *++itmslst3_ <<std::endl;
+
     return 0;
 }

@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 15:36:09 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/10/20 17:53:25 by sylabbe          ###   ########.fr       */
+/*   Updated: 2025/10/27 13:23:16 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@
             _n = n;
     }
     Span::Span(const Span& src): _n(src._n){
-        this->_t =src._t;
+        this->_t = src._t;
     }
     Span::~Span(){}
 
     Span& Span::operator=(const Span& src){
         _n = src._n;
         this->_t.clear();
-        this->_t =src._t;
+        this->_t = src._t;
         return (*this);
     }
 
@@ -47,7 +47,7 @@
 
         for (std::multiset<int>::iterator next = ++_t.begin(); next != _t.end(); ++next)
         {
-            if ((unsigned int)(*next - *it) < r)
+            if (static_cast<unsigned int>(*next - *it) < r)
                 r = *next -*it;
             it = next;
         }
@@ -63,14 +63,13 @@
     void Span::fillT(std::vector<int>::iterator& begin,std::vector<int>::iterator& end){
         unsigned int s_fill = 0;
         unsigned int a_space = _n - _t.size();
-        if (begin > end)
-            return;
+
         for (std::vector<int>::iterator it = begin;it != end;it++)
             s_fill++;
         if(a_space >= s_fill)
             _t.insert(begin,end);
         else{
-            _t.insert(begin, begin + a_space); 
+            _t.insert(begin, begin + a_space);
             throw std::exception();
         }
     }

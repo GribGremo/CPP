@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 15:36:05 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/09/19 21:32:30 by grib             ###   ########.fr       */
+/*   Updated: 2025/10/27 13:28:14 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <climits>
-/*OK subject is unclear, "a single number" might be interpreted as a unic number or one number only.
- The two iterators method seem after few research "impossible" to secure, you could have revert 1st an 2nd iterator or even have iterators from different container(not good)*/
+
 std::vector<int>& genVec(std::vector<int>& vec, unsigned int n, unsigned int range){
     
     for(unsigned int i = 0; i < n; i++){
@@ -31,18 +30,18 @@ void printSpan(Span& sp){
         std::cout << "Longest Span: " << sp.longestSpan() << std::endl;
     }
     catch(std::exception& e){
-        std::cout << "Not enough value to calculate Span" << std::endl;
+        std::cout << "Not enough value to calculate longest Span" << std::endl;
     }
     try{
         std::cout << "Shortest Span: " << sp.shortestSpan() << std::endl;
     }
     catch(std::exception& e){
-        std::cout << "Not enough value to calculate Span" << std::endl;
+        std::cout << "Not enough value to calculate shortest Span" << std::endl;
     }
 }
-void fillT_s( std::vector<int>::iterator& start,  std::vector<int>::iterator& end, Span& sp){
+void fillT_s(std::vector<int>::iterator& start,  std::vector<int>::iterator& end, Span& sp){
     try{
-        sp.fillT(start,end);
+        sp.fillT(start, end);
     }
     catch(std::exception& e){
         std::cout << "Cannot fill Span with entire range" << std::endl;
@@ -50,7 +49,7 @@ void fillT_s( std::vector<int>::iterator& start,  std::vector<int>::iterator& en
 }
 
 int main(){
-
+    std::cout << "~~~~~~~~~~~~~~~TEST SUBJECT~~~~~~~~~~~~~~~" << std::endl;
     Span sp = Span(5);
     sp.addNumber(6);
     sp.addNumber(3);
@@ -61,39 +60,39 @@ int main(){
     std::cout << sp.shortestSpan() << std::endl;
     std::cout << sp.longestSpan() << std::endl;
     
-    // Span test = Span(10);
-    // std::vector<int> vec;
-    // std::vector<int> vec2;
-    // std::vector<int> vec3;
+    Span test = Span(10);
+    std::vector<int> vec;
+    std::vector<int> vec2;
+    std::vector<int> vec3;
 
-    // srand (time(NULL));
+    srand (time(NULL));
 
-    // genVec(vec,0,100);
-    // std::vector<int>::iterator start = vec.begin();
-    // std::vector<int>::iterator end = vec.end(); 
+    genVec(vec,0,100);
+    std::vector<int>::iterator start = vec.begin();
+    std::vector<int>::iterator end = vec.end(); 
 
-    // genVec(vec2,5,100);
-    // std::vector<int>::iterator start2 = vec2.begin();
-    // std::vector<int>::iterator end2 = vec2.end(); 
-    
-    // genVec(vec3,15000,100);
-    // std::vector<int>::iterator start3 = vec3.begin();
-    // std::vector<int>::iterator end3 = vec3.end(); 
+    genVec(vec2,5,100);
+    std::vector<int>::iterator start2 = vec2.begin();
+    std::vector<int>::iterator end2 = vec2.end(); 
 
-    // //Test 1
-    // fillT_s(start,end,test);
-    // test.printContainer();
-    // printSpan(test);
-    
-    // std::cout << std::endl;
-    
-    // fillT_s(start2,end2,test);
-    // test.printContainer();
-    // printSpan(test);
-        
-    // std::cout << std::endl;
-    
-    // fillT_s(start3,end3,test);
-    // test.printContainer();
-    // printSpan(test);
+    genVec(vec3,15000,100);
+    std::vector<int>::iterator start3 = vec3.begin();
+    std::vector<int>::iterator end3 = vec3.end(); 
+
+    //Test 1
+    fillT_s(start,end,test);
+    test.printContainer();
+    printSpan(test);  
+    std::cout << std::endl;
+
+    //Test 2
+    fillT_s(start2,end2,test);
+    test.printContainer();
+    printSpan(test);
+    std::cout << std::endl;
+
+    //Test 3
+    fillT_s(start3,end3,test);
+    test.printContainer();
+    printSpan(test);
 }
