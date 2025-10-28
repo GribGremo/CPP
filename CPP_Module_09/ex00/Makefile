@@ -6,7 +6,7 @@
 #    By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/20 17:20:41 by sylabbe           #+#    #+#              #
-#    Updated: 2025/09/22 13:50:14 by sylabbe          ###   ########.fr        #
+#    Updated: 2025/10/28 17:54:53 by sylabbe          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ SRC_MDT_DIR = .
 DEST_MDT_DIR = .
 
 # ls -1 *.c | sed -z 's/\n/ \\\n\t\t\t/g'
-SRC =	$(addprefix $(SRC_MDT_DIR)/, main.cpp)
+SRC =	$(addprefix $(SRC_MDT_DIR)/, main.cpp \
+										BitcoinExchange.cpp)
 
 
 OBJECTS = $(SRC:$(SRC_MDT_DIR)/%.cpp=$(DEST_MDT_DIR)/%.o)
