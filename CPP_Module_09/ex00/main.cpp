@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 17:20:39 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/10/28 17:54:02 by sylabbe          ###   ########.fr       */
+/*   Updated: 2025/10/29 10:41:04 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 #include <iostream>
 
 int main(int argc, char **argv){
-    std::fstream fs;
-    std::string buffer;
     bitcoinExchange btc;
 
     if (argc != 2)
@@ -32,11 +30,8 @@ int main(int argc, char **argv){
         std::cout << "Error: Cannot create bitcoinExchange: " << e.what() << std::endl;
         return (1);
     }
-    fs.open(argv[1]);
-    if (!fs.is_open())
-        std::cout << "File did not open" << std::endl;
-    while(std::getline(fs,buffer))
-        btc.printValue(buffer);
+
+    btc.printValue(argv[1]);
 }
 
 

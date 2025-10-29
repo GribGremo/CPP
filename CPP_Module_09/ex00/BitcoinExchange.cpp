@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 17:20:20 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/10/28 18:08:43 by sylabbe          ###   ########.fr       */
+/*   Updated: 2025/10/29 14:40:30 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,19 @@
 
 //~~~~~~~~~~~~~~~~~~CONSTRUCTORS~~~~~~~~~~~~~~~~~~
 
-bitcoinExchange::bitcoinExchange(){}
+bitcoinExchange::bitcoinExchange(){}//Verifie si vide ou new line vide
 
 bitcoinExchange::bitcoinExchange(const bitcoinExchange& src) : _dataBase(src._dataBase){}
 
 bitcoinExchange::bitcoinExchange(std::string dbFile){
-    extractDB(dbFile);
+    try{
+        extractDB(dbFile);
+    }
+    catch(const std::exception& e)
+    {
+        std::cout << "Error: Cannot create bitcoinExchange: " << e.what() << std::endl;
+        throw;
+    }
 }
 
 bitcoinExchange::~bitcoinExchange(){}
@@ -45,6 +52,7 @@ bool strIsDigit(const std::string& str){
 
 bool getDateValue(const std::string& str, long int& n, const size_t& size)
 {
+    // std::cout << "GETDATEVALUE: " << str << std::endl;
     if (str.size() != size || !strIsDigit(str))
         return (false);
     n = strtol(str.c_str(), NULL, 10);
@@ -60,10 +68,10 @@ bool bitcoinExchange::isValidDate(const std::string& date){
     size_t first = date.find_first_of('-');
     size_t last = date.find_last_of('-');
 
-    if (first == std::string::npos ||
+    if (std::count(date.begin(),date.end(),'-') != 2 ||
         !getDateValue(date.substr(0, first), year, 4) ||
-        !getDateValue(date.substr(first + 1, last), month, 2) ||
-        !getDateValue(date.substr(last + 1, date.size()), day, 2)){
+        !getDateValue(date.substr(first + 1, last - (first + 1)), month, 2) ||
+        !getDateValue(date.substr(last + 1, date.size() - (last + 1)), day, 2)){
             std::cout << "1" <<std::endl;
             return (false);
     }
@@ -98,7 +106,7 @@ bool bitcoinExchange::isValidRate(const std::string& rate, double& rateDouble){
     if (std::count(rate.begin(),rate.end(),'.') > 1)
         return (false);
     for (size_t i = 0; i != rate.size(); i++){
-        if (!isdigit(rate[i]) && rate[i] != '.')
+        if (!isdigit(rate[i]) && rate[i] != '.' && rate[i] != '+' && rate[i] != '-')// attention au + et - dans la string verifie
             return (false);
     }
     rateDouble = strtod(rate.c_str(), &end);
@@ -111,18 +119,22 @@ bool bitcoinExchange::isValidRate(const std::string& rate, double& rateDouble){
 void bitcoinExchange::parseLineDB(const std::string& line){
     std::string date;
     std::string rate;
-    size_t comma = line.find_first_of(',');
+    std::string sep = ",";
+    size_t comma = line.find_first_of(sep);// a voir si string
     double rateDouble = 0;
 
     if (comma == std::string::npos)//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Retour erreur
-        return ;
+        throw std::runtime_error("No separator found");
 
     date = line.substr(0,comma);
-    rate = line.substr(comma + 1, line.size());
-    if(!isValidDate(date) || !isValidRate(rate, rateDouble))//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Retour erreur
-        return ;
-    std::cout << "DATE:" << date << std::endl;
-    std::cout << "RATE:" << rate << std::endl;
+    rate = line.substr(comma + 1, comma + 1 - line.size());
+    if(!isValidDate(date))//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Retour erreur
+        throw std::runtime_error("Invalid date : " + date);
+    if(!isValidRate(rate, rateDouble))
+        throw std::runtime_error("Invalid rate : " + rate);
+
+    // std::cout << "DATE:" << date << std::endl;
+    // std::cout << "RATE:" << rate << std::endl;
 
     _dataBase[date] = rateDouble;
 }
@@ -134,8 +146,20 @@ void bitcoinExchange::extractDB(const std::string& dbFile){
     fs.open(dbFile.c_str());
     if (!fs.is_open())
         std::cout << "File did not open" << std::endl;
+    std::getline(fs,buffer);
     while(std::getline(fs,buffer))
-        parseLineDB(buffer);
+    {
+        try{
+            parseLineDB(buffer);
+        }
+        catch (const std::exception& e)
+        {
+            fs.close();
+            throw ;
+        }
+    }
+    fs.close();
+
 }
 
 bool isValidAmount(const std::string& amount, double& amountDouble){
@@ -145,7 +169,7 @@ bool isValidAmount(const std::string& amount, double& amountDouble){
         return (false);
     }
     for (size_t i = 0; i != amount.size(); i++){
-        if (!isdigit(amount[i]) && amount[i] != '.'){
+        if (!isdigit(amount[i]) && amount[i] != '.' && amount[i] != '+' && amount[i] != '-'){// attention au + et - dans la string verifie
             std::cout << "Error: invalid format of number: " << amount << std::endl;
             return (false);
         }
@@ -191,8 +215,36 @@ bool bitcoinExchange::parseLineSearch(const std::string& search){
     return (true);
 }
 
-void bitcoinExchange::printValue(const std::string& search){
-    if (!parseLineSearch(search))
+bool getSeparator(std::string str, std::string one, std::string two, std::string& sep){
+    size_t oneS = str.find(one);
+    size_t twoS = str.find(two);
+
+    if (oneS == std::string::npos || twoS == std::string::npos || oneS > twoS)
+        return (false);
+    sep = str.substr(one.size(), str.size() - (one.size() + two.size()));
+    if (str.size() != (one.size() + two.size() + sep.size()) || sep.empty())
+        return (false);
+
+    return (true);
+}
+
+void bitcoinExchange::printValue(const std::string& inputFileName){
+    std::fstream fs;
+    std::string buffer;
+    std::string sep;
+
+    fs.open(inputFileName.c_str());
+    if (!fs.is_open())
+        std::cout << "Error: " << inputFileName << " did not open" << std::endl;
+    std::getline(fs,buffer);// Attention que renvoie getline
+    if (!getSeparator(buffer, "date", "value", sep)){
+        std::cout << "Error: Invalid header in file " << inputFileName << std::endl;
         return ;
+    }
+    std::cout << "SEPARATOR: '" << sep << "'" <<std::endl;
+    while(std::getline(fs,buffer)){
+        if (parseLineSearch(buffer))
+            std::cout<<"VALUE"<<std::endl;
+    }
     
 }
