@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
+/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 17:20:39 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/10/29 10:41:04 by sylabbe          ###   ########.fr       */
+/*   Updated: 2025/10/29 23:56:09 by grib             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,17 @@ int main(int argc, char **argv){
         return (1);
     }
 
-    try{
+    try
+    {
         btc = bitcoinExchange("data.csv");
     }
     catch(const std::exception& e)
     {
-        std::cout << "Error: Cannot create bitcoinExchange: " << e.what() << std::endl;
         return (1);
     }
 
     btc.printValue(argv[1]);
+    return (0);
 }
 
 

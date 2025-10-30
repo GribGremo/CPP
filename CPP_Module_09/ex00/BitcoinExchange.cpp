@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   BitcoinExchange.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
+/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 17:20:20 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/10/29 14:40:30 by sylabbe          ###   ########.fr       */
+/*   Updated: 2025/10/30 08:44:52 by grib             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,14 @@
 
 //~~~~~~~~~~~~~~~~~~CONSTRUCTORS~~~~~~~~~~~~~~~~~~
 
-bitcoinExchange::bitcoinExchange(){}//Verifie si vide ou new line vide
+bitcoinExchange::bitcoinExchange(){}
 
-bitcoinExchange::bitcoinExchange(const bitcoinExchange& src) : _dataBase(src._dataBase){}
+bitcoinExchange::bitcoinExchange(const bitcoinExchange& src) : _dataBase(src._dataBase), _res(src._res){}
 
 bitcoinExchange::bitcoinExchange(std::string dbFile){
+    _res.amount = 0;
+    _res.total = 0;//A VOIR
+    _res.date = "";
     try{
         extractDB(dbFile);
     }
@@ -37,6 +40,7 @@ bitcoinExchange& bitcoinExchange::operator=(const bitcoinExchange& src){
     if(this == &src)
         return (*this);
     _dataBase = src._dataBase;
+    _res = src._res;
     return (*this);
 }
 
@@ -57,6 +61,19 @@ bool getDateValue(const std::string& str, long int& n, const size_t& size)
         return (false);
     n = strtol(str.c_str(), NULL, 10);
     
+    return (true);
+}
+
+bool getSeparator(std::string str, std::string one, std::string two, std::string& sep){
+    size_t oneS = str.find(one);
+    size_t twoS = str.find(two);
+
+    if (oneS == std::string::npos || twoS == std::string::npos || oneS > twoS)
+        return (false);
+    sep = str.substr(oneS + one.size(), str.size() - ((oneS +one.size()) + (str.size() - twoS)));
+    if (str.size() != (one.size() + two.size() + sep.size()) || sep.empty())
+        return (false);
+
     return (true);
 }
 
@@ -101,7 +118,7 @@ bool bitcoinExchange::isValidDate(const std::string& date){
     return (true);
 }
 
-bool bitcoinExchange::isValidRate(const std::string& rate, double& rateDouble){
+bool bitcoinExchange::isValidRate(const std::string& rate, float& ratefloat){
     char *end = NULL;
     if (std::count(rate.begin(),rate.end(),'.') > 1)
         return (false);
@@ -109,7 +126,7 @@ bool bitcoinExchange::isValidRate(const std::string& rate, double& rateDouble){
         if (!isdigit(rate[i]) && rate[i] != '.' && rate[i] != '+' && rate[i] != '-')// attention au + et - dans la string verifie
             return (false);
     }
-    rateDouble = strtod(rate.c_str(), &end);
+    ratefloat = strtof(rate.c_str(), &end);
     if (*end != '\0' || errno == ERANGE)
         return (false);
     return (true);
@@ -121,7 +138,7 @@ void bitcoinExchange::parseLineDB(const std::string& line){
     std::string rate;
     std::string sep = ",";
     size_t comma = line.find_first_of(sep);// a voir si string
-    double rateDouble = 0;
+    float ratefloat = 0;
 
     if (comma == std::string::npos)//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Retour erreur
         throw std::runtime_error("No separator found");
@@ -130,23 +147,28 @@ void bitcoinExchange::parseLineDB(const std::string& line){
     rate = line.substr(comma + 1, comma + 1 - line.size());
     if(!isValidDate(date))//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Retour erreur
         throw std::runtime_error("Invalid date : " + date);
-    if(!isValidRate(rate, rateDouble))
+    if(!isValidRate(rate, ratefloat))
         throw std::runtime_error("Invalid rate : " + rate);
 
     // std::cout << "DATE:" << date << std::endl;
     // std::cout << "RATE:" << rate << std::endl;
 
-    _dataBase[date] = rateDouble;
+    _dataBase[date] = ratefloat;
 }
 
 void bitcoinExchange::extractDB(const std::string& dbFile){
     std::fstream fs;
     std::string buffer;
+    std::string sep;
 
     fs.open(dbFile.c_str());
     if (!fs.is_open())
-        std::cout << "File did not open" << std::endl;
+        throw std::runtime_error(dbFile + " did not open");
+
     std::getline(fs,buffer);
+    if (!getSeparator(buffer, "date", "exchange_rate", sep))
+        throw std::runtime_error("Invalid header in file '" + dbFile + "' : '" + buffer + "'");
+
     while(std::getline(fs,buffer))
     {
         try{
@@ -159,23 +181,22 @@ void bitcoinExchange::extractDB(const std::string& dbFile){
         }
     }
     fs.close();
+    if (_dataBase.empty())
+        throw std::runtime_error("Empty database");
 
 }
 
-bool isValidAmount(const std::string& amount, double& amountDouble){
+bool isValidAmount(const std::string& amount, float& amountfloat){
     char *end = NULL;
-    if (std::count(amount.begin(),amount.end(),'.') > 1){
-        std::cout << "Error: invalid format of number: " << amount << std::endl;
-        return (false);
-    }
+
     for (size_t i = 0; i != amount.size(); i++){
-        if (!isdigit(amount[i]) && amount[i] != '.' && amount[i] != '+' && amount[i] != '-'){// attention au + et - dans la string verifie
+        if (!isdigit(amount[i]) && amount[i] != '.' && amount[i] != '+' && amount[i] != '-'){
             std::cout << "Error: invalid format of number: " << amount << std::endl;
             return (false);
         }
     }
-    amountDouble = strtod(amount.c_str(), &end);
-    if (*end != '\0' ){//a voir pas essentiel
+    amountfloat = strtof(amount.c_str(), &end);
+    if (*end != '\0' ){
         std::cout << "Error: invalid format of number: "  << amount << std::endl;
         return (false);
     }
@@ -183,48 +204,45 @@ bool isValidAmount(const std::string& amount, double& amountDouble){
         std::cout << "Error: out of bounds number: " << amount << std::endl;
         return (false);
     }
-    if (amountDouble > 1000){
+    if (amountfloat >= 1000){
         std::cout << "Error: too large a number: " << amount << std::endl;
         return (false);
     }
-    if (amountDouble < 0){
+    if (amountfloat < 0){
         std::cout << "Error: not a positive number: " << amount << std::endl;
+        return (false);
+    }
+    if (amountfloat == 0){
+        std::cout << "Error: no need to convert 0: " << amount << std::endl;
         return (false);
     }
     return (true);
 }
 
-bool bitcoinExchange::parseLineSearch(const std::string& search){
-    std::string date;
+bool bitcoinExchange::parseLineSearch(const std::string& search, const std::string& sep){
     std::string amount;
-    double amountDouble;
-    if (std::count(search.begin(),search.end(), ' ') != 2 || std::count(search.begin(),search.end(), '|') != 1)
+
+    size_t sepS = search.find(sep);
+
+    if (sepS == std::string::npos)
     {
         std::cout << "Error: bad input: " << search << std::endl;
         return (false);
     }
-    date = search.substr(0,search.find_first_of(' '));
-    amount = search.substr(search.find_last_of(' ') + 1, search.size());
-    if (!isValidDate(date)){
-        std::cout << "Error: invalid format of date: " << date << std::endl;
+    _res.date = search.substr(0,sepS);
+    amount = search.substr(sepS + sep.size(), search.size() - (sepS + sep.size()));
+    if (!isValidDate(_res.date)){
+        std::cout << "Error: invalid format of date: '" << _res.date << "'" << std::endl;
         return (false);
     }
-    else if (!isValidAmount(amount, amountDouble))
+    else if (!isValidAmount(amount, _res.amount))
         return (false);
-    
-    return (true);
-}
-
-bool getSeparator(std::string str, std::string one, std::string two, std::string& sep){
-    size_t oneS = str.find(one);
-    size_t twoS = str.find(two);
-
-    if (oneS == std::string::npos || twoS == std::string::npos || oneS > twoS)
-        return (false);
-    sep = str.substr(one.size(), str.size() - (one.size() + two.size()));
-    if (str.size() != (one.size() + two.size() + sep.size()) || sep.empty())
-        return (false);
-
+    for (std::map<std::string,float>::iterator it = _dataBase.begin(); it != _dataBase.end(); it++)
+    {
+        if (_res.date < it->first)
+            return (true);
+        _res.total = _res.amount * it->second;
+    }
     return (true);
 }
 
@@ -232,19 +250,30 @@ void bitcoinExchange::printValue(const std::string& inputFileName){
     std::fstream fs;
     std::string buffer;
     std::string sep;
-
-    fs.open(inputFileName.c_str());
-    if (!fs.is_open())
-        std::cout << "Error: " << inputFileName << " did not open" << std::endl;
-    std::getline(fs,buffer);// Attention que renvoie getline
-    if (!getSeparator(buffer, "date", "value", sep)){
-        std::cout << "Error: Invalid header in file " << inputFileName << std::endl;
+    if (_dataBase.empty())
+    {
+        std::cout << "Error: Database is empty" <<std::endl;
         return ;
     }
-    std::cout << "SEPARATOR: '" << sep << "'" <<std::endl;
-    while(std::getline(fs,buffer)){
-        if (parseLineSearch(buffer))
-            std::cout<<"VALUE"<<std::endl;
+
+    fs.open(inputFileName.c_str());
+    if (!fs.is_open()){
+        std::cout << "Error: '" << inputFileName << "' did not open" << std::endl;
+        return ;
     }
-    
+    std::getline(fs,buffer);
+    if (!getSeparator(buffer, "date", "value", sep)){
+        std::cout << "Error: Invalid header in file '" << inputFileName << "' : '" << buffer << "'" << std::endl;
+        return ;
+    }
+    while(std::getline(fs,buffer)){
+        if (parseLineSearch(buffer, sep))
+            std::cout<< _res.date << " => " << _res.amount << " = " << _res.total <<std::endl;
+    }
+    fs.close();
 }
+
+//ATTENTION SI TU NE TROUVES PAS DE DATE INFERIEURE
+//PAS D'ENTREE DANS LA DB
+//Si CONSTRUCTEUR PAR DEFAUT DATABASE PAS INIT SI IL PRINT VALUE
+//CPP8 Fais des pointeurs sur tes iterateurs pour verifier la range dans span

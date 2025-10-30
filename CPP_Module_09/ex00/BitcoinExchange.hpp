@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   BitcoinExchange.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
+/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 17:20:32 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/10/29 10:59:15 by sylabbe          ###   ########.fr       */
+/*   Updated: 2025/10/29 20:42:37 by grib             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,22 +24,31 @@ class bitcoinExchange
 {
     //~~~~~~~~~~~~~~~~~~METHODS~~~~~~~~~~~~~~~~~~
     private:
+    struct result{
+        float amount;
+        float total;
+        std::string date;
+    };
+
+    //~~~~~~~~~~~~~~~~~~METHODS~~~~~~~~~~~~~~~~~~
+    private:
     //extract DB
     bool isValidDate(const std::string& date);
-    bool isValidRate(const std::string& rate, double& rateDouble);
+    bool isValidRate(const std::string& rate, float& ratefloat);
 
     void parseLineDB(const std::string& line);
     void extractDB(const std::string& dbFile);
 
     //print value
-    bool parseLineSearch(const std::string& search);
+    bool parseLineSearch(const std::string& search, const std::string& sep);
 
     public:
     void printValue(const std::string& search);
 
     //~~~~~~~~~~~~~~~~~~MEMBERS~~~~~~~~~~~~~~~~~~
     private:
-    std::map<std::string,double> _dataBase;
+    std::map<std::string,float> _dataBase;
+    result _res;
 
     //~~~~~~~~~~~~~~~~~~CONSTRUCTORS~~~~~~~~~~~~~~~~~~
     public:
