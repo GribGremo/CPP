@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   BitcoinExchange.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 17:20:20 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/10/30 08:44:52 by grib             ###   ########.fr       */
+/*   Updated: 2025/10/30 17:19:51 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,6 @@ bitcoinExchange::bitcoinExchange(){}
 bitcoinExchange::bitcoinExchange(const bitcoinExchange& src) : _dataBase(src._dataBase), _res(src._res){}
 
 bitcoinExchange::bitcoinExchange(std::string dbFile){
-    _res.amount = 0;
-    _res.total = 0;//A VOIR
-    _res.date = "";
     try{
         extractDB(dbFile);
     }
@@ -56,7 +53,6 @@ bool strIsDigit(const std::string& str){
 
 bool getDateValue(const std::string& str, long int& n, const size_t& size)
 {
-    // std::cout << "GETDATEVALUE: " << str << std::endl;
     if (str.size() != size || !strIsDigit(str))
         return (false);
     n = strtol(str.c_str(), NULL, 10);
@@ -88,70 +84,58 @@ bool bitcoinExchange::isValidDate(const std::string& date){
     if (std::count(date.begin(),date.end(),'-') != 2 ||
         !getDateValue(date.substr(0, first), year, 4) ||
         !getDateValue(date.substr(first + 1, last - (first + 1)), month, 2) ||
-        !getDateValue(date.substr(last + 1, date.size() - (last + 1)), day, 2)){
-            std::cout << "1" <<std::endl;
+        !getDateValue(date.substr(last + 1, date.size() - (last + 1)), day, 2))
             return (false);
-    }
-    
-    if (year < 1 || (month < 1) || day < 1){//limite max sur year
-        std::cout << "2" <<std::endl; 
+
+    if (year < 1 || (month < 1 || month > 12) || day < 1)
         return (false);
-    }
-    if ((month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) && day > 31){
-        std::cout << "3" <<std::endl;
+    if ((month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) && day > 31)
         return (false);
-    }
-    if ((month == 4 || month == 6 || month == 9 || month == 11) && day > 30){
-        std::cout << "4" <<std::endl;
+    if ((month == 4 || month == 6 || month == 9 || month == 11) && day > 30)
         return (false);
-    }
-    if (year % 4 == 0 && month == 2 && day > 29){
-        std::cout << "5" <<std::endl;
+    if (year % 4 == 0 && month == 2 && day > 29)
         return (false);
-    }
     else if (year % 4 != 0 && month == 2 && day > 28)
-    {
-        std::cout << "6" <<std::endl;
         return (false);
-    }
-    
+
     return (true);
 }
 
 bool bitcoinExchange::isValidRate(const std::string& rate, float& ratefloat){
     char *end = NULL;
+
     if (std::count(rate.begin(),rate.end(),'.') > 1)
         return (false);
     for (size_t i = 0; i != rate.size(); i++){
-        if (!isdigit(rate[i]) && rate[i] != '.' && rate[i] != '+' && rate[i] != '-')// attention au + et - dans la string verifie
+        if (!isdigit(rate[i]) && rate[i] != '.' && rate[i] != '+' && rate[i] != '-')
             return (false);
     }
     ratefloat = strtof(rate.c_str(), &end);
-    if (*end != '\0' || errno == ERANGE)
+    if (*end != '\0' || errno == ERANGE || ratefloat < 0)
         return (false);
     return (true);
 }
 
 
-void bitcoinExchange::parseLineDB(const std::string& line){
+void bitcoinExchange::parseLineDB(const std::string& line, std::string sep)
+{
     std::string date;
     std::string rate;
-    std::string sep = ",";
-    size_t comma = line.find_first_of(sep);// a voir si string
+    size_t sepS = line.find(sep);
     float ratefloat = 0;
 
-    if (comma == std::string::npos)//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Retour erreur
+    if (sepS == std::string::npos)
         throw std::runtime_error("No separator found");
 
-    date = line.substr(0,comma);
-    rate = line.substr(comma + 1, comma + 1 - line.size());
-    if(!isValidDate(date))//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Retour erreur
+    date = line.substr(0,sepS);
+    rate = line.substr(sepS + sep.size(), line.size() - (sepS + sep.size()));
+
+    if(!isValidDate(date))
         throw std::runtime_error("Invalid date : " + date);
     if(!isValidRate(rate, ratefloat))
         throw std::runtime_error("Invalid rate : " + rate);
-
-    // std::cout << "DATE:" << date << std::endl;
-    // std::cout << "RATE:" << rate << std::endl;
+    if (_dataBase.find(date) != _dataBase.end() && _dataBase.find(date)->second != ratefloat)
+        throw std::runtime_error("Two entries for day " + date + " have different rate");
 
     _dataBase[date] = ratefloat;
 }
@@ -172,7 +156,7 @@ void bitcoinExchange::extractDB(const std::string& dbFile){
     while(std::getline(fs,buffer))
     {
         try{
-            parseLineDB(buffer);
+            parseLineDB(buffer,sep);
         }
         catch (const std::exception& e)
         {
@@ -183,10 +167,9 @@ void bitcoinExchange::extractDB(const std::string& dbFile){
     fs.close();
     if (_dataBase.empty())
         throw std::runtime_error("Empty database");
-
 }
 
-bool isValidAmount(const std::string& amount, float& amountfloat){
+bool isValidAmount(const std::string& amount, float& amountFloat){
     char *end = NULL;
 
     for (size_t i = 0; i != amount.size(); i++){
@@ -195,7 +178,7 @@ bool isValidAmount(const std::string& amount, float& amountfloat){
             return (false);
         }
     }
-    amountfloat = strtof(amount.c_str(), &end);
+    amountFloat = strtof(amount.c_str(), &end);
     if (*end != '\0' ){
         std::cout << "Error: invalid format of number: "  << amount << std::endl;
         return (false);
@@ -204,15 +187,15 @@ bool isValidAmount(const std::string& amount, float& amountfloat){
         std::cout << "Error: out of bounds number: " << amount << std::endl;
         return (false);
     }
-    if (amountfloat >= 1000){
+    if (amountFloat >= 1000){
         std::cout << "Error: too large a number: " << amount << std::endl;
         return (false);
     }
-    if (amountfloat < 0){
+    if (amountFloat < 0){
         std::cout << "Error: not a positive number: " << amount << std::endl;
         return (false);
     }
-    if (amountfloat == 0){
+    if (amountFloat == 0){
         std::cout << "Error: no need to convert 0: " << amount << std::endl;
         return (false);
     }
@@ -240,7 +223,14 @@ bool bitcoinExchange::parseLineSearch(const std::string& search, const std::stri
     for (std::map<std::string,float>::iterator it = _dataBase.begin(); it != _dataBase.end(); it++)
     {
         if (_res.date < it->first)
+        {
+            if (_res.total == -1)
+            {
+                std::cout << "Error: No rate anterior to " << _res.date <<std::endl;
+                return (false);
+            }
             return (true);
+        }
         _res.total = _res.amount * it->second;
     }
     return (true);
@@ -250,6 +240,7 @@ void bitcoinExchange::printValue(const std::string& inputFileName){
     std::fstream fs;
     std::string buffer;
     std::string sep;
+
     if (_dataBase.empty())
     {
         std::cout << "Error: Database is empty" <<std::endl;
@@ -267,6 +258,9 @@ void bitcoinExchange::printValue(const std::string& inputFileName){
         return ;
     }
     while(std::getline(fs,buffer)){
+        _res.amount = 0;
+        _res.total = -1;
+        _res.date = "";
         if (parseLineSearch(buffer, sep))
             std::cout<< _res.date << " => " << _res.amount << " = " << _res.total <<std::endl;
     }

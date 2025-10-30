@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 17:20:39 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/10/29 23:56:09 by grib             ###   ########.fr       */
+/*   Updated: 2025/10/30 15:51:04 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int main(int argc, char **argv){
 
     try
     {
-        btc = bitcoinExchange("data.csv");
+        btc = bitcoinExchange("test.csv");
     }
     catch(const std::exception& e)
     {

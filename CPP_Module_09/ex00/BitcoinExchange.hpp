@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   BitcoinExchange.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 17:20:32 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/10/29 20:42:37 by grib             ###   ########.fr       */
+/*   Updated: 2025/10/30 15:46:03 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ class bitcoinExchange
     bool isValidDate(const std::string& date);
     bool isValidRate(const std::string& rate, float& ratefloat);
 
-    void parseLineDB(const std::string& line);
+    void parseLineDB(const std::string& line, std::string sep);
     void extractDB(const std::string& dbFile);
 
     //print value
