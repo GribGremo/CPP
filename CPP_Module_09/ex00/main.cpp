@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
+/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 17:20:39 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/10/30 15:51:04 by sylabbe          ###   ########.fr       */
+/*   Updated: 2025/10/30 22:22:47 by grib             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int main(int argc, char **argv){
 
     try
     {
-        btc = bitcoinExchange("test.csv");
+        btc = bitcoinExchange("data.csv");
     }
     catch(const std::exception& e)
     {
@@ -34,10 +34,3 @@ int main(int argc, char **argv){
     btc.printValue(argv[1]);
     return (0);
 }
-
-
-//Parse file.txt
-//  -Format date:Verifier date valide
-//  -Value: 0 <= value <= 1000
-//Parse data.csv
-//Render result (value*rate) from date or lower

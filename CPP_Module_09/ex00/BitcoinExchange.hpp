@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   BitcoinExchange.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
+/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 17:20:32 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/10/30 15:46:03 by sylabbe          ###   ########.fr       */
+/*   Updated: 2025/10/30 22:22:13 by grib             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,30 +16,37 @@
 #include <map>
 #include <iostream>
 #include <string>
+#include <iomanip>
 
 #ifndef BITCOIN_EXCHANGE_HPP
 #define BITCOIN_EXCHANGE_HPP
 
 class bitcoinExchange
 {
-    //~~~~~~~~~~~~~~~~~~METHODS~~~~~~~~~~~~~~~~~~
+    //~~~~~~~~~~~~~~~~~~STRUCTURES~~~~~~~~~~~~~~~~~~
     private:
     struct result{
-        float amount;
-        float total;
+        double amount;
+        double total;
         std::string date;
     };
 
     //~~~~~~~~~~~~~~~~~~METHODS~~~~~~~~~~~~~~~~~~
     private:
+    //utils
+    bool getSeparator(std::string str, std::string one, std::string two, std::string& sep);
+    bool getDateValue(const std::string& str, long int& n, const size_t& size);
+    bool strIsDigit(const std::string& str);
+
+
     //extract DB
     bool isValidDate(const std::string& date);
-    bool isValidRate(const std::string& rate, float& ratefloat);
-
+    bool isValidRate(const std::string& rate, double& ratedouble);
     void parseLineDB(const std::string& line, std::string sep);
     void extractDB(const std::string& dbFile);
 
     //print value
+    bool isValidAmount(const std::string& amount, double& amountdouble);
     bool parseLineSearch(const std::string& search, const std::string& sep);
 
     public:
@@ -47,7 +54,7 @@ class bitcoinExchange
 
     //~~~~~~~~~~~~~~~~~~MEMBERS~~~~~~~~~~~~~~~~~~
     private:
-    std::map<std::string,float> _dataBase;
+    std::map<std::string,double> _dataBase;
     result _res;
 
     //~~~~~~~~~~~~~~~~~~CONSTRUCTORS~~~~~~~~~~~~~~~~~~
