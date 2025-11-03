@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 17:20:39 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/10/30 22:22:47 by grib             ###   ########.fr       */
+/*   Updated: 2025/11/03 15:21:38 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
 #include <iostream>
+
+#define DATAFILE "data.csv"
 
 int main(int argc, char **argv){
     bitcoinExchange btc;
@@ -24,13 +26,25 @@ int main(int argc, char **argv){
 
     try
     {
-        btc = bitcoinExchange("data.csv");
+        btc = bitcoinExchange(DATAFILE);
     }
     catch(const std::exception& e)
     {
         return (1);
     }
-
+    
+    std::cout << "~~~~~~~~~~~~~~~Main Test~~~~~~~~~~~~~~~" <<std::endl;
     btc.printValue(argv[1]);
+    std::cout << std::endl;
+    
+    std::cout << "~~~~~~~~~~~~~~~operator= Test~~~~~~~~~~~~~~~" <<std::endl;
+    bitcoinExchange test = btc;
+    test.printValue(argv[1]);
+    std::cout << std::endl;
+
+    std::cout << "~~~~~~~~~~~~~~~Copy constructor Test~~~~~~~~~~~~~~~" <<std::endl;
+    bitcoinExchange test2(btc);
+    test2.printValue(argv[1]);
+
     return (0);
 }

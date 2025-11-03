@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 17:20:44 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/10/31 09:24:30 by grib             ###   ########.fr       */
+/*   Updated: 2025/11/03 15:22:34 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,15 @@ int main(int argc, char** argv){
         return (1);
     }
 
+    std::cout << "~~~~~~~~~~~~~~~Main Test~~~~~~~~~~~~~~~" <<std::endl;
     cal = RPN(argv[1]);
     cal.printResult();
+    std::cout << "~~~~~~~~~~~~~~~operator= Test~~~~~~~~~~~~~~~" <<std::endl;
+    RPN test = cal;
+    test.printResult();
+    std::cout << "~~~~~~~~~~~~~~~copy constructor Test~~~~~~~~~~~~~~~" <<std::endl;
+    RPN test2(cal);
+    test2.printResult();
 
     return (0);
 }

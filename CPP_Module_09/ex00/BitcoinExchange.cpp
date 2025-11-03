@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   BitcoinExchange.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 17:20:20 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/10/30 22:21:30 by grib             ###   ########.fr       */
+/*   Updated: 2025/11/03 15:10:41 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,17 +220,15 @@ bool bitcoinExchange::parseLineSearch(const std::string& search, const std::stri
     }
     else if (!isValidAmount(amount, _res.amount))
         return (false);
+    if (_res.date < _dataBase.begin()->first)
+    {
+        std::cout << "Error: No rate anterior to " << _res.date <<std::endl;
+        return (false);       
+    }
     for (std::map<std::string,double>::iterator it = _dataBase.begin(); it != _dataBase.end(); it++)
     {
         if (_res.date < it->first)
-        {
-            if (_res.total == -1)
-            {
-                std::cout << "Error: No rate anterior to " << _res.date <<std::endl;
-                return (false);
-            }
             return (true);
-        }
         _res.total = _res.amount * it->second;
     }
     return (true);
@@ -262,13 +260,12 @@ void bitcoinExchange::printValue(const std::string& inputFileName){
         _res.amount = 0;
         _res.total = -1;
         _res.date = "";
-        if (parseLineSearch(buffer, sep))
-            std::cout<< _res.date << " => " << _res.amount << " = " << std::fixed  << std::setprecision(2) << _res.total <<std::endl;
+        if (parseLineSearch(buffer, sep)){
+            if (std::isinf(_res.total))
+                std::cout << "Error: Value too big(i really should have invested)" <<std::endl;
+            else
+                std::cout<< _res.date << " => " << _res.amount << " = " << std::fixed  << std::setprecision(2) << _res.total <<std::endl;
+        }
     }
     fs.close();
 }
-
-//ATTENTION SI TU NE TROUVES PAS DE DATE INFERIEURE
-//PAS D'ENTREE DANS LA DB
-//Si CONSTRUCTEUR PAR DEFAUT DATABASE PAS INIT SI IL PRINT VALUE
-//CPP8 Fais des pointeurs sur tes iterateurs pour verifier la range dans span

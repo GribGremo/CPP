@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RPN.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 17:20:49 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/10/31 09:27:45 by grib             ###   ########.fr       */
+/*   Updated: 2025/11/03 15:27:39 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,9 @@ bool RPN::handleError(int idx, const std::string& reason){
 bool RPN::parseLine(){
     for (size_t i = 0; i != _str.size();i++){
         if (i % 2 == 1 && (_str[i] != ' ' || i + 1 == _str.size()))
-            return handleError(i,"Invalid format received");//return (false);
+            return handleError(i,"Invalid format received");
         else if (i % 2 == 0 && !isdigit(_str[i]) && _str[i] != '+' && _str[i] != '-' && _str[i] != '*' && _str[i] != '/')
-            return handleError(i,"Invalid format received");//return (false);
+            return handleError(i,"Invalid format received");
     }
     return (true);
 }
@@ -93,11 +93,11 @@ bool RPN::operate(char c, int i)
     else if (c == '/')
     {
         if (two == 0)
-            return handleError(i,"Division by zero");//return (false);
+            return handleError(i,"Division by zero");
         res = one / two;
     }
     if (res < INT_MIN || res > INT_MAX)
-        return handleError(-1,"Overflow");//return (false);
+        return handleError(-1,"Overflow");
     _numbers.push(res);
     return (true);
 }
@@ -110,14 +110,14 @@ bool RPN::execRPN(){
         if (_str[i] == '+' || _str[i] == '-' || _str[i] == '*' || _str[i] == '/')
         {
             if (_numbers.size() < 2)
-                return handleError(i,"Missing number to operate");//std::cerr << "ERROR" << std::endl;
+                return handleError(i,"Missing number to operate");
             if (!operate(_str[i], i))
                 return (false);
         }
         else if (isdigit(_str[i]))
         {
             c = _str[i];
-            _numbers.push(strtol(c.c_str(),NULL,10));//A voir
+            _numbers.push(strtol(c.c_str(),NULL,10));
         }
     }
     if (_numbers.size() != 1)
