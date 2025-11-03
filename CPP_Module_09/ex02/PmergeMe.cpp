@@ -511,7 +511,7 @@ Pour 2.pow(x) - 1 taille de sequence, il faut x comparaisons max
  .  |  .                                       1 comparaison
  |     |                                       2 comparaisons max
 
- *  *  *  *  *  *  *                           5
+ *  *  *  *  *  *  *                           7
  .  .  .  |  .  .  .                           1
  .  |  .     .  |  .                           2
  |     |     |     |                           3
