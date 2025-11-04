@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 17:21:03 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/11/03 21:55:19 by grib             ###   ########.fr       */
+/*   Updated: 2025/11/04 14:47:08 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ class PmergeMe{
     void                                                    initIdList(Container<sqc,std::allocator<sqc> >& lst, typename Container<sqc,std::allocator<sqc> >::iterator& start, typename Container<sqc,std::allocator<sqc> >::iterator& end);
     void                                                    execJS(Container<sqc,std::allocator<sqc> >& main,Container<sqc,std::allocator<sqc> >& pending,int idJS);
     void                                                    setupJS(pairer& pairing, Container<sqc,std::allocator<sqc> >& main,Container<sqc,std::allocator<sqc> >& pending, Container<sqc,std::allocator<sqc> >& rest);
-    Container<int,std::allocator<int> >                     insertFJ(pairer& pairing);
+    void                     insertFJ(pairer& pairing);
     
     //SORT PAIRS
     void        swapRange(sqc& u1, sqc& u2);
@@ -105,12 +105,11 @@ class PmergeMe{
     
     //
     void        timeSort(int argc , char **argv);
-    void        sortFJ();
-    Container<int,std::allocator<int> >    sortFJ_Container(Container<int,std::allocator<int> >& v, unsigned int seqLen);
+    void        sortFJ(unsigned int seqLen);
     
     //PARSING
-    bool        parseArgs(int argc, char **argv);
     bool        isArgValid(char* str, long int& value);
+    void        parseArgs(int argc, char **argv);
     
     /*~~~~~~~~~~~~~~~~~~~~~CONSTRUCTOR~~~~~~~~~~~~~~~~~~~~~*/    
     
