@@ -6,7 +6,7 @@
 /*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 17:21:00 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/10/27 07:54:46 by grib             ###   ########.fr       */
+/*   Updated: 2025/11/03 23:03:21 by grib             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,34 @@
 
 
 template <template < typename,typename> class Container>
-PmergeMe<Container>::PmergeMe(){}
+PmergeMe<Container>::PmergeMe(){
+    _res.empty = true;
+    _res.execTime = 0;
+    _res.containerType = "";
+    _res.unitTime = "";
+}
 
 template <template < typename,typename > class Container>
-PmergeMe<Container>::PmergeMe(const PmergeMe<Container>& src){//ATTENTION SI JE TENTE DE METTRE UNVEC DANS UNE LISTE (Container = src.Container?) ou throw
+PmergeMe<Container>::PmergeMe(const PmergeMe<Container>& src){
     _res = src._res;
 }
 
 template <template < typename,typename > class Container>
 PmergeMe<Container>::PmergeMe(int argc, char **argv){
-    checkContainerType(_res.containerType);
-    timeSort(argc, argv);
+    try{
+        checkContainerType(_res.containerType);
+        timeSort(argc, argv);
+    }
+    catch(const std::exception& e)
+    {
+        _res.empty = true;
+        _res.execTime = 0;
+        _res.containerType = "";
+        _res.unitTime = "";
+        std::cerr << "Error: Can not build PmergeMe: " << e.what() <<std::endl;
+        throw ;
+    }
+    _res.empty = false;
 }
 
 template <template < typename,typename > class Container>
@@ -46,7 +63,7 @@ PmergeMe<Container>::~PmergeMe(){}
 template <template < typename,typename > class Container>
 PmergeMe<Container> PmergeMe<Container>::operator=(const PmergeMe<Container>& src){
     if (this == &src)
-        return (this);
+        return (*this);
     _res = src._res;
     return (*this);
 }
@@ -55,6 +72,11 @@ PmergeMe<Container> PmergeMe<Container>::operator=(const PmergeMe<Container>& sr
 template <template < typename,typename > class Container>
 const typename PmergeMe<Container>::result&  PmergeMe<Container>::getRes(){
     return (_res);
+}
+
+template <template < typename,typename > class Container>
+bool PmergeMe<Container>::empty(){
+    return (_res.empty);
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\
@@ -136,10 +158,7 @@ bool PmergeMe<Container>::isArgValid(char* str, long int& value){
     errno = 0;
     value = strtol(str,&end,10);
     if (str == end || errno == ERANGE || *end != '\0' || value < 0 || value > __INT_MAX__ )
-    {
-        std::cout << "Error: Invalid argument format" <<std::endl;
-        return (false);
-    }
+        throw std::runtime_error("Invalid argument format");
     return (true);
 }
 
@@ -147,10 +166,8 @@ template <template < typename,typename > class Container>
 bool    PmergeMe<Container>::parseArgs(int argc, char **argv){
     long int value = 0;
     if (argc < 2)
-    {
-        std::cout << "Error: Invalid number of arguments" << std::endl;
-        return true;//EXCEPTION?
-    }
+        throw std::runtime_error("Invalid number of arguments");
+
     for (int i = 1; i < argc; i++)
     {
         if(isArgValid(argv[i], value))
@@ -632,3 +649,6 @@ void PmergeMe<std::vector>::execJS(std::vector<sqc>& main,std::vector<sqc>& pend
         idJS--;
     }
 }
+
+
+//FAIS LES GENERIQUES POUR CALMER LE COMPILATEUR

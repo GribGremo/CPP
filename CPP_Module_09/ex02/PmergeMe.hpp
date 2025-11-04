@@ -6,7 +6,7 @@
 /*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 17:21:03 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/10/31 18:27:23 by grib             ###   ########.fr       */
+/*   Updated: 2025/11/03 21:55:19 by grib             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ class PmergeMe{
     public:
 
     struct result{
+        bool                                                        empty;
         Container<int, std::allocator<int> >                        sorted;
         Container<int, std::allocator<int> >                        unsorted;
         double                                                      execTime;
@@ -102,7 +103,7 @@ class PmergeMe{
     sqc         initStructSeq(typename Container<int,std::allocator<int> >::iterator& it, typename Container<int,std::allocator<int> >::iterator end, int idSeq, int seqLen);
     pairer      initPairing(Container<int,std::allocator<int> >& v, int seqLen);
     
-    //SORT
+    //
     void        timeSort(int argc , char **argv);
     void        sortFJ();
     Container<int,std::allocator<int> >    sortFJ_Container(Container<int,std::allocator<int> >& v, unsigned int seqLen);
@@ -113,7 +114,6 @@ class PmergeMe{
     
     /*~~~~~~~~~~~~~~~~~~~~~CONSTRUCTOR~~~~~~~~~~~~~~~~~~~~~*/    
     
-    PmergeMe();
     
     /*~~~~~~~~~~~~~~~~~~~~~MEMBERS~~~~~~~~~~~~~~~~~~~~~*/    
     
@@ -123,6 +123,7 @@ class PmergeMe{
     public:
     
     /*~~~~~~~~~~~~~~~~~~~~~CONSTRUCTOR~~~~~~~~~~~~~~~~~~~~~*/    
+    PmergeMe();
 
     PmergeMe(int argc, char **argv);
     PmergeMe(const PmergeMe<Container>& src);
@@ -132,7 +133,7 @@ class PmergeMe{
     PmergeMe operator=(const PmergeMe<Container>& src);
 
     /*~~~~~~~~~~~~~~~~~~~~~METHODS~~~~~~~~~~~~~~~~~~~~~*/    
-
+    bool            empty();
     bool            isSorted();
     void            printCont(Container<int,std::allocator<int> >& c);
 

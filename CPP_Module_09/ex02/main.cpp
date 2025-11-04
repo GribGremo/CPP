@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
+/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 17:20:55 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/11/03 15:40:58 by sylabbe          ###   ########.fr       */
+/*   Updated: 2025/11/03 22:42:51 by grib             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,13 @@
 #include "PmergeMe.hpp"
 
 void printFJ(PmergeMe<std::vector>& vec, PmergeMe<std::list>& lst){
+    if (vec.empty() || lst.empty())
+    {
+        std::cout << "No result to print" <<std::endl;
+        return ;
+    }
     PmergeMe<std::vector>::result rVec = vec.getRes();
     PmergeMe<std::list>::result rLst = lst.getRes(); 
-
     std::cout << "Before:" ;
     vec.printCont(rVec.unsorted);
 
@@ -41,21 +45,40 @@ void printFJ(PmergeMe<std::vector>& vec, PmergeMe<std::list>& lst){
 }
 
 int main(int argc, char **argv){
-
-    PmergeMe<std::vector> vec(argc,argv);
-    // if (vec.isSorted())
-    //     std::cout << "SORTED: TRUE" << std::endl;
-    // else
-    //     std::cout << "SORTED: FALSE" << std::endl;
-    PmergeMe<std::list> list(argc,argv);
-    // if (list.isSorted())
-    //     std::cout << "SORTED: TRUE" << std::endl;
-    // else
-    //     std::cout << "SORTED: FALSE" << std::endl;
-
+    PmergeMe<std::vector> vec;
+    PmergeMe<std::list> list;
+    try {
+        vec = PmergeMe<std::vector>(argc,argv);
+        // if (vec.isSorted())
+        //     std::cout << "SORTED: TRUE" << std::endl;
+        // else
+        //     std::cout << "SORTED: FALSE" << std::endl;
+        list = PmergeMe<std::list>(argc,argv);
+        // if (list.isSorted())
+        //     std::cout << "SORTED: TRUE" << std::endl;
+        // else
+        //     std::cout << "SORTED: FALSE" << std::endl;
+        PmergeMe<std::deque > deque(argc,argv);
+    }
+    catch(const std::exception& e)
+    {
+        return (1);
+    }
+    std::cout << "~~~~~~~~~~~~~~~Main Test~~~~~~~~~~~~~~~" <<std::endl;
     printFJ(vec,list);
+    std::cout << std::endl;
 
-    // PmergeMe<std::deque > deque(argc,argv);
+    std::cout << "~~~~~~~~~~~~~~~operator= Test~~~~~~~~~~~~~~~" <<std::endl;
+    PmergeMe<std::vector> testVec = vec;
+    PmergeMe<std::list> testLst = list;
+    printFJ(testVec,testLst);
+    std::cout << std::endl;
+
+    std::cout << "~~~~~~~~~~~~~~~copy constructor Test~~~~~~~~~~~~~~~" <<std::endl;
+    PmergeMe<std::vector> testVec2(vec);
+    PmergeMe<std::list> testLst2(list);
+    printFJ(testVec2,testLst2);
+
 
 }
 
