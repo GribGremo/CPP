@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 17:20:55 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/11/03 22:42:51 by grib             ###   ########.fr       */
+/*   Updated: 2025/11/04 12:42:28 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int main(int argc, char **argv){
         //     std::cout << "SORTED: TRUE" << std::endl;
         // else
         //     std::cout << "SORTED: FALSE" << std::endl;
-        PmergeMe<std::deque > deque(argc,argv);
+        // PmergeMe<std::deque > deque(argc,argv);
     }
     catch(const std::exception& e)
     {

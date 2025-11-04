@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.tpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 17:21:00 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/11/03 23:03:21 by grib             ###   ########.fr       */
+/*   Updated: 2025/11/04 13:33:08 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,6 @@ const typename PmergeMe<Container>::result&  PmergeMe<Container>::getRes(){
     return (_res);
 }
 
-template <template < typename,typename > class Container>
-bool PmergeMe<Container>::empty(){
-    return (_res.empty);
-}
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\
 |  _____ _____ __  __ ____  _        _  _____ _____   |
@@ -88,9 +84,72 @@ bool PmergeMe<Container>::empty(){
 |                                                     |
 \~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
+//PUBLIC METHODS
+//Return a boolean to signal if a sort has been made
+template <template < typename,typename > class Container>
+bool PmergeMe<Container>::empty(){
+    return (_res.empty);
+}
+
+//print container content
+template <template < typename,typename > class Container>
+void PmergeMe<Container>::printCont(Container<int,std::allocator<int> >& c){
+    for(typename Container<int,std::allocator<int> >::iterator it = c.begin(); it != c.end(); it++)
+        std::cout << " " << *it;
+    std::cout << std::endl;
+}
+
+//Check if container is sorted, return a boolean
+template <template < typename,typename > class Container>
+bool PmergeMe<Container>::isSorted(){
+    if (_res.sorted.size() <= 1)
+        return (true);
+
+    typename Container<int, std::allocator<int> >::iterator it = _res.sorted.begin();
+    typename Container<int, std::allocator<int> >::iterator prev = it;
+    it++;
+    while (it != _res.sorted.end())
+    {
+        if (*prev > *it)
+            return (false);
+        it++;
+        prev++;
+    }
+    return (true);
+}
+
+//UTILS
+
+//Generic function to check container type and init _res.containerType, this function has 2 specialisations for vector and list, if not one of those container, an eception is thrown
+template <template <typename,typename> class Container>
+void PmergeMe<Container>::checkContainerType(std::string& containerType){
+    containerType = "Invalid container";
+    throw std::runtime_error("Invalid container type");
+}
+
+//Generic function to execJS, without it i can't compile with an invalid template, compilator doesn't know i already check the type of container, he just want to create an execJS for deque and find no corresponding function. I could have made explicit specialisation of execJS, but needed 2 prototypes in hpp
+template <template <typename,typename> class Container>
+void PmergeMe<Container>::execJS(Container<sqc, std::allocator<sqc> >& main,Container<sqc, std::allocator<sqc> >& pending,int idJS){
+    (void)main;
+    (void)pending;
+    (void)idJS;
+    throw std::runtime_error("Invalid Container type");
+}
+
+//Get iterator for a id, iterate until you findit the correct index, this is why list are so much inefficient in this exercise
+template <template < typename,typename > class Container>
+typename Container<typename PmergeMe<Container>::sqc,std::allocator<typename PmergeMe<Container>::sqc> >::iterator PmergeMe<Container>::getItFromId(Container<sqc,std::allocator<sqc> >& lst, int id){
+    typename Container<sqc,std::allocator<sqc> >::iterator it = lst.begin();
+    while (it != lst.end() && id != it->idSeq){
+        it++;
+    }
+    return (it);
+}
+
 
 //METHODS
 
+//Timer of parsing plus sort, will set _res.execTime and _res.unitTime
 template <template < typename,typename > class Container>
 void PmergeMe<Container>::timeSort(int argc , char **argv){
     timeval start;
@@ -117,39 +176,11 @@ void PmergeMe<Container>::timeSort(int argc , char **argv){
 }
 
 template <template < typename,typename > class Container>
-bool PmergeMe<Container>::isSorted(){
-    if (_res.sorted.size() <= 1)
-        return (true);
-
-    typename Container<int, std::allocator<int> >::iterator it = _res.sorted.begin();
-    typename Container<int, std::allocator<int> >::iterator prev = it;
-    it++;
-    while (it != _res.sorted.end())
-    {
-        if (*prev > *it)
-            return (false);
-        it++;
-        prev++;
-    }
-    return (true);
-}
-
-//CHECKER_TYPE
-
-template <template <typename,typename> class Container>
-void PmergeMe<Container>::checkContainerType(std::string& containerType){
-    containerType = "Invalid container";
-    throw std::runtime_error("Invalid container type");
-}
-
-
-template <template < typename,typename > class Container>
 void PmergeMe<Container>::sortFJ(){
     _res.sorted = sortFJ_Container(_res.sorted, 1);
     // std::cout << std::endl<< std::endl<< std::endl <<"FINAL LIST:";
     // printCont(_res.sorted);
 }
-
 
 //PARSING
 template <template < typename,typename > class Container>
@@ -194,12 +225,6 @@ void PmergeMe<Container>::printFL(sqc u){
     std::cout << "\033[0m";
 }
 
-template <template < typename,typename > class Container>
-void PmergeMe<Container>::printCont(Container<int,std::allocator<int> >& c){
-    for(typename Container<int,std::allocator<int> >::iterator it = c.begin(); it != c.end(); it++)
-        std::cout << " " << *it;
-    std::cout << std::endl;
-}
 
 
 template <template < typename,typename > class Container>
@@ -233,6 +258,8 @@ void PmergeMe<Container>::printStruct(pairer pairing){
     std::cout << "SeqLen: " << pairing.seqLen << std::endl;
 }
 
+//////////////////////////////////////CONVERT////////////////////////////////////////
+
 template <template < typename,typename > class Container>
 Container<int,std::allocator<int> > PmergeMe<Container>::cSqcTocInt(Container<sqc,std::allocator<sqc> > lstSqc){
     Container<int,std::allocator<int> > lst;
@@ -247,15 +274,6 @@ Container<int,std::allocator<int> > PmergeMe<Container>::cSqcTocInt(Container<sq
 
 
 //////////////////////////////////////UTILS////////////////////////////////////////
-
-template <template < typename,typename > class Container>
-typename Container<typename PmergeMe<Container>::sqc,std::allocator<typename PmergeMe<Container>::sqc> >::iterator PmergeMe<Container>::getItFromId(Container<sqc,std::allocator<sqc> >& lst, int id){
-    typename Container<sqc,std::allocator<sqc> >::iterator it = lst.begin();
-    while (it != lst.end() && id != it->idSeq){
-        it++;
-    }
-    return (it);
-}
 
 
 
@@ -420,7 +438,7 @@ Container<int,std::allocator<int> > PmergeMe<Container>::sortFJ_Container(Contai
 //     std::cout << std::endl<< "STRUCT AVANT SORTPAIR:"<<std::endl<< std::endl;
 //     printStruct(pairing);
 
-//     sortPairs(pairing);    
+//     sortPairs(pairing);
     
 //     std::cout << std::endl<< "STRUCT APRES SORTPAIR:"<<std::endl<< std::endl;
 //     printStruct(pairing);
