@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
+/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 17:21:03 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/11/04 14:47:08 by sylabbe          ###   ########.fr       */
+/*   Updated: 2025/11/04 21:36:25 by grib             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,9 +116,10 @@ class PmergeMe{
     
     /*~~~~~~~~~~~~~~~~~~~~~MEMBERS~~~~~~~~~~~~~~~~~~~~~*/    
     
-    result _res;
-    pairer _pairing;
-    
+    result  _res;
+    pairer  _pairing;
+    int     _countCmp;
+
     public:
     
     /*~~~~~~~~~~~~~~~~~~~~~CONSTRUCTOR~~~~~~~~~~~~~~~~~~~~~*/    
@@ -129,7 +130,7 @@ class PmergeMe{
     ~PmergeMe();
 
     /*~~~~~~~~~~~~~~~~~~~~~OPERATORS~~~~~~~~~~~~~~~~~~~~~*/    
-    PmergeMe operator=(const PmergeMe<Container>& src);
+    PmergeMe        operator=(const PmergeMe<Container>& src);
 
     /*~~~~~~~~~~~~~~~~~~~~~METHODS~~~~~~~~~~~~~~~~~~~~~*/    
     bool            empty();
@@ -139,6 +140,8 @@ class PmergeMe{
     /*~~~~~~~~~~~~~~~~~~~~~GETTERS~~~~~~~~~~~~~~~~~~~~~*/    
 
     const result&   getRes();
+    const int&      getCountCmp();
+
 };
 
 #include "PmergeMe.tpp"

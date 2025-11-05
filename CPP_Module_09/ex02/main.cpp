@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
+/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 17:20:55 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/11/04 13:47:18 by sylabbe          ###   ########.fr       */
+/*   Updated: 2025/11/04 20:50:31 by grib             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void printFJ(PmergeMe<std::vector>& vec, PmergeMe<std::list>& lst){
 
     std::cout << "Time to process a range of " << rVec.unsorted.size() << " elements with " << rVec.containerType << " : " << rVec.execTime << " " << rVec.unitTime << std::endl;
     std::cout << "Time to process a range of " << rLst.unsorted.size() << " elements with " << rLst.containerType << " : " << rLst.execTime << " " << rLst.unitTime << std::endl;
+    std::cout << "Number of comparisons: " << lst.getCountCmp() << std::endl;
 }
 
 int main(int argc, char **argv){
@@ -64,20 +65,20 @@ int main(int argc, char **argv){
     {
         return (1);
     }
-    std::cout << "~~~~~~~~~~~~~~~Main Test~~~~~~~~~~~~~~~" <<std::endl;
+    // std::cout << "~~~~~~~~~~~~~~~Main Test~~~~~~~~~~~~~~~" <<std::endl;
     printFJ(vec,list);
-    std::cout << std::endl;
+    // std::cout << std::endl;
 
-    std::cout << "~~~~~~~~~~~~~~~operator= Test~~~~~~~~~~~~~~~" <<std::endl;
-    PmergeMe<std::vector> testVec = vec;
-    PmergeMe<std::list> testLst = list;
-    printFJ(testVec,testLst);
-    std::cout << std::endl;
+    // std::cout << "~~~~~~~~~~~~~~~operator= Test~~~~~~~~~~~~~~~" <<std::endl;
+    // PmergeMe<std::vector> testVec = vec;
+    // PmergeMe<std::list> testLst = list;
+    // printFJ(testVec,testLst);
+    // std::cout << std::endl;
 
-    std::cout << "~~~~~~~~~~~~~~~copy constructor Test~~~~~~~~~~~~~~~" <<std::endl;
-    PmergeMe<std::vector> testVec2(vec);
-    PmergeMe<std::list> testLst2(list);
-    printFJ(testVec2,testLst2);
+    // std::cout << "~~~~~~~~~~~~~~~copy constructor Test~~~~~~~~~~~~~~~" <<std::endl;
+    // PmergeMe<std::vector> testVec2(vec);
+    // PmergeMe<std::list> testLst2(list);
+    // printFJ(testVec2,testLst2);
 
 
 }

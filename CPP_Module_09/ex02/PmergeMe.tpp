@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.tpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
+/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 17:21:00 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/11/04 16:25:37 by sylabbe          ###   ########.fr       */
+/*   Updated: 2025/11/04 22:14:52 by grib             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ template <template < typename,typename> class Container>
 PmergeMe<Container>::PmergeMe(){
     _res.empty = true;
     _res.execTime = 0;
+    _countCmp = 0;
     _res.containerType = "";
     _res.unitTime = "";
 }
@@ -34,10 +35,12 @@ PmergeMe<Container>::PmergeMe(){
 template <template < typename,typename > class Container>
 PmergeMe<Container>::PmergeMe(const PmergeMe<Container>& src){
     _res = src._res;
+    _countCmp = src._countCmp;
 }
 
 template <template < typename,typename > class Container>
 PmergeMe<Container>::PmergeMe(int argc, char **argv){
+    _countCmp = 0;
     try{
         checkContainerType(_res.containerType);
         timeSort(argc, argv);
@@ -48,6 +51,7 @@ PmergeMe<Container>::PmergeMe(int argc, char **argv){
         _res.execTime = 0;
         _res.containerType = "";
         _res.unitTime = "";
+        _countCmp = 0;
         std::cerr << "Error: Can not build PmergeMe: " << e.what() <<std::endl;
         throw ;
     }
@@ -65,6 +69,7 @@ PmergeMe<Container> PmergeMe<Container>::operator=(const PmergeMe<Container>& sr
     if (this == &src)
         return (*this);
     _res = src._res;
+    _countCmp = src._countCmp;
     return (*this);
 }
 
@@ -74,6 +79,10 @@ const typename PmergeMe<Container>::result&  PmergeMe<Container>::getRes(){
     return (_res);
 }
 
+template <template < typename,typename > class Container>
+const int&  PmergeMe<Container>::getCountCmp(){
+    return (_countCmp);
+}
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\
 |  _____ _____ __  __ ____  _        _  _____ _____   |
@@ -158,7 +167,7 @@ void PmergeMe<Container>::timeSort(int argc , char **argv){
 
     parseArgs(argc, argv);
     sortFJ(1);
-    
+
     gettimeofday(&end,NULL);
     _res.execTime = (end.tv_sec - start.tv_sec) *1000000L + (end.tv_usec - start.tv_usec);
     _res.unitTime = "μs";
@@ -291,6 +300,7 @@ void    PmergeMe<Container>::sortPairs(pairer& pairing){
 
     while(itmin != pairing.min.end() && itmax != pairing.max.end()){
         if(*(itmin->last) > *(itmax->last) && itmax->full == true ){
+            _countCmp++;
             swapRange(*itmin, *itmax);
         }
         itmin++;
@@ -350,7 +360,7 @@ typename PmergeMe<Container>::pairer PmergeMe<Container>::initPairing(Container<
 
 //////////////////////////////////////MAIN////////////////////////////////////////
 
-
+//Setup main and pending to insert with JS later, if a sequence is not full, we put it apart and will put it back later
 template <template < typename,typename > class Container> 
 void PmergeMe<Container>::setupJS(pairer& pairing, Container<sqc,std::allocator<sqc> >& main,Container<sqc,std::allocator<sqc> >& pending, Container<sqc,std::allocator<sqc> >& rest){
     typename Container<sqc,std::allocator<sqc> >::iterator itmin = pairing.min.begin();
@@ -396,6 +406,8 @@ void PmergeMe<Container>::insertFJ(pairer& pairing){
     _res.sorted = cSqcTocInt(main);
 }
 
+//Main function of FJ, will built pairing, sort by pair, recusively call himself until we can't make a full pair,
+// then remake pairing with list sent back by by depth + 1, and use JS to insert min into max
 template <template < typename,typename > class Container> 
 void PmergeMe<Container>::sortFJ(unsigned int seqLen){
     pairer pairing = initPairing(_res.sorted,seqLen);
@@ -464,8 +476,6 @@ void PmergeMe<std::list>::checkContainerType(std::string& containerType){
     containerType = "std::list<int>";
 }
 
-//DEBUG
-
 //return the it for index i, this index is used for binarysearch
 template <>
 std::list<PmergeMe<std::list>::sqc>::iterator PmergeMe<std::list>::getItFromindex(std::list<sqc>& lst, int id){
@@ -501,7 +511,7 @@ PmergeMe<Container>::getNext(Container<sqc,std::allocator<sqc> >& lst, typename 
 
 
 //////////////////////////////////////INSERT_LIST_FJ_JS////////////////////////////////////////
-//binary search will compare at seq/2 recursively, until seq equal one, and retur n an iterator target to insert cmp 
+//binary search will compare at seq/2 recursively, until seq equal one, and return an iterator target to insert cmp 
 template <>
 std::list<PmergeMe<std::list>::sqc>::iterator PmergeMe<std::list>::binarySearch(std::list<sqc>& lst, std::list<sqc>::iterator start, std::list<sqc>::iterator end, int cmp){
     int diff = end->i - start->i;
@@ -510,67 +520,26 @@ std::list<PmergeMe<std::list>::sqc>::iterator PmergeMe<std::list>::binarySearch(
     std::list<sqc>::iterator res;
 
     if(cmp > *itmid->last){
-        if(start == end || diff < 0)
+        _countCmp++;
+        if(itmid == end)
             return (getNext(lst,itmid));
         start = getNext(lst,itmid);
         res = binarySearch(lst,start,end,cmp);
     }
-    else if (cmp < *itmid->last){
-        end = getPrev(lst,itmid);
-        if(/*start == end ||*/ diff < 0 || end == lst.end())
+    else{
+        _countCmp++;
+        if(start == itmid)
             return (itmid);
+        end = getPrev(lst,itmid);
         res = binarySearch(lst,start,end,cmp);
     }
-    else if (cmp == *itmid->last)
-        return (itmid);
 
     return (res);
 }
 
 
-
-// template <>
-// std::list<PmergeMe<std::list>::sqc>::iterator PmergeMe<std::list>::binarySearch(std::list<sqc>& lst, std::list<sqc>::iterator start, std::list<sqc>::iterator end, int cmp){
-//     std::cout << "COMPARATEUR~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << cmp << std::endl;
-//     std::cout <<"endid:"<< end->i<<"startid:"<< start->i << std::endl;
-//     int diff = end->i - start->i;
-//     int mid = ((diff / 2) + start->i) ;
-//     std::cout << "MID:" << mid << std::endl;
-//     std::list<sqc>::iterator itmid = getItFromindex(lst, mid);
-//     std::list<sqc>::iterator res;
-//     if (diff <= 0)
-//         std::cout <<"DIFF"<< diff << std::endl;
-//     if(cmp > *itmid->last){
-//         std::cout << cmp << ">" << *itmid->last <<std::endl;
-//         if(start == end || diff < 0)
-//             return (getNext(lst,itmid));
-//         start = getNext(lst,itmid);
-//         if (start == lst.end())
-//             std::cout << "C'est la merde dans le binary search1"<<std::endl;
-
-//         std::cout << ">>PARTIE SUPP" <<std::endl;
-//         res = binarySearch(lst,start,end,cmp);//partie superieure
-//     }
-//     else if (cmp < *itmid->last){
-//         std::cout << cmp << "<" << *itmid->last <<std::endl;
-//         end = getPrev(lst,itmid);
-//         if(/*start == end ||*/ diff < 0 || end == lst.end())
-//             return (itmid);
-//         if (end == lst.end())
-//             std::cout << "C'est la merde dans le binary search2"<<std::endl;
-//         std::cout << ">>PARTIE INFF" <<std::endl;
-//         res = binarySearch(lst,start,end,cmp);//partie interieure
-//     }
-//     else if (cmp == *itmid->last)
-//         return (itmid);
-
-//     return (res);
-// }
-
-
 template <>
-void PmergeMe<std::list>::initIdList(std::list<sqc>& lst, std::list<sqc>::iterator& start, std::list<sqc>::iterator& end)
-{
+void PmergeMe<std::list>::initIdList(std::list<sqc>& lst, std::list<sqc>::iterator& start, std::list<sqc>::iterator& end){
     int i = 1;
     for(std::list<sqc>::iterator it = start; it != getNext(lst,end); it++){
         it->i = i;
@@ -580,16 +549,15 @@ void PmergeMe<std::list>::initIdList(std::list<sqc>& lst, std::list<sqc>::iterat
 
 template <>
 void PmergeMe<std::list>::execJS(std::list<sqc>& main,std::list<sqc>& pending,int idJS){
-    std::list<sqc>::iterator itMinMain = main.begin();//getNext(main, main.begin());
+    std::list<sqc>::iterator itMinMain = main.begin();
     std::list<sqc>::iterator itMaxMain = getPrev(main, getItFromId(main, idJS));
     std::list<sqc>::iterator target;
 
     for ( std::list<sqc>::iterator itToInsert = getItFromId(pending,idJS); itToInsert != pending.end(); itToInsert = getItFromId(pending,idJS)){
         itMinMain = main.begin();
         itMaxMain = getPrev(main, getItFromId(main, idJS));
-        initIdList(main,itMinMain,itMaxMain);//
+        initIdList(main,itMinMain,itMaxMain);
         target = binarySearch(main, itMinMain, itMaxMain, *itToInsert->last);
-        // std::cout << "TARGET----------------------------->" << *target->last <<std::endl;
         main.splice(target,pending,itToInsert);
         idJS--;
     }

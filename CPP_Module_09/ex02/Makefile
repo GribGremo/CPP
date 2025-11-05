@@ -6,13 +6,13 @@
 #    By: grib <grib@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/20 17:20:58 by sylabbe           #+#    #+#              #
-#    Updated: 2025/10/22 17:15:08 by grib             ###   ########.fr        #
+#    Updated: 2025/11/04 21:17:10 by grib             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = PmergeMe
 
-CXXFLAGS = -Werror -Wall -Wextra -std=c++98 #-fno-elide-constructors #-fsanitize=address
+CXXFLAGS = -Werror -Wall -Wextra -std=c++98 #-fsanitize=address #-fno-elide-constructors 
 
 SRC_MDT_DIR = .
 
