@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 17:21:00 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/11/05 13:31:39 by sylabbe          ###   ########.fr       */
+/*   Updated: 2025/11/05 14:25:48 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -310,13 +310,13 @@ typename PmergeMe<Container>::sqc PmergeMe<Container>::initStructSeq(typename Co
 This structur incorporates 2 containers of int representing the min last int of our sequence and the max in the other,
 this two form a pair, and incorporate the size of the sequence*/
 template <template < typename,typename > class Container>
-typename PmergeMe<Container>::pairer PmergeMe<Container>::initPairing(Container<int,std::allocator<int> >& v, int seqLen){//RETURN REF?
+typename PmergeMe<Container>::pairer PmergeMe<Container>::initPairing(Container<int,std::allocator<int> >& v, int seqLen){
     pairer pairing;
     int idSeq = 0;
     int i = 0;
     pairing.seqLen = seqLen;
 
-    for(typename Container<int,std::allocator<int> >::iterator it = v.begin(); it != v.end(); it++)//IT = IT ATTENTION A LA BOUCLE INITSEQ
+    for(typename Container<int,std::allocator<int> >::iterator it = v.begin(); it != v.end(); it++)
     {
         if (i % 2 == 0){
             idSeq++;
