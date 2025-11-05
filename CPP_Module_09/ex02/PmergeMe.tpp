@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 17:21:00 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/11/05 14:25:48 by sylabbe          ###   ########.fr       */
+/*   Updated: 2025/11/05 14:39:07 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,8 +117,8 @@ bool PmergeMe<Container>::empty(){
 
 //print container content
 template <template < typename,typename > class Container>
-void PmergeMe<Container>::printCont(Container<int,std::allocator<int> >& c){
-    for(typename Container<int,std::allocator<int> >::iterator it = c.begin(); it != c.end(); it++)
+void PmergeMe<Container>::printCont(cont_int& c){
+    for(it_cont_int it = c.begin(); it != c.end(); it++)
         std::cout << " " << *it;
     std::cout << std::endl;
 }
@@ -129,8 +129,8 @@ bool PmergeMe<Container>::isSorted(){
     if (_res.sorted.size() <= 1)
         return (true);
 
-    typename Container<int, std::allocator<int> >::iterator it = _res.sorted.begin();
-    typename Container<int, std::allocator<int> >::iterator prev = it;
+    it_cont_int it = _res.sorted.begin();
+    it_cont_int prev = it;
     it++;
     while (it != _res.sorted.end())
     {
@@ -154,8 +154,9 @@ void PmergeMe<Container>::checkContainerType(std::string& containerType){
 
 //Get iterator for a id, iterate until you findit the correct index, this is why list are so much inefficient in this exercise
 template <template < typename,typename > class Container>
-typename Container<typename PmergeMe<Container>::sqc,std::allocator<typename PmergeMe<Container>::sqc> >::iterator PmergeMe<Container>::getItFromId(Container<sqc,std::allocator<sqc> >& lst, int id){
-    typename Container<sqc,std::allocator<sqc> >::iterator it = lst.begin();
+typename Container<typename PmergeMe<Container>::sqc,std::allocator<typename PmergeMe<Container>::sqc> >::iterator 
+PmergeMe<Container>::getItFromId(cont_seq& lst, int id){
+    it_cont_seq it = lst.begin();
     while (it != lst.end() && id != it->idSeq){
         it++;
     }
@@ -166,7 +167,7 @@ typename Container<typename PmergeMe<Container>::sqc,std::allocator<typename Pme
 
 //Generic function to execJS, without it i can't compile with an invalid template, compilator doesn't know i already check the type of container, he just want to create an execJS for deque(by default the generic) and find no corresponding function. I could have made explicit specialisation of execJS, but needed 2 prototypes in hpp
 template <template <typename,typename> class Container>
-void PmergeMe<Container>::execJS(Container<sqc, std::allocator<sqc> >& main,Container<sqc, std::allocator<sqc> >& pending,int idJS){
+void PmergeMe<Container>::execJS(cont_seq& main,cont_seq& pending,int idJS){
     (void)main;
     (void)pending;
     (void)idJS;
@@ -235,10 +236,10 @@ void    PmergeMe<Container>::parseArgs(int argc, char **argv){
 //////////////////////////////////////CONVERT////////////////////////////////////////
 //convert a container of structure seq, in a container of int
 template <template < typename,typename > class Container>
-Container<int,std::allocator<int> > PmergeMe<Container>::cSqcTocInt(Container<sqc,std::allocator<sqc> > lstSqc){
+Container<int,std::allocator<int> > PmergeMe<Container>::cSqcTocInt(cont_seq lstSqc){
     Container<int,std::allocator<int> > lst;
 
-    for(typename Container<sqc,std::allocator<sqc> >::iterator it = lstSqc.begin(); it != lstSqc.end(); it++){
+    for(it_cont_seq it = lstSqc.begin(); it != lstSqc.end(); it++){
         lst.insert(lst.end(),it->first,it->last);
         lst.push_back(*it->last); 
     }
@@ -251,8 +252,8 @@ Container<int,std::allocator<int> > PmergeMe<Container>::cSqcTocInt(Container<sq
 //This function swap the the 2 sequences of int, so min and max will be place accordingly
 template <template < typename,typename > class Container>
 void PmergeMe<Container>::swapRange(sqc& u1, sqc& u2){
-    typename Container<int,std::allocator<int> >::iterator it1 = u1.first;
-    typename Container<int,std::allocator<int> >::iterator it2 = u2.first;
+    it_cont_int it1 = u1.first;
+    it_cont_int it2 = u2.first;
 
     while(it1 != u1.last && it2 != u2.last)
     {
@@ -266,8 +267,8 @@ void PmergeMe<Container>::swapRange(sqc& u1, sqc& u2){
 //This function will sort by pairs, pairs are represented by 2 containers(min,max) aligned, we will swap them, if the last int of our sequence is superior to the last int of his 'pair' 
 template <template < typename,typename > class Container>
 void    PmergeMe<Container>::sortPairs(pairer& pairing){
-    typename Container<sqc,std::allocator<sqc> >::iterator itmin = pairing.min.begin();
-    typename Container<sqc,std::allocator<sqc> >::iterator itmax = pairing.max.begin();
+    it_cont_seq itmin = pairing.min.begin();
+    it_cont_seq itmax = pairing.max.begin();
 
     while(itmin != pairing.min.end() && itmax != pairing.max.end()){
         if(*(itmin->last) > *(itmax->last) && itmax->full == true ){
@@ -285,7 +286,7 @@ void    PmergeMe<Container>::sortPairs(pairer& pairing){
 It will incorporate 2 iterators representing the first and last numer of our sequence, it will also include idSeq, will be used with JS BS,
  to know wich sstructure is link to the other, will also use an index i*/
 template <template < typename,typename > class Container>
-typename PmergeMe<Container>::sqc PmergeMe<Container>::initStructSeq(typename Container<int,std::allocator<int> >::iterator& it, typename Container<int,std::allocator<int> >::iterator end, int idSeq, int seqLen){
+typename PmergeMe<Container>::sqc PmergeMe<Container>::initStructSeq(it_cont_int& it, it_cont_int end, int idSeq, int seqLen){
     sqc u;
     int i = 0;
     u.first = it;
@@ -310,13 +311,13 @@ typename PmergeMe<Container>::sqc PmergeMe<Container>::initStructSeq(typename Co
 This structur incorporates 2 containers of int representing the min last int of our sequence and the max in the other,
 this two form a pair, and incorporate the size of the sequence*/
 template <template < typename,typename > class Container>
-typename PmergeMe<Container>::pairer PmergeMe<Container>::initPairing(Container<int,std::allocator<int> >& v, int seqLen){
+typename PmergeMe<Container>::pairer PmergeMe<Container>::initPairing(cont_int& v, int seqLen){
     pairer pairing;
     int idSeq = 0;
     int i = 0;
     pairing.seqLen = seqLen;
 
-    for(typename Container<int,std::allocator<int> >::iterator it = v.begin(); it != v.end(); it++)
+    for(it_cont_int it = v.begin(); it != v.end(); it++)
     {
         if (i % 2 == 0){
             idSeq++;
@@ -333,9 +334,9 @@ typename PmergeMe<Container>::pairer PmergeMe<Container>::initPairing(Container<
 
 //Setup main and pending to insert with JS later, if a sequence is not full, we put it apart and will put it back later
 template <template < typename,typename > class Container> 
-void PmergeMe<Container>::setupJS(pairer& pairing, Container<sqc,std::allocator<sqc> >& main,Container<sqc,std::allocator<sqc> >& pending, Container<sqc,std::allocator<sqc> >& rest){
-    typename Container<sqc,std::allocator<sqc> >::iterator itmin = pairing.min.begin();
-    typename Container<sqc,std::allocator<sqc> >::iterator itmax = pairing.max.begin();
+void PmergeMe<Container>::setupJS(pairer& pairing, cont_seq& main,cont_seq& pending, cont_seq& rest){
+    it_cont_seq itmin = pairing.min.begin();
+    it_cont_seq itmax = pairing.max.begin();
     
     main.push_back(*itmin);
     itmin++;
@@ -356,9 +357,9 @@ void PmergeMe<Container>::setupJS(pairer& pairing, Container<sqc,std::allocator<
 //Jacosthal:Creation of main pending => until JS index higher than pending index => binarysearch on limited sequence with the help of JS
 template <template < typename,typename > class Container> 
 void PmergeMe<Container>::insertFJ(pairer& pairing){
-    Container<sqc,std::allocator<sqc> > main;
-    Container<sqc,std::allocator<sqc> > pending;
-    Container<sqc,std::allocator<sqc> > rest;
+    cont_seq main;
+    cont_seq pending;
+    cont_seq rest;
     int x = 3;
     
     setupJS(pairing,main,pending,rest);

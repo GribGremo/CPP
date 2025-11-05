@@ -6,7 +6,7 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 17:21:03 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/11/05 14:03:34 by sylabbe          ###   ########.fr       */
+/*   Updated: 2025/11/05 14:42:18 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 #include <list>
 #include <algorithm>
 #include <cmath>
+#include <errno.h>
+
 
 template <template <typename,typename> class Container>
 class PmergeMe{

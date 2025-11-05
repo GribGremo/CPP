@@ -6,23 +6,13 @@
 /*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 17:20:55 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/11/05 13:43:19 by sylabbe          ###   ########.fr       */
+/*   Updated: 2025/11/05 15:21:59 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <vector>
 #include <list>
-#include <deque>
-#include <time.h>
-
-#include <cstdlib>
-#include <errno.h>
-//temp
-#include <unistd.h>
-#include <iomanip>
-#include <sys/time.h>
-#include <cmath>
 
 #include "PmergeMe.hpp"
 
@@ -31,7 +21,6 @@ Optional:
     std::cout << "Number of comparisons: " << lst.getCountCmp() << " (list)"<< std::endl;
     std::cout << "Number of comparisons: " << vec.getCountCmp() << " (vector)"<< std::endl;
 */
-
 void printFJ(PmergeMe<std::vector>& vec, PmergeMe<std::list>& lst){
     if (vec.empty() || lst.empty())
     {
@@ -51,39 +40,33 @@ void printFJ(PmergeMe<std::vector>& vec, PmergeMe<std::list>& lst){
 }
 
 int main(int argc, char **argv){
+    (void)argc;
+    (void)argv;
+
     PmergeMe<std::vector> vec;
     PmergeMe<std::list> list;
     try {
         vec = PmergeMe<std::vector>(argc,argv);
-        // if (vec.isSorted())
-        //     std::cout << "SORTED: TRUE" << std::endl;
-        // else
-        //     std::cout << "SORTED: FALSE" << std::endl;
         list = PmergeMe<std::list>(argc,argv);
-        // if (list.isSorted())
-        //     std::cout << "SORTED: TRUE" << std::endl;
-        // else
-        //     std::cout << "SORTED: FALSE" << std::endl;
-        // PmergeMe<std::deque > deque(argc,argv);//ATTENTION CLOSE?
     }
     catch(const std::exception& e)
     {
         return (1);
     }
-    // std::cout << "~~~~~~~~~~~~~~~Main Test~~~~~~~~~~~~~~~" <<std::endl;
+    std::cout << "~~~~~~~~~~~~~~~Main Test~~~~~~~~~~~~~~~" <<std::endl;
     printFJ(vec,list);
-    // std::cout << std::endl;
+    std::cout << std::endl;
 
-    // std::cout << "~~~~~~~~~~~~~~~operator= Test~~~~~~~~~~~~~~~" <<std::endl;
-    // PmergeMe<std::vector> testVec = vec;
-    // PmergeMe<std::list> testLst = list;
-    // printFJ(testVec,testLst);
-    // std::cout << std::endl;
+    std::cout << "~~~~~~~~~~~~~~~operator= Test~~~~~~~~~~~~~~~" <<std::endl;
+    PmergeMe<std::vector> testVec = vec;
+    PmergeMe<std::list> testLst = list;
+    printFJ(testVec,testLst);
+    std::cout << std::endl;
 
-    // std::cout << "~~~~~~~~~~~~~~~copy constructor Test~~~~~~~~~~~~~~~" <<std::endl;
-    // PmergeMe<std::vector> testVec2(vec);
-    // PmergeMe<std::list> testLst2(list);
-    // printFJ(testVec2,testLst2);
+    std::cout << "~~~~~~~~~~~~~~~copy constructor Test~~~~~~~~~~~~~~~" <<std::endl;
+    PmergeMe<std::vector> testVec2(vec);
+    PmergeMe<std::list> testLst2(list);
+    printFJ(testVec2,testLst2);
 
 
 }
