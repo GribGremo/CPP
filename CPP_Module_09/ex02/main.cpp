@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 17:20:55 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/11/04 20:50:31 by grib             ###   ########.fr       */
+/*   Updated: 2025/11/05 13:43:19 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,12 @@
 
 #include "PmergeMe.hpp"
 
+/*Print final result as requested by the subject
+Optional:
+    std::cout << "Number of comparisons: " << lst.getCountCmp() << " (list)"<< std::endl;
+    std::cout << "Number of comparisons: " << vec.getCountCmp() << " (vector)"<< std::endl;
+*/
+
 void printFJ(PmergeMe<std::vector>& vec, PmergeMe<std::list>& lst){
     if (vec.empty() || lst.empty())
     {
@@ -42,7 +48,6 @@ void printFJ(PmergeMe<std::vector>& vec, PmergeMe<std::list>& lst){
 
     std::cout << "Time to process a range of " << rVec.unsorted.size() << " elements with " << rVec.containerType << " : " << rVec.execTime << " " << rVec.unitTime << std::endl;
     std::cout << "Time to process a range of " << rLst.unsorted.size() << " elements with " << rLst.containerType << " : " << rLst.execTime << " " << rLst.unitTime << std::endl;
-    std::cout << "Number of comparisons: " << lst.getCountCmp() << std::endl;
 }
 
 int main(int argc, char **argv){
@@ -59,7 +64,7 @@ int main(int argc, char **argv){
         //     std::cout << "SORTED: TRUE" << std::endl;
         // else
         //     std::cout << "SORTED: FALSE" << std::endl;
-        // PmergeMe<std::deque > deque(argc,argv);
+        // PmergeMe<std::deque > deque(argc,argv);//ATTENTION CLOSE?
     }
     catch(const std::exception& e)
     {

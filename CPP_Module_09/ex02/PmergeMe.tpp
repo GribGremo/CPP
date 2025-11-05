@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.tpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 17:21:00 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/11/04 22:14:52 by grib             ###   ########.fr       */
+/*   Updated: 2025/11/05 13:31:39 by sylabbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ PmergeMe<Container> PmergeMe<Container>::operator=(const PmergeMe<Container>& sr
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~GETTERS~~~~~~~~~~~~~~~~~~~~~*/
+
 template <template < typename,typename > class Container>
 const typename PmergeMe<Container>::result&  PmergeMe<Container>::getRes(){
     return (_res);
@@ -83,6 +84,20 @@ template <template < typename,typename > class Container>
 const int&  PmergeMe<Container>::getCountCmp(){
     return (_countCmp);
 }
+
+/*~~~~~~~~~~~~~~~~~~~~~FUNCTOR/WRAPPER~~~~~~~~~~~~~~~~~~~~~*/
+
+//Construct my wrapper with a pointer to the instance of PmergeMe, so i can access _countCmp and increment it
+template <template < typename,typename > class Container> 
+PmergeMe<Container>::CmpStruct::CmpStruct(PmergeMe* src): parent(src){}
+
+//Construct my functor, so i can use him as a function on lower_bound, lower_bound want access to a free function, not a function member of a class, it will compare the *last in sqc provided to the value provided(lowerbound internal logic)
+template <template < typename,typename > class Container> 
+bool PmergeMe<Container>::CmpStruct::operator()(const sqc& s, int value){
+    parent->_countCmp++;
+    return (*s.last < value);
+}
+
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\
 |  _____ _____ __  __ ____  _        _  _____ _____   |
@@ -136,14 +151,6 @@ void PmergeMe<Container>::checkContainerType(std::string& containerType){
     throw std::runtime_error("Invalid container type");
 }
 
-//Generic function to execJS, without it i can't compile with an invalid template, compilator doesn't know i already check the type of container, he just want to create an execJS for deque(by default the generic) and find no corresponding function. I could have made explicit specialisation of execJS, but needed 2 prototypes in hpp
-template <template <typename,typename> class Container>
-void PmergeMe<Container>::execJS(Container<sqc, std::allocator<sqc> >& main,Container<sqc, std::allocator<sqc> >& pending,int idJS){
-    (void)main;
-    (void)pending;
-    (void)idJS;
-    throw std::runtime_error("Invalid Container type");
-}
 
 //Get iterator for a id, iterate until you findit the correct index, this is why list are so much inefficient in this exercise
 template <template < typename,typename > class Container>
@@ -156,6 +163,16 @@ typename Container<typename PmergeMe<Container>::sqc,std::allocator<typename Pme
 }
 
 //METHODS
+
+//Generic function to execJS, without it i can't compile with an invalid template, compilator doesn't know i already check the type of container, he just want to create an execJS for deque(by default the generic) and find no corresponding function. I could have made explicit specialisation of execJS, but needed 2 prototypes in hpp
+template <template <typename,typename> class Container>
+void PmergeMe<Container>::execJS(Container<sqc, std::allocator<sqc> >& main,Container<sqc, std::allocator<sqc> >& pending,int idJS){
+    (void)main;
+    (void)pending;
+    (void)idJS;
+    throw std::runtime_error("Invalid Container type");
+}
+
 
 //Timer of parsing plus sort, will set _res.execTime and _res.unitTime
 template <template < typename,typename > class Container>
@@ -214,52 +231,6 @@ void    PmergeMe<Container>::parseArgs(int argc, char **argv){
 }
 
 
-//////////////////////////////////////DEBUG////////////////////////////////////////
-
-template <template < typename,typename > class Container>
-void PmergeMe<Container>::printFL(sqc u){
-    if (u.full == false)
-    std::cout << "\033[1;31m";
-    while(u.first != u.last){
-        std::cout << " " << *u.first;
-        u.first++;
-    }
-    std::cout << " " << *u.first;
-    std::cout << "\033[0m";
-}
-
-
-
-template <template < typename,typename > class Container>
-void PmergeMe<Container>::printLstSqc(Container<sqc,std::allocator<sqc> > lst){
-    for(typename Container<sqc,std::allocator<sqc> >::iterator it = lst.begin(); it != lst.end();it++){
-        std::cout << "{";
-        printFL(*it);
-        std::cout << " }";
-        std::cout << std::endl;
-    }
-}
-
-template <template < typename,typename > class Container>
-void PmergeMe<Container>::printStruct(pairer pairing){
-    typename Container<sqc,std::allocator<sqc> >::iterator itmin = pairing.min.begin();
-    typename Container<sqc,std::allocator<sqc> >::iterator itmax = pairing.max.begin();
-    std::cout << "Sequence:"<< std::endl;
-    while(itmin != pairing.min.end())
-    {
-        std::cout << "< ";
-        printFL(*itmin);
-        std::cout << " | ";
-        if(itmax != pairing.max.end())
-        printFL(*itmax);
-        else
-        std::cout << "EMPTY";
-        std::cout << " >" << std::endl;
-        itmin++;
-        itmax++;
-    }
-    std::cout << "SeqLen: " << pairing.seqLen << std::endl;
-}
 
 //////////////////////////////////////CONVERT////////////////////////////////////////
 //convert a container of structure seq, in a container of int
@@ -358,7 +329,7 @@ typename PmergeMe<Container>::pairer PmergeMe<Container>::initPairing(Container<
     return (pairing);
 }
 
-//////////////////////////////////////MAIN////////////////////////////////////////
+//////////////////////////////////////INSERT_JS////////////////////////////////////////
 
 //Setup main and pending to insert with JS later, if a sequence is not full, we put it apart and will put it back later
 template <template < typename,typename > class Container> 
@@ -406,6 +377,10 @@ void PmergeMe<Container>::insertFJ(pairer& pairing){
     _res.sorted = cSqcTocInt(main);
 }
 
+//////////////////////////////////////MAIN_SORT////////////////////////////////////////
+
+
+
 //Main function of FJ, will built pairing, sort by pair, recusively call himself until we can't make a full pair,
 // then remake pairing with list sent back by by depth + 1, and use JS to insert min into max
 template <template < typename,typename > class Container> 
@@ -422,44 +397,6 @@ void PmergeMe<Container>::sortFJ(unsigned int seqLen){
     insertFJ(pairing);
 }
 
-//////////////////////////////////////MAINDEBUG////////////////////////////////////////
-
-// template <template < typename,typename > class Container>
-// Container<int,std::allocator<int> > PmergeMe<Container>::sortFJ_Container(Container<int,std::allocator<int> >& v, unsigned int seqLen){
-//     Container<int,std::allocator<int> > lst;
-//     std::cout << "//////////////////////////////////REC: " << seqLen << "/////////////////////////////////" << std::endl;
-//     std::cout << "LST:" << std::endl;
-//     printCont(v);
-
-//     std::cout << std::endl;
-//     pairer pairing = initPairing(v,seqLen);
-
-//     std::cout << std::endl<< "STRUCT AVANT SORTPAIR:"<<std::endl<< std::endl;
-//     printStruct(pairing);
-
-//     sortPairs(pairing);
-    
-//     std::cout << std::endl<< "STRUCT APRES SORTPAIR:"<<std::endl<< std::endl;
-//     printStruct(pairing);
-
-//     if(seqLen * 2 <= v.size() / 2){//IIIIIIIIIIIIIIIIIIIIIICCCCCCCCCCCCCCCCCCCCCIIIIIIIIIIIII t'as mis <= au lieu de < PAS SUR
-//         lst = sortFJ_Container(v, seqLen * 2);
-//         std::cout << "//////////////////////////////////REC: " << seqLen<< "/////////////////////////////////" << std::endl;
-//         std::cout << "LST:" << std::endl;
-//         printCont(lst);
-//         pairing = initPairing(lst, seqLen);
-//     }
-
-//     std::cout << std::endl<< "STRUCT AVANT INSERTLIST:"<<std::endl<< std::endl;
-//     printStruct(pairing);
-
-//     lst = insertFJ(pairing);
-
-//     std::cout << std::endl<< "LIST APRES INSERTLIST:" << std::endl<< std::endl;
-//     printCont(lst);
-
-//     return (lst);
-// }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\
 |               _     ___ ____ _____              |
@@ -476,6 +413,10 @@ void PmergeMe<std::list>::checkContainerType(std::string& containerType){
     containerType = "std::list<int>";
 }
 
+
+
+//UTILS
+
 //return the it for index i, this index is used for binarysearch
 template <>
 std::list<PmergeMe<std::list>::sqc>::iterator PmergeMe<std::list>::getItFromindex(std::list<sqc>& lst, int id){
@@ -485,9 +426,6 @@ std::list<PmergeMe<std::list>::sqc>::iterator PmergeMe<std::list>::getItFrominde
     }
     return (it);
 }
-
-
-//UTILS
 
 //return previous iterator, if none, return Container.end()
 template <template < typename,typename > class Container> 
@@ -509,8 +447,19 @@ PmergeMe<Container>::getNext(Container<sqc,std::allocator<sqc> >& lst, typename 
     return (it);
 }
 
+//Initialize i in the main Container of sqc, it will be used as an index to find the mid, i have to init after each insert of course
+template <>
+void PmergeMe<std::list>::initIdList(std::list<sqc>& lst, std::list<sqc>::iterator& start, std::list<sqc>::iterator& end){
+    int i = 1;
+    for(std::list<sqc>::iterator it = start; it != getNext(lst,end); it++){
+        it->i = i;
+        i++;
+    }
+}
+
 
 //////////////////////////////////////INSERT_LIST_FJ_JS////////////////////////////////////////
+
 //binary search will compare at seq/2 recursively, until seq equal one, and return an iterator target to insert cmp 
 template <>
 std::list<PmergeMe<std::list>::sqc>::iterator PmergeMe<std::list>::binarySearch(std::list<sqc>& lst, std::list<sqc>::iterator start, std::list<sqc>::iterator end, int cmp){
@@ -538,15 +487,7 @@ std::list<PmergeMe<std::list>::sqc>::iterator PmergeMe<std::list>::binarySearch(
 }
 
 
-template <>
-void PmergeMe<std::list>::initIdList(std::list<sqc>& lst, std::list<sqc>::iterator& start, std::list<sqc>::iterator& end){
-    int i = 1;
-    for(std::list<sqc>::iterator it = start; it != getNext(lst,end); it++){
-        it->i = i;
-        i++;
-    }
-}
-
+//this loop will decrement from idJS(JS number) until nothing left before it, for each we will find the target, and will insert our min before the target
 template <>
 void PmergeMe<std::list>::execJS(std::list<sqc>& main,std::list<sqc>& pending,int idJS){
     std::list<sqc>::iterator itMinMain = main.begin();
@@ -579,45 +520,21 @@ void PmergeMe<std::vector>::checkContainerType(std::string& containerType){
     containerType = "std::vector<int>";
 }
 
+//////////////////////////////////////INSERT_LIST_FJ_JS////////////////////////////////////////
 
-template <>
-std::vector<PmergeMe<std::vector>::sqc>::iterator PmergeMe<std::vector>::binarySearch(std::vector<sqc>& lst, std::vector<sqc>::iterator start, std::vector<sqc>::iterator end, int cmp){
-    (void)lst;
-    return std::lower_bound(start, end, cmp, CmpStruct());
-    
-    // int diff = end->i - start->i;//C"EST LA LE PROBLEME T"A PAS INIT I
-    // int mid = ((diff / 2) + start->i) ;
-    // int idmid = mid - 1;
-    // std::vector<sqc>::iterator res;
 
-    // if(cmp > *(lst[idmid].last)){
-    //     if(start == end || diff < 0)
-    //         return (lst.begin() + (idmid + 1 ));
-    //     start = lst.begin() + (idmid + 1);
-    //     res = binarySearch(lst,start,end,cmp);
-    // }
-    // else if (cmp <  *(lst[idmid].last)){
-    //     end = lst.begin() + (idmid - 1);
-    //     if(/*start == end ||*/ diff < 0 || end == lst.end())
-    //         return (lst.begin() + idmid);
-    //     res = binarySearch(lst,start,end,cmp);
-    // }
-    // else if (cmp == *(lst[idmid].last))
-    //     return (lst.begin() + idmid);
-
-    // return (res);
-}
-
+//Same as list but i use lowerbound instead of my own binary search, and can't splice so insert then erase.
 template <>
 void PmergeMe<std::vector>::execJS(std::vector<sqc>& main,std::vector<sqc>& pending,int idJS){
     std::vector<sqc>::iterator itMinMain = main.begin();
     std::vector<sqc>::iterator itMaxMain = getPrev(main, getItFromId(main, idJS));
     std::vector<sqc>::iterator target;
+    CmpStruct cmpS(this);
 
     for ( std::vector<sqc>::iterator itToInsert = getItFromId(pending,idJS); itToInsert != pending.end(); itToInsert = getItFromId(pending,idJS)){
         itMinMain = main.begin();
         itMaxMain = getItFromId(main, idJS);
-        target = std::lower_bound(itMinMain, itMaxMain, *itToInsert->last, CmpStruct());// binarySearch(main, itMinMain, itMaxMain, *itToInsert->last);
+        target = std::lower_bound(itMinMain, itMaxMain, *itToInsert->last, cmpS);
         main.insert(target,*itToInsert);
         pending.erase(itToInsert);
         idJS--;
@@ -625,4 +542,3 @@ void PmergeMe<std::vector>::execJS(std::vector<sqc>& main,std::vector<sqc>& pend
 }
 
 
-//FAIS LES GENERIQUES POUR CALMER LE COMPILATEUR
