@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
+/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 17:20:55 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/11/05 15:21:59 by sylabbe          ###   ########.fr       */
+/*   Updated: 2025/11/06 21:23:24 by grib             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void printFJ(PmergeMe<std::vector>& vec, PmergeMe<std::list>& lst){
 
     std::cout << "Time to process a range of " << rVec.unsorted.size() << " elements with " << rVec.containerType << " : " << rVec.execTime << " " << rVec.unitTime << std::endl;
     std::cout << "Time to process a range of " << rLst.unsorted.size() << " elements with " << rLst.containerType << " : " << rLst.execTime << " " << rLst.unitTime << std::endl;
+    std::cout << "Number of comparisons: " << lst.getCountCmp() /*<< " (list)"*/<< std::endl;
+    std::cout << "Number of comparisons: " << vec.getCountCmp() /*<< " (vector)"*/<< std::endl;
 }
 
 int main(int argc, char **argv){

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.tpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sylabbe <sylabbe@student.42.fr>            +#+  +:+       +#+        */
+/*   By: grib <grib@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 17:21:00 by sylabbe           #+#    #+#             */
-/*   Updated: 2025/11/05 14:39:07 by sylabbe          ###   ########.fr       */
+/*   Updated: 2025/11/07 09:15:32 by grib             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -270,9 +270,9 @@ void    PmergeMe<Container>::sortPairs(pairer& pairing){
     it_cont_seq itmin = pairing.min.begin();
     it_cont_seq itmax = pairing.max.begin();
 
-    while(itmin != pairing.min.end() && itmax != pairing.max.end()){
-        if(*(itmin->last) > *(itmax->last) && itmax->full == true ){
-            _countCmp++;
+    while(itmin != pairing.min.end() && itmax != pairing.max.end() && itmax->full == true){
+        _countCmp++;
+        if(*(itmin->last) > *(itmax->last)){
             swapRange(*itmin, *itmax);
         }
         itmin++;
@@ -337,7 +337,7 @@ template <template < typename,typename > class Container>
 void PmergeMe<Container>::setupJS(pairer& pairing, cont_seq& main,cont_seq& pending, cont_seq& rest){
     it_cont_seq itmin = pairing.min.begin();
     it_cont_seq itmax = pairing.max.begin();
-    
+
     main.push_back(*itmin);
     itmin++;
     while(itmax != pairing.max.end() && itmax->full == true){
@@ -361,7 +361,7 @@ void PmergeMe<Container>::insertFJ(pairer& pairing){
     cont_seq pending;
     cont_seq rest;
     int x = 3;
-    
+
     setupJS(pairing,main,pending,rest);
     if (pairing.max.empty()){
         _res.sorted = cSqcTocInt(pairing.min);
@@ -389,7 +389,7 @@ void PmergeMe<Container>::sortFJ(unsigned int seqLen){
     pairer pairing = initPairing(_res.sorted,seqLen);
 
     sortPairs(pairing);   
-     
+
     if(seqLen * 2 <= _res.sorted.size() / 2){
         sortFJ(seqLen * 2);
         pairing = initPairing(_res.sorted, seqLen);
